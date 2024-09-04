@@ -1,0 +1,1 @@
+export const menuData = ["Home", "About", "Services", "Contact"];
