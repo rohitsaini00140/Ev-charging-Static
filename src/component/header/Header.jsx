@@ -168,7 +168,7 @@ function Header() {
             <Typography
               sx={{
                 cursor: "pointer",
-                color: "white",
+                // color: "white",
                 "&:hover": {
                   color: "#ff6600",
                 },
