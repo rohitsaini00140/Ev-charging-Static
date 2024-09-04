@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { Stack } from '@mui/system';
 
 function ScrollUp() {
     const [isVisible, setIsVisible] = useState(false);
@@ -25,12 +26,21 @@ function ScrollUp() {
     };
 
     return (
-        <div
+        <Stack
             onClick={handleScrollUp}
+            sx={{
+                position: 'fixed',
+                bottom: 10,
+                cursor: "pointer",
+                right: 16,
+                padding: "1rem",
+                zIndex: "10",
+                display: isVisible ? "block" : "none"
+            }}
             className={`fixed bottom-10 cursor-pointer ${isVisible ? "block" : "hidden"} right-16 rounded-[5rem] p-[.1rem] z-10`}
         >
             <KeyboardArrowUpIcon sx={{ fontSize: "3rem", color: "white", backgroundColor: "#6CAAA8", borderRadius: "5rem" }} />
-        </div>
+        </Stack>
     );
 };
 
