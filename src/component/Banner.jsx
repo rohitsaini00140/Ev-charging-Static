@@ -1,5 +1,4 @@
 import { Stack } from "@mui/material";
-
 function Banner() {
   return (
     <Stack

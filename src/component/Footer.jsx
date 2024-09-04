@@ -9,17 +9,14 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 function Footer() {
   const imageSrc = require('../img/logo.png');
   const [email, setEmail] = useState('');
-
   const handleSubscribe = (event) => {
     event.preventDefault();
     console.log('Subscribed with email:', email);
     setEmail('');
   };
-
   return (
     <footer style={{ padding: '10px 0', backgroundColor: '#0c2226' }}>
       <Container>
-
         {/* Top footer section start here */}
         <Typography variant="h6" gutterBottom color="#fff" sx={{ textAlign: 'center', padding: '30px 0px' }}>
           Get More For us ? <br />

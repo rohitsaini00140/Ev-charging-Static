@@ -50,8 +50,6 @@
 
 // export default Header;
 
-
-
 import { Button } from "@mui/material";
 import { menuData } from "./menuData";
 // import logo from "./ashwanhealthcareLogo.webp"
@@ -59,9 +57,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 function Header() {
-
   let location = useLocation()
-
   return (
     <div className="bg-transparant h-[6.5rem] w-full absolute top-0 z-10 hidden flex-row justify-around items-center
         md:flex

@@ -35,7 +35,7 @@ const blogPosts = [
       },
     // Add more posts as needed
   ];
-function BlogCom() {
+function Blog() {
     const settings = {
     infinite: true,
     speed: 500,
@@ -119,4 +119,4 @@ function BlogCom() {
   )
 }
 
-export default BlogCom
+export default Blog
