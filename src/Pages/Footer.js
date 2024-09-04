@@ -19,7 +19,6 @@ function Footer() {
   return (
     <footer style={{ padding: '10px 0', backgroundColor: '#0c2226' }}>
       <Container>
-     
         {/* Top footer section start here */}
   <Typography variant="h6" gutterBottom color="#fff" sx={{textAlign:'center',padding:'30px 0px'}}>
     Get More For us ? <br />
@@ -34,19 +33,19 @@ function Footer() {
             xl: '50%'    // For extra-large screens
           } }}>
           <TextField
-            variant="outlined"
+            
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
             size="small"
-            sx={{ flex: 1, backgroundColor: '#fff',borderRadius:'3px',  }}
+            sx={{ flex: 1, backgroundColor: '#fff',borderRadius:'2px'}}
           />
           <Button
             type="submit"
-            variant="contained"
+           
             color="#99ff00"
-            sx={{ height: '100%',background:' #434e51',color:'#99ff00',borderRadius:'3px' }}
+            sx={{ height: '100%', padding: '7px 16px',background:' #434e51',color:'#99ff00' }}
           >
             Subscribe
           </Button>
@@ -178,7 +177,7 @@ function Footer() {
             <b>UAE Address -:</b>  <Link color="#ffffffd1" sx={{ textDecoration: 'none' }} href="#">Business Centre, Sharjah Publishing City Free Zone, Sharjah, United Arab Emirates</Link>
             </Typography>
             <Typography variant="body2" color="#ffffffd1" sx={{margin:'8px 0px'}} >
-           <b>International Address -:</b> <Link color="#ffffffd1" sx={{ textDecoration: 'none' }} href="#">- 3901, 7 Marbelle Avenue Toronto, M9A0C9, Canada</Link>
+           <b>International Address -:</b> <Link color="#ffffffd1" sx={{ textDecoration: 'none' }} href="#"> 3901, 7 Marbelle Avenue Toronto, M9A0C9, Canada</Link>
             </Typography>
             <Typography variant="body2" color="#ffffffd1" sx={{display:'flex',margin:'12px 0px'}}>
             <MailOutlineIcon sx={{fontSize:'20px',color:'#99ff00'}}/> <Link color="#ffffffd1" sx={{ textDecoration: 'none',marginLeft:'10px',"&:hover":{
