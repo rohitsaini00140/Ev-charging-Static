@@ -1,6 +1,5 @@
 import React from 'react'
 import { Container,Box, Typography,Grid } from '@mui/material';
-
 function WhyChoose() {
  const imageSrc = require('../../img/machine.png');
  const icon1 = require('../../img/icon1.png');
@@ -13,9 +12,6 @@ function WhyChoose() {
         <Typography variant="h6" gutterBottom color="#0c2226" style={{ textAlign: 'center', fontWeight: '600',fontSize:'16px' }}>
           <b> VNT EV Charging is the Biggest EV Charging Station in the World  </b>
         </Typography>
-
-
-
          {/* <p style={{color:'#0009',textAlign:'center',fontSize: '0.875rem'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quisquam repellat sapiente minus libero officia.</p> */}
          <Container>
       <Box sx={{ padding: {
@@ -92,5 +88,4 @@ function WhyChoose() {
    </>
   )
 }
-
 export default WhyChoose
