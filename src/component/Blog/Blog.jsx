@@ -1,10 +1,11 @@
 import React from 'react'
 import Slider from 'react-slick';
-import { Container, Card, CardContent, Typography, CardMedia } from '@mui/material';
+import {Card, CardContent, Typography, CardMedia } from '@mui/material';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './blog.css';
 import { Link } from 'react-router-dom';
+import { Container } from '@mui/system';
 // Sample blog posts
 const blogPosts = [
   {
@@ -73,11 +74,12 @@ function Blog() {
   };
   return (
     <>
-      <Container sx={{ margin: '30px 0px' }}>
+      <div sx={{ margin: '30px 0px' }}>
         <span style={{ color: '#ff6600', display: 'block', fontSize: '24px', fontWeight: 'bold', textAlign: 'center' }}>Our Blog</span>
         <Typography variant="h6" gutterBottom color="#0c2226" style={{ textAlign: 'center', fontWeight: '600', marginBottom: '15px' }}>
           <b>EV Charging Article</b>
         </Typography>
+        <Container>
         <Slider {...settings}>
           {blogPosts.map((post, index) => (
             <div key={index}>
@@ -116,7 +118,8 @@ function Blog() {
             </div>
           ))}
         </Slider>
-      </Container>
+        </Container>
+      </div>
     </>
   )
 }
