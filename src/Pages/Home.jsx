@@ -1,4 +1,3 @@
-// import Appspic from "../Component/AppsPic/Appspic"
 import Appspic from "../component/appspic/Appspic"
 import Banner from "../component/Banner"
 import Blog from "../component/blog/Blog"

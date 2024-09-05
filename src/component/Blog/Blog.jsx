@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './blog.css';
 import { Link } from 'react-router-dom';
-import { Container } from '@mui/system';
+import { Container} from '@mui/system';
 // Sample blog posts
 const blogPosts = [
   {
@@ -74,13 +74,13 @@ function Blog() {
   };
   return (
     <>
-      <div sx={{ margin: '30px 0px' }}>
-        <span style={{ color: '#ff6600', display: 'block', fontSize: '24px', fontWeight: 'bold', textAlign: 'center' }}>Our Blog</span>
+      <div>
+        <span style={{marginTop: '20px', color: '#57b33e', display: 'block', fontSize: '22px', fontWeight: 'bold', textAlign: 'center' }}>Our Blog</span>
         <Typography variant="h6" gutterBottom color="#0c2226" style={{ textAlign: 'center', fontWeight: '600', marginBottom: '15px' }}>
           <b>EV Charging Article</b>
         </Typography>
         <Container>
-        <Slider {...settings}>
+        <Slider {...settings} sx={{marginTop: '30px'}}>
           {blogPosts.map((post, index) => (
             <div key={index}>
               <Card sx={{ margin: '0px 10px' }}>

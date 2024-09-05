@@ -15,7 +15,7 @@ function Footer() {
     setEmail('');
   };
   return (
-    <footer style={{ padding: '10px 0', backgroundColor: '#0c2226' }}>
+    <footer style={{ padding: '10px 0', backgroundColor: '#232a2b' }}>
       <Container>
         {/* Top footer section start here */}
         <Typography variant="h6" gutterBottom color="#fff" sx={{ textAlign: 'center', padding: '30px 0px' }}>
