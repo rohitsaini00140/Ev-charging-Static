@@ -136,10 +136,10 @@ function Header() {
         position: "fixed",
         top: 0,
         zIndex: 10,
-        display: "flex",
+        display: { xs: "none", md: "flex" },
         flexDirection: "row",
         justifyContent: "space-between",
-        padding: "0 5rem",
+        padding: { md: "0 5rem" },
         alignItems: "center",
       }}
     >
