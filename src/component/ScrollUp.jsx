@@ -39,7 +39,7 @@ function ScrollUp() {
             }}
             className={`fixed bottom-10 cursor-pointer ${isVisible ? "block" : "hidden"} right-16 rounded-[5rem] p-[.1rem] z-10`}
         >
-            <KeyboardArrowUpIcon sx={{ fontSize: "3rem", color: "white", backgroundColor: "#6CAAA8", borderRadius: "5rem" }} />
+            <KeyboardArrowUpIcon sx={{ fontSize: "3rem", color: "white", backgroundColor: "rgb(255, 102, 0)", borderRadius: "5rem" }} />
         </Stack>
     );
 };

@@ -32,8 +32,7 @@
 .css-46bh2p-MuiCardContent-root {
     padding: 8px !important;
 }
-@media (min-width: 1200px) {
-    .css-znxhet-MuiContainer-root {
-        max-width: 1252px !important;
-}
+.slick-slide img {
+  border-radius: 5px;
+  display: block;
 }
