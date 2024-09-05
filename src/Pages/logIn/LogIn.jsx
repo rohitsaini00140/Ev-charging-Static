@@ -85,6 +85,7 @@ function Login() {
                     <img
                         src='https://static.vecteezy.com/system/resources/previews/027/128/052/non_2x/electric-car-ev-car-woman-charging-battery-at-electric-charging-station-with-solar-panel-and-wind-turbines-sustainable-green-energy-for-ecology-environment-vector.jpg'
                         height={"100%"}
+                        alt='error'
                         style={{
                             borderTopLeftRadius: '2rem',
                             borderBottomLeftRadius: '2rem',
