@@ -1,4 +1,7 @@
-import Appspic from "../component/appspic/Appspic"
+
+// import Appspic from "../Component/AppsPic/Appspic"
+// import Appspic from "../component/appspic/Appspic"
+import Appspic from "../component/appsPic/Appspic"
 import Banner from "../component/Banner"
 import Blog from "../component/blog/Blog"
 import Quotes from "../component/quotes/Quotes"
