@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Footer from '../layout/Footer';
 import Home from '../Pages/Home';
 import Header from "../layout/header/Header"
@@ -7,7 +7,6 @@ import GoToTop from "../component/GoToTop";
 import ScrollUp from "../component/ScrollUp";
 
 function Router() {
-
     return (
         <BrowserRouter>
         <GoToTop />
@@ -21,5 +20,4 @@ function Router() {
       </BrowserRouter>
     )
 }
-
 export default Router;

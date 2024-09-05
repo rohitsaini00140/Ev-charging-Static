@@ -22,11 +22,10 @@
     color: #99ff00 !important;
 }
 .slick-prev {
-  left: 0%;
+  left: -3%;
 }
-
 .slick-next {
-  right: 0%;
+  right: -3%;
 }
 /* Optional: Custom arrow styles */
 .css-46bh2p-MuiCardContent-root {

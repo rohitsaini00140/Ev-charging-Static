@@ -19,9 +19,7 @@ function ThemeProvider({ children }) {
         }),
         []
     );
-
     const theme = createTheme(memoizedValue);
-
     return (
         <MUIThemeProvider theme={theme}>
             <CssBaseline />

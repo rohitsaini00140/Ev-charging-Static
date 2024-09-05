@@ -5,7 +5,7 @@ function Quotes() {
   return (
     <div>
      <Container>
-       <Box sx={{ background: '#232a2b', textAlign:'center', padding: '20px 40px',marginTop:'30px'}}>
+       <Box sx={{ background: '#232a2b', textAlign:'center', padding: '20px 40px',marginTop:'0px'}}>
            <div sx={{display:'grid',placeItems:'center',margin:'0 auto'}}>
            <FormatQuoteIcon sx={{color:'#99ff00',fontSize:'40px'}}/>
            </div>
