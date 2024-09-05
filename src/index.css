@@ -4,3 +4,10 @@
   font-family: sans-serif;
   box-sizing: border-box;
 }
+
+
+@media (min-width: 992px) {
+  .css-19v7jyx-MuiContainer-root {
+      max-width: 1200px !important;
+  }
+}

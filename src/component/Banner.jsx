@@ -45,12 +45,12 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 // import BannerImg from './bannerImg.jpg';
 
-function Banner({ heading }) {
+function Banner() {
   return (
-    <Box sx={{ position: 'relative', height: '15rem', width: '100%' }}>
+    <Box sx={{ height: '90vh', width: '100%' }}>
       <Box
         sx={{
-          position: 'absolute',
+          position: 'relative',
           inset: 0,
           background: 'linear-gradient(to top right, rgba(0,0,0,0.56), rgba(0,0,0,0.56))',
           opacity: 0.7,
