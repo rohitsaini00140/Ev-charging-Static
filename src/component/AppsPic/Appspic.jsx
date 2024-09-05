@@ -19,19 +19,25 @@ function Appspic() {
             </span>
             <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-            <Box sx={{width:'100%',padding:'30px 0px',display:'flex'}} >
+            <Box sx={{width:'100%',padding:'30px 0px',display:'flex',  flexWrap: {
+      xs: 'wrap',    
+      sm: 'wrap',    
+      md: 'wrap',    
+      lg: 'nowrap',  
+      xl: 'nowrap', 
+    },  }} >
             <Link >
             <img
               src={playstore}
               alt="VNT Play Store"
-              style={{ width: '150px', borderRadius:'5px', height: 'auto', }} // Adjust style as needed
+              style={{ width: '150px', borderRadius:'5px', height: '45px', margin: '6px auto 0px 10px' }} // Adjust style as needed
             /> 
             </Link>
             <Link >
             <img
               src={aapstore}
               alt="VNT App Store"
-              style={{ width: '135px', borderRadius:'5px', height: 'auto', margin: '0 auto',marginLeft:'20px' }} // Adjust style as needed
+              style={{ width: '150px', borderRadius:'5px', height: '45px', margin: '6px auto 0px 10px' }} // Adjust style as needed
             /> 
             </Link>
              </Box>
