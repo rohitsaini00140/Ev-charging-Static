@@ -48,7 +48,7 @@ function Banner() {
           Find EV Charging Stations and Get Ready to
           <Typography
             variant="h3"
-            sx={{ color: "green", display: "inline", paddingLeft: "1rem", fontWeight: "700", }}
+            sx={{ color: "rgb(87, 179, 62)", display: "inline", paddingLeft: "1rem", fontWeight: "700", }}
           >Go Green</Typography>
         </Typography>
       </Box>

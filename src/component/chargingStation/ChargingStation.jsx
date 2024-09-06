@@ -1,13 +1,16 @@
 import { Container, Grid,Box ,Stack,Button} from "@mui/material";
 import { Typography } from "@mui/material";
 import React from "react";
+import { FaCar } from "react-icons/fa";
+import { TbBulbFilled } from "react-icons/tb";
+
 function ChargingStation() {
 const imageSrc = require("../../img/car_new.png");
   return (
     <Container>
     <Grid container spacing={3} sx={{margin:'10px 0px'}}>
   <Grid item xs={12} md={6}>
-   <span style={{ color: 'rgb(87, 179, 62)', fontWeight: '600',fontSize:'16px' }}>About VNT EV</span>
+   <span style={{ color: 'rgb(87, 179, 62)', fontWeight: '600',fontSize:'18px' }}>About VNT EV</span>
     <Typography
       variant="h6"
       sx={{ fontWeight: '700', margin:'7px 0px', color: '#253745',fontSize: '1.6rem',
@@ -23,16 +26,18 @@ const imageSrc = require("../../img/car_new.png");
           width:{
             xs: '180px', 
             sm: '100px', 
-            md: '100px', 
-            lg: '100px', 
-            xl: '100px'
+            md: '80px', 
+            lg: '80px', 
+            xl: '80px'
           },
-          height: '55px', 
+          height: '40px', 
           marginTop: '15px',
-          borderRadius: '3px', 
+          display:'grid',
+          placeItems:'center',
+          borderRadius: '6px', 
+          boxShadow: '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
           background: 'rgb(87, 179, 62)' 
-        }} 
-      />
+        }}> <TbBulbFilled style={{ fontSize: '25px', color: 'white' }} />   </Box >
       <Stack sx={{ paddingLeft:'18px'}}>
         <Typography
           variant="h6"
@@ -72,16 +77,19 @@ const imageSrc = require("../../img/car_new.png");
           width:{
             xs: '180px',  // 16px padding on extra-small screens
             sm: '100px',  // 32px padding on small screens
-            md: '100px',  // 48px padding on medium screens
-            lg: '100px',  // 64px padding on large screens
-            xl: '100px'  // 100px padding on extra-large screens
+            md: '80px',  // 48px padding on medium screens
+            lg: '80px',  // 64px padding on large screens
+            xl: '80px'  // 100px padding on extra-large screens
           },
-          height: '55px', 
+          height: '40px', 
           marginTop: '15px',
-          borderRadius: '3px', 
+          display:'grid',
+          placeItems:'center',
+          borderRadius: '5px', 
+          boxShadow: '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
           background: '#253745' 
         }} 
-      />
+      >  <FaCar style={{ fontSize: '25px', color: 'white' }} />  </Box>
       <Stack sx={{ paddingLeft:'18px'}}>
         <Typography
           variant="h6"

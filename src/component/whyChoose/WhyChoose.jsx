@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container,Box, Typography,Grid } from '@mui/material';
+import { Stack } from '@mui/system';
 function WhyChoose() {
  const imageSrc = require('../../img/machine.png');
  const icon1 = require('../../img/icon1.png');
@@ -8,12 +9,15 @@ function WhyChoose() {
  const icon4 = require('../../img/icon4.png');
   return (
         <>
-       <span style={{ color: '#57b33e', display: 'block', fontSize: '16px', fontWeight: 'bold', textAlign: 'center',marginTop:'30px' }}><b>Why Choose Us</b></span>
-        <Typography variant="h6" gutterBottom color="#0c2226" style={{ textAlign: 'center', fontWeight: '600',fontSize:'16px' }}>
-          <b> VNT EV Charging is the Biggest EV Charging Station in the World  </b>
-        </Typography>
-         {/* <p style={{color:'#0009',textAlign:'center',fontSize: '0.875rem'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quisquam repellat sapiente minus libero officia.</p> */}
          <Container>
+           <Stack sx={{textAlign:'center'}}>
+         <Typography variant="h6" sx={{ color: 'rgb(87, 179, 62)', fontSize:'25px',  fontWeight:'700' }}>
+              Why Choose Us
+              </Typography>
+              <Typography variant="body2" sx={{ color: '#253745' ,fontWeight:'700',fontSize:'24px',linHeight: '28px' }}>
+              VNT EV Charging is the Biggest EV Charging Station in the World
+              </Typography>
+              </Stack>
       <Box sx={{ padding: {
       xs: '10px 10px',       
       sm: '10px 10px',       
