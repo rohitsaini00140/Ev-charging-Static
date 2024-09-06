@@ -8,24 +8,20 @@ import { useEffect, useState } from "react";
 function Header() {
   const [isBgcolor, setIsBgcolor] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
+    useEffect(() => {
     const handleScroll = () => {
       const sticky = 80;
       setIsBgcolor(window.scrollY > sticky);
     };
-
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
   return (
     <Stack
       sx={{
-        bgcolor: isBgcolor ? "black" : "transparent",
+        bgcolor: isBgcolor ? "rgb(35, 42, 43)" : "transparent",
         height: "6.5rem",
         width: "100%",
         position: "fixed",

@@ -14,10 +14,7 @@ import { menuList } from './data';
 import { Stack } from '@mui/system';
 
 function DrawerNavbar() {
-
-
     const [isBgcolor, setIsBgcolor] = useState(false);
-
     useEffect(() => {
         const handleScroll = () => {
             const sticky = 80;
@@ -31,11 +28,7 @@ function DrawerNavbar() {
         };
     }, []);
 
-
-
-
     const [drop, setDrop] = useState(Array(menuList.length).fill(false));
-
     const handleClick = (index) => {
         const openChild = [...drop];
         openChild[index] = !openChild[index];
@@ -118,7 +111,7 @@ function DrawerNavbar() {
     return (
         <Stack
             sx={{
-                bgcolor: isBgcolor ? "black" : "transparent",
+                bgcolor: isBgcolor ? "#fff" : "transparent",
                 height: "6.5rem",
                 width: "100%",
                 position: "fixed",

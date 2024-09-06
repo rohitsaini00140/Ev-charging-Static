@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Stack } from '@mui/system';
-
 function ScrollUp() {
     const [isVisible, setIsVisible] = useState(false);
-
     useEffect(() => {
         const handleScroll = () => {
             const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -17,14 +15,12 @@ function ScrollUp() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
     const handleScrollUp = () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
         });
     };
-
     return (
         <Stack
             onClick={handleScrollUp}

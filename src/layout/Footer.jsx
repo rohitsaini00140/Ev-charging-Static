@@ -45,7 +45,7 @@ function Footer() {
               type="submit"
               variant="contained"
               color="#99ff00"
-              sx={{ height: '100%', padding:'7px 16px', background: ' #434e51', color: '#99ff00', borderRadius: '3px' }}
+              sx={{ height: '100%', padding:'7px 16px', lineHeight:'1.90', background: ' #434e51', color: '#99ff00', borderRadius: '3px' }}
             >
               Subscribe
             </Button>

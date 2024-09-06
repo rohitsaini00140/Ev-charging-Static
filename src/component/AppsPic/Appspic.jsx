@@ -12,8 +12,8 @@ function Appspic() {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <Typography variant="h6" sx={{fontWeight:'600', fontSize:'30px',lineHeight:'34px',marginTop:'13px'}}>
-                GET Charged up <br />
-                Install Our Ev Charging APP Today !
+                GET Charged up<br />
+                Install Our Ev Charging APP Today
             </Typography>
             <span style ={{marginTop:'10px', display:'block',color:'rgba(0, 0, 0, 0.6)'}}>The App is designed to provide a convenient and soomloss experience for electric vehicle own.
             </span>
