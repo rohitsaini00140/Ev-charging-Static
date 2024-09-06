@@ -10,44 +10,31 @@ export const menuList = [
         path: "/about"
     },
     {
-        name: "Our Business",
+        name: "Services",
         // icon: <LocalOfferIcon />,
-        arr: [
-            {
-                name: "Ayurveda",
-                path: "/ourBusiness/ayurveda",
-            },
-            {
-                name: "Nutraceutical",
-                path: "/ourBusiness/Nutraceutical",
-            }
-        ]
+        // arr: [
+        //     {
+        //         name: "Ayurveda",
+        //         path: "/ourBusiness/ayurveda",
+        //     },
+        //     {
+        //         name: "Nutraceutical",
+        //         path: "/ourBusiness/Nutraceutical",
+        //     }
+        // ]
     },
+    // {
+    //     name: "Servies",
+    //     // icon: <ViewCarouselIcon />,
+    //     path: "/Servies"
+    // },
     {
-        name: "Products",
-        // icon: <CategoryIcon />,
-        arr: [
-            {
-                name: "Patent Medicine",
-                path: "/products/patentMedicine",
-            },
-            {
-                name: "Classical Medicine",
-                path: "/products/classicalMedicine",
-            },
-            {
-                name: "Pure Herbs",
-                path: "/products/pureHerbs",
-            }
-        ]
-    },
-    {
-        name: "Operations",
+        name: "Blog",
         // icon: <NoteIcon />,
-        path: "/operations",
+        path: "/Blog",
     },
     {
-        name: "Contact Us",
+        name: "Contact",
         // icon: <LogoutIcon />,
         path: "/contactUs",
     }
