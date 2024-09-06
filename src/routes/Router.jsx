@@ -5,7 +5,8 @@ import Header from "../layout/header/Header"
 import DrawerNavbar from "../layout/drawerNavbar/DrawerNavbar";
 import GoToTop from "../component/GoToTop";
 import ScrollUp from "../component/ScrollUp";
-import Login from "../Pages/logIn/LogIn";
+import Login from "../Pages/auth/logIn/LogIn";
+import Registration from "../Pages/auth/registration/Registration";
 function Router() {
   return (
     <BrowserRouter>
@@ -15,6 +16,7 @@ function Router() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/logIn" element={<Login />} />
+        <Route path="/register" element={<Registration/>}/>
       </Routes>
       <ScrollUp />
       <Footer />

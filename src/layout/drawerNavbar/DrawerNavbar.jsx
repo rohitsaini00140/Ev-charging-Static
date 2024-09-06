@@ -63,7 +63,9 @@ function DrawerNavbar() {
             <List>
                 {menuList.map((ele, index) => (
                     <>
-                        <Link to={ele.path}
+                        <Link
+                            style={{ textDecoration: "none", color: "#04f5f5" }}
+                            to={ele.path}
                             onClick={!ele.arr && toggleDrawer(anchor, false)}
                         >
                             <ListItem key={index} disablePadding
@@ -75,11 +77,11 @@ function DrawerNavbar() {
                                             ?
                                             <>
                                                 <ListItemText primary={ele.name}
-                                                    sx={{ font: "#6CAAA8" }} />
-                                                {drop[index] ? <ExpandMore sx={{ font: "#6CAAA8" }} /> : <ExpandLess sx={{ font: "#6CAAA8" }} />}
+                                                    sx={{ font: "#04f5f5" }} />
+                                                {drop[index] ? <ExpandMore sx={{ font: "#04f5f5" }} /> : <ExpandLess sx={{ font: "#04f5f5" }} />}
                                             </>
                                             :
-                                            <ListItemText primary={ele.name} sx={{ font: "#6CAAA8" }} />
+                                            <ListItemText primary={ele.name} sx={{ font: "#04f5f5" }} />
                                     }
                                 </ListItemButton>
                             </ListItem>
@@ -96,7 +98,7 @@ function DrawerNavbar() {
                                                 <ListItemButton key={i}>
                                                     <ListItemText
                                                         primary={ele.name}
-                                                        sx={{ paddingLeft: "2rem", color: "#6CAAA8" }}
+                                                        sx={{ paddingLeft: "2rem", color: "#04f5f5" }}
                                                     />
                                                 </ListItemButton>
                                             </Link>
@@ -139,7 +141,7 @@ function DrawerNavbar() {
             <Stack>
                 {['right'].map((anchor) => (
                     <Stack key={anchor}>
-                        <MenuIcon onClick={toggleDrawer(anchor, true)} sx={{ fontSize: "2rem", color: "black" }} />
+                        <MenuIcon onClick={toggleDrawer(anchor, true)} sx={{ fontSize: "2rem", color: "#04f5f5" }} />
                         <Drawer
                             anchor={anchor}
                             open={state[anchor]}
