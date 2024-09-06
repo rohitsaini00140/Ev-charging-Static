@@ -10,8 +10,8 @@ import { inputStyles } from '../authPagesStyle';
 
 function LoginForm() {
     const theme = useTheme();
-    const [showPassword, setShowPassword] = useState(false);
-
+    // const [showPassword, setShowPassword] = useState(false);
+   const [showPassword] = useState(false);
     const renderForm = (
         <>
             <Stack spacing={3}>

@@ -83,8 +83,8 @@ function Header() {
           <Button
             variant="outlined"
             sx={{
-              borderColor: "#00ffff",
-              color: "#00ffff",
+              borderColor: "rgb(87, 179, 62)",
+              color: "rgb(87, 179, 62)",
               width: "5%",
             }}
           >

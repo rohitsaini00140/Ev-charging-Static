@@ -34,7 +34,7 @@ const [energyStorage] = useState(92);
                 textAlign: 'left',
               }}
             >
-              <Typography variant="h6" sx={{ color: 'rgb(87, 179, 62)', fontSize:'16px',  fontWeight:'600' }}>
+              <Typography variant="h6" sx={{ color: 'rgb(87, 179, 62)', fontSize:'18px',  fontWeight:'700' }}>
                 Who We Are
               </Typography>
               <Typography variant="body2" sx={{ color: '#253745' ,fontWeight:'700',fontSize:'24px',linHeight: '28px' }}>
