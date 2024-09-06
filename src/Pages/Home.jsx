@@ -6,6 +6,7 @@ import Banner from "../component/Banner"
 import Blog from "../component/blog/Blog"
 import ChargingStation from "../component/chargingStation/ChargingStation"
 import Quotes from "../component/quotes/Quotes"
+import WhoareWe from "../component/whoWeAre/WhoareWe"
 import WhyChoose from "../component/whyChoose/WhyChoose"
 // import Blog 
 function Home() {
@@ -13,6 +14,7 @@ function Home() {
     <div>
       <Banner />
       <ChargingStation/>
+      <WhoareWe/>
       <Quotes/>
       <WhyChoose/>
       <Appspic/>

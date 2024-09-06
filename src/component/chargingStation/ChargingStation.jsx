@@ -1,23 +1,125 @@
-import { Container, Grid } from "@mui/material";
+import { Container, Grid,Box ,Stack,Button} from "@mui/material";
 import { Typography } from "@mui/material";
 import React from "react";
 function ChargingStation() {
-  const imageSrc = require("../../img/car_new.png");
-
+const imageSrc = require("../../img/car_new.png");
   return (
     <Container>
     <Grid container spacing={3} sx={{margin:'10px 0px'}}>
-  <Grid item xs={12} sm={6}>
-    <span style={{ color: 'rgb(87, 179, 62)', fontWeight: '600',fontSize:'20px' }}>About Us</span>
+  <Grid item xs={12} md={6}>
+   <span style={{ color: 'rgb(87, 179, 62)', fontWeight: '600',fontSize:'16px' }}>About VNT EV</span>
     <Typography
       variant="h6"
-      sx={{ fontWeight: '700', color: 'rgb(12, 34, 38)',fontSize: '2rem',
-        lineHeight: '40px',textTransform:'capitalize' }}
-    >
-      We provide the best solutions for your electric vehicle
+      sx={{ fontWeight: '700', margin:'7px 0px', color: '#253745',fontSize: '1.6rem',
+        lineHeight: '30px',textTransform:'capitalize' }}
+    >We provide  best solutions for <br /> your electric vehicle
     </Typography>
+    <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.875rem',
+    lineHeight: '1.43',display:'block',margin:'5px 0px',
+    }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo rem architecto at error explicabo tempora</span>
+    <Stack direction="row" spacing={2} sx={{margin:'30px 0px'}}>
+      <Box 
+        sx={{ 
+          width:{
+            xs: '180px', 
+            sm: '100px', 
+            md: '100px', 
+            lg: '100px', 
+            xl: '100px'
+          },
+          height: '55px', 
+          marginTop: '15px',
+          borderRadius: '3px', 
+          background: 'rgb(87, 179, 62)' 
+        }} 
+      />
+      <Stack sx={{ paddingLeft:'18px'}}>
+        <Typography
+          variant="h6"
+          sx={{ 
+            fontWeight: '700', 
+            color: '#253745',
+            fontSize: '1.1rem',
+            lineHeight: '30px',
+            textTransform: 'capitalize' 
+          }}
+        >
+         Save More Energy
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{ 
+            color: 'rgba(0, 0, 0, 0.6)',
+            fontSize: '0.875rem',
+            lineHeight: '1.16',
+            paddingRight:{
+              xs: '16px',  // 16px padding on extra-small screens
+              sm: '10px',  // 32px padding on small screens
+              md: '48px',  // 48px padding on medium screens
+              lg: '64px',  // 64px padding on large screens
+              xl: '100px'  // 100px padding on extra-large screens
+            },
+            textAlign:'justify'
+          }}
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo rem architecto at error explicabo tempora.
+        </Typography>
+      </Stack>
+    </Stack>
+    <Stack direction="row" spacing={2} sx={{margin:'30px 0px'}}>
+      <Box 
+        sx={{ 
+          width:{
+            xs: '180px',  // 16px padding on extra-small screens
+            sm: '100px',  // 32px padding on small screens
+            md: '100px',  // 48px padding on medium screens
+            lg: '100px',  // 64px padding on large screens
+            xl: '100px'  // 100px padding on extra-large screens
+          },
+          height: '55px', 
+          marginTop: '15px',
+          borderRadius: '3px', 
+          background: '#253745' 
+        }} 
+      />
+      <Stack sx={{ paddingLeft:'18px'}}>
+        <Typography
+          variant="h6"
+          sx={{ 
+            fontWeight: '700', 
+            color: '#253745',
+            fontSize: '1.1rem',
+            lineHeight: '30px',
+            textTransform: 'capitalize' 
+          }}
+        >
+          Smart Connected
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{ 
+            color: 'rgba(0, 0, 0, 0.6)',
+            fontSize: '0.875rem',
+            lineHeight: '1.16',
+            paddingRight:{
+              xs: '16px',  // 16px padding on extra-small screens
+              sm: '10px',  // 32px padding on small screens
+              md: '48px',  // 48px padding on medium screens
+              lg: '64px',  // 64px padding on large screens
+              xl: '100px'  // 100px padding on extra-large screens
+            },
+            textAlign:'justify'
+          }}
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo rem architecto at error explicabo tempora.
+        </Typography>
+      </Stack>
+    </Stack>
+    <Button variant="contained" sx={{background:'rgb(87, 179, 62)',color:'white'}}>
+     More About Us
+    </Button>
   </Grid>
-  <Grid item xs={12} sm={6}>
+  <Grid item xs={12} md={6}>
     <img
       src={imageSrc}
       alt="VNT EV Machine"
@@ -29,7 +131,7 @@ function ChargingStation() {
     />
   </Grid>
 </Grid>
-    </Container>
+</Container>
   );
 }
 export default ChargingStation;

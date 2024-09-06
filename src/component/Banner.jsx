@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 // import BannerImg from './bannerImg.jpg';
-
 function Banner() {
   return (
     <Box sx={{ height: '90vh', width: '100%' }}>

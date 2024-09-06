@@ -8,7 +8,7 @@ function WhyChoose() {
  const icon4 = require('../../img/icon4.png');
   return (
         <>
-       <span style={{ color: '#57b33e', display: 'block', fontSize: '22px', fontWeight: 'bold', textAlign: 'center',marginTop:'30px' }}><b>Why Choose Us</b></span>
+       <span style={{ color: '#57b33e', display: 'block', fontSize: '16px', fontWeight: 'bold', textAlign: 'center',marginTop:'30px' }}><b>Why Choose Us</b></span>
         <Typography variant="h6" gutterBottom color="#0c2226" style={{ textAlign: 'center', fontWeight: '600',fontSize:'16px' }}>
           <b> VNT EV Charging is the Biggest EV Charging Station in the World  </b>
         </Typography>
