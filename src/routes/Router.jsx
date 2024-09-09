@@ -8,6 +8,7 @@ import Dashboard from "../adminPanel/pages/dashboard/Dashboard";
 import AddUser from "../adminPanel/pages/user/addUser";
 import AuthLayout from "./AuthLayout";
 import PublicLayout from "./PublicLayout";
+import ThemeProvider from  "../landingUI/layout/theme/ThemeProvider"
 
 function Router() {
   return (
@@ -22,7 +23,6 @@ function Router() {
         >
           <Route path="/" element={<Home />} />
         </Route>
-
         <Route
           element={
             <ThemeProvider>
@@ -33,8 +33,6 @@ function Router() {
           <Route path="/logIn" element={<Login />} />
           <Route path="/register" element={<Registration />} />
         </Route>
-
-        {/* Admin Routes */}
         <Route
           path="/admin/*"
           element={
