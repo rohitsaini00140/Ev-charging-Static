@@ -1,1 +1,0 @@
-export const menuData = ["Home", "About", "Services", "Blog", "Contact"];

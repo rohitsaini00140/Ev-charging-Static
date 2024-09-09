@@ -1,0 +1,37 @@
+.slick-prev,
+.slick-next {
+  z-index: 1; /* Ensure buttons are above other content */
+  width: 40px;
+  height: 40px;
+ background-color:#434e51; 
+  border-radius: 50%;
+  color: #99ff00;
+  font-size: 24px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+   overflow: hidden;
+}
+.css-1f5yl0u-MuiPaper-root-MuiCard-root{
+    --Paper-shadow:none !important;
+}
+.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus{
+ background: #434e51 !important;
+}
+.slick-prev:before, .slick-next:before{
+    color: #99ff00 !important;
+}
+.slick-prev {
+  left: -3%;
+}
+.slick-next {
+  right: -3%;
+}
+/* Optional: Custom arrow styles */
+.css-46bh2p-MuiCardContent-root {
+    padding: 8px !important;
+}
+.slick-slide img {
+ 
+  display: block;
+}
