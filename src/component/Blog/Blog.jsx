@@ -88,6 +88,7 @@ function Blog() {
                   component="img"
                   alt={post.title}
                   height="250"
+                  borderRadius='5px'
                   image={post.image}
                   title={post.title}
                 />

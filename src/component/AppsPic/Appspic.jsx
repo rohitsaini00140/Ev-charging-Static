@@ -6,9 +6,9 @@ function Appspic() {
     const playstore = require('../../img/play.png');
     const aapstore = require('../../img/app.png');
     const aapMobile = require('../../img/mobile.png');
-  return (
-<Container>
-      <Box sx={{ background: '#f4faef', padding: '20px 40px',marginTop:'30px'}}>
+    return (
+    <Container>
+      <Box sx={{ background: '#f4faef', padding: '20px 40px'}}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <Typography variant="h6" sx={{fontWeight:'600', fontSize:'30px',lineHeight:'34px',marginTop:'13px'}}>
@@ -42,7 +42,6 @@ function Appspic() {
             </Link>
              </Box>
             </Grid>
-          
             </Grid>
           </Grid>
           <Grid item xs={12} sm={6}>

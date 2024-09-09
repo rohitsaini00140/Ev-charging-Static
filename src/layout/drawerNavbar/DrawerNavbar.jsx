@@ -20,21 +20,18 @@ function DrawerNavbar() {
             const sticky = 80;
             setIsBgcolor(window.scrollY > sticky);
         };
-
         window.addEventListener('scroll', handleScroll);
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
     const [drop, setDrop] = useState(Array(menuList.length).fill(false));
     const handleClick = (index) => {
         const openChild = [...drop];
         openChild[index] = !openChild[index];
         setDrop(openChild);
     }
-
     const [state, setState] = useState({
         left: false,
     });
@@ -51,13 +48,13 @@ function DrawerNavbar() {
         <Box
             role="presentation"
             onKeyDown={toggleDrawer(anchor, false)}
-            sx={{ bgcolor: "#6CAAA814", height: "full" }}
+            sx={{ bgcolor: "#232a2b", height: "full" }}
         >
             <List>
                 {menuList.map((ele, index) => (
                     <>
                         <Link
-                            style={{ textDecoration: "none", color: "#04f5f5" }}
+                            style={{ textDecoration: "none", color: "#fff" }}
                             to={ele.path}
                             onClick={!ele.arr && toggleDrawer(anchor, false)}
                         >
@@ -70,11 +67,11 @@ function DrawerNavbar() {
                                             ?
                                             <>
                                                 <ListItemText primary={ele.name}
-                                                    sx={{ font: "#04f5f5" }} />
-                                                {drop[index] ? <ExpandMore sx={{ font: "#04f5f5" }} /> : <ExpandLess sx={{ font: "#04f5f5" }} />}
+                                                    sx={{ font: "#fff" }} />
+                                                {drop[index] ? <ExpandMore sx={{ font: "#fff" }} /> : <ExpandLess sx={{ font: "#fff" }} />}
                                             </>
                                             :
-                                            <ListItemText primary={ele.name} sx={{ font: "#04f5f5" }} />
+                                            <ListItemText primary={ele.name} sx={{ font: "#fff" }} />
                                     }
                                 </ListItemButton>
                             </ListItem>
@@ -91,7 +88,7 @@ function DrawerNavbar() {
                                                 <ListItemButton key={i}>
                                                     <ListItemText
                                                         primary={ele.name}
-                                                        sx={{ paddingLeft: "2rem", color: "#04f5f5" }}
+                                                        sx={{ paddingLeft: "2rem", color: "#fff" }}
                                                     />
                                                 </ListItemButton>
                                             </Link>
@@ -111,8 +108,8 @@ function DrawerNavbar() {
     return (
         <Stack
             sx={{
-                bgcolor: isBgcolor ? "#fff" : "transparent",
-                height: "6.5rem",
+                bgcolor: isBgcolor ? "#232a2b" : "transparent",
+                height: "5.5rem",
                 width: "100%",
                 position: "fixed",
                 top: 0,
@@ -134,7 +131,7 @@ function DrawerNavbar() {
             <Stack>
                 {['right'].map((anchor) => (
                     <Stack key={anchor}>
-                        <MenuIcon onClick={toggleDrawer(anchor, true)} sx={{ fontSize: "2rem", color: "#04f5f5" }} />
+                        <MenuIcon onClick={toggleDrawer(anchor, true)} sx={{ fontSize: "2rem", color: "#fff" }} />
                         <Drawer
                             anchor={anchor}
                             open={state[anchor]}

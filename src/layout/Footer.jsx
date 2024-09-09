@@ -15,7 +15,7 @@ function Footer() {
     setEmail('');
   };
   return (
-    <footer style={{ padding: '10px 0', backgroundColor: '#232a2b' }}>
+    <footer style={{ padding: '10px 0', backgroundColor: '#02121e'}}>
       <Container>
         {/* Top footer section start here */}
         <Typography variant="h6" gutterBottom color="#fff" sx={{ textAlign: 'center', padding: '30px 0px' }}>
@@ -73,25 +73,25 @@ function Footer() {
             <Typography variant="body2" color="#ffffffd1" sx={{ display: 'flex', marginTop: '15px' }}>
               <Link color="#fff" sx={{ textDecoration: 'none', marginLeft: '0px', background: '#434e51', width: '25px', height: '25px', borderRadius: '5px', display: 'grid', placeItems: 'center' }} href="https://www.linkedin.com/company/vrinda-nano-technologies/?originalSubdomain=in" target="_blank" > <LinkedInIcon sx={{
                 fontSize: '18px', "&:hover": {
-                  color: '#99ff00',
+                  color: '#61e93d',
                   transition: '0.20s'
                 }
               }} /></Link>
               <Link color="#fff" sx={{ textDecoration: 'none', marginLeft: '15px', background: '#434e51', width: '25px', height: '25px', borderRadius: '5px', display: 'grid', placeItems: 'center' }} href="#" target="_blank" > <InstagramIcon sx={{
                 fontSize: '18px', "&:hover": {
-                  color: '#99ff00',
+                  color: '#61e93d',
                   transition: '0.20s'
                 }
               }} /></Link>
               <Link color="#fff" sx={{ textDecoration: 'none', marginLeft: '15px', background: '#434e51', width: '25px', height: '25px', borderRadius: '5px', display: 'grid', placeItems: 'center' }} target="_blank" href="https://www.facebook.com/vrindananotechnologiesvnt"> <FacebookIcon sx={{
                 fontSize: '18px', "&:hover": {
-                  color: '#99ff00',
+                  color: '#61e93d',
                   transition: '0.20s'
                 }
               }} /></Link>
               <Link color="#fff" sx={{ textDecoration: 'none', marginLeft: '15px', background: '#434e51', width: '25px', height: '25px', borderRadius: '5px', display: 'grid', placeItems: 'center' }} target="_blank" href="#"> <TwitterIcon sx={{
                 fontSize: '18px', "&:hover": {
-                  color: '#99ff00',
+                  color: '#61e93d',
                   transition: '0.20s'
                 }
               }} /></Link>
@@ -101,13 +101,13 @@ function Footer() {
           </Grid>
           <Grid container item xs={12} sm={8}>
             <Grid item xs={12} sm={6} md={4} lg={4}>
-              <Typography variant="h6" gutterBottom color="#99ff00">
+              <Typography variant="h6" gutterBottom color="#61e93d">
                 Quick Links
               </Typography>
               <Typography variant="body2" sx={{ margin: '15px 0px' }}>
                 <Link sx={{
                   textDecoration: 'none', "&:hover": {
-                    color: '#99ff00',
+                    color: '#61e93d',
                     transition: '0.20s'
                   }
                 }} href="#" color="#ffffffd1">
@@ -117,7 +117,7 @@ function Footer() {
               <Typography variant="body2" sx={{ margin: '15px 0px' }}>
                 <Link sx={{
                   textDecoration: 'none', "&:hover": {
-                    color: '#99ff00',
+                    color: '#61e93d',
                     transition: '0.20s'
                   }
                 }} href="#" color="#ffffffd1">
@@ -127,7 +127,7 @@ function Footer() {
               <Typography variant="body2" sx={{ margin: '15px 0px' }}>
                 <Link sx={{
                   textDecoration: 'none', "&:hover": {
-                    color: '#99ff00',
+                    color: '#61e93d',
                     transition: '0.20s'
                   }
                 }} href="#" color="#ffffffd1">
@@ -137,7 +137,7 @@ function Footer() {
               <Typography variant="body2" sx={{ margin: '15px 0px' }}>
                 <Link sx={{
                   textDecoration: 'none', "&:hover": {
-                    color: '#99ff00',
+                    color: '#61e93d',
                     transition: '0.20s'
                   }
                 }} href="#" color="#ffffffd1">
@@ -146,13 +146,13 @@ function Footer() {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={4}>
-              <Typography variant="h6" gutterBottom color="#99ff00">
+              <Typography variant="h6" gutterBottom color="#61e93d">
                 Useful Links
               </Typography>
               <Typography variant="body2" sx={{ margin: '15px 0px' }}>
                 <Link href="#" color="#ffffffd1" sx={{
                   textDecoration: 'none', "&:hover": {
-                    color: '#99ff00',
+                    color: '#61e93d',
                     transition: '0.20s'
                   }
                 }}>
@@ -162,7 +162,7 @@ function Footer() {
               <Typography variant="body2" sx={{ margin: '15px 0px' }}>
                 <Link sx={{
                   textDecoration: 'none', "&:hover": {
-                    color: '#99ff00',
+                    color: '#61e93d',
                     transition: '0.20s'
                   }
                 }} href="#" color="#ffffffd1">
@@ -172,7 +172,7 @@ function Footer() {
               <Typography variant="body2" sx={{ margin: '15px 0px' }} >
                 <Link sx={{
                   textDecoration: 'none', "&:hover": {
-                    color: '#99ff00',
+                    color: '#61e93d',
                     transition: '0.20s'
                   }
                 }} href="#" color="#ffffffd1">
@@ -182,7 +182,7 @@ function Footer() {
               <Typography variant="body2" sx={{ margin: '15px 0px' }}>
                 <Link sx={{
                   textDecoration: 'none', "&:hover": {
-                    color: '#99ff00',
+                    color: '#61e93d',
                     transition: '0.20s'
                   }
                 }} href="#" color="#ffffffd1">
@@ -191,7 +191,7 @@ function Footer() {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-              <Typography variant="h6" gutterBottom color="#99ff00">
+              <Typography variant="h6" gutterBottom color="#61e93d">
                 Contact Us
               </Typography>
               <Typography variant="body2" color="#ffffffd1" sx={{ margin: '8px 0px' }}>
@@ -204,17 +204,17 @@ function Footer() {
                 <b>International Address -:</b> <Link color="#ffffffd1" sx={{ textDecoration: 'none' }} href="#">- 3901, 7 Marbelle Avenue Toronto, M9A0C9, Canada</Link>
               </Typography>
               <Typography variant="body2" color="#ffffffd1" sx={{ display: 'flex', margin: '12px 0px' }}>
-                <MailOutlineIcon sx={{ fontSize: '20px', color: '#99ff00' }} /> <Link color="#ffffffd1" sx={{
+                <MailOutlineIcon sx={{ fontSize: '20px', color: '#61e93d' }} /> <Link color="#ffffffd1" sx={{
                   textDecoration: 'none', marginLeft: '10px', "&:hover": {
-                    color: '#99ff00',
+                    color: '#61e93d',
                     transition: '0.20s'
                   }
                 }} href="mailto:info@vnt.in">info@vnt.in</Link>
               </Typography>
               <Typography variant="body2" color="#ffffffd1" sx={{ display: 'flex' }}>
-                <PhoneIcon sx={{ fontSize: '20px', color: '#99ff00' }} /><Link color="#ffffffd1" sx={{
+                <PhoneIcon sx={{ fontSize: '20px', color: '#61e93d' }} /><Link color="#ffffffd1" sx={{
                   textDecoration: 'none', marginLeft: '5px', "&:hover": {
-                    color: '#99ff00',
+                    color: '#61e93d',
                     transition: '0.20s'
                   }
                 }} href="tel:+1800 572 7592">1800 572 7592</Link>
