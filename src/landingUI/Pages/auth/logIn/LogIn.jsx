@@ -5,10 +5,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
-// Styled Components
-
-const loginImg = require('../../../img/logoin.png')
-
+const loginImg = require('../../../img/login_bg.jpg')
 const FormContainer = styled(Box)(({ theme }) => ({
     width: '100%',
     maxWidth: '480px',
@@ -25,19 +22,16 @@ const FormContainer = styled(Box)(({ theme }) => ({
         margin: '0 auto',
     },
 }));
-
 const LoginContainer = styled(Grid)(({ theme }) => ({
     minHeight: '100vh',
-    backgroundColor: '#f5f5f5',
+    background: {loginImg},
     padding: "8rem 0rem 5rem 0rem"
 }));
-
 const SocialButton = styled(Button)(({ theme }) => ({
     margin: theme.spacing(1, 0),
     borderRadius: '50px',
     textTransform: 'none',
 }));
-
 function Login() {
     return (
         <LoginContainer container>
@@ -64,11 +58,9 @@ function Login() {
                     <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
                         SIGN IN
                     </Button>
-
                     <Typography variant="body2" color="textSecondary" mt={3} mb={1}>
                         Or Sign In with
                     </Typography>
-
                     <SocialButton fullWidth variant="outlined" startIcon={<GoogleIcon />} color="inherit">
                         Sign in with Google
                     </SocialButton>
@@ -78,15 +70,12 @@ function Login() {
                     <SocialButton fullWidth variant="outlined" startIcon={<LinkedInIcon />} color="inherit">
                         Sign in with LinkedIn
                     </SocialButton>
-
                     <Typography variant="body2" mt={3}>
                         Not a member? <Link href="#" underline="none">Sign Up</Link>
                     </Typography>
                 </FormContainer>
             </Grid>
-            
         </LoginContainer>
     );
 }
-
 export default Login;
