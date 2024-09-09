@@ -136,10 +136,7 @@ function Testimaonils() {
           fontSize: '18px',
           cursor: 'pointer',
           zIndex: '999',
-          "&:hover": {
-            color: 'rgb(87, 179, 62)',
-            transition: '0.20s'
-          }
+          color:'#253745'
         }}
       >
           {post.title}

@@ -2,15 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../landingUI/Pages/Home";
 import Login from "../landingUI/Pages/auth/logIn/LogIn";
 import Registration from "../landingUI/Pages/auth/registration/Registration";
-import ThemeProvider from "../landingUI/layout/theme/ThemeProvider";
 import ThemeProviderAdmin from "../adminPanel/layouts/theme/ThemeProviderAdmin";
 import Drawer from "../adminPanel/layouts/sidebar/Drawer";
 import Dashboard from "../adminPanel/pages/dashboard/Dashboard";
 import AddUser from "../adminPanel/pages/user/addUser";
 import AuthLayout from "./AuthLayout";
 import PublicLayout from "./PublicLayout";
-
-// 
 
 function Router() {
   return (
@@ -54,6 +51,6 @@ function Router() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default Router;
