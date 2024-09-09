@@ -1,0 +1,9 @@
+/* Remove border for FileUpload component */
+.p-fileupload .p-fileupload-buttonbar {
+    border: none !important;
+}
+
+.p-fileupload .p-fileupload-content {
+    border: none !important;
+    background: transparent !important;
+}

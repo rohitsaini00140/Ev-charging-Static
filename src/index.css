@@ -27,3 +27,5 @@ background-color: #56a745 !important;
   padding-left: 0px !important;
 }
 }
+
+@import 'simplebar-react/dist/simplebar.min.css';

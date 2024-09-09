@@ -1,0 +1,7 @@
+export const statusData = ["Private", "Public"]
+export const categoriesData = ["Men's Wear", "Women's Wear"]
+export const brandData = ["Levi's", "Addidas", "H&M", "Rolex", "Apple", "Gucci", "Schnell", "Zara", "Nike", "Gillette", "Accenture", "Nescafe", "Loreal"]
+export const productCollectionData = ["Featured products", "Trending products", "Top selling products"]
+export const taxRuleData = ["Default"]
+export const shippingRuleData = ["Default"]
+export const bundleDealData = ["Default"]
