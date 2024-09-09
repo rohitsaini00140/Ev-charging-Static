@@ -18,7 +18,7 @@ const navConfig = [
     children: [
       {
         title: 'List',
-        path: '/admin/user/list',
+        path: '/admin/addUser',
         icon: icon('ic_circle'),
       },
       {

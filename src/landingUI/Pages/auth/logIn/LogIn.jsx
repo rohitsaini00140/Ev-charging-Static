@@ -201,9 +201,17 @@ const FormContainer = styled(Box)(({ theme }) => ({
 }));
 
 const RightSide = styled(Box)(({ theme }) => ({
-    background: 'url(/mnt/data/loginimg.jpg) center/cover no-repeat',
-    // height: '100vh',
-    border:"1px solid black",
+    background: 'url(https://i.pinimg.com/736x/4a/90/33/4a903338c0e478248153bd8f3f6f6745.jpg) center/cover no-repeat',
+    width: '100%',
+    maxWidth: '480px',
+    border: "1px solid black",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    height: "100%",
+    backgroundColor: '#fff',
+    borderRadius: '10px',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
     [theme.breakpoints.down('md')]: {
         display: 'none',
     },
