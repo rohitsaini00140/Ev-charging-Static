@@ -21,8 +21,8 @@ function Header() {
   return (
     <Stack
       sx={{
-        bgcolor: isBgcolor ? "rgb(35, 42, 43)" : "transparent",
-        height: "6.5rem",
+        bgcolor: isBgcolor ? "#02121e" : "transparent",
+        height: "5.5rem",
         width: "100%",
         position: "fixed",
         top: 0,
@@ -63,7 +63,7 @@ function Header() {
                 transition:'0.5s',
 
                 "&:hover": {
-                  color: "rgb(87, 179, 62)",
+                  color: "#61e93d",
                   transition:'0.5s'
                 },
                 color: location.pathname === ele.path ? "#ff6600" : "white"
@@ -86,8 +86,8 @@ function Header() {
           <Button
             variant="outlined"
             sx={{
-              borderColor: "rgb(87, 179, 62)",
-              color: "rgb(87, 179, 62)",
+              borderColor: "#61e93d",
+              color: "#61e93d",
               width: "5%",
             }}
           >

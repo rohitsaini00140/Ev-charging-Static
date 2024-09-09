@@ -40,15 +40,16 @@ function Banner() {
               xs: "80%"
             },
             color: "white",
-            marginLeft: "5rem",
-            margin: { xs: "0 1rem", sm: "0 2rem", md: "0 5rem" },
+            marginLeft: { xs: "0", sm: "0", md: "5rem" },
+            margin: { xs: "0", sm: "0", md: "0 5rem" },
             fontWeight: "700",
-            lineHeight: "4rem"
+            lineHeight: {xs: "42px", sm: "42px", md: "4rem"},
+            fontSize:{xs: "2rem", sm: "2rem", md: "3rem"}
           }}>
           Find EV Charging Stations and Get Ready to
           <Typography
             variant="h3"
-            sx={{ color: "rgb(87, 179, 62)", display: "inline", paddingLeft: "1rem", fontWeight: "700", }}
+            sx={{ color: "rgb(87, 179, 62)", display: "inline", paddingLeft: "1rem", fontWeight: "700",fontSize:{xs: "2rem", sm: "2rem", md: "3rem"} }}
           >Go Green</Typography>
         </Typography>
       </Box>

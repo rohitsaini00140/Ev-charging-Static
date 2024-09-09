@@ -7,7 +7,6 @@
 .css-16janke-MuiStack-root>:not(style):not(style){
   margin: auto !important;
 }
-
 .css-hud6bj-MuiLinearProgress-bar1{
 background-color: #56a745 !important;
 }
@@ -27,5 +26,4 @@ background-color: #56a745 !important;
   padding-left: 0px !important;
 }
 }
-
 @import 'simplebar-react/dist/simplebar.min.css';
