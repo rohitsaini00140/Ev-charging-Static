@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Footer from "../landingUI/layout/Footer";
 import Home from "../landingUI/Pages/Home";
 import Header from "../landingUI/layout/header/Header";
@@ -7,50 +7,54 @@ import GoToTop from "../landingUI/component/GoToTop";
 import ScrollUp from "../landingUI/component/ScrollUp";
 import Login from "../landingUI/Pages/auth/logIn/LogIn";
 import Registration from "../landingUI/Pages/auth/registration/Registration";
-import ThemeProvider from "../landingUI/layout/theme/ThemeProvider";
 import ThemeProviderAdmin from "../adminPanel/layouts/theme/ThemeProviderAdmin";
 import Drawer from "../adminPanel/layouts/sidebar/Drawer";
 import Dashboard from "../adminPanel/pages/dashboard/Dashboard";
 
-function Router() {
+const LayoutWithHeaderAndFooter = () => (
+  <>
+    <Header />
+    <DrawerNavbar />
+    <GoToTop />
+    <main>
+      <Outlet /> 
+    </main>
+    <ScrollUp />
+    <Footer />
+  </>
+);
+// Layout component for admin pages
+const AdminLayout = () => (
+  <>
+    <Drawer />
+    <main>
+      <Outlet />
+    </main>
+  </>
+);
+
+const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Routes */}
-        <Route
-          path="/*"
-          element={
-            <ThemeProvider>
-              <GoToTop />
-              <Header />
-              <DrawerNavbar />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/logIn" element={<Login />} />
-                <Route path="/register" element={<Registration />} />
-              </Routes>
-              <ScrollUp />
-              <Footer />
-            </ThemeProvider>
-          }
-        />
-
-        {/* Admin Routes */}
-        <Route
-          path="/admin/*"
-          element={
-            <ThemeProviderAdmin>
-              <Drawer>
-                <Routes>
-                  <Route path="/admin" element={<Dashboard />} />
-                </Routes>
-              </Drawer>
-            </ThemeProviderAdmin>
-          }
-        />
+       {/* Protected routes with header and footer */}
+          <Route>
+          <Route element={<LayoutWithHeaderAndFooter />}>
+            <Route path="/" element={<Home />} />
+          </Route>
+        </Route>
+        {/* Public routes without header and footer */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Registration />} />
+        {/* Admin routes */}
+        <Route element={<ThemeProviderAdmin />}>
+        <Route element={<AdminLayout />}>
+        <Route path="/admin" element={<Dashboard />} />
+        </Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default Router;
