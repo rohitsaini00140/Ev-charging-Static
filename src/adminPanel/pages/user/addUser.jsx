@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
@@ -22,7 +21,7 @@ import Iconify from '../../component/Iconify';
 
 // ----------------------------------------------------------------------
 
-function Login() {
+function AddUser() {
     const theme = useTheme();
 
     // const router = useRouter();
@@ -153,4 +152,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default AddUser;

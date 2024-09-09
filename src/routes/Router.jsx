@@ -1,15 +1,13 @@
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import Footer from "../landingUI/layout/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../landingUI/Pages/Home";
-import Header from "../landingUI/layout/header/Header";
-import DrawerNavbar from "../landingUI/layout/drawerNavbar/DrawerNavbar";
-import GoToTop from "../landingUI/component/GoToTop";
-import ScrollUp from "../landingUI/component/ScrollUp";
 import Login from "../landingUI/Pages/auth/logIn/LogIn";
 import Registration from "../landingUI/Pages/auth/registration/Registration";
 import ThemeProviderAdmin from "../adminPanel/layouts/theme/ThemeProviderAdmin";
 import Drawer from "../adminPanel/layouts/sidebar/Drawer";
 import Dashboard from "../adminPanel/pages/dashboard/Dashboard";
+import AddUser from "../adminPanel/pages/user/addUser";
+import AuthLayout from "./AuthLayout";
+import PublicLayout from "./PublicLayout";
 
 const LayoutWithHeaderAndFooter = () => (
   <>
@@ -37,21 +35,41 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-       {/* Protected routes with header and footer */}
-          <Route>
-          <Route element={<LayoutWithHeaderAndFooter />}>
-            <Route path="/" element={<Home />} />
-          </Route>
+        <Route
+          element={
+            <ThemeProvider>
+              <PublicLayout />
+            </ThemeProvider>
+          }
+        >
+          <Route path="/" element={<Home />} />
         </Route>
-        {/* Public routes without header and footer */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Registration />} />
-        {/* Admin routes */}
-        <Route element={<ThemeProviderAdmin />}>
-        <Route element={<AdminLayout />}>
-        <Route path="/admin" element={<Dashboard />} />
+
+        <Route
+          element={
+            <ThemeProvider>
+              <AuthLayout />
+            </ThemeProvider>
+          }
+        >
+          <Route path="/logIn" element={<Login />} />
+          <Route path="/register" element={<Registration />} />
         </Route>
-        </Route>
+
+        {/* Admin Routes */}
+        <Route
+          path="/admin/*"
+          element={
+            <ThemeProviderAdmin>
+              <Drawer>
+                <Routes>
+                  <Route path="/admin" element={<Dashboard />} />
+                  <Route path="/admin/addUser" element={<AddUser />} />
+                </Routes>
+              </Drawer>
+            </ThemeProviderAdmin>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

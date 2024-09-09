@@ -23,6 +23,7 @@ import { NAV } from './configLayout';
 import navConfig from './NavigationConfig';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Collapse, ListItemIcon, ListItemText } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
 // ----------------------------------------------------------------------
@@ -148,64 +149,69 @@ function NavItem({ item }) {
 
     const active = item.path === pathname;
 
+    console.log(item.path)
+
     return (
         <Box>
-            <ListItemButton
-                component={RouterLink}
-                href={item.path}
-                onClick={item.children ? handleClick : undefined}
-                sx={{
-                    minHeight: 44,
-                    borderRadius: 0.75,
-                    typography: 'body2',
-                    color: 'text.secondary',
-                    textTransform: 'capitalize',
-                    fontWeight: 'fontWeightMedium',
-                    ...(active && {
-                        color: 'primary.main',
-                        fontWeight: 'fontWeightSemiBold',
-                        bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
-                        '&:hover': {
-                            bgcolor: (theme) => alpha(theme.palette.primary.main, 0.16),
-                        },
-                    }),
-                }}
-            >
-                <Box component="span" sx={{ width: 24, height: 24, mr: 2 }}>
-                    {item.icon}
-                </Box>
-                <Box component="span">{item.title}</Box>
-                {item.children && (
-                    <Box sx={{ ml: 'auto', transition: '0.3s' }}>
-                        {open ? <ExpandLess /> : <ExpandMore />}
+            <Link to={item.path} style={{ textDecoration: "none" }}>
+                <ListItemButton
+                    component={RouterLink}
+                    onClick={item.children ? handleClick : undefined}
+                    sx={{
+                        minHeight: 44,
+                        borderRadius: 0.75,
+                        typography: 'body2',
+                        color: 'text.secondary',
+                        textTransform: 'capitalize',
+                        fontWeight: 'fontWeightMedium',
+                        ...(active && {
+                            color: 'primary.main',
+                            fontWeight: 'fontWeightSemiBold',
+                            bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
+                            '&:hover': {
+                                bgcolor: (theme) => alpha(theme.palette.primary.main, 0.16),
+                            },
+                        }),
+                    }}
+                >
+                    <Box component="span" sx={{ width: 24, height: 24, mr: 2 }}>
+                        {item.icon}
                     </Box>
-                )}
-            </ListItemButton>
+                    <Box component="span">{item.title}</Box>
+                    {item.children && (
+                        <Box sx={{ ml: 'auto', transition: '0.3s' }}>
+                            {open ? <ExpandLess /> : <ExpandMore />}
+                        </Box>
+                    )}
+                </ListItemButton>
+            </Link>
             {item.children && (
                 <Collapse in={open}>
                     <Box>
                         {item.children.map((child) => (
-                            <ListItemButton
-                                key={child.title}
-                                component={RouterLink}
-                                href={child.path}
-                                sx={{
-                                    pl: 6.8,
-                                    borderRadius: 0.75,
-                                    typography: 'body2',
-                                    color: 'text.secondary',
-                                    textTransform: 'capitalize',
-                                    fontWeight: 'fontWeightMedium',
-                                    '&:hover': {
-                                        bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
-                                    },
-                                }}
-                            >
-                                <Box component="span" sx={{ width: 15, height: 15, mr: 2 }}>
-                                    {child.icon}
-                                </Box>
-                                <Box component="span">{child.title}</Box>
-                            </ListItemButton>
+                            <Link to={child.path} style={{ textDecoration: "none" }}>
+                                <ListItemButton
+                                    key={child.title}
+                                    component={RouterLink}
+                                    href={child.path}
+                                    sx={{
+                                        pl: 6.8,
+                                        borderRadius: 0.75,
+                                        typography: 'body2',
+                                        color: 'text.secondary',
+                                        textTransform: 'capitalize',
+                                        fontWeight: 'fontWeightMedium',
+                                        '&:hover': {
+                                            bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
+                                        },
+                                    }}
+                                >
+                                    <Box component="span" sx={{ width: 15, height: 15, mr: 2 }}>
+                                        {child.icon}
+                                    </Box>
+                                    <Box component="span">{child.title}</Box>
+                                </ListItemButton>
+                            </Link>
                         ))}
                     </Box>
                 </Collapse>

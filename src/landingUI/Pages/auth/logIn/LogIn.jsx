@@ -26,7 +26,6 @@ const FormContainer = styled(Box)(({ theme }) => ({
     },
 }));
 
-
 const LoginContainer = styled(Grid)(({ theme }) => ({
     minHeight: '100vh',
     backgroundColor: '#f5f5f5',
