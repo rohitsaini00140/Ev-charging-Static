@@ -60,8 +60,11 @@ function Header() {
               sx={{
                 cursor: "pointer",
                 // color: "white",
+                transition:'0.5s',
+
                 "&:hover": {
-                  color: "#ff6600",
+                  color: "rgb(87, 179, 62)",
+                  transition:'0.5s'
                 },
                 color: location.pathname === ele.path ? "#ff6600" : "white"
               }}
