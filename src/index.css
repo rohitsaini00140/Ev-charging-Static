@@ -26,10 +26,4 @@ background-color: #56a745 !important;
   padding-left: 0px !important;
 }
 }
-.slick-dots li button{
-  color: white !important;
-}
-.slick-dots li button:before{
-  color: white !important;
-  font-size: 10px !important;
-}
+@import 'simplebar-react/dist/simplebar.min.css';
