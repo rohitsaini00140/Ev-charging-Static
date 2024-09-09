@@ -1,9 +1,7 @@
 import CssBaseline from '@mui/material/CssBaseline';
 import { useMemo } from 'react';
 import { createTheme, ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
-
 // ----------------------------------------------------------------------
-
 function ThemeProvider({ children }) {
     const memoizedValue = useMemo(
         () => ({

@@ -41,5 +41,21 @@
   color: #56a745 !important;
   font-size: 10px !important;
 }
+.slick-dots li button{
+  color: white !important;
+}
+.slick-dots li button:before{
+  color: white !important;
+  font-size: 10px !important;
+}
+.slick-dots li button:before:hover{
+  color: rgb(87, 179, 62) !important;
+}
+
+.slick-dots li.slick-active button:before{
+  color: rgb(87, 179, 62) !important;
+}
 
 @import 'simplebar-react/dist/simplebar.min.css';
+
+
