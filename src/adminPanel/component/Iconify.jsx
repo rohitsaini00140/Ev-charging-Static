@@ -11,7 +11,7 @@ const Iconify = forwardRef(({ icon, width = 20, sx, ...other }, ref) => (
     component={Icon}
     className="component-iconify"
     icon={icon}
-    sx={{ width, height: width, ...sx }}
+    sx={{ fontSize: width, ...sx, }}
     {...other}
   />
 ));
