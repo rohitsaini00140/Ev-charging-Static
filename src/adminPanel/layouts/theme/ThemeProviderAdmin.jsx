@@ -6,9 +6,7 @@ import { shadows } from './shadows';
 import { overrides } from './overrides';
 import { typography } from './typography';
 import { customShadows } from './custom-shadows';
-
 // ----------------------------------------------------------------------
-
 function ThemeProviderAdmin({ children }) {
   const memoizedValue = useMemo(
     () => ({
@@ -20,11 +18,8 @@ function ThemeProviderAdmin({ children }) {
     }),
     []
   );
-
   const theme = createTheme(memoizedValue);
-
   theme.components = overrides(theme);
-
   return (
     <MUIThemeProvider theme={theme}>
       <CssBaseline />
@@ -32,5 +27,4 @@ function ThemeProviderAdmin({ children }) {
     </MUIThemeProvider>
   );
 }
-
 export default ThemeProviderAdmin;

@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../landingUI/Pages/Home";
 import Login from "../landingUI/Pages/auth/logIn/LogIn";
 import Registration from "../landingUI/Pages/auth/registration/Registration";
-import ThemeProvider from "../landingUI/layout/theme/ThemeProvider";
 import ThemeProviderAdmin from "../adminPanel/layouts/theme/ThemeProviderAdmin";
 import Drawer from "../adminPanel/layouts/sidebar/Drawer";
 import Dashboard from "../adminPanel/pages/dashboard/Dashboard";
@@ -10,6 +9,7 @@ import AddUser from "../adminPanel/pages/user/add/AddUser";
 import AuthLayout from "./AuthLayout";
 import PublicLayout from "./PublicLayout";
 import UserView from "../adminPanel/pages/user/view/UserView";
+import ThemeProvider from  "../landingUI/layout/theme/ThemeProvider"
 
 function Router() {
   return (
@@ -24,7 +24,6 @@ function Router() {
         >
           <Route path="/" element={<Home />} />
         </Route>
-
         <Route
           element={
             <ThemeProvider>
@@ -35,8 +34,6 @@ function Router() {
           <Route path="/logIn" element={<Login />} />
           <Route path="/register" element={<Registration />} />
         </Route>
-
-        {/* Admin Routes */}
         <Route
           path="/admin/*"
           element={
@@ -54,6 +51,6 @@ function Router() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default Router;
