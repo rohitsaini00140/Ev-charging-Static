@@ -46,6 +46,7 @@ function AdminHeader({ onOpenNav }) {
             sx={{
                 boxShadow: 'none',
                 height: HEADER.H_MOBILE,
+                bgcolor: "#253745",
                 zIndex: theme.zIndex.appBar + 1,
                 ...bgBlur({
                     color: theme.palette.background.default,

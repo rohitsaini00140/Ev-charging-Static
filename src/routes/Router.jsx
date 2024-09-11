@@ -6,11 +6,10 @@ import ThemeProvider from "../landingUI/layout/theme/ThemeProvider";
 import ThemeProviderAdmin from "../adminPanel/layouts/theme/ThemeProviderAdmin";
 import Drawer from "../adminPanel/layouts/sidebar/Drawer";
 import Dashboard from "../adminPanel/pages/dashboard/Dashboard";
-import AddUser from "../adminPanel/pages/user/addUser";
+import AddUser from "../adminPanel/pages/user/add/AddUser";
 import AuthLayout from "./AuthLayout";
 import PublicLayout from "./PublicLayout";
-
-// 
+import UserView from "../adminPanel/pages/user/view/UserView";
 
 function Router() {
   return (
@@ -44,8 +43,9 @@ function Router() {
             <ThemeProviderAdmin>
               <Drawer>
                 <Routes>
-                  <Route path="/admin" element={<Dashboard />} />
-                  <Route path="/admin/addUser" element={<AddUser />} />
+                  <Route path="" element={<Dashboard />} />
+                  <Route path="user/add" element={<AddUser />} />
+                  <Route path="user/view" element={<UserView />} />
                 </Routes>
               </Drawer>
             </ThemeProviderAdmin>

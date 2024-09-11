@@ -1,28 +1,18 @@
 import { useEffect, useState } from 'react';
-
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
-// import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import { alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import ListItemButton from '@mui/material/ListItemButton';
-
 import { usePathname } from '../../customHooks/usePathname';
-import RouterLink from '../../component/RouterLink';
-
 import { useResponsive } from '../../customHooks/useResponsive';
-
-// import { account } from 'src/_mock/account';
-
-// import logo from "../../../public/assets/images/logo.png"
 import Scrollbar from '../../component/scrollbar/Scrollbar';
-
 import { NAV } from './configLayout';
 import navConfig from './NavigationConfig';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Collapse, ListItemIcon, ListItemText } from '@mui/material';
+import { Collapse } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 
@@ -31,7 +21,7 @@ import { Link } from 'react-router-dom';
 const account = {
     displayName: 'Aditya Shaw',
     email: 'aadi@gmail.com',
-    photoURL: '/assets/images/avatars/avatar_25.jpg',
+    photoURL: '/assets/images/avatar.svg',
 };
 // ----------------------------------------------------------------------
 
@@ -58,12 +48,17 @@ function Nav({ openNav, onCloseNav }) {
                 borderRadius: 1.5,
                 alignItems: 'center',
                 bgcolor: (theme) => alpha(theme.palette.grey[500], 0.12),
+                boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)',
             }}
         >
-            {/* <Avatar src={account.photoURL} alt="photoURL" /> */}
+            <Avatar
+                src={account.photoURL}
+                alt="photoURL"
+                sx={{ boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)' }}
+            />
 
             <Box sx={{ ml: 2 }}>
-                <Typography variant="subtitle2">{account.displayName}</Typography>
+                <Typography variant="subtitle2" color='rgb(87 179 62)'>{account.displayName}</Typography>
 
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                     {account.role}
@@ -115,6 +110,7 @@ function Nav({ openNav, onCloseNav }) {
                         height: 1,
                         position: 'fixed',
                         width: NAV.WIDTH,
+                        bgcolor: "#253745",
                         borderRight: (theme) => `dashed 1px ${theme.palette.Boxider}`,
                     }}
                 >
@@ -127,6 +123,7 @@ function Nav({ openNav, onCloseNav }) {
                     PaperProps={{
                         sx: {
                             width: NAV.WIDTH,
+                            bgcolor: "#253745",
                         },
                     }}
                 >
@@ -149,13 +146,10 @@ function NavItem({ item }) {
 
     const active = item.path === pathname;
 
-    console.log(item.path)
-
     return (
         <Box>
             <Link to={item.path} style={{ textDecoration: "none" }}>
                 <ListItemButton
-                    component={RouterLink}
                     onClick={item.children ? handleClick : undefined}
                     sx={{
                         minHeight: 44,
@@ -165,19 +159,21 @@ function NavItem({ item }) {
                         textTransform: 'capitalize',
                         fontWeight: 'fontWeightMedium',
                         ...(active && {
-                            color: 'primary.main',
+                            color: 'rgba(87, 179, 62)',
                             fontWeight: 'fontWeightSemiBold',
-                            bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
+                            bgcolor: () => alpha("rgba(87, 179, 62)", 0.08),
+                            boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)',
                             '&:hover': {
-                                bgcolor: (theme) => alpha(theme.palette.primary.main, 0.16),
+                                bgcolor: () => alpha("rgba(87, 179, 62)", 0.16),
+                                boxShadow: '0px 6px 18px rgba(87, 179, 62, 0.3)',
                             },
                         }),
                     }}
                 >
-                    <Box component="span" sx={{ width: 24, height: 24, mr: 2 }}>
+                    <Box component="span" sx={{ width: 24, height: 24, mr: 2, color: "rgb(87 179 62)" }}>
                         {item.icon}
                     </Box>
-                    <Box component="span">{item.title}</Box>
+                    <Box component="span" color={"white"}>{item.title}</Box>
                     {item.children && (
                         <Box sx={{ ml: 'auto', transition: '0.3s' }}>
                             {open ? <ExpandLess /> : <ExpandMore />}
@@ -192,24 +188,27 @@ function NavItem({ item }) {
                             <Link to={child.path} style={{ textDecoration: "none" }}>
                                 <ListItemButton
                                     key={child.title}
-                                    component={RouterLink}
-                                    href={child.path}
                                     sx={{
                                         pl: 6.8,
                                         borderRadius: 0.75,
                                         typography: 'body2',
                                         color: 'text.secondary',
                                         textTransform: 'capitalize',
-                                        fontWeight: 'fontWeightMedium',
-                                        '&:hover': {
-                                            bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
-                                        },
+                                        ...(child.path === pathname && {
+                                            color: 'rgb(87 179 62)',
+                                            fontWeight: 'fontWeightSemiBold',
+                                            bgcolor: () => alpha("rgb(87 179 62)", 0.08),
+                                            '&:hover': {
+                                                bgcolor: () => alpha("rgb(87 179 62)", 0.16),
+                                            },
+                                        }),
+                                        fontWeight: 'fontWeightMedium'
                                     }}
                                 >
-                                    <Box component="span" sx={{ width: 15, height: 15, mr: 2 }}>
+                                    <Box component="span" sx={{ width: 15, height: 15, mr: 2, color: "rgb(87 179 62)" }}>
                                         {child.icon}
                                     </Box>
-                                    <Box component="span">{child.title}</Box>
+                                    <Box component="span" color={"white"}>{child.title}</Box>
                                 </ListItemButton>
                             </Link>
                         ))}

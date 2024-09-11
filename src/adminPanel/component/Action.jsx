@@ -19,10 +19,10 @@ function Action({ data, pathToNavigate, onDelete }) {
         setOpen(null);
     };
 
-    const handleGetDataId = () => {
-        setOpen(null);
-        navigate(`${pathToNavigate}/${data._id}`)
-    }
+    // const handleGetDataId = () => {
+    //     setOpen(null);
+    //     navigate(`${pathToNavigate}/${data._id}`)
+    // }
 
     return (
         <>
@@ -39,7 +39,9 @@ function Action({ data, pathToNavigate, onDelete }) {
                     sx: { width: 140 },
                 }}
             >
-                <MenuItem onClick={handleGetDataId}>
+                <MenuItem
+                    // onClick={handleGetDataId}
+                >
                     <Iconify icon="eva:edit-fill" sx={{ mr: 2 }} />
                     Edit
                 </MenuItem>
