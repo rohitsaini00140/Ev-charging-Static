@@ -56,6 +56,30 @@
   color: rgb(87, 179, 62) !important;
 }
 
+/* Base styles for the background image */
+.banner_bg {
+  background-image: url('https://src.n-ix.com/uploads/2023/11/27/42899ff8-fbbf-494d-9947-0d665ec28709.webp');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover; /* Adjust as needed */
+  height: 500px; /* Adjust the height as needed */
+}
+/* .banner_bg {
+  height: 90vh;
+  width: 100%;
+  background-image: url("https://src.n-ix.com/uploads/2023/11/27/42899ff8-fbbf-494d-9947-0d665ec28709.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: #f0f0f0;
+}
+
+@media (max-width: 600px) {
+  .banner_bg {
+      height: 100vh; 
+  }
+} */
+
 @import 'simplebar-react/dist/simplebar.min.css';
 
 

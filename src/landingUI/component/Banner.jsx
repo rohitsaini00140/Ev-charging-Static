@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 // import BannerImg from './bannerImg.jpg';
 function Banner() {
   return (
-    <Box sx={{ height: '90vh', width: '100%' }}>
+    <Box className="banner_bg" >
       <Box
         sx={{
           position: 'relative',
@@ -12,7 +12,9 @@ function Banner() {
           opacity: 0.7,
         }}
       />
-      <img
+
+
+      {/* <img
         src={"https://src.n-ix.com/uploads/2023/11/27/42899ff8-fbbf-494d-9947-0d665ec28709.webp"}
         alt="Banner"
         style={{
@@ -21,7 +23,7 @@ function Banner() {
           objectFit: 'cover',
           filter: 'brightness(50%)'
         }}
-      />
+      /> */}
       <Box
         sx={{
           height: "90vh",
