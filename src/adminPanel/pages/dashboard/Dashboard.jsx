@@ -1,7 +1,7 @@
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { Card } from '@mui/material';
-import Grid from '@mui/material/Grid2';  // Importing Grid2
+import Grid from '@mui/material/Grid2';
 import DashboardCard from '../../component/DashboardCard';
 import { dashboardCardData, dashboardCardData2, dashboardCardData3 } from './data';
 import LineChart from '../../component/charts/LineChart';
