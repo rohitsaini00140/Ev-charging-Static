@@ -1,6 +1,6 @@
 import { TablePagination } from "@mui/material";
 
-function Pagination({ pageChange, rowChange, totalCount, pageNo, rowNo }) {
+function Pagination({ pageChange, totalCount, pageNo, rowNo }) {
 
     return (
         <TablePagination
@@ -8,9 +8,9 @@ function Pagination({ pageChange, rowChange, totalCount, pageNo, rowNo }) {
             component="div"
             count={totalCount}
             rowsPerPage={rowNo}
-            onPageChange={pageChange}
+            // onPageChange={pageChange}
             rowsPerPageOptions={[10, 25, 50, 100]}
-            onRowsPerPageChange={(e) => rowChange(e.target.value)}
+            // onRowsPerPageChange={(e) => rowChange(e.target.value)}
         />
     )
 }
