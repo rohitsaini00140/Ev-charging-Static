@@ -1,186 +1,184 @@
 import { useState } from 'react';
-import { Box, Button, TextField, Typography, Stack } from '@mui/material';
+import { Button, TextField, Typography, Container, Box } from '@mui/material';
+import Grid from '@mui/material/Grid2';
+import { Link } from "react-router-dom";
 import { inputStyles } from '../authPagesStyle';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import KeyIcon from '@mui/icons-material/Key';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import authBgImage from "../../../img/authBgImage.png";
-import EmailIcon from '@mui/icons-material/Email';
-import { Link } from 'react-router-dom';
-import { useLocation } from "react-router-dom";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import { registrationSchema } from "./registrationSchema";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+
+const companyLogo = require('../../../img/logo.png');
 
 function Registration() {
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    const [showAndHide, setShowAndHide] = useState(false)
-    const [showAndHideConf, setShowAndHideConf] = useState(false)
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
 
-    function showAndHidePswd() {
-        setShowAndHide(!showAndHide)
+    const defaultValues = {
+        name: "",
+        email: "",
+        password: "",
+        confirm_Password: "",
     }
 
-    function showAndHideConfPswd() {
-        setShowAndHideConf(!showAndHideConf)
-    }
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(registrationSchema),
+        defaultValues: defaultValues
+    });
 
-    let location = useLocation()
+    const onSubmit = async (data) => {
+        try {
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    };
 
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: { xs: 'column', md: 'row' },
-                alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: '100vh',
-                backgroundColor: '#F0F5F9',
-                padding: { xs: "2rem 1rem", md: "10rem 5rem 5rem 5rem" }
-            }}
-        >
-            <Stack
+        <Grid container sx={{ minHeight: '100vh' }}>
+            <Grid item xs={false} size={{ lg: 6 }}
                 sx={{
-                    width: { xs: "100%", md: "480px" },
-                    padding: { xs: "1rem", md: "0" },
-                    marginBottom: { xs: "2rem", md: "0" },
+                    bgcolor: "#daf5ef",
+                    display: { xs: 'none', lg: 'flex' },
+                    justifyContent: 'space-around',
+                    padding: '0 5rem',
+                    flexDirection: 'column',
                 }}
             >
-                <Box
-                    sx={{
-                        display: "flex",
-                        marginBottom: "1rem",
-                        justifyContent: "space-around"
-                    }}
-                >
-                    <Link to={"/logIn"} style={{ textDecoration: "none" }}>
-                        <Typography variant="h6" gutterBottom color='rgb(87, 179, 62)' sx={{
-                            borderBottom: (location.pathname === "/logIn") && "2px solid rgb(87, 179, 62)",
-                            px: (location.pathname === "/logIn") && "3px"
-                        }}>
-                            Login
-                        </Typography>
-                    </Link>
-                    <Link to={"/register"} style={{ textDecoration: "none" }}>
-                        <Typography variant="h6" gutterBottom color='rgb(87, 179, 62)' sx={{
-                            borderBottom: (location.pathname === "/register") && "2px solid rgb(87, 179, 62)",
-                            px: (location.pathname === "/register") && "3px"
-                        }}>
-                            Sign up
-                        </Typography>
-                    </Link>
-                </Box>
-                <form>
-                    <Box
-                        sx={{
-                            borderRadius: "5rem",
-                            width: "100%",
-                            height: "3rem",
-                            display: "flex",
-                            alignItems: "center",
-                            gap: ".5rem",
-                            padding: "0rem 2rem",
-                            marginBottom: "2rem",
-                            boxShadow: "3px 3px 6px rgba(0, 0, 0, 0.3)"
-                        }}
-                    >
-                        <AccountCircleIcon sx={{ color: 'rgb(87, 179, 62)' }} />
-                        <TextField
-                            label="Name"
-                            variant="outlined"
-                            sx={inputStyles}
-                            fullWidth
-                        />
-                    </Box>
-                    <Box
-                        sx={{
-                            borderRadius: "5rem",
-                            width: "100%",
-                            height: "3rem",
-                            display: "flex",
-                            alignItems: "center",
-                            gap: ".5rem",
-                            padding: "0rem 2rem",
-                            marginBottom: "2rem",
-                            boxShadow: "3px 3px 6px rgba(0, 0, 0, 0.3)"
-                        }}
-                    >
-                        <EmailIcon sx={{ color: 'rgb(87, 179, 62)' }} />
-                        <TextField
-                            label="Email"
-                            variant="outlined"
-                            sx={inputStyles}
-                            fullWidth
-                        />
-                    </Box>
-                    <Box
-                        sx={{
-                            borderRadius: "5rem",
-                            width: "100%",
-                            height: "3rem",
-                            display: "flex",
-                            alignItems: "center",
-                            gap: ".5rem",
-                            padding: "0rem 2rem",
-                            marginBottom: "2rem",
-                            boxShadow: "3px 3px 6px rgba(0, 0, 0, 0.3)"
-                        }}
-                    >
-                        <KeyIcon sx={{ color: 'rgb(87, 179, 62)' }} />
-                        <TextField
-                            label="Password"
-                            type={showAndHide ? "text" : "password"}
-                            variant="outlined"
-                            sx={inputStyles}
-                            fullWidth
-                        />
-                        {showAndHide ? <VisibilityIcon sx={{ color: 'rgb(87, 179, 62)', cursor: "pointer" }} onClick={showAndHidePswd} /> : <VisibilityOffIcon sx={{ color: 'rgb(87, 179, 62)', cursor: "pointer" }} onClick={showAndHidePswd} />}
-                    </Box>
-                    <Box
-                        sx={{
-                            borderRadius: "5rem",
-                            width: "100%",
-                            height: "3rem",
-                            display: "flex",
-                            alignItems: "center",
-                            gap: ".5rem",
-                            padding: "0rem 2rem",
-                            marginBottom: "2rem",
-                            boxShadow: "3px 3px 6px rgba(0, 0, 0, 0.3)"
-                        }}
-                    >
-                        <KeyIcon sx={{ color: 'rgb(87, 179, 62)' }} />
-                        <TextField
-                            label="Confirm password"
-                            type={showAndHideConf ? "text" : "password"}
-                            variant="outlined"
-                            sx={inputStyles}
-                            fullWidth
-                        />
-                        {showAndHideConf ? <VisibilityIcon sx={{ color: 'rgb(87, 179, 62)' }} onClick={showAndHideConfPswd} /> : <VisibilityOffIcon sx={{ color: 'rgb(87, 179, 62)' }} onClick={showAndHideConfPswd} />}
-                    </Box>
-                    <Button
-                        variant="contained"
-                        type="submit"
-                        sx={{
-                            borderRadius: "5rem",
-                            textTransform: "capitalize",
-                            bgcolor: 'rgb(87, 179, 62)',
-                            width: "100%"
-                        }}
-                    >
-                        Sign Up
-                    </Button>
-                </form>
-            </Stack>
-            <Stack
+                <Typography variant='h3' fontWeight="700">
+                    Find EV Charging Stations and Get Ready to <Typography color="#57b33e" variant='h3' fontWeight="700">Go Green</Typography>
+                </Typography>
+                <img src={companyLogo} alt='company logo' style={{ width: "8rem", marginTop: '1rem' }} />
+            </Grid>
+            <Grid item size={{ lg: 6, xs: 12 }}
                 sx={{
-                    width: { xs: "100%", md: "500px" },
-                    display: { xs: "none", md: "block" } // Hide image on small screens
+                    paddingTop: 6,
+                    paddingBottom: 6,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    bgcolor: "#155e3d",
                 }}
             >
-                <img src={authBgImage} alt="Registration Background" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </Stack>
-        </Box>
+                <Container component="main" maxWidth="xs">
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                            padding: 5,
+                            borderRadius: 2,
+                            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+                            backdropFilter: 'blur(10px)',
+                            width: '100%',
+                        }}
+                    >
+                        <Typography component="h1" variant="h5" textAlign="center">
+                            Welcome to VNT! 👋
+                        </Typography>
+                        <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
+                            <TextField
+                                {...register("name", { required: true })}
+                                margin="normal"
+                                fullWidth
+                                label="Name"
+                                sx={inputStyles}
+                            />
+                            {errors.name && (
+                                <Typography color="red">
+                                    *{errors.name.message}
+                                </Typography>
+                            )}
+                            <TextField
+                                {...register("email", { required: true })}
+                                margin="normal"
+                                fullWidth
+                                label="Email"
+                                sx={inputStyles}
+                            />
+                            {errors.email && (
+                                <Typography color="red">
+                                    *{errors.email.message}
+                                </Typography>
+                            )}
+                            <TextField
+                                {...register("password", { required: true })}
+                                sx={inputStyles}
+                                margin="normal"
+                                label="Password"
+                                fullWidth
+                                type={showPassword ? 'text' : 'password'}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                edge="end"
+                                            >
+                                                {showPassword ? <VisibilityOff sx={{ color: "#57b33e" }} /> : <Visibility sx={{ color: "#57b33e" }} />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                            {errors.password && (
+                                <Typography color="red">
+                                    *{errors.password.message}
+                                </Typography>
+                            )}
+                            <TextField
+                                {...register("confirm_Password", { required: true })}
+                                sx={inputStyles}
+                                margin="normal"
+                                label="Confirm password"
+                                fullWidth
+                                type={showConfirmPassword ? 'text' : 'password'}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowConfirmPassword}
+                                                edge="end"
+                                            >
+                                                {showConfirmPassword ? <VisibilityOff sx={{ color: "#57b33e" }} /> : <Visibility sx={{ color: "#57b33e" }} />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                            {errors.confirm_Password && (
+                                <Typography color="red">
+                                    *{errors.confirm_Password.message}
+                                </Typography>
+                            )}
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2, textTransform: "capitalize", bgcolor: "#57b33e" }}
+                            >
+                                Sign up
+                            </Button>
+                            <Typography variant="body2" color="black" align="center" sx={{ mt: 2 }}>
+                                {'Already have an account? '}
+                                <Link to={"/logIn"} style={{ textDecoration: "none", color: "#57b33e" }}>
+                                    Login
+                                </Link>
+                            </Typography>
+                        </Box>
+                    </Box>
+                </Container>
+            </Grid>
+        </Grid >
     );
-}
+};
 
 export default Registration;

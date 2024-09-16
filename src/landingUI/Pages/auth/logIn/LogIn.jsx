@@ -1,94 +1,159 @@
-import React from "react";
-import { Box, TextField, Button, Typography, Link } from "@mui/material";
-import { Stack} from "@mui/system";
+import { useState } from 'react';
+import { Button, TextField, Typography, Container, Box, Stack } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { FcGoogle } from "react-icons/fc";
-import Grid from "@mui/material/Grid2";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import { inputStyles } from "../authPagesStyle";
+import { inputStyles } from '../authPagesStyle';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import { Link } from "react-router-dom";
+import { loginSchema } from "./logInSchema";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
-import { FormContainer,iconstyle ,LoginContainer, SocialButton } from "./Login_style";
-const logo_img = require("../../../img/logo.png")
+const companyLogo = require('../../../img/logo.png');
+
 
 function Login() {
-  return (
-    <LoginContainer container>
-      <Grid sx={{ /* fallback for old browsers */
-    //    background: '-webkit-linear-gradient(to right, #ffff1c, #00c3ff)', /* Chrome 10-25, Safari 5.1-6 */
-      background: 'linear-gradient(to right, #ffff1c, #00c3ff);' /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      }} item size={{ xs: 12, md: 6 }}>
-        {/* <img
-        //   src={loginImg}
-          alt="VNT EV Login Form"
-          style={{ width: "100%", height: "auto", margin: "0 auto" }} // Adjust style as needed
-        /> */}
-      </Grid>
-      <Grid
-        item
-        size={{xs:12, md:6}}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <FormContainer>
-        <img
-          src={logo_img}
-          alt="VNT Login Img"
-          style={{ width: "100px", height: "auto", margin: "0 auto" }} // Adjust style as needed
-        />
-          <Typography variant="h4" sx={{color:'#253745'}} fontWeight="bold">
-            Welcome Back
-          </Typography>
-          <Typography variant="span" sx={{color:'rgba(0, 0, 0, 0.6)',fontSize: '13px'}}>
-            Please Login Your Account
-          </Typography>
-         
-         <TextField  sx={{mt:3, ...inputStyles }} fullWidth id="user_name" label="Email and Username" variant="standard" />
-         <TextField sx={{mt:3,fontSize:'11px'}}  fullWidth id="password" label="Password" variant="standard" />
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const defaultValues = {
+        name: "",
+        email: "",
+    }
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(loginSchema),
+        defaultValues: defaultValues
+    });
 
 
-          <Box display="flex" justifyContent="space-between" width="100%">
-            <Link href="#" sx={{marginTop:'10px',fontWeight:'600',color:'#253745'}} underline="none" variant="body2">
-              Forgot Password?
-            </Link>
-          </Box>
-          <Button
-            variant="contained"
-            fullWidth
-            sx={{
-              color: "white",
-              fontWeight: "600",
-              mt: 2,
-              padding:'12px 16px' ,
-              backgroundColor: "rgb(87, 179, 62)",
-            }}
-          >
-            SIGN IN
-          </Button>
-          <Typography variant="body2"  sx={{color:'#253745',fontWeight:'600'}} mt={2} mb={1}>
-            Or Sign In with
-          </Typography>
-          <Stack direction="row">
-            <SocialButton startIcon={<FcGoogle style={iconstyle}/>}
-            ></SocialButton>
-            <SocialButton
-              startIcon={<FacebookIcon sx={{ ...iconstyle  , color: "#1877F2" }} />}
-            ></SocialButton>
-            <SocialButton
-              startIcon={<LinkedInIcon  sx={{ ...iconstyle, color: "#0274b3" }}
-              />}
-              color="inherit"
-            ></SocialButton>
-          </Stack>
-          <Typography sx={{color:'#253745'}} variant="body2" mt={1}>
-            Not a Member?{" "}
-            <Link sx={{color:'#253745',fontWeight:'600'}} href="#" underline="none">
-              Sign Up
-            </Link>
-          </Typography>
-        </FormContainer>
-      </Grid>
-    </LoginContainer>
-  );
-}
+    const onSubmit = async (data) => {
+        try {
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+
+    return (
+        <Grid container sx={{ minHeight: '100vh' }}>
+            <Grid item xs={false} size={{ lg: 6 }}
+                sx={{
+                    bgcolor: "#daf5ef",
+                    display: { xs: 'none', lg: 'flex' },
+                    justifyContent: 'space-around',
+                    padding: '0 5rem',
+                    flexDirection: 'column',
+                }}
+            >
+                <Typography variant='h3' fontWeight={"700"}>Find EV Charging Stations and Get Ready to <Typography color="#57b33e" variant='h3' fontWeight={"700"}>Go Green</Typography></Typography>
+                <img src={companyLogo} alt='error' style={{ width: "8rem" }} />
+            </Grid>
+            <Grid item size={{ lg: 6, xs: 12 }}
+                sx={{
+                    paddingTop: 6,
+                    paddingBottom: 6,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    bgcolor: "#155e3d",
+                }}
+            >
+                <Container component="main" maxWidth="xs">
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                            padding: 5,
+                            borderRadius: 2,
+                            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+                            backdropFilter: 'blur(10px)',
+                            width: '100%',
+                        }}
+                    >
+                        <Typography component="h1" variant="h5" textAlign={"center"}>
+                            Welcome to VNT! 👋
+                        </Typography>
+                        <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
+                            <TextField
+                                {...register("email", { required: true })}
+                                margin="normal"
+                                fullWidth
+                                label="Email"
+                                sx={inputStyles}
+                            />
+                            {errors.email && <Typography color={"red"}>*{errors.email.message}</Typography>}
+                            <TextField
+                                {...register("password", { required: true })}
+                                sx={inputStyles}
+                                margin="normal"
+                                label="Password"
+                                fullWidth
+                                type={showPassword ? 'text' : 'password'}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                edge="end"
+                                            >
+                                                {showPassword ? <VisibilityOff sx={{ color: "#57b33e" }} /> : <Visibility sx={{ color: "#57b33e" }} />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                            {errors.password && <Typography color={"red"}>*{errors.password.message}</Typography>}
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 1, textTransform: "capitalize", bgcolor: "#57b33e" }}
+                            >
+                                Login
+                            </Button>
+                            <Link to={""} style={{ textDecoration: "none", color: "blue" }}>
+                                Forgot Password?
+                            </Link>
+                            <Typography variant="body2" color="black" align="center" sx={{ mt: 2 }}>
+                                {'New on our platform? '}
+                                <Link to={"/register"} style={{ textDecoration: "none", color: "blue" }}>
+                                    Create an account
+                                </Link>
+                            </Typography>
+                            <Stack direction="row" alignItems="center" sx={{ mt: 2 }}>
+                                <Box sx={{ flex: 1, height: '1px', bgcolor: 'grey.400' }} />
+                                <Typography variant="body2" color="black" align="center" sx={{ px: 2 }}>
+                                    or
+                                </Typography>
+                                <Box sx={{ flex: 1, height: '1px', bgcolor: 'grey.400' }} />
+                            </Stack>
+                            <Stack
+                                sx={{
+                                    mt: "1.2rem",
+                                    flexDirection: "row",
+                                    justifyContent: "center",
+                                    gap: "1.2rem"
+                                }}
+                            >
+                                <FcGoogle size={"1.5rem"} />
+                                <FacebookIcon sx={{ color: "#1877F2", fontSize: "1.5rem" }} />
+                            </Stack>
+                        </Box>
+                    </Box>
+                </Container>
+            </Grid>
+        </Grid>
+    );
+};
+
 export default Login;

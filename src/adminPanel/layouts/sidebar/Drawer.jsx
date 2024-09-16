@@ -1,10 +1,9 @@
 import { useState } from 'react';
-
 import Box from '@mui/material/Box';
-
 import Nav from './Nav';
 import Sidebar from './Sidebar';
 import AdminHeader from '../adminHeader/AdminHeader';
+import AdminFooter from '../adminFooter/AdminFooter';
 
 // ----------------------------------------------------------------------
 
@@ -26,6 +25,8 @@ function Drawer({ children }) {
 
                 <Sidebar>{children}</Sidebar>
             </Box>
+
+            <AdminFooter />
         </>
     );
 }
