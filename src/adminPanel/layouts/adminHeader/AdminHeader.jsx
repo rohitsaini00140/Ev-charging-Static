@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import AppBar from '@mui/material/AppBar';
@@ -11,7 +10,6 @@ import Iconify from '../../component/Iconify';
 import Searchbar from './Searchbar';
 import { NAV, HEADER } from '../sidebar/configLayout';
 import Account from './Account';
-import Language from './Language';
 import Notification from './Notification';
 
 // ----------------------------------------------------------------------
@@ -34,7 +32,6 @@ function AdminHeader({ onOpenNav }) {
             <Box sx={{ flexGrow: 1 }} />
 
             <Stack direction="row" alignItems="center" spacing={1}>
-                {/* <Language /> */}
                 <Notification />
                 <Account />
             </Stack>
@@ -46,7 +43,6 @@ function AdminHeader({ onOpenNav }) {
             sx={{
                 boxShadow: 'none',
                 height: HEADER.H_MOBILE,
-                bgcolor: "#253745",
                 zIndex: theme.zIndex.appBar + 1,
                 ...bgBlur({
                     color: theme.palette.background.default,

@@ -24,7 +24,6 @@ function AddUser() {
                         width: 1,
                         maxWidth: "100%",
                         height: "auto",
-                        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)',
                     }}
                 >
                     <Typography variant="h4" sx={{ mb: 3 }}>Add User</Typography>
