@@ -1,19 +1,19 @@
-import Tooltip from '@mui/material/Tooltip';
+// import Tooltip from '@mui/material/Tooltip';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import Iconify from '../../../component/Iconify';
-import MenuList from '../../../component/MenuList';
-import SearchInput from '../../../component/SearchInput';
-import ExcelExport from '../../../component/ExcelExport';
-import PdfExport from '../../../component/PdfExport';
+// import Typography from '@mui/material/Typography';
+// import IconButton from '@mui/material/IconButton';
+// import Iconify from '../../../component/Iconify';
+// import MenuList from '../../../component/MenuList';
+import SearchInput from '../../../../component/SearchInput';
+import ExcelExport from '../../../../component/ExcelExport';
+import PdfExport from '../../../../component/PdfExport';
 // import { fieldsToDownload, fieldMapping, filter } from './headLabel';
 import { Stack } from '@mui/material';
-import Selector from '../../../component/Selector';
+import Selector from '../../../../component/Selector';
 
 // ----------------------------------------------------------------------
 
-function UserTableToolbar() {
+function PermissionTableToolbar() {
 
     return (
         <Toolbar
@@ -47,19 +47,19 @@ function UserTableToolbar() {
                     >
                         <Stack width={"100%"}>
                             <SearchInput
-                                placeholder="Search users..."
+                                placeholder="Search permissions..."
                                 width={"100%"}
                             // onChange={(e) => handleSearchKeywords(e.target.value)}
                             // value={searchKeywords}
                             />
                         </Stack>
-                        <Stack width={"100%"}>
+                        {/* <Stack width={"100%"}>
                             <Selector
-                                placeholder='Select Role'
+                                placeholder='Select Permissions'
                                 selectType="single"
                                 options={["User", "Admin", "Moderator"]}
                             />
-                        </Stack>
+                        </Stack> */}
                         <Stack width={"100%"}>
                             <Selector
                                 placeholder='Select Status'
@@ -103,4 +103,4 @@ function UserTableToolbar() {
     );
 }
 
-export default UserTableToolbar;
+export default PermissionTableToolbar;
