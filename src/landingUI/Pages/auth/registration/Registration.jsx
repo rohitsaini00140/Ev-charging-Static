@@ -169,7 +169,7 @@ function Registration() {
                             </Button>
                             <Typography variant="body2" color="black" align="center" sx={{ mt: 2 }}>
                                 {'Already have an account? '}
-                                <Link to={"/logIn"} style={{ textDecoration: "none", color: "#57b33e" }}>
+                                <Link to={"/logIn"} style={{ textDecoration: "none", color: "blue" }}>
                                     Login
                                 </Link>
                             </Typography>

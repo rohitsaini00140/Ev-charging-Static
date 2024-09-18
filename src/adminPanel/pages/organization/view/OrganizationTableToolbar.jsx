@@ -13,7 +13,7 @@ import Selector from '../../../component/Selector';
 
 // ----------------------------------------------------------------------
 
-function UserTableToolbar() {
+function OrganizationTableToolbar() {
 
     return (
         <Toolbar
@@ -47,19 +47,19 @@ function UserTableToolbar() {
                     >
                         <Stack width={"100%"}>
                             <SearchInput
-                                placeholder="Search users..."
+                                placeholder="Search organizations..."
                                 width={"100%"}
                             // onChange={(e) => handleSearchKeywords(e.target.value)}
                             // value={searchKeywords}
                             />
                         </Stack>
-                        <Stack width={"100%"}>
+                        {/* <Stack width={"100%"}>
                             <Selector
                                 placeholder='Select Role'
                                 selectType="single"
                                 options={["User", "Admin", "Moderator"]}
                             />
-                        </Stack>
+                        </Stack> */}
                         <Stack width={"100%"}>
                             <Selector
                                 placeholder='Select Status'
@@ -103,4 +103,4 @@ function UserTableToolbar() {
     );
 }
 
-export default UserTableToolbar;
+export default OrganizationTableToolbar;

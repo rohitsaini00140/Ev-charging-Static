@@ -2,11 +2,11 @@ import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import AddUserFields from './AddUserFields';
+import AddZoneFields from './AddZoneFields';
 
 // ----------------------------------------------------------------------
 
-function AddUser() {
+function AddZone() {
 
     return (
         <Box
@@ -24,11 +24,11 @@ function AddUser() {
                     }}
                 >
                     <Typography variant="h4" sx={{ mb: 3 }}>Add Users</Typography>
-                    <AddUserFields />
+                    <AddZoneFields />
                 </Card>
             </Stack>
         </Box>
     );
 }
 
-export default AddUser;
+export default AddZone;

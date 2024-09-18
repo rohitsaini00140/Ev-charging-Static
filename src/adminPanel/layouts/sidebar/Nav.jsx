@@ -136,106 +136,28 @@ function Nav({ openNav, onCloseNav }) {
 
 // ----------------------------------------------------------------------
 
-// function NavItem({ item }) {
-//     const [open, setOpen] = useState(false);
-//     const pathname = usePathname();
-
-//     const handleClick = () => {
-//         setOpen(!open);
-//     };
-
-//     const active = item.path === pathname;
-
-//     return (
-//         <Box>
-//             <Link to={item.path} style={{ textDecoration: "none" }}>
-//                 <ListItemButton
-//                     onClick={item.children ? handleClick : undefined}
-//                     sx={{
-//                         minHeight: 44,
-//                         borderRadius: 0.75,
-//                         typography: 'body2',
-//                         color: 'text.secondary',
-//                         textTransform: 'capitalize',
-//                         fontWeight: 'fontWeightMedium',
-//                         ...(active && {
-//                             color: 'rgba(87, 179, 62)',
-//                             fontWeight: 'fontWeightSemiBold',
-//                             bgcolor: () => alpha("rgba(87, 179, 62)", 0.08),
-//                             boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)',
-//                             '&:hover': {
-//                                 bgcolor: () => alpha("rgba(87, 179, 62)", 0.16),
-//                                 boxShadow: '0px 6px 18px rgba(87, 179, 62, 0.3)',
-//                             },
-//                         }),
-//                     }}
-//                 >
-//                     <Box component="span" sx={{ width: 24, height: 24, mr: 2, color: "rgb(87 179 62)" }}>
-//                         {item.icon}
-//                     </Box>
-//                     <Box component="span" color={"white"}>{item.title}</Box>
-//                     {item.children && (
-//                         <Box sx={{ ml: 'auto', transition: '0.3s' }}>
-//                             {open ? <ExpandLess /> : <ExpandMore />}
-//                         </Box>
-//                     )}
-//                 </ListItemButton>
-//             </Link>
-//             {item.children && (
-//                 <Collapse in={open}>
-//                     <Box>
-//                         {item.children.map((child) => (
-//                             <Link to={child.path} style={{ textDecoration: "none" }}>
-//                                 <ListItemButton
-//                                     key={child.title}
-//                                     sx={{
-//                                         pl: 6.8,
-//                                         borderRadius: 0.75,
-//                                         typography: 'body2',
-//                                         color: 'text.secondary',
-//                                         textTransform: 'capitalize',
-//                                         ...(child.path === pathname && {
-//                                             color: 'rgb(87 179 62)',
-//                                             fontWeight: 'fontWeightSemiBold',
-//                                             bgcolor: () => alpha("rgb(87 179 62)", 0.08),
-//                                             '&:hover': {
-//                                                 bgcolor: () => alpha("rgb(87 179 62)", 0.16),
-//                                             },
-//                                         }),
-//                                         fontWeight: 'fontWeightMedium'
-//                                     }}
-//                                 >
-//                                     <Box component="span" sx={{ width: 15, height: 15, mr: 2, color: "rgb(87 179 62)" }}>
-//                                         {child.icon}
-//                                     </Box>
-//                                     <Box component="span" color={"white"}>{child.title}</Box>
-//                                 </ListItemButton>
-//                             </Link>
-//                         ))}
-//                     </Box>
-//                 </Collapse>
-//             )}
-//         </Box>
-//     );
-// }
-
-function NavItem({ item }) {
-    const [open, setOpen] = useState(false);
-    const [childOpen, setChildOpen] = useState({});
-
+function NavItem({ item, level = 0 }) {
+    const [open, setOpen] = useState(false)
     const handleClick = () => {
         setOpen(!open);
     };
+    const pathname = usePathname();
+    const active = item.path === pathname;
 
-    const handleChildClick = (path) => {
-        setChildOpen((prev) => ({
-            ...prev,
-            [path]: !prev[path],
-        }));
+    const iconSize = level === 0 ? 24 : 15;
+    const paddingLeft = 2 + level * 2;
+
+    const renderChildren = (children) => {
+        return (
+            <Collapse in={open}>
+                <Box>
+                    {children.map((child) => (
+                        <NavItem key={child.title} item={child} level={level + 1} paddingLeft={paddingLeft + 1} />
+                    ))}
+                </Box>
+            </Collapse>
+        );
     };
-        const pathname = usePathname();
-    
-        const active = item.path === pathname;
 
     return (
         <Box>
@@ -243,6 +165,7 @@ function NavItem({ item }) {
                 <ListItemButton
                     onClick={item.children ? handleClick : undefined}
                     sx={{
+                        pl: paddingLeft,
                         minHeight: 44,
                         borderRadius: 0.75,
                         typography: 'body2',
@@ -252,100 +175,27 @@ function NavItem({ item }) {
                         ...(active && {
                             color: 'rgba(87, 179, 62)',
                             fontWeight: 'fontWeightSemiBold',
-                            bgcolor: () => alpha('rgba(87, 179, 62)', 0.08),
+                            bgcolor: alpha('rgba(87, 179, 62)', 0.08),
                             boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)',
                             '&:hover': {
-                                bgcolor: () => alpha('rgba(87, 179, 62)', 0.16),
+                                bgcolor: alpha('rgba(87, 179, 62)', 0.16),
                                 boxShadow: '0px 6px 18px rgba(87, 179, 62, 0.3)',
                             },
                         }),
                     }}
                 >
-                    <Box component="span" sx={{ width: 24, height: 24, mr: 2, color: 'rgb(87 179 62)' }}>
+                    <Box component="span" sx={{ width: iconSize, height: iconSize, mr: 2, color: 'rgb(87 179 62)' }}>
                         {item.icon}
                     </Box>
                     <Box component="span" color={"white"}>{item.title}</Box>
                     {item.children && (
-                        <Box sx={{ ml: 'auto', transition: '0.3s' }}>
+                        <Box sx={{ ml: 'auto' }} component="span">
                             {open ? <ExpandLess /> : <ExpandMore />}
                         </Box>
                     )}
                 </ListItemButton>
             </Link>
-            {item.children && (
-                <Collapse in={open}>
-                    <Box>
-                        {item.children.map((child) => (
-                            <Box key={child.title}>
-                                <Link to={child.path} style={{ textDecoration: 'none' }}>
-                                    <ListItemButton
-                                        onClick={child.children ? () => handleChildClick(child.path) : undefined}
-                                        sx={{
-                                            pl: 6.8,
-                                            borderRadius: 0.75,
-                                            typography: 'body2',
-                                            color: 'text.secondary',
-                                            textTransform: 'capitalize',
-                                            ...(child.path === pathname && {
-                                                color: 'rgb(87 179 62)',
-                                                fontWeight: 'fontWeightSemiBold',
-                                                bgcolor: () => alpha('rgb(87, 179, 62)', 0.08),
-                                                '&:hover': {
-                                                    bgcolor: () => alpha('rgb(87, 179, 62)', 0.16),
-                                                },
-                                            }),
-                                            fontWeight: 'fontWeightMedium',
-                                        }}
-                                    >
-                                        <Box component="span" sx={{ width: 15, height: 15, mr: 2, color: 'rgb(87 179 62)' }}>
-                                            {child.icon}
-                                        </Box>
-                                        <Box component="span" color={"white"}>{child.title}</Box>
-                                        {child.children && (
-                                            <Box sx={{ ml: 'auto', transition: '0.3s' }}>
-                                                {childOpen[child.path] ? <ExpandLess /> : <ExpandMore />}
-                                            </Box>
-                                        )}
-                                    </ListItemButton>
-                                </Link>
-                                {child.children && (
-                                    <Collapse in={childOpen[child.path]}>
-                                        <Box>
-                                            {child.children.map((grandChild) => (
-                                                <Link key={grandChild.title} to={grandChild.path} style={{ textDecoration: 'none' }}>
-                                                    <ListItemButton
-                                                        sx={{
-                                                            pl: 8.8,
-                                                            borderRadius: 0.75,
-                                                            typography: 'body2',
-                                                            color: 'text.secondary',
-                                                            textTransform: 'capitalize',
-                                                            ...(grandChild.path === pathname && {
-                                                                color: 'rgb(87, 179, 62)',
-                                                                fontWeight: 'fontWeightSemiBold',
-                                                                bgcolor: () => alpha('rgb(87, 179, 62)', 0.08),
-                                                                '&:hover': {
-                                                                    bgcolor: () => alpha('rgb(87, 179, 62)', 0.16),
-                                                                },
-                                                            }),
-                                                            fontWeight: 'fontWeightMedium',
-                                                        }}
-                                                    >
-                                                        <Box component="span" sx={{ width: 15, height: 15, mr: 2, color: 'rgb(87 179 62)' }}>
-                                                            {grandChild.icon}
-                                                        </Box>
-                                                        <Box component="span" color={"white"}>{grandChild.title}</Box>
-                                                    </ListItemButton>
-                                                </Link>
-                                            ))}
-                                        </Box>
-                                    </Collapse>
-                                )}
-                            </Box>
-                        ))}
-                    </Box>
-                </Collapse>
-            )}
+            {item.children && renderChildren(item.children)}
         </Box>
     );
 }

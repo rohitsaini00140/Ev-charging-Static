@@ -83,7 +83,7 @@ export const userData = [
 
 export const headLabel = [
     { id: 'name', label: 'Name' },
-    { id: 'email_Id', label: 'EmailId' },
+    { id: 'email_Id', label: 'EmailID' },
     { id: 'mobileNo', label: 'Mobile No.' },
     { id: 'role', label: 'Role' },
     { id: 'status', label: 'Status' },

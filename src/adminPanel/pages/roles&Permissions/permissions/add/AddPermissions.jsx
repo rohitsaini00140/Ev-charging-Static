@@ -2,11 +2,11 @@ import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import AddUserFields from './AddUserFields';
+import AddPermissionFields from './AddPermissionFields';
 
 // ----------------------------------------------------------------------
 
-function AddUser() {
+function AddPermissions() {
 
     return (
         <Box
@@ -23,12 +23,12 @@ function AddUser() {
                         height: "auto",
                     }}
                 >
-                    <Typography variant="h4" sx={{ mb: 3 }}>Add Users</Typography>
-                    <AddUserFields />
+                    <Typography variant="h4" sx={{ mb: 3 }}>Add Permissions</Typography>
+                    <AddPermissionFields />
                 </Card>
             </Stack>
         </Box>
     );
 }
 
-export default AddUser;
+export default AddPermissions;

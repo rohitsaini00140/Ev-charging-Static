@@ -13,7 +13,7 @@ const navConfig = [
     icon: icon('ic_dashboard'),
   },
   {
-    title: 'User',
+    title: 'Users',
     icon: icon('ic_user'),
     children: [
       {
@@ -28,53 +28,81 @@ const navConfig = [
       },
     ],
   },
-  // {
-  //   title: 'Roles & Permissions',
-  //   icon: icon('ic_roleAndPermission'),
-  //   children: [
-  //     {
-  //       title: 'Role',
-  //       path: '/admin/authorization/role',
-  //       icon: icon('ic_circle'),
-  //     },
-  //     {
-  //       title: 'Permission',
-  //       path: '/admin/authorization/permission',
-  //       icon: icon('ic_circle'),
-  //     },
-  //   ],
-  // },
-  // {
-  //   title: 'Auth Pages',
-  //   icon: icon('ic_auth'),
-  //   children: [
-  //     {
-  //       title: 'Login',
-  //       path: '/admin/auth/login',
-  //       icon: icon('ic_circle'),
-  //     },
-  //     {
-  //       title: 'Register',
-  //       path: '/admin/auth/register',
-  //       icon: icon('ic_circle'),
-  //     },
-  //     {
-  //       title: 'Verify Email',
-  //       path: '/admin/auth/verifyEmail',
-  //       icon: icon('ic_circle'),
-  //     },
-  //     {
-  //       title: 'Forgot Password',
-  //       path: '/admin/auth/forgotPassword',
-  //       icon: icon('ic_circle'),
-  //     },
-  //     {
-  //       title: 'Reset Password',
-  //       path: '/admin/auth/resetPassword',
-  //       icon: icon('ic_circle'),
-  //     },
-  //   ],
-  // },
+  {
+    title: 'Roles & Permissions',
+    icon: icon('ic_roleAndPermission'),
+    children: [
+      {
+        title: 'Permissions to Role',
+        path: '/admin/roles&Permissions/permissionsToRole',
+        icon: icon('ic_circle'),
+      },
+      {
+        title: 'Roles',
+        icon: icon('ic_circle'),
+        children: [
+          {
+            title: 'Add',
+            path: '/admin/role/add',
+            icon: icon('ic_circle'),
+          },
+          {
+            title: 'View',
+            path: '/admin/role/view',
+            icon: icon('ic_circle'),
+          },
+        ],
+      },
+      {
+        title: 'Permissions',
+        icon: icon('ic_circle'),
+        children: [
+          {
+            title: 'Add',
+            path: '/admin/permission/add',
+            icon: icon('ic_circle'),
+          },
+          {
+            title: 'View',
+            path: '/admin/permission/view',
+            icon: icon('ic_circle'),
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Organizations',
+    icon: icon('ic_organization'),
+    children: [
+      {
+        title: 'Add',
+        path: '/admin/organization/add',
+        icon: icon('ic_circle'),
+      },
+      {
+        title: 'View',
+        path: '/admin/organization/view',
+        icon: icon('ic_circle'),
+      },
+    ],
+  },
+  {
+    title: 'Zone',
+    icon: icon('ic_zone'),
+    children: [
+      {
+        title: 'Add',
+        path: '/admin/zone/add',
+        icon: icon('ic_circle'),
+      },
+      {
+        title: 'View',
+        path: '/admin/zone/view',
+        icon: icon('ic_circle'),
+      },
+    ],
+  },
 ];
 
 export default navConfig;
