@@ -73,9 +73,9 @@ export const organizationData = [
 
 
 export const headLabel = [
+    { id: "slNo.", label: "SLNo.", align: "center" },
     { id: 'name', label: 'Name' },
     { id: 'email', label: 'EmailId' },
     { id: 'address', label: 'Address' },
-    { id: 'status', label: 'Status' },
     { id: 'action', label: 'Action', align: "center" }
 ]
