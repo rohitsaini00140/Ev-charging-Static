@@ -103,6 +103,22 @@ const navConfig = [
       },
     ],
   },
+  {
+    title: 'Cluster',
+    icon: icon('ic_cluster'),
+    children: [
+      {
+        title: 'Add',
+        path: '/admin/cluster/add',
+        icon: icon('ic_circle'),
+      },
+      {
+        title: 'View',
+        path: '/admin/cluster/view',
+        icon: icon('ic_circle'),
+      },
+    ],
+  },
 ];
 
 export default navConfig;

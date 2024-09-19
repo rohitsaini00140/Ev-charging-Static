@@ -1,34 +1,50 @@
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import Selector from '../../../component/Selector';
 import { Button } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { organizationSchema } from './organizationSchema';
 import { Typography } from '@mui/material';
+import { useAddOrganizationMutation } from '../../../globalState/organization/organizationApis';
 
 function AddOrganizationFields() {
+
+    const [addOrganization] = useAddOrganizationMutation()
 
     const defaultValues = {
         name: "",
         email: "",
-        address: "",
-        status: "",
+        address: ""
     }
 
-    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm({
+    const { register, handleSubmit, setError, formState: { errors } } = useForm({
         resolver: zodResolver(organizationSchema),
         defaultValues: defaultValues
     });
 
     const onSubmit = async (data) => {
         try {
-            console.log(data)
+            await addOrganization(data).unwrap();
         } catch (error) {
-            console.log(error)
+            if (error.data && error.data.errors) {
+                if (error.data.errors.name) {
+                    setError("name", {
+                        type: "server",
+                        message: error.data.errors.name[0]
+                    });
+                }
+                if (error.data.errors.email) {
+                    setError("email", {
+                        type: "server",
+                        message: error.data.errors.email[0]
+                    });
+                }
+            }
+            console.error("Failed to add organization:", error.data.errors);
         }
     };
+
 
     return (
         <form fullWidth onSubmit={handleSubmit(onSubmit)}>
@@ -67,16 +83,6 @@ function AddOrganizationFields() {
                         />
                         {errors.address && <Typography color={"red"} mt={".5rem"}>*{errors.address.message}</Typography>}
                     </Stack>
-                    <Stack width={"100%"}>
-                        <Selector
-                            value={watch("status")}
-                            onChange={(e) => setValue("status", e.target.value, { shouldValidate: true })}
-                            placeholder='Status'
-                            selectType="single"
-                            options={["Active", "Inactive"]}
-                        />
-                        {errors.status && <Typography color={"red"} mt={".5rem"}>*{errors.status.message}</Typography>}
-                    </Stack>
                 </Stack>
                 <Stack direction={"row"} justifyContent={"end"}>
                     <Button
@@ -86,7 +92,7 @@ function AddOrganizationFields() {
                             bgcolor: "#0ab39c",
                             width: "5rem",
                             height: "2.5rem",
-                            BoxShadow: "none",
+                            boxShadow: "none",
                             '&:hover': {
                                 bgcolor: "#0ab39c"
                             }
