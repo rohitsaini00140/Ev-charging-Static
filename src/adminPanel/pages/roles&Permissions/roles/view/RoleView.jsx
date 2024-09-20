@@ -9,7 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import Iconify from '../../../../component/Iconify';
 import Scrollbar from '../../../../component/scrollbar/Scrollbar';
 import { Link } from 'react-router-dom';
-import Pagination from '../../../../component/Pagination';
+import TablePagination from '../../../../component/TablePagination';
 import RoleTableToolbar from './RoleTableToolbar';
 import RoleTableHead from './RoleTableHead';
 import RoleTableRow from './RoleTableRow';
@@ -46,13 +46,7 @@ function RoleView() {
             </Table>
           </TableContainer>
         </Scrollbar>
-        {(roleData.length > 0) && <Pagination
-          // pageChange={handleChangePage}
-          // rowChange={handleChangeRowsPerPage}
-          totalCount={roleData.length}
-          pageNo={1}
-          rowNo={10}
-        />}
+        {(roleData.length > 0) && <TablePagination />}
       </Card>
     </Container>
   );

@@ -1,21 +1,18 @@
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import TableCell from '@mui/material/TableCell';
-import Label from '../../../component/lable/Lable';
-import Iconify from '../../../component/Iconify';
-import ModalBox from '../../../component/ModalBox';
 import Action from '../../../component/Action';
-import { zoneData } from './zoneData';
+import Label from "../../../component/lable/Lable"
 
 // ----------------------------------------------------------------------
 
-function ZoneTableRow() {
+function ZoneTableRow({ allZoneData }) {
 
     return (
         <>
-            {zoneData.length > 0
+            {allZoneData.length > 0
                 &&
-                zoneData.map((data) => (
+                allZoneData.map((data, i) => (
                     < TableRow hover tabIndex={-1} role="checkbox" key={data.ID}
                     >
                         <TableCell padding="checkbox">
@@ -24,15 +21,19 @@ function ZoneTableRow() {
                             // checked={selectedCategoryId.includes(data["ID"])}
                             />
                         </TableCell>
-                        <TableCell>{data.organizationID}</TableCell>
+                        <TableCell>{i + 1}</TableCell>
+                        <TableCell>{data.organization.name}</TableCell>
                         <TableCell>{data.name}</TableCell>
                         <TableCell>{data.location}</TableCell>
                         <TableCell>
-                            <Label color={data.Status === 'Inactive' ? 'error' : 'success'} >{data.Status}</Label>
+                            <Label color={data.deleted_at ? 'error' : 'success'} >{data.deleted_at === null ? 'Inactive' : 'Active'}</Label>
                         </TableCell>
+                        <TableCell>{new Date(data.created_at).toLocaleString()}</TableCell>
                         <TableCell>
-                            <Action data={data}
-                            // pathToNavigate={"/category/update"} 
+                            <Action
+                                activeOrInactive={data.deleted_at}
+                                data={data}
+                                pathToNavigate={"/admin/zone/update"}
                             />
                         </TableCell>
                     </TableRow>

@@ -1,20 +1,19 @@
-import { useState, useEffect } from 'react';
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import { zoneData, headLabel } from './zoneData';
+import { headLabel } from './zoneData';
 
 // ----------------------------------------------------------------------
 
-function ZoneTableHead() {
+function ZoneTableHead({ allZoneData }) {
 
     return (
         <TableHead>
             <TableRow>
                 {
-                    zoneData.length > 0 && <TableCell padding="checkbox">
+                    allZoneData.length > 0 && <TableCell padding="checkbox">
                         <Checkbox
                         // onChange={onHandleSelectAll}
                         // checked={selectAll}

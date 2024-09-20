@@ -5,7 +5,7 @@ import { useState } from "react";
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function Action({ data, pathToNavigate, onDelete }) {
+function Action({ data, pathToNavigate, onSoftDelete, onRestoreData, activeOrInactive }) {
 
     let navigate = useNavigate()
 
@@ -19,10 +19,20 @@ function Action({ data, pathToNavigate, onDelete }) {
         setOpen(null);
     };
 
-    // const handleGetDataId = () => {
-    //     setOpen(null);
-    //     navigate(`${pathToNavigate}/${data._id}`)
-    // }
+    const handleGetDataId = () => {
+        setOpen(null);
+        navigate(`${pathToNavigate}/${data.id}`)
+    }
+
+    const handleSoftDelete = () => {
+        onSoftDelete(data);
+        handleCloseMenu();
+    };
+
+    const handleRestore = () => {
+        onRestoreData(data.id);
+        handleCloseMenu();
+    };
 
     return (
         <>
@@ -39,17 +49,32 @@ function Action({ data, pathToNavigate, onDelete }) {
                     sx: { width: 140 },
                 }}
             >
-                <MenuItem
-                    // onClick={handleGetDataId}
-                >
-                    <Iconify icon="eva:edit-fill" sx={{ mr: 2 }} />
-                    Edit
-                </MenuItem>
+                {!activeOrInactive ? (
+                    <>
+                        <MenuItem
+                            onClick={handleGetDataId}
+                        >
+                            <Iconify icon="eva:edit-fill" sx={{ mr: 2 }} />
+                            Edit
+                        </MenuItem>
 
-                <MenuItem onClick={() => onDelete(data._id)} sx={{ color: 'error.main' }}>
-                    <Iconify icon="eva:trash-2-outline" sx={{ mr: 2 }} />
-                    Delete
-                </MenuItem>
+                        <MenuItem
+                            onClick={handleSoftDelete}
+                            sx={{ color: 'error.main' }}>
+                            <Iconify icon="eva:trash-2-outline" sx={{ mr: 2 }} />
+                            Delete
+                        </MenuItem>
+                    </>
+                )
+                    :
+                    (<MenuItem
+                        onClick={handleRestore}
+                        sx={{ color: 'success.main' }}
+                    >
+                        <Iconify icon="fa-solid:trash-restore" sx={{ mr: 2 }} />
+                        Restore
+                    </MenuItem>)
+                }
             </Popover>
         </>
     )

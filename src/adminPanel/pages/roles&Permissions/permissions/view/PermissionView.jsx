@@ -9,7 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import Iconify from '../../../../component/Iconify';
 import Scrollbar from '../../../../component/scrollbar/Scrollbar';
 import { Link } from 'react-router-dom';
-import Pagination from '../../../../component/Pagination';
+import TablePagination from '../../../../component/TablePagination';
 import { permissionData } from './permissionData';
 import PermissionTableToolbar from './PermissionTableToolbar';
 import PermissionTableHead from './PermissionTableHead';
@@ -46,13 +46,7 @@ function PermissionView() {
                         </Table>
                     </TableContainer>
                 </Scrollbar>
-                {(permissionData.length > 0) && <Pagination
-                    // pageChange={handleChangePage}
-                    // rowChange={handleChangeRowsPerPage}
-                    totalCount={permissionData.length}
-                    pageNo={1}
-                    rowNo={10}
-                />}
+                {(permissionData.length > 0) && <TablePagination />}
             </Card>
         </Container>
     );

@@ -10,10 +10,11 @@ import PdfExport from '../../../component/PdfExport';
 // import { fieldsToDownload, fieldMapping, filter } from './headLabel';
 import { Stack } from '@mui/material';
 import Selector from '../../../component/Selector';
+import { fieldMapping, fieldsToDownload } from './organizationData';
 
 // ----------------------------------------------------------------------
 
-function OrganizationTableToolbar() {
+function OrganizationTableToolbar({ allOrganizationData }) {
 
     return (
         <Toolbar
@@ -81,21 +82,17 @@ function OrganizationTableToolbar() {
 
                 <Stack direction={'row'} alignItems={"center"} spacing={2} width={"100%"}>
                     <PdfExport
-                    // data={allCategories.length > 0 && allCategories}
-                    // fileName="Categories.pdf"
-                    // fields={fieldsToDownload}
-                    // fieldMapping={fieldMapping}
+                        data={allOrganizationData.length > 0 && allOrganizationData}
+                        fileName="Organization.pdf"
+                        fields={fieldsToDownload}
+                        fieldMapping={fieldMapping}
                     />
                     <ExcelExport
-                    // data={allCategories.length > 0 && allCategories}
-                    // fileName="Categories"
-                    // fields={fieldsToDownload}
-                    // fieldMapping={fieldMapping}
+                        data={allOrganizationData.length > 0 && allOrganizationData}
+                        fileName="Organization"
+                        fields={fieldsToDownload}
+                        fieldMapping={fieldMapping}
                     />
-                    {/* <MenuList heading={<Iconify icon="ic:round-filter-list" />}
-                    // values={filter}
-                    // onChange={handleOrderChange}
-                    /> */}
                 </Stack>
                 // )
             }

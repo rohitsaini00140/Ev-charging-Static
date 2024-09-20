@@ -2,24 +2,32 @@ import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import TableCell from '@mui/material/TableCell';
 import Action from '../../../component/Action';
-import { useGetOrganizationQuery } from '../../../globalState/organization/organizationApis';
+import Label from "../../../component/lable/Lable"
+import { useRestoreDeletedOrganizationMutation, useSoftDeleteOrganizationMutation } from '../../../globalState/organization/organizationApis';
 
 // ----------------------------------------------------------------------
 
-function OrganizationTableRow() {
+function OrganizationTableRow({ allOrganizationData }) {
 
-    const { data, isSuccess } = useGetOrganizationQuery()
+    const [softDeleteOrganization] = useSoftDeleteOrganizationMutation()
+    const [restoreDeletedOrganization] = useRestoreDeletedOrganizationMutation()
 
-    const allOrganizationData = isSuccess && data.data
+    function onSoftDelete(data) {
+        let dataId = data.id
+        softDeleteOrganization({ id: dataId, softDeletedOrganizationData: data })
+    }
 
-    console.log(allOrganizationData)
+    function onRestoreData(id) {
+        console.log(id)
+        restoreDeletedOrganization(id)
+    }
 
     return (
         <>
             {allOrganizationData.length > 0
                 &&
                 allOrganizationData.map((data, i) => (
-                    < TableRow hover tabIndex={-1} role="checkbox" key={data.ID}>
+                    < TableRow hover tabIndex={-1} role="checkbox" key={data.id}>
                         <TableCell padding="checkbox">
                             <Checkbox disableFocusRipple
                             // onChange={(e) => onHandleChange(e.target.checked, data["ID"])}
@@ -31,8 +39,16 @@ function OrganizationTableRow() {
                         <TableCell>{data.email}</TableCell>
                         <TableCell>{data.address}</TableCell>
                         <TableCell>
-                            <Action data={data}
-                            // pathToNavigate={"/category/update"} 
+                            <Label color={data.deleted_at === null ? 'success' : 'error'} >{data.deleted_at === null ? 'Active' : 'Inactive'}</Label>
+                        </TableCell>
+                        <TableCell>{new Date(data.created_at).toLocaleString()}</TableCell>
+                        <TableCell>
+                            <Action
+                                data={data}
+                                activeOrInactive={data.deleted_at}
+                                pathToNavigate={"/admin/organization/update"}
+                                onSoftDelete={onSoftDelete}
+                                onRestoreData={onRestoreData}
                             />
                         </TableCell>
                     </TableRow>

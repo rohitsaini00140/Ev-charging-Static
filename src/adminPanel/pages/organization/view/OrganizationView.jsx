@@ -12,12 +12,31 @@ import OrganizationTableHead from "./OrganizationTableHead";
 import OrganizationTableToolbar from "./OrganizationTableToolbar";
 import { Link } from 'react-router-dom';
 import OrganizationTableRow from "./OrganizationTableRow";
-import Pagination from '../../../component/Pagination';
-import { organizationData } from "./organizationData";
+import { useGetOrganizationQuery } from '../../../globalState/organization/organizationApis';
+import TablePagination from '../../../component/TablePagination';
+import { useDispatch, useSelector } from "react-redux";
+import { setOrganizationListPageNo } from "../../../globalState/organization/organizationSlices";
+
 
 // ----------------------------------------------------------------------
 
 function OrganizationView() {
+
+    const dispatch = useDispatch()
+
+    const { pageNo } = useSelector(state => state.organization);
+
+    const { data, isSuccess } = useGetOrganizationQuery({ page: pageNo });
+
+    const allOrganizationData = isSuccess && data.data;
+    const paginationData = isSuccess && data;
+
+    const { last_page } = paginationData;
+
+    const handlePageChange = (event, value) => {
+        sessionStorage.setItem('organizationListPageNo', JSON.stringify(value));
+        dispatch(setOrganizationListPageNo(value));
+    };
 
     return (
         <Container>
@@ -35,24 +54,22 @@ function OrganizationView() {
                 </Link>
             </Stack>
             <Card>
-                <OrganizationTableToolbar />
+                <OrganizationTableToolbar allOrganizationData={allOrganizationData} />
                 <Scrollbar>
                     <TableContainer sx={{ overflow: 'unset' }}>
                         <Table sx={{ minWidth: 800 }}>
-                            <OrganizationTableHead />
+                            <OrganizationTableHead allOrganizationData={allOrganizationData} />
                             <TableBody>
-                                <OrganizationTableRow />
+                                <OrganizationTableRow allOrganizationData={allOrganizationData} />
                             </TableBody>
                         </Table>
                     </TableContainer>
                 </Scrollbar>
-                {(organizationData.length > 0) && <Pagination
-                    // pageChange={handleChangePage}
-                    // rowChange={handleChangeRowsPerPage}
-                    totalCount={organizationData.length}
-                    pageNo={1}
-                    rowNo={10}
-                />}
+                <TablePagination
+                    count={last_page}
+                    page={pageNo}
+                    onPageChange={handlePageChange}
+                />
             </Card>
         </Container>
     );
