@@ -10,15 +10,15 @@ import AuthLayout from "./AuthLayout";
 import PublicLayout from "./PublicLayout";
 import UserView from "../adminPanel/pages/user/view/UserView";
 import ThemeProvider from "../landingUI/layout/theme/ThemeProvider";
-import AddOrganization from "../adminPanel/pages/organization/add/AddOrganization";
 import OrganizationView from "../adminPanel/pages/organization/view/OrganizationView";
 import AddRoles from "../adminPanel/pages/roles&Permissions/roles/add/AddRoles";
 import RoleView from "../adminPanel/pages/roles&Permissions/roles/view/RoleView";
 import AddPermissions from "../adminPanel/pages/roles&Permissions/permissions/add/AddPermissions";
 import PermissionView from "../adminPanel/pages/roles&Permissions/permissions/view/PermissionView";
-import AddZone from "../adminPanel/pages/zone/add/AddZone";
+import AddOrUpdateZone from "../adminPanel/pages/zone/addOrUpdate/AddOrUpdateZone";
 import ZoneView from "../adminPanel/pages/zone/view/ZoneView";
 import PermissionsToRole from "../adminPanel/pages/roles&Permissions/permissionsToRole/PermissionsToRole";
+import AddOrUpdateOrganization from "../adminPanel/pages/organization/addOrUpdate/AddOrUpdateOrganization";
 
 function Router() {
   return (
@@ -54,8 +54,9 @@ function Router() {
                   <Route path="/user/add" element={<AddUser />} />
                   <Route path="/user/view" element={<UserView />} />
 
-                  <Route path="/organization/add" element={<AddOrganization />} />
+                  <Route path="/organization/add" element={<AddOrUpdateOrganization />} />
                   <Route path="/organization/view" element={<OrganizationView />} />
+                  <Route path="/organization/update/:id" element={<AddOrUpdateOrganization />} />
 
                   <Route path="/role/add" element={<AddRoles />} />
                   <Route path="/role/view" element={<RoleView />} />
@@ -65,8 +66,9 @@ function Router() {
 
                   <Route path="/roles&Permissions/permissionsToRole" element={<PermissionsToRole />} />
 
-                  <Route path="/zone/add" element={<AddZone />} />
+                  <Route path="/zone/add" element={<AddOrUpdateZone />} />
                   <Route path="/zone/view" element={<ZoneView />} />
+                  <Route path="/zone/update/:id" element={<AddOrUpdateZone />} />
                 </Routes>
               </Drawer>
             </ThemeProviderAdmin>

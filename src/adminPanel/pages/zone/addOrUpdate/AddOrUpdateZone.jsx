@@ -2,11 +2,11 @@ import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import AddOrganizationFields from './AddOrganizationFields';
+import AddZoneFields from './AddOrUpdateZoneFields';
 
 // ----------------------------------------------------------------------
 
-function AddOrganization() {
+function AddOrUpdateZone() {
 
     return (
         <Box
@@ -23,12 +23,12 @@ function AddOrganization() {
                         height: "auto",
                     }}
                 >
-                    <Typography variant="h4" sx={{ mb: 3 }}>Add Organizations</Typography>
-                    <AddOrganizationFields />
+                    <Typography variant="h4" sx={{ mb: 3 }}>Add Zones</Typography>
+                    <AddZoneFields />
                 </Card>
             </Stack>
         </Box>
     );
 }
 
-export default AddOrganization;
+export default AddOrUpdateZone;

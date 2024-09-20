@@ -16,13 +16,41 @@ export const organizationApi = createApi({
             invalidatesTags: ['organization']
         }),
         getOrganization: builder.query({
-            query: () => "/api/organizations/list",
+            query: ({ page }) => ({
+                url: `/api/organizations/list?page=${page}`
+            }),
             providesTags: ['organization'],
         }),
+        updateOrganization: builder.mutation({
+            query: ({ id, updatedOrganizationData }) => ({
+                url: `/api/organizations/update/${id}`,
+                method: "PUT",
+                body: updatedOrganizationData
+            }),
+            invalidatesTags: ['organization']
+        }),
+        softDeleteOrganization: builder.mutation({
+            query: ({ id, softDeletedOrganizationData }) => ({
+                url: `api/organizations/soft-delete/${id}`,
+                method: "POST",
+                body: softDeletedOrganizationData
+            }),
+            invalidatesTags: ['organization']
+        }),
+        restoreDeletedOrganization: builder.mutation({
+            query: (id) => ({
+                url: `api/organizations/restore/${id}`,
+                method: "POST"
+            }),
+            invalidatesTags: ['organization']
+        })
     }),
 })
 
 export const {
     useAddOrganizationMutation,
-    useGetOrganizationQuery
+    useGetOrganizationQuery,
+    useUpdateOrganizationMutation,
+    useSoftDeleteOrganizationMutation,
+    useRestoreDeletedOrganizationMutation
 } = organizationApi;

@@ -12,7 +12,7 @@ import UserTableHead from './UserTableHead';
 import UserTableToolbar from './UserTableToolbar';
 import { Link } from 'react-router-dom';
 import UserTableRow from './UserTableRow';
-import Pagination from '../../../component/Pagination';
+import TablePagination from '../../../component/TablePagination';
 import { userData } from './userData';
 
 // ----------------------------------------------------------------------
@@ -46,13 +46,7 @@ function UserView() {
             </Table>
           </TableContainer>
         </Scrollbar>
-        {(userData.length > 0) && <Pagination
-          // pageChange={handleChangePage}
-          // rowChange={handleChangeRowsPerPage}
-          totalCount={userData.length}
-          pageNo={1}
-          rowNo={10}
-        />}
+        {(userData.length > 0) && <TablePagination />}
       </Card>
     </Container>
   );

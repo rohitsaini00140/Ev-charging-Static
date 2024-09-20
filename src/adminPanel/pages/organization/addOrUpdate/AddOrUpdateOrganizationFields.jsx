@@ -6,44 +6,80 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { organizationSchema } from './organizationSchema';
 import { Typography } from '@mui/material';
-import { useAddOrganizationMutation } from '../../../globalState/organization/organizationApis';
+import { useAddOrganizationMutation, useGetOrganizationQuery, useUpdateOrganizationMutation } from '../../../globalState/organization/organizationApis';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-function AddOrganizationFields() {
+function AddOrUpdateOrganizationFields() {
+
+    let { id } = useParams()
+
+    let navigate = useNavigate()
+
+    const { pageNo } = useSelector(state => state.organization);
+    const { data, isSuccess } = useGetOrganizationQuery({ page: pageNo })
+
+    const organizationForUpdate = (isSuccess && data?.data) && data.data.find(ele => ele.id === Number(id))
 
     const [addOrganization] = useAddOrganizationMutation()
 
+    const [updateOrganization] = useUpdateOrganizationMutation()
+
     const defaultValues = {
-        name: "",
-        email: "",
-        address: ""
+        name: organizationForUpdate ? organizationForUpdate.name : "",
+        email: organizationForUpdate ? organizationForUpdate.email : "",
+        address: organizationForUpdate ? organizationForUpdate.address : ""
     }
 
-    const { register, handleSubmit, setError, formState: { errors } } = useForm({
+    const { register, handleSubmit, setError, reset, formState: { errors } } = useForm({
         resolver: zodResolver(organizationSchema),
         defaultValues: defaultValues
     });
 
+    useEffect(() => {
+        if (!id) {
+            reset({
+                name: "",
+                email: "",
+                address: ""
+            });
+        } else if (organizationForUpdate) {
+            reset({
+                name: organizationForUpdate && organizationForUpdate.name,
+                email: organizationForUpdate && organizationForUpdate.email,
+                address: organizationForUpdate && organizationForUpdate.address
+            });
+        }
+    }, [id, organizationForUpdate, reset]);
+
+
     const onSubmit = async (data) => {
         try {
-            await addOrganization(data).unwrap();
+            await (id ? updateOrganization({ id, updatedOrganizationData: data }).unwrap()
+                : addOrganization(data).unwrap());
         } catch (error) {
-            if (error.data && error.data.errors) {
-                if (error.data.errors.name) {
-                    setError("name", {
-                        type: "server",
-                        message: error.data.errors.name[0]
-                    });
-                }
-                if (error.data.errors.email) {
-                    setError("email", {
-                        type: "server",
-                        message: error.data.errors.email[0]
-                    });
+            if (!error.data.success) {
+                if (error.data.errors) {
+                    if (error.data.errors.name) {
+                        setError("name", {
+                            type: "server",
+                            message: error.data.errors.name[0]
+                        });
+                    }
+                    if (error.data.errors.email) {
+                        setError("email", {
+                            type: "server",
+                            message: error.data.errors.email[0]
+                        });
+                    }
                 }
             }
-            console.error("Failed to add organization:", error.data.errors);
+            console.error("Error during submission:", error);
         }
+        navigate("/admin/organization/view")
     };
+
 
 
     return (
@@ -69,7 +105,6 @@ function AddOrganizationFields() {
                         />
                         {errors.email && <Typography color={"red"} mt={".5rem"}>*{errors.email.message}</Typography>}
                     </Stack>
-
                 </Stack>
                 <Stack
                     direction={{ xs: 'column', sm: 'row' }}
@@ -111,4 +146,4 @@ function AddOrganizationFields() {
     )
 }
 
-export default AddOrganizationFields;
+export default AddOrUpdateOrganizationFields;

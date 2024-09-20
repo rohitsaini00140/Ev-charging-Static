@@ -1,20 +1,19 @@
-import { useState, useEffect } from 'react';
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import { organizationData, headLabel } from './organizationData';
+import { headLabel } from './organizationData';
 
 // ----------------------------------------------------------------------
 
-function OrganizationTableHead() {
+function OrganizationTableHead({ allOrganizationData }) {
 
     return (
         <TableHead>
             <TableRow>
                 {
-                    organizationData.length > 0 && <TableCell padding="checkbox">
+                    allOrganizationData.length > 0 && <TableCell padding="checkbox">
                         <Checkbox
                         // onChange={onHandleSelectAll}
                         // checked={selectAll}
