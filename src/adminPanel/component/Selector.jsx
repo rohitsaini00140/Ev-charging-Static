@@ -11,7 +11,8 @@ const MenuProps = {
     PaperProps: {
         style: {
             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            // width: 250,
+            backgroundColor: "#34345a",
+            // boxShadow: 'none',
         },
     },
 };
@@ -22,6 +23,7 @@ function getStyles(option, value, theme) {
             Array.isArray(value) && value.indexOf(option) === -1
                 ? theme.typography.fontWeightRegular
                 : theme.typography.fontWeightMedium,
+        color: "white"
     };
 }
 
@@ -40,7 +42,7 @@ function Selector({ placeholder, selectType, value, onChange, options }) {
                     input={<OutlinedInput />}
                     renderValue={(selected) => {
                         if (selected.length === 0) {
-                            return <em>{placeholder}</em>;
+                            return <em style={{ color: '#6f6f82' }}>{placeholder}</em>;
                         }
 
                         return Array.isArray(selected) ? selected.join(', ') : selected;
@@ -49,7 +51,7 @@ function Selector({ placeholder, selectType, value, onChange, options }) {
                     inputProps={{ 'aria-label': 'Without label' }}
                 >
                     <MenuItem disabled value="">
-                        <em>{placeholder}</em>
+                        <em style={{ color: 'white' }}>{placeholder}</em>
                     </MenuItem>
                     {Array.isArray(options) && options.map((option) => (
                         <MenuItem

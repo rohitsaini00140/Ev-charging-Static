@@ -16,7 +16,7 @@ function AdminFooter() {
                 py: 2,
                 marginLeft: lgUp && "17.5rem",
                 textAlign: 'center',
-                backgroundColor: theme.palette.background.paper,
+                backgroundColor: "#222245",
                 mt: 'auto',
             }}
         >

@@ -22,7 +22,7 @@ function ZoneTableRow({ allZoneData }) {
                             />
                         </TableCell>
                         <TableCell>{i + 1}</TableCell>
-                        <TableCell>{data.organization.name}</TableCell>
+                        <TableCell>{data.organization ? data.organization.name : "Not Selected"}</TableCell>
                         <TableCell>{data.name}</TableCell>
                         <TableCell>{data.location}</TableCell>
                         <TableCell>

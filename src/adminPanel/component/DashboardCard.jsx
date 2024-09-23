@@ -11,6 +11,7 @@ function DashboardCard({ data }) {
                 flexDirection: "row",
                 gap: "1rem",
                 boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)',
+                bgcolor: "#34345a"
             }}
         >
             <Stack>

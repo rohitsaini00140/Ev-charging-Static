@@ -2,9 +2,10 @@ import Iconify from "./Iconify"
 import { OutlinedInput } from "@mui/material"
 import { InputAdornment } from "@mui/material"
 
-function SearchInput({ placeholder, onChange, value }) {
+function SearchInput({ placeholder, onChange, value, sx }) {
     return (
         <OutlinedInput
+            sx={sx}
             value={value}
             onChange={onChange}
             placeholder={placeholder}

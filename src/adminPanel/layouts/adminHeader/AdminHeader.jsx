@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import { useResponsive } from '../../customHooks/useResponsive';
 import { bgBlur } from "../theme/css"
 import Iconify from '../../component/Iconify';
-import Searchbar from './Searchbar';
+// import Searchbar from './Searchbar';
 import { NAV, HEADER } from '../sidebar/configLayout';
 import Account from './Account';
 import Notification from './Notification';
@@ -27,7 +27,7 @@ function AdminHeader({ onOpenNav }) {
                 </IconButton>
             )}
 
-            <Searchbar />
+            {/* <Searchbar /> */}
 
             <Box sx={{ flexGrow: 1 }} />
 
@@ -42,6 +42,7 @@ function AdminHeader({ onOpenNav }) {
         <AppBar
             sx={{
                 boxShadow: 'none',
+                bgcolor: "#222245",
                 height: HEADER.H_MOBILE,
                 zIndex: theme.zIndex.appBar + 1,
                 ...bgBlur({
@@ -60,6 +61,7 @@ function AdminHeader({ onOpenNav }) {
                 sx={{
                     height: 1,
                     px: { lg: 5 },
+                    bgcolor: "#222245",
                 }}
             >
                 {renderContent}

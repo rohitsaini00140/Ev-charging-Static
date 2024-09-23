@@ -21,10 +21,11 @@ function AddOrUpdateOrganization() {
                         width: 1,
                         maxWidth: "100%",
                         height: "auto",
+                        backgroundColor: "#181837",
                     }}
                 >
-                    <Typography variant="h4" sx={{ mb: 3 }}>Add Organizations</Typography>
-                    <AddOrUpdateOrganizationFields/>
+                    <Typography variant="h4" sx={{ mb: 3, color: "white" }}>Add Organizations</Typography>
+                    <AddOrUpdateOrganizationFields />
                 </Card>
             </Stack>
         </Box>

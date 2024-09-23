@@ -35,21 +35,75 @@ export const fakeBarChartData = {
             'rgb(32, 201, 151)',
             'rgb(32, 201, 151)',
             'rgb(255, 99, 132)'
-        ],
-        // borderColor: [
-        //     'rgb(32, 201, 151)',
-        //     'rgb(255, 99, 132)',
-        //     'rgb(32, 201, 151)',
-        //     'rgb(32, 201, 151)',
-        //     'rgb(255, 99, 132)',
-        //     'rgb(255, 99, 132)',
-        //     'rgb(255, 99, 132)',
-        //     'rgb(32, 201, 151)',
-        //     'rgb(255, 99, 132)',
-        //     'rgb(32, 201, 151)',
-        //     'rgb(32, 201, 151)',
-        //     'rgb(255, 99, 132)'
-        // ],
-        // borderWidth: 1
+        ]
     }]
+};
+
+
+
+export const optionsForLineChart = {
+    responsive: true,
+    plugins: {
+        legend: {
+            position: 'top',
+            labels: {
+                color: 'white',
+            },
+        }
+    },
+
+    scales: {
+        x: {
+            ticks: {
+                color: 'white',
+            },
+            grid: {
+                color: '#637381',
+            }
+        },
+        y: {
+            ticks: {
+                color: 'white',
+            },
+            grid: {
+                color: '#637381',
+            }
+        },
+    }
+};
+
+
+export const optionsForBarChart = {
+    responsive: true,
+    plugins: {
+        legend: {
+            position: 'top',
+            labels: {
+                color: 'white',
+            },
+        },
+        title: {
+            display: true,
+            text: 'Monthly Sales Growth',
+            color: "white"
+        },
+    },
+    scales: {
+        x: {
+            ticks: {
+                color: 'white'
+            },
+            grid: {
+                color: '#637381',
+            }
+        },
+        y: {
+            ticks: {
+                color: 'white'
+            },
+            grid: {
+                color: '#637381',
+            }
+        },
+    },
 };

@@ -24,6 +24,7 @@ function OrganizationTableToolbar({ allOrganizationData }) {
                 display: 'flex',
                 flexDirection: "column",
                 gap: "1rem",
+                bgcolor: "#181837"
                 // p: (theme) => theme.spacing(0, 1, 0, 3),
                 // ...(selectedCategoryId.length > 0 && {
                 //     color: 'primary.main',
@@ -48,6 +49,7 @@ function OrganizationTableToolbar({ allOrganizationData }) {
                     >
                         <Stack width={"100%"}>
                             <SearchInput
+                                sx={{ color: "white" }}
                                 placeholder="Search organizations..."
                                 width={"100%"}
                             // onChange={(e) => handleSearchKeywords(e.target.value)}
