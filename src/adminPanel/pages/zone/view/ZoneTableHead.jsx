@@ -9,6 +9,8 @@ import { headLabel } from './zoneData';
 
 function ZoneTableHead({ allZoneData }) {
 
+    console.log(Object.entries(allZoneData))
+
     return (
         <TableHead>
             <TableRow>

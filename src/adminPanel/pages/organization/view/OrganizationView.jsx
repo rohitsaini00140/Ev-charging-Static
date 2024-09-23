@@ -46,14 +46,22 @@ function OrganizationView() {
                 justifyContent="space-between"
                 mb={5}
             >
-                <Typography variant="h4">Organizations</Typography>
+                <Typography variant="h4" color="white">Organizations</Typography>
                 <Link to={"/admin/organization/add"}>
-                    <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            bgcolor: "#34345a",
+                            boxShadow: 'none',
+                            "&:hover": { bgcolor: "#34345a" }
+                        }}
+                        color="inherit"
+                        startIcon={<Iconify icon="eva:plus-fill" />}>
                         New Organization
                     </Button>
                 </Link>
             </Stack>
-            <Card>
+            <Card sx={{ bgcolor: "#181837" }}>
                 <OrganizationTableToolbar allOrganizationData={allOrganizationData} />
                 <Scrollbar>
                     <TableContainer sx={{ overflow: 'unset' }}>
@@ -65,11 +73,11 @@ function OrganizationView() {
                         </Table>
                     </TableContainer>
                 </Scrollbar>
-                <TablePagination
+                {allOrganizationData.length > 0 && <TablePagination
                     count={last_page}
                     page={pageNo}
                     onPageChange={handlePageChange}
-                />
+                />}
             </Card>
         </Container>
     );

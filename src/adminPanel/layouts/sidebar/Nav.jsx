@@ -110,7 +110,7 @@ function Nav({ openNav, onCloseNav }) {
                         height: 1,
                         position: 'fixed',
                         width: NAV.WIDTH,
-                        bgcolor: "#253745",
+                        backgroundColor: "#181837",
                         borderRight: (theme) => `dashed 1px ${theme.palette.Boxider}`,
                     }}
                 >
@@ -123,7 +123,7 @@ function Nav({ openNav, onCloseNav }) {
                     PaperProps={{
                         sx: {
                             width: NAV.WIDTH,
-                            bgcolor: "#253745",
+                            backgroundColor: "#181837",
                         },
                     }}
                 >
