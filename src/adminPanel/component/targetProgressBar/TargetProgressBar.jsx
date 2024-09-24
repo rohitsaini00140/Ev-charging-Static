@@ -78,11 +78,11 @@ function TargetProgressBar() {
             }}>
                 <Box>
                     <Typography variant='h4' color="white">₹5,870</Typography>
-                    <Typography color={"text.secondary"}>Revenue</Typography>
+                    <Typography color={"rgb(32, 201, 151)"}>Revenue</Typography>
                 </Box>
                 <Box>
                     <Typography variant='h4' color="white">₹7,870</Typography>
-                    <Typography color={"text.secondary"}>Target</Typography>
+                    <Typography color={"rgb(32, 201, 151)"}>Target</Typography>
                 </Box>
             </Box>
         </Card>

@@ -1,12 +1,13 @@
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import Selector from '../../../../component/Selector';
+import Selector from '../../../../component/selector/Selector';
 import { Button } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { roleSchema } from './roleSchema';
 import { Typography } from '@mui/material';
+import { inputStyle } from './addRolesStyle';
 
 function AddRoleFields() {
 
@@ -40,8 +41,8 @@ function AddRoleFields() {
                         <TextField
                             label="Name"
                             {...register("name", { required: true })}
+                            sx={inputStyle}
                             fullWidth
-                            multiline
                         />
                         {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
                     </Stack>
@@ -61,6 +62,7 @@ function AddRoleFields() {
                         label="Description"
                         {...register("description", { required: true })}
                         fullWidth
+                        sx={inputStyle}
                         multiline
                         rows={4}
                     />

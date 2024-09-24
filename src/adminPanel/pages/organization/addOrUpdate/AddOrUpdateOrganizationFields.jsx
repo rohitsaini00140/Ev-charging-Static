@@ -11,7 +11,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Alertbar from '../../../component/Alertbar';
-import { inputStyle } from './AddOrUpdateOrganizationStyle';
+import { inputStyle } from './addOrUpdateOrganizationStyle';
 
 function AddOrUpdateOrganizationFields() {
 

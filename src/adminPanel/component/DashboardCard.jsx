@@ -20,9 +20,9 @@ function DashboardCard({ data }) {
                 </Stack>
             </Stack>
             <Stack color={"text.secondary"}>
-                <Typography variant='h4' mb=".4rem" color='black'>{data.totalCount}</Typography>
-                <Typography mb="1rem">{data.type}</Typography>
-                <Typography sx={{ fontSize: ".8rem" }}>
+                <Typography variant='h4' mb=".4rem" color='white'>{data.totalCount}</Typography>
+                <Typography mb="1rem" color='white'>{data.type}</Typography>
+                <Typography sx={{ fontSize: ".8rem", color: "white" }}>
                     <Typography sx={{ fontSize: ".8rem", color: data.incOrDec === "inc" ? "rgb(32, 201, 151)" : "rgb(255, 77, 79)", display: "inline", mr: ".6rem" }}>{data.arrowIcon} {data.Percentage}</Typography>{data.duration}</Typography>
             </Stack>
         </Card>

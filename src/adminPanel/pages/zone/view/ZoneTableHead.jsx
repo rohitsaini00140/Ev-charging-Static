@@ -1,46 +1,44 @@
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import TableHead from '@mui/material/TableHead';
-import TableCell from '@mui/material/TableCell';
 import TableSortLabel from '@mui/material/TableSortLabel';
+import { StyledTableCell } from '../../../component/tableStyle';
 import { headLabel } from './zoneData';
 
 // ----------------------------------------------------------------------
 
 function ZoneTableHead({ allZoneData }) {
 
-    console.log(Object.entries(allZoneData))
-
     return (
         <TableHead>
             <TableRow>
                 {
-                    allZoneData.length > 0 && <TableCell padding="checkbox">
+                    allZoneData.length > 0 && <StyledTableCell padding="checkbox">
                         <Checkbox
                         // onChange={onHandleSelectAll}
                         // checked={selectAll}
                         />
-                    </TableCell>
+                    </StyledTableCell>
                 }
 
                 {headLabel.map((headCell) => (
-                    <TableCell
+                    <StyledTableCell
                         sx={{ width: headCell.width, minWidth: headCell.minWidth }}
                     >
                         <TableSortLabel hideSortIcon>
                             {headCell.label}
                         </TableSortLabel>
-                    </TableCell>
+                    </StyledTableCell>
                 ))
                     // :
                     // headLabel.slice(0, -1).map((headCell) => (
-                    //     <TableCell
+                    //     <StyledTableCell
                     //         sx={{ width: headCell.width, minWidth: headCell.minWidth }}
                     //     >
                     //         <TableSortLabel hideSortIcon>
                     //             {headCell.label}
                     //         </TableSortLabel>
-                    //     </TableCell>
+                    //     </StyledTableCell>
                     // ))
                 }
             </TableRow>

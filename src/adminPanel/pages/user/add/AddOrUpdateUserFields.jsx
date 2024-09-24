@@ -1,14 +1,15 @@
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import Selector from '../../../component/Selector';
+import Selector from '../../../component/selector/Selector';
 import { Button } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { userSchema } from './userSchema';
 import { Typography } from '@mui/material';
+import { inputStyle } from './addOrUpdateUserStyle';
 
-function AddUserFields() {
+function AddOrUpdateUserFields() {
 
     const defaultValues = {
         name: "",
@@ -42,6 +43,7 @@ function AddUserFields() {
                         <TextField
                             label="Name"
                             {...register("name", { required: true })}
+                            sx={inputStyle}
                             fullWidth
                         />
                         {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
@@ -50,6 +52,7 @@ function AddUserFields() {
                         <TextField
                             label="Email Address"
                             {...register("email", { required: true })}
+                            sx={inputStyle}
                             fullWidth
                         />
                         {errors.email && <Typography color={"red"} mt={".5rem"}>*{errors.email.message}</Typography>}
@@ -58,6 +61,7 @@ function AddUserFields() {
                         <TextField
                             label="Mobile No."
                             {...register("mobile_No", { required: true })}
+                            sx={inputStyle}
                             fullWidth
                         />
                         {errors.mobile_No && <Typography color={"red"} mt={".5rem"}>*{errors.mobile_No.message}</Typography>}
@@ -115,4 +119,4 @@ function AddUserFields() {
     )
 }
 
-export default AddUserFields;
+export default AddOrUpdateUserFields;

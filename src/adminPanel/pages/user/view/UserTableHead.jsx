@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import TableHead from '@mui/material/TableHead';
-import TableCell from '@mui/material/TableCell';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { userData, headLabel } from './userData';
+import { StyledTableCell } from '../../../component/tableStyle';
 
 // ----------------------------------------------------------------------
 
@@ -14,22 +13,22 @@ function UserTableHead() {
         <TableHead>
             <TableRow>
                 {
-                    userData.length > 0 && <TableCell padding="checkbox">
+                    userData.length > 0 && <StyledTableCell padding="checkbox">
                         <Checkbox
                         // onChange={onHandleSelectAll}
                         // checked={selectAll}
                         />
-                    </TableCell>
+                    </StyledTableCell>
                 }
 
                 {headLabel.map((headCell) => (
-                    <TableCell
+                    <StyledTableCell
                         sx={{ width: headCell.width, minWidth: headCell.minWidth }}
                     >
                         <TableSortLabel hideSortIcon>
                             {headCell.label}
                         </TableSortLabel>
-                    </TableCell>
+                    </StyledTableCell>
                 ))
                     // :
                     // headLabel.slice(0, -1).map((headCell) => (

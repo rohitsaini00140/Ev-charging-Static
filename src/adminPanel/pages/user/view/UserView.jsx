@@ -27,14 +27,21 @@ function UserView() {
         justifyContent="space-between"
         mb={5}
       >
-        <Typography variant="h4">Users</Typography>
+        <Typography variant="h4" color="white">Users</Typography>
         <Link to={"/admin/user/add"}>
-          <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: "#34345a",
+              boxShadow: 'none',
+              "&:hover": { bgcolor: "#34345a" }
+            }}
+            startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button>
         </Link>
       </Stack>
-      <Card>
+      <Card sx={{ bgcolor: "#181837" }}>
         <UserTableToolbar />
         <Scrollbar>
           <TableContainer sx={{ overflow: 'unset' }}>

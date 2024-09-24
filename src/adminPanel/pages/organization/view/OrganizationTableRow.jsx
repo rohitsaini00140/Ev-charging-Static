@@ -1,14 +1,22 @@
-import TableRow from '@mui/material/TableRow';
+import { useState, useEffect } from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import { styled } from '@mui/material/styles';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import Action from '../../../component/Action';
 import Label from "../../../component/lable/Lable"
+import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import { useRestoreDeletedOrganizationMutation, useSoftDeleteOrganizationMutation } from '../../../globalState/organization/organizationApis';
+import { Skeleton } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
 function OrganizationTableRow({ allOrganizationData }) {
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
 
     const [softDeleteOrganization] = useSoftDeleteOrganizationMutation()
     const [restoreDeletedOrganization] = useRestoreDeletedOrganizationMutation()
@@ -23,26 +31,6 @@ function OrganizationTableRow({ allOrganizationData }) {
     }
 
 
-    const StyledTableCell = styled(TableCell)(() => ({
-        [`&.${tableCellClasses.body}`]: {
-            backgroundColor: "#181837",
-            color: "white",
-            fontSize: 14,
-            borderColor: "#34345a"
-        },
-    }));
-
-    const StyledTableRow = styled(TableRow)(() => ({
-        backgroundColor: "#181837",
-        borderColor: "#34345a",
-        '&:last-child td, &:last-child th': {
-            border: 0,
-            borderColor: "#34345a",
-        },
-    }));
-
-
-
     return (
         <>
             {allOrganizationData.length > 0
@@ -50,27 +38,35 @@ function OrganizationTableRow({ allOrganizationData }) {
                 allOrganizationData.map((data, i) => (
                     <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.id}>
                         <StyledTableCell padding="checkbox">
-                            <Checkbox disableFocusRipple
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Checkbox disableFocusRipple
                             // onChange={(e) => onHandleChange(e.target.checked, data["ID"])}
                             // checked={selectedCategoryId.includes(data["ID"])}
-                            />
+                            />}
                         </StyledTableCell>
-                        <StyledTableCell color={"white"} >{i + 1}</StyledTableCell>
-                        <StyledTableCell color={"#222245"}>{data.name}</StyledTableCell>
-                        <StyledTableCell color={"#222245"}>{data.email}</StyledTableCell>
-                        <StyledTableCell color={"#222245"}>{data.address}</StyledTableCell>
-                        <StyledTableCell>
-                            <Label color={data.deleted_at === null ? 'success' : 'error'} >{data.deleted_at === null ? 'Active' : 'Inactive'}</Label>
+                        <StyledTableCell color={"white"} >
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : i + 1}
                         </StyledTableCell>
-                        <StyledTableCell color={"#222245"}>{new Date(data.created_at).toLocaleString()}</StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.name}
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.email}
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.address}
+                        </StyledTableCell>
                         <StyledTableCell>
-                            <Action
+                            <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : (new Date(data.created_at).toLocaleString())}</StyledTableCell>
+                        <StyledTableCell>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
                                 data={data}
                                 activeOrInactive={data.deleted_at}
                                 pathToNavigate={"/admin/organization/update"}
                                 onSoftDelete={onSoftDelete}
                                 onRestoreData={onRestoreData}
-                            />
+                            />}
                         </StyledTableCell>
                     </StyledTableRow>
                 ))
