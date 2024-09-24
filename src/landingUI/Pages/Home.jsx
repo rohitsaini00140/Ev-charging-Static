@@ -15,7 +15,7 @@ function Home() {
       <WhoareWe/>
       <Quotes/>
       <WhyChoose/>
-        <Testimaonils/>
+      <Testimaonils/>
       <Appspic/>
       <Blog/>
     </div>

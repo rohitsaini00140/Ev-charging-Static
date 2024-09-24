@@ -7,14 +7,14 @@ import ScrollUp from "../landingUI/component/ScrollUp";
 
 function PublicLayout() {
     return (
-        <>
+             <>
             <GoToTop />
             <Header />
             <DrawerNavbar />
             <Outlet />
             <ScrollUp />
             <Footer />
-        </>
+           </>
     );
 }
 

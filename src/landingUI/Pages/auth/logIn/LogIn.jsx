@@ -15,24 +15,19 @@ import { useForm } from 'react-hook-form';
 
 const companyLogo = require('../../../img/logo.png');
 
-
 function Login() {
 
+    // password show and hide
     const [showPassword, setShowPassword] = useState(false);
-
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
     const defaultValues = {
         name: "",
         email: "",
     }
-
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(loginSchema),
         defaultValues: defaultValues
     });
-
-
     const onSubmit = async (data) => {
         try {
             console.log(data)
@@ -40,8 +35,6 @@ function Login() {
             console.log(error)
         }
     };
-
-
     return (
         <Grid container sx={{ minHeight: '100vh' }}>
             <Grid item xs={false} size={{ lg: 6 }}
@@ -72,15 +65,15 @@ function Login() {
                             display: 'flex',
                             flexDirection: 'column',
                             backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                            padding: 5,
+                            padding: { xs: '1rem', md: '2rem', lg: '2rem' },
                             borderRadius: 2,
-                            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+                            boxShadow: 'rgba(17, 12, 46, 0.15) 0px 48px 100px 0px',
                             backdropFilter: 'blur(10px)',
                             width: '100%',
                         }}
                     >
-                        <Typography component="h1" variant="h5" textAlign={"center"}>
-                            Welcome to VNT! 👋
+                        <Typography component="h1" sx={{fontWeight:'600',color:'#253745'}} variant="h5" textAlign={"center"}>
+                            Login VNT! 👋
                         </Typography>
                         <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
                             <TextField
@@ -90,7 +83,7 @@ function Login() {
                                 label="Email"
                                 sx={inputStyles}
                             />
-                            {errors.email && <Typography color={"red"}>*{errors.email.message}</Typography>}
+                            {errors.email && <Typography style={{fontSize:'.85rem'}} color={"red"}>*{errors.email.message}</Typography>}
                             <TextField
                                 {...register("password", { required: true })}
                                 sx={inputStyles}
@@ -112,7 +105,7 @@ function Login() {
                                     ),
                                 }}
                             />
-                            {errors.password && <Typography color={"red"}>*{errors.password.message}</Typography>}
+                            {errors.password && <Typography style={{fontSize:'.85rem'}} color={"red"}>*{errors.password.message}</Typography>}
                             <Button
                                 type="submit"
                                 fullWidth
@@ -121,13 +114,13 @@ function Login() {
                             >
                                 Login
                             </Button>
-                            <Link to={""} style={{ textDecoration: "none", color: "blue" }}>
+                            <Link to={""} style={{ textDecoration: "none", fontSize: '15px', fontWeight:'600', color: "#253745" }}>
                                 Forgot Password?
                             </Link>
                             <Typography variant="body2" color="black" align="center" sx={{ mt: 2 }}>
-                                {'New on our platform? '}
-                                <Link to={"/register"} style={{ textDecoration: "none", color: "blue" }}>
-                                    Create an account
+                                {'New on Our Platform ? '}
+                                <Link to={"/register"} style={{ textDecoration: "none", color: "#ff6600",fontWeight:'500' }}>
+                                    Create an Account
                                 </Link>
                             </Typography>
                             <Stack direction="row" alignItems="center" sx={{ mt: 2 }}>
@@ -145,8 +138,8 @@ function Login() {
                                     gap: "1.2rem"
                                 }}
                             >
-                                <FcGoogle size={"1.5rem"} />
-                                <FacebookIcon sx={{ color: "#1877F2", fontSize: "1.5rem" }} />
+                                <FcGoogle sx={{cursor:'pointer'}} size={"1.5rem"} />
+                                <FacebookIcon sx={{ color: "#1877F2", fontSize: "1.5rem",cursor:'pointer' }} />
                             </Stack>
                         </Box>
                     </Box>
@@ -155,5 +148,4 @@ function Login() {
         </Grid>
     );
 };
-
 export default Login;

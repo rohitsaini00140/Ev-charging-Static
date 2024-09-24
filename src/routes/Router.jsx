@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../landingUI/Pages/Home";
-import Login from "../landingUI/Pages/auth/logIn/LogIn";
-import Registration from "../landingUI/Pages/auth/registration/Registration";
+// import all component for landing page
+import { Home, Login, Registration,ContactUs } from "./LandingUi"
+
 import ThemeProviderAdmin from "../adminPanel/layouts/theme/ThemeProviderAdmin";
 import Drawer from "../adminPanel/layouts/sidebar/Drawer";
 import Dashboard from "../adminPanel/pages/dashboard/Dashboard";
@@ -32,6 +32,7 @@ function Router() {
           }
         >
           <Route path="/" element={<Home />} />
+          <Route path="/contactus" element={<ContactUs />} />
         </Route>
         <Route
           element={
@@ -43,7 +44,6 @@ function Router() {
           <Route path="/logIn" element={<Login />} />
           <Route path="/register" element={<Registration />} />
         </Route>
-
         <Route
           path="/admin/*"
           element={
@@ -53,19 +53,14 @@ function Router() {
                   <Route path="" element={<Dashboard />} />
                   <Route path="/user/add" element={<AddUser />} />
                   <Route path="/user/view" element={<UserView />} />
-
                   <Route path="/organization/add" element={<AddOrUpdateOrganization />} />
                   <Route path="/organization/view" element={<OrganizationView />} />
                   <Route path="/organization/update/:id" element={<AddOrUpdateOrganization />} />
-
                   <Route path="/role/add" element={<AddRoles />} />
                   <Route path="/role/view" element={<RoleView />} />
-
                   <Route path="/permission/add" element={<AddPermissions />} />
                   <Route path="/permission/view" element={<PermissionView />} />
-
                   <Route path="/roles&Permissions/permissionsToRole" element={<PermissionsToRole />} />
-
                   <Route path="/zone/add" element={<AddOrUpdateZone />} />
                   <Route path="/zone/view" element={<ZoneView />} />
                   <Route path="/zone/update/:id" element={<AddOrUpdateZone />} />
