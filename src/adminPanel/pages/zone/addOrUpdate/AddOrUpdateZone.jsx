@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import AddZoneFields from './AddOrUpdateZoneFields';
+import AddOrUpdateZoneField from './AddOrUpdateZoneFields';
 
 // ----------------------------------------------------------------------
 
@@ -21,10 +21,11 @@ function AddOrUpdateZone() {
                         width: 1,
                         maxWidth: "100%",
                         height: "auto",
+                        backgroundColor: "#181837",
                     }}
                 >
-                    <Typography variant="h4" sx={{ mb: 3 }}>Add Zones</Typography>
-                    <AddZoneFields />
+                    <Typography variant="h4" color='white' sx={{ mb: 3 }}>Add Zones</Typography>
+                    <AddOrUpdateZoneField />
                 </Card>
             </Stack>
         </Box>

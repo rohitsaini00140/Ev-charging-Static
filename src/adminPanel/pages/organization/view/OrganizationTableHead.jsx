@@ -1,23 +1,13 @@
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import TableHead from '@mui/material/TableHead';
-import { styled } from '@mui/material/styles';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import { StyledTableCell } from '../../../component/tableStyle';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { headLabel } from './organizationData';
 
 // ----------------------------------------------------------------------
 
 function OrganizationTableHead({ allOrganizationData }) {
-
-
-    const StyledTableCell = styled(TableCell)(() => ({
-        [`&.${tableCellClasses.head}`]: {
-            backgroundColor: "#34345a",
-            color: "#COCOEE",
-            borderColor: "#34345a",
-        }
-    }));
 
 
     return (

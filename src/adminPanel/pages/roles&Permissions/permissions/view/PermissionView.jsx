@@ -27,14 +27,22 @@ function PermissionView() {
                 justifyContent="space-between"
                 mb={5}
             >
-                <Typography variant="h4">Permissions</Typography>
+                <Typography variant="h4" color="white">Permissions</Typography>
                 <Link to={"/admin/permission/add"}>
-                    <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            bgcolor: "#34345a",
+                            boxShadow: 'none',
+                            "&:hover": { bgcolor: "#34345a" }
+                        }}
+                        color="inherit"
+                        startIcon={<Iconify icon="eva:plus-fill" />}>
                         New Permission
                     </Button>
                 </Link>
             </Stack>
-            <Card>
+            <Card sx={{ bgcolor: "#181837" }}>
                 <PermissionTableToolbar />
                 <Scrollbar>
                     <TableContainer sx={{ overflow: 'unset' }}>

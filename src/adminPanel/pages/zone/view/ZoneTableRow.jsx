@@ -1,46 +1,54 @@
-import TableRow from '@mui/material/TableRow';
+import { useState, useEffect } from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import TableCell from '@mui/material/TableCell';
 import Action from '../../../component/Action';
+import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import Label from "../../../component/lable/Lable"
+import { Skeleton } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-function ZoneTableRow({ allZoneData }) {
+function ZoneStyledTableRow({ allZoneData }) {
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 2000);
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <>
             {allZoneData.length > 0
                 &&
                 allZoneData.map((data, i) => (
-                    < TableRow hover tabIndex={-1} role="checkbox" key={data.ID}
+                    < StyledTableRow hover tabIndex={-1} role="checkbox" key={data.ID}
                     >
-                        <TableCell padding="checkbox">
-                            <Checkbox disableFocusRipple
+                        <StyledTableCell padding="checkbox">
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Checkbox disableFocusRipple
                             // onChange={(e) => onHandleChange(e.target.checked, data["ID"])}
                             // checked={selectedCategoryId.includes(data["ID"])}
-                            />
-                        </TableCell>
-                        <TableCell>{i + 1}</TableCell>
-                        <TableCell>{data.organization ? data.organization.name : "Not Selected"}</TableCell>
-                        <TableCell>{data.name}</TableCell>
-                        <TableCell>{data.location}</TableCell>
-                        <TableCell>
-                            <Label color={data.deleted_at ? 'error' : 'success'} >{data.deleted_at === null ? 'Inactive' : 'Active'}</Label>
-                        </TableCell>
-                        <TableCell>{new Date(data.created_at).toLocaleString()}</TableCell>
-                        <TableCell>
-                            <Action
+                            />}
+                        </StyledTableCell>
+                        <StyledTableCell>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : i + 1}</StyledTableCell>
+                        <StyledTableCell>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : (data.organization ? data.organization.name : "Not Selected")}</StyledTableCell>
+                        <StyledTableCell>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.name}</StyledTableCell>
+                        <StyledTableCell>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.location}</StyledTableCell>
+                        <StyledTableCell>
+                            <Label color={data.deleted_at ? 'error' : 'success'} >{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : (data.deleted_at === null ? 'Inactive' : 'Active')}</Label>
+                        </StyledTableCell>
+                        <StyledTableCell>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : (new Date(data.created_at).toLocaleString())}</StyledTableCell>
+                        <StyledTableCell>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
                                 activeOrInactive={data.deleted_at}
                                 data={data}
                                 pathToNavigate={"/admin/zone/update"}
-                            />
-                        </TableCell>
-                    </TableRow>
+                            />}
+                        </StyledTableCell>
+                    </StyledTableRow>
                 ))
             }
         </>
     );
 }
 
-export default ZoneTableRow;
+export default ZoneStyledTableRow;

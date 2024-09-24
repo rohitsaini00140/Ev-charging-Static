@@ -2,11 +2,11 @@ import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import AddUserFields from './AddUserFields';
+import AddOrUpdateUserFields from './AddOrUpdateUserFields';
 
 // ----------------------------------------------------------------------
 
-function AddUser() {
+function AddOrUpdateUser() {
 
     return (
         <Box
@@ -21,14 +21,15 @@ function AddUser() {
                         width: 1,
                         maxWidth: "100%",
                         height: "auto",
+                        backgroundColor: "#181837",
                     }}
                 >
-                    <Typography variant="h4" sx={{ mb: 3 }}>Add Users</Typography>
-                    <AddUserFields />
+                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>Add Users</Typography>
+                    <AddOrUpdateUserFields />
                 </Card>
             </Stack>
         </Box>
     );
 }
 
-export default AddUser;
+export default AddOrUpdateUser;

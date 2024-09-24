@@ -6,6 +6,7 @@ import Iconify from '../../../component/Iconify';
 import ModalBox from '../../../component/ModalBox';
 import Action from '../../../component/Action';
 import { userData } from './userData';
+import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 
 // ----------------------------------------------------------------------
 
@@ -16,27 +17,26 @@ function UserTableRow() {
             {userData.length > 0
                 &&
                 userData.map((data) => (
-                    < TableRow hover tabIndex={-1} role="checkbox" key={data.ID}
-                    >
-                        <TableCell padding="checkbox">
+                    <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.ID}>
+                        <StyledTableCell padding="checkbox">
                             <Checkbox disableFocusRipple
                             // onChange={(e) => onHandleChange(e.target.checked, data["ID"])}
                             // checked={selectedCategoryId.includes(data["ID"])}
                             />
-                        </TableCell>
-                        <TableCell>{data.Name}</TableCell>
-                        <TableCell>{data.EmailId}</TableCell>
-                        <TableCell>{data.MobileNo}</TableCell>
-                        <TableCell>{data.Role}</TableCell>
-                        <TableCell>
+                        </StyledTableCell>
+                        <StyledTableCell>{data.Name}</StyledTableCell>
+                        <StyledTableCell>{data.EmailId}</StyledTableCell>
+                        <StyledTableCell>{data.MobileNo}</StyledTableCell>
+                        <StyledTableCell>{data.Role}</StyledTableCell>
+                        <StyledTableCell>
                             <Label color={data.Status === 'Inactive' ? 'error' : 'success'} >{data.Status}</Label>
-                        </TableCell>
-                        <TableCell>
+                        </StyledTableCell>
+                        <StyledTableCell>
                             <Action data={data}
                             // pathToNavigate={"/category/update"} 
                             />
-                        </TableCell>
-                    </TableRow>
+                        </StyledTableCell>
+                    </StyledTableRow>
                 ))
             }
         </>

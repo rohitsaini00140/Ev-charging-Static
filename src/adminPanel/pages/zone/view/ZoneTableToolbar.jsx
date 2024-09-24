@@ -9,7 +9,7 @@ import ExcelExport from '../../../component/ExcelExport';
 import PdfExport from '../../../component/PdfExport';
 // import { fieldsToDownload, fieldMapping, filter } from './headLabel';
 import { Stack } from '@mui/material';
-import Selector from '../../../component/Selector';
+import Selector from '../../../component/selector/Selector';
 import { fieldsToDownload, fieldMapping } from './zoneData';
 
 // ----------------------------------------------------------------------
@@ -48,6 +48,7 @@ function ZoneTableToolbar({ allZoneData }) {
                     >
                         <Stack width={"100%"}>
                             <SearchInput
+                                sx={{ color: "white" }}
                                 placeholder="Search zones..."
                                 width={"100%"}
                             // onChange={(e) => handleSearchKeywords(e.target.value)}

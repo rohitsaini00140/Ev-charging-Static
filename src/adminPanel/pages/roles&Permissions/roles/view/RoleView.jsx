@@ -27,14 +27,22 @@ function RoleView() {
         justifyContent="space-between"
         mb={5}
       >
-        <Typography variant="h4">Roles</Typography>
+        <Typography variant="h4" color="white">Roles</Typography>
         <Link to={"/admin/role/add"}>
-          <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: "#34345a",
+              boxShadow: 'none',
+              "&:hover": { bgcolor: "#34345a" }
+            }}
+            color="inherit"
+            startIcon={<Iconify icon="eva:plus-fill" />}>
             New Role
           </Button>
         </Link>
       </Stack>
-      <Card>
+      <Card sx={{ bgcolor: "#181837" }}>
         <RoleTableToolbar />
         <Scrollbar>
           <TableContainer sx={{ overflow: 'unset' }}>

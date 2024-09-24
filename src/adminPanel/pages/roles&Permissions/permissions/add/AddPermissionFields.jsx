@@ -1,12 +1,13 @@
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import Selector from '../../../../component/Selector';
+import Selector from '../../../../component/selector/Selector';
 import { Button } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { permissionSchema } from './permissionSchema';
 import { Typography } from '@mui/material';
+import { inputStyle } from './addPermissionStyle';
 
 function AddPermissionFields() {
 
@@ -40,8 +41,8 @@ function AddPermissionFields() {
                         <TextField
                             label="Name"
                             {...register("name", { required: true })}
+                            sx={inputStyle}
                             fullWidth
-                            multiline
                         />
                         {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
                     </Stack>
@@ -62,6 +63,7 @@ function AddPermissionFields() {
                         {...register("description", { required: true })}
                         fullWidth
                         multiline
+                        sx={inputStyle}
                         rows={4}
                     />
                     {errors.description && <Typography color={"red"} mt={".5rem"}>*{errors.description.message}</Typography>}

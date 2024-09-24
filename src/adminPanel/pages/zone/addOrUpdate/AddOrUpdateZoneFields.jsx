@@ -8,11 +8,12 @@ import { zoneSchema } from './zoneSchema';
 import { Typography } from '@mui/material';
 import { useAddZoneMutation, useUpdateZoneMutation } from "../../../globalState/zone/zoneApis"
 import { useGetZoneQuery } from '../../../globalState/zone/zoneApis';
-import SearchableDropdown from '../../../component/SearchableDropdown';
+import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Alertbar from '../../../component/Alertbar';
+import { inputStyle } from './addOrUpdateZoneStyle';
 
 function AddOrUpdateZoneFields() {
 
@@ -149,6 +150,7 @@ function AddOrUpdateZoneFields() {
                                 label="Name"
                                 {...register("name", { required: true })}
                                 value={watch("name") || ""}
+                                sx={inputStyle}
                                 fullWidth
                             />
                             {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
@@ -163,6 +165,7 @@ function AddOrUpdateZoneFields() {
                                 label="Location"
                                 {...register("location", { required: true })}
                                 value={watch("location") || ""}
+                                sx={inputStyle}
                                 fullWidth
                             />
                             {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}

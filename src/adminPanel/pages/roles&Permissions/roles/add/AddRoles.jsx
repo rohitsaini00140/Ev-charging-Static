@@ -21,9 +21,10 @@ function AddRoles() {
                         width: 1,
                         maxWidth: "100%",
                         height: "auto",
+                        backgroundColor: "#181837",
                     }}
                 >
-                    <Typography variant="h4" sx={{ mb: 3 }}>Add Roles</Typography>
+                    <Typography variant="h4" sx={{ mb: 3 }} color="white">Add Roles</Typography>
                     <AddRoleFields />
                 </Card>
             </Stack>

@@ -20,7 +20,7 @@ function AdminFooter() {
                 mt: 'auto',
             }}
         >
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="white">
                 © 2024 VNT. All rights reserved.
             </Typography>
         </Box>

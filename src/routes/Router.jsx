@@ -5,7 +5,7 @@ import { Home, Login, Registration,ContactUs } from "./LandingUi"
 import ThemeProviderAdmin from "../adminPanel/layouts/theme/ThemeProviderAdmin";
 import Drawer from "../adminPanel/layouts/sidebar/Drawer";
 import Dashboard from "../adminPanel/pages/dashboard/Dashboard";
-import AddUser from "../adminPanel/pages/user/add/AddUser";
+import AddOrUpdateUser from "../adminPanel/pages/user/add/AddOrUpdateUser.jsx";
 import AuthLayout from "./AuthLayout";
 import PublicLayout from "./PublicLayout";
 import UserView from "../adminPanel/pages/user/view/UserView";
@@ -15,7 +15,7 @@ import AddRoles from "../adminPanel/pages/roles&Permissions/roles/add/AddRoles";
 import RoleView from "../adminPanel/pages/roles&Permissions/roles/view/RoleView";
 import AddPermissions from "../adminPanel/pages/roles&Permissions/permissions/add/AddPermissions";
 import PermissionView from "../adminPanel/pages/roles&Permissions/permissions/view/PermissionView";
-import AddOrUpdateZone from "../adminPanel/pages/zone/addOrUpdate/AddOrUpdateZone";
+import AddOrUpdateZone from "../adminPanel/pages/zone/addOrUpdate/AddOrUpdateZone.jsx";
 import ZoneView from "../adminPanel/pages/zone/view/ZoneView";
 import PermissionsToRole from "../adminPanel/pages/roles&Permissions/permissionsToRole/PermissionsToRole";
 import AddOrUpdateOrganization from "../adminPanel/pages/organization/addOrUpdate/AddOrUpdateOrganization";
@@ -51,7 +51,7 @@ function Router() {
               <Drawer>
                 <Routes>
                   <Route path="" element={<Dashboard />} />
-                  <Route path="/user/add" element={<AddUser />} />
+                  <Route path="/user/add" element={<AddOrUpdateUser />} />
                   <Route path="/user/view" element={<UserView />} />
                   <Route path="/organization/add" element={<AddOrUpdateOrganization />} />
                   <Route path="/organization/view" element={<OrganizationView />} />

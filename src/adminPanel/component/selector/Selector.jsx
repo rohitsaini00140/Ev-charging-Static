@@ -4,6 +4,8 @@ import { useTheme } from '@mui/material/styles';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { Box } from '@mui/material';
+import { inputStyle } from './selectorStyle';
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -11,8 +13,7 @@ const MenuProps = {
     PaperProps: {
         style: {
             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            backgroundColor: "#34345a",
-            // boxShadow: 'none',
+            backgroundColor: "#34345a"
         },
     },
 };
@@ -34,15 +35,24 @@ function Selector({ placeholder, selectType, value, onChange, options }) {
         <Box sx={{ width: '100%' }}>
             <FormControl fullWidth>
                 <Select
+                    sx={{
+                        backgroundColor: "#34345a",
+                        borderRadius: "8px",
+                        ...inputStyle
+                    }}
                     fullWidth
                     multiple={selectType === "multiple"}
                     displayEmpty
                     value={value || []}
                     onChange={onChange}
-                    input={<OutlinedInput />}
+                    input={<OutlinedInput sx={{
+                        "& .MuiInputBase-input": {
+                            color: "white"
+                        },
+                    }} />}
                     renderValue={(selected) => {
                         if (selected.length === 0) {
-                            return <em style={{ color: '#6f6f82' }}>{placeholder}</em>;
+                            return <em style={{ color: 'white' }}>{placeholder}</em>;
                         }
 
                         return Array.isArray(selected) ? selected.join(', ') : selected;

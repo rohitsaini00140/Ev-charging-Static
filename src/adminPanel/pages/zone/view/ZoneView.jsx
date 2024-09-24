@@ -20,16 +20,12 @@ import { setZoneListPageNo } from '../../../globalState/zone/zoneSlices';
 // ----------------------------------------------------------------------
 
 function ZoneView() {
-
+    // 
     const dispatch = useDispatch()
 
     const { pageNo } = useSelector(state => state.zone);
 
     const { data, isSuccess } = useGetZoneQuery({ page: pageNo });
-
-    const allOrganization = isSuccess && data?.filters?.organizations
-        ? Object.entries(data.filters.organizations).map(([id, name]) => ({ id, name }))
-        : [];
 
     const allZoneData = isSuccess && data.data.data;
     const paginationData = isSuccess && data.data;
@@ -49,14 +45,21 @@ function ZoneView() {
                 justifyContent="space-between"
                 mb={5}
             >
-                <Typography variant="h4">Zones</Typography>
+                <Typography variant="h4" color='white'>Zones</Typography>
                 <Link to={"/admin/zone/add"}>
-                    <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            bgcolor: "#34345a",
+                            boxShadow: 'none',
+                            "&:hover": { bgcolor: "#34345a" }
+                        }}
+                        startIcon={<Iconify icon="eva:plus-fill" />}>
                         New Zone
                     </Button>
                 </Link>
             </Stack>
-            <Card>
+            <Card sx={{ bgcolor: "#181837" }}>
                 <ZoneTableToolbar allZoneData={allZoneData} />
                 <Scrollbar>
                     <TableContainer sx={{ overflow: 'unset' }}>
