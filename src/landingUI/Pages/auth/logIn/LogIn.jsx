@@ -3,7 +3,7 @@ import { Button, TextField, Typography, Container, Box, Stack } from '@mui/mater
 import Grid from '@mui/material/Grid2';
 import { FcGoogle } from "react-icons/fc";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import { inputStyles } from '../authPagesStyle';
+import { inputStyles } from '../../authPagesStyle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';

@@ -12,17 +12,6 @@ function Banner() {
           opacity: 0.7,
         }}
       />
-     
-      {/* <img
-        src={"https://src.n-ix.com/uploads/2023/11/27/42899ff8-fbbf-494d-9947-0d665ec28709.webp"}
-        alt="Banner"
-        style={{
-          width: '100%',
-          height: '90vh',
-          objectFit: 'cover',
-          filter: 'brightness(50%)'
-        }}
-      /> */}
       <Box
         sx={{
           height: "90vh",

@@ -4,39 +4,31 @@
   font-family: sans-serif;
   box-sizing: border-box;
 }
-
 .css-16janke-MuiStack-root>:not(style):not(style) {
   margin: auto !important;
 }
-
 .css-hud6bj-MuiLinearProgress-bar1 {
   background-color: #56a745 !important;
 }
-
 .css-1e8gvwt-MuiLinearProgress-bar1 {
   background-color: #253644 !important;
 }
-
 @media (min-width: 992px) {
   .css-19v7jyx-MuiContainer-root {
     max-width: 1200px !important;
   }
 }
-
 @media (max-width: 768px) {
   .css-1yjnhim-MuiStack-root>:not(style)~:not(style) {
     margin-left: 0px !important;
   }
-
   .css-cjv43n-MuiGrid-root>.MuiGrid-item {
     padding-left: 0px !important;
   }
 }
-
 .slick-dots li button {
   color: white !important;
 }
-
 .slick-dots li button:before {
   color: #56a745 !important;
   font-size: 10px !important;
@@ -51,35 +43,23 @@
 .slick-dots li button:before:hover{
   color: rgb(87, 179, 62) !important;
 }
-
 .slick-dots li.slick-active button:before{
   color: rgb(87, 179, 62) !important;
 }
-
-/* Base styles for the background image */
 .banner_bg {
   background-image: url('https://src.n-ix.com/uploads/2023/11/27/42899ff8-fbbf-494d-9947-0d665ec28709.webp');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover; /* Adjust as needed */
-  height: 500px; /* Adjust the height as needed */
+  background-size: cover; 
+  height: 500px; 
 }
-/* .banner_bg {
-  height: 90vh;
-  width: 100%;
-  background-image: url("https://src.n-ix.com/uploads/2023/11/27/42899ff8-fbbf-494d-9947-0d665ec28709.webp");
+.contact_bg {
+  background-image: url('../public/assets/images/contact.jpg');
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center center;
   background-size: cover;
-  background-color: #f0f0f0;
+  height: 500px;
 }
-
-@media (max-width: 600px) {
-  .banner_bg {
-      height: 100vh; 
-  }
-} */
-
 @import 'simplebar-react/dist/simplebar.min.css';
 
 
