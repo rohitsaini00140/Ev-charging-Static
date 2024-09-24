@@ -79,8 +79,8 @@ function Registration() {
                             width: '100%',
                         }}
                     >
-                        <Typography component="h1" variant="h5" textAlign="center">
-                            Welcome to VNT! 👋
+                        <Typography component="h1" sx={{fontWeight:'600',color:'#253745'}} variant="h5" textAlign="center">
+                            Sign Up VNT! 👋
                         </Typography>
                         <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
                             <TextField
@@ -91,7 +91,7 @@ function Registration() {
                                 sx={inputStyles}
                             />
                             {errors.name && (
-                                <Typography color="red">
+                                <Typography style={{fontSize:'.85rem'}} color="red">
                                     *{errors.name.message}
                                 </Typography>
                             )}
@@ -103,7 +103,7 @@ function Registration() {
                                 sx={inputStyles}
                             />
                             {errors.email && (
-                                <Typography color="red">
+                                <Typography style={{fontSize:'.85rem'}} color="red">
                                     *{errors.email.message}
                                 </Typography>
                             )}
@@ -129,7 +129,7 @@ function Registration() {
                                 }}
                             />
                             {errors.password && (
-                                <Typography color="red">
+                                <Typography style={{fontSize:'.85rem'}} color="red">
                                     *{errors.password.message}
                                 </Typography>
                             )}
@@ -155,7 +155,7 @@ function Registration() {
                                 }}
                             />
                             {errors.confirm_Password && (
-                                <Typography color="red">
+                                <Typography style={{fontSize:'.85rem'}} color="red">
                                     *{errors.confirm_Password.message}
                                 </Typography>
                             )}
@@ -169,7 +169,7 @@ function Registration() {
                             </Button>
                             <Typography variant="body2" color="black" align="center" sx={{ mt: 2 }}>
                                 {'Already have an account? '}
-                                <Link to={"/logIn"} style={{ textDecoration: "none", color: "blue" }}>
+                                <Link to={"/logIn"} style={{ textDecoration: "none", color: "rgb(255, 102, 0)" }}>
                                     Login
                                 </Link>
                             </Typography>

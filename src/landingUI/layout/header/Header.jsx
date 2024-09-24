@@ -59,7 +59,6 @@ function Header() {
             <Typography
               sx={{
                 cursor: "pointer",
-                // color: "white",
                 transition:'0.5s',
 
                 "&:hover": {
@@ -69,7 +68,7 @@ function Header() {
                 color: location.pathname === ele.path ? "#ff6600" : "white"
               }}
             >
-              {ele}
+              {ele.name}
             </Typography>
           </Link>
         ))}
