@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button, TextField, Typography, Container, Box } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { Link } from "react-router-dom";
-import { inputStyles } from '../authPagesStyle';
+import { inputStyles } from '../../authPagesStyle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -26,7 +26,6 @@ function Registration() {
         password: "",
         confirm_Password: "",
     }
-
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(registrationSchema),
         defaultValues: defaultValues
@@ -39,7 +38,6 @@ function Registration() {
             console.log(error)
         }
     };
-
     return (
         <Grid container sx={{ minHeight: '100vh' }}>
             <Grid item xs={false} size={{ lg: 6 }}
