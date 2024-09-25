@@ -25,17 +25,12 @@ export function useResponsive(query, start, end) {
   if (query === 'between') {
     return mediaBetween;
   }
-
   return mediaOnly;
 }
-
 // ----------------------------------------------------------------------
-
 export function useWidth() {
   const theme = useTheme();
-
   const keys = [...theme.breakpoints.keys].reverse();
-
   return (
     keys.reduce((output, key) => {
       // eslint-disable-next-line react-hooks/rules-of-hooks

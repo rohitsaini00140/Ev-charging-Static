@@ -13,14 +13,13 @@ import { useEffect, useState } from 'react';
 import Alertbar from '../../../component/Alertbar';
 import { inputStyle } from './addOrUpdateOrganizationStyle';
 
-function AddOrUpdateOrganizationFields() {
 
+function AddOrUpdateOrganizationFields() {
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
         severity: 'success'
     });
-
     let { id } = useParams()
 
     let navigate = useNavigate()
@@ -61,7 +60,6 @@ function AddOrUpdateOrganizationFields() {
         }
     }, [id, organizationForUpdate, reset]);
 
-
     const onSubmit = async (data) => {
         try {
             if (id) {
@@ -79,9 +77,7 @@ function AddOrUpdateOrganizationFields() {
                 }, 3000);
 
             } else {
-
                 await addOrganization(data).unwrap();
-
                 setSnackbar({
                     open: true,
                     message: 'Organization successfully added!',
@@ -113,8 +109,6 @@ function AddOrUpdateOrganizationFields() {
             console.error("Error during submission:", error);
         }
     };
-
-
     const handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -124,8 +118,6 @@ function AddOrUpdateOrganizationFields() {
             open: false
         }));
     };
-
-
     return (
         <>
             <form fullWidth onSubmit={handleSubmit(onSubmit)}>
@@ -203,5 +195,4 @@ function AddOrUpdateOrganizationFields() {
         </>
     )
 }
-
 export default AddOrUpdateOrganizationFields;
