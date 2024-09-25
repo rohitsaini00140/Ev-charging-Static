@@ -15,13 +15,11 @@ import { inputStyle } from './addOrUpdateClustersStyle';
 import Selector from '../../../component/selector/Selector';
 
 function AddOrUpdateClustersFields() {
-
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
         severity: 'success'
     });
-
     let { id } = useParams()
 
     let navigate = useNavigate()
@@ -67,7 +65,6 @@ function AddOrUpdateClustersFields() {
             });
         }
     }, [id, clusterForUpdate, reset]);
-
 
     const onSubmit = async (data) => {
         try {
@@ -120,8 +117,6 @@ function AddOrUpdateClustersFields() {
             console.error("Error during submission:", error);
         }
     };
-
-
     const handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -131,8 +126,6 @@ function AddOrUpdateClustersFields() {
             open: false
         }));
     };
-
-
     return (
         <>
             <form fullWidth onSubmit={handleSubmit(onSubmit)}>
@@ -228,4 +221,4 @@ function AddOrUpdateClustersFields() {
     )
 }
 
-export default AddOrUpdateClustersFields;
+export default AddOrUpdateClustersFields

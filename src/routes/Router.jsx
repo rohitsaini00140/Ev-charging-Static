@@ -58,7 +58,7 @@ function Router() {
             <ThemeProviderAdmin>
               <Drawer>
                 <Routes>
-                  <Route path="" element={<Dashboard />} />
+                  <Route path="/" element={<Dashboard />} />
                   <Route path="/user/add" element={<AddOrUpdateUser />} />
                   <Route path="/user/view" element={<UserView />} />
                   <Route path="/cluster/add" element={<AddOrUpdateClusters />} />
