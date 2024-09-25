@@ -1,20 +1,14 @@
-import Tooltip from '@mui/material/Tooltip';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import Iconify from '../../../component/Iconify';
-import MenuList from '../../../component/MenuList';
-import SearchInput from '../../../component/SearchInput';
-import ExcelExport from '../../../component/ExcelExport';
-import PdfExport from '../../../component/PdfExport';
+import SearchInput from '../../../../component/SearchInput';
+// import ExcelExport from '../../../component/ExcelExport';
+// import PdfExport from '../../../component/PdfExport';
 // import { fieldsToDownload, fieldMapping, filter } from './headLabel';
 import { Stack } from '@mui/material';
-import Selector from '../../../component/selector/Selector';
-import { fieldMapping, fieldsToDownload } from './organizationData';
+import Selector from '../../../../component/selector/Selector';
 
 // ----------------------------------------------------------------------
 
-function OrganizationTableToolbar({ allOrganizationData }) {
+function CountryTableToolbar() {
 
     return (
         <Toolbar
@@ -24,7 +18,6 @@ function OrganizationTableToolbar({ allOrganizationData }) {
                 display: 'flex',
                 flexDirection: "column",
                 gap: "1rem",
-                bgcolor: "#181837"
                 // p: (theme) => theme.spacing(0, 1, 0, 3),
                 // ...(selectedCategoryId.length > 0 && {
                 //     color: 'primary.main',
@@ -50,7 +43,7 @@ function OrganizationTableToolbar({ allOrganizationData }) {
                         <Stack width={"100%"}>
                             <SearchInput
                                 sx={{ color: "white" }}
-                                placeholder="Search organizations..."
+                                placeholder="Search countries..."
                                 width={"100%"}
                             // onChange={(e) => handleSearchKeywords(e.target.value)}
                             // value={searchKeywords}
@@ -83,18 +76,18 @@ function OrganizationTableToolbar({ allOrganizationData }) {
                 // ) : (
 
                 <Stack direction={'row'} alignItems={"center"} spacing={2} width={"100%"}>
-                    <PdfExport
-                        data={allOrganizationData.length > 0 && allOrganizationData}
-                        fileName="Organization.pdf"
+                    {/* <PdfExport
+                        data={allZoneData.length > 0 && allZoneData}
+                        fileName="Zones.pdf"
                         fields={fieldsToDownload}
                         fieldMapping={fieldMapping}
                     />
                     <ExcelExport
-                        data={allOrganizationData.length > 0 && allOrganizationData}
-                        fileName="Organization"
+                        data={allZoneData.length > 0 && allZoneData}
+                        fileName="Zones"
                         fields={fieldsToDownload}
                         fieldMapping={fieldMapping}
-                    />
+                    /> */}
                 </Stack>
                 // )
             }
@@ -102,4 +95,4 @@ function OrganizationTableToolbar({ allOrganizationData }) {
     );
 }
 
-export default OrganizationTableToolbar;
+export default CountryTableToolbar;

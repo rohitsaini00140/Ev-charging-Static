@@ -2,11 +2,11 @@ import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import AddOrUpdateOrganizationFields from './AddOrUpdateOrganizationFields';
+import AddOrUpdateCountryFields from './AddOrUpdateCountryFields';
 
 // ----------------------------------------------------------------------
 
-function AddOrUpdateOrganization() {
+function AddOrUpdateCountry() {
 
     return (
         <Box
@@ -24,12 +24,12 @@ function AddOrUpdateOrganization() {
                         backgroundColor: "#181837",
                     }}
                 >
-                    <Typography variant="h4" sx={{ mb: 3, color: "white" }}>Add Organizations</Typography>
-                    <AddOrUpdateOrganizationFields />
+                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>Add Countries</Typography>
+                    <AddOrUpdateCountryFields />
                 </Card>
             </Stack>
         </Box>
     );
 }
 
-export default AddOrUpdateOrganization;
+export default AddOrUpdateCountry;

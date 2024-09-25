@@ -6,36 +6,17 @@ import Container from '@mui/material/Container';
 import TableBody from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
-import Iconify from '../../../component/Iconify';
-import Scrollbar from '../../../component/scrollbar/Scrollbar';
+import Iconify from '../../../../component/Iconify';
+import Scrollbar from '../../../../component/scrollbar/Scrollbar';
 import { Link } from 'react-router-dom';
-import TablePagination from '../../../component/TablePagination';
-import ZoneTableToolbar from './ZoneTableToolbar';
-import ZoneTableRow from './ZoneTableRow';
-import ZoneTableHead from './ZoneTableHead';
-import { useGetZoneQuery } from '../../../globalState/zone/zoneApis';
-import { useDispatch, useSelector } from "react-redux";
-import { setZoneListPageNo } from '../../../globalState/zone/zoneSlices';
+import TablePagination from '../../../../component/TablePagination';
+import CountryTableToolbar from './CountryTableToolbar';
+import CountryTableHead from './CountryTableHead';
+import CountryTableRow from './CountryTableRow';
 
 // ----------------------------------------------------------------------
 
-function ZoneView() {
-    
-    const dispatch = useDispatch()
-
-    const { pageNo } = useSelector(state => state.zone);
-
-    const { data, isSuccess } = useGetZoneQuery({ page: pageNo });
-
-    const allZoneData = isSuccess && data.data.data;
-    const paginationData = isSuccess && data.data;
-
-    const { last_page } = paginationData;
-
-    const handlePageChange = (event, value) => {
-        sessionStorage.setItem('zoneListPageNo', JSON.stringify(value));
-        dispatch(setZoneListPageNo(value));
-    };
+function CountryView() {
 
     return (
         <Container>
@@ -45,8 +26,8 @@ function ZoneView() {
                 justifyContent="space-between"
                 mb={5}
             >
-                <Typography variant="h4" color='white'>Zones</Typography>
-                <Link to={"/admin/zone/add"}>
+                <Typography variant="h4" color='white'>Countries</Typography>
+                <Link to={"/admin/country/add"}>
                     <Button
                         variant="contained"
                         sx={{
@@ -55,30 +36,30 @@ function ZoneView() {
                             "&:hover": { bgcolor: "#34345a" }
                         }}
                         startIcon={<Iconify icon="eva:plus-fill" />}>
-                        New Zone
+                        New Country
                     </Button>
                 </Link>
             </Stack>
             <Card sx={{ bgcolor: "#181837" }}>
-                <ZoneTableToolbar allZoneData={allZoneData} />
+                <CountryTableToolbar />
                 <Scrollbar>
                     <TableContainer sx={{ overflow: 'unset' }}>
                         <Table sx={{ minWidth: 800 }}>
-                            <ZoneTableHead allZoneData={allZoneData} />
+                            <CountryTableHead />
                             <TableBody>
-                                <ZoneTableRow allZoneData={allZoneData} />
+                                <CountryTableRow />
                             </TableBody>
                         </Table>
                     </TableContainer>
                 </Scrollbar>
                 <TablePagination
-                    count={last_page}
-                    page={pageNo}
-                    onPageChange={handlePageChange}
+                // count={last_page}
+                // page={pageNo}
+                // onPageChange={handlePageChange}
                 />
             </Card>
         </Container>
     );
 }
 
-export default ZoneView;
+export default CountryView;

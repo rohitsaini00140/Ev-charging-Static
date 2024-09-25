@@ -1,12 +1,10 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
 import { useResponsive } from '../../customHooks/useResponsive';
 
 // ----------------------------------------------------------------------
 
 function AdminFooter() {
-    const theme = useTheme();
 
     const lgUp = useResponsive('up', 'lg');
 

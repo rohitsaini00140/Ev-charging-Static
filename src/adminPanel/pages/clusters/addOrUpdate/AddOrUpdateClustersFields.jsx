@@ -4,17 +4,17 @@ import { Button } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { organizationSchema } from './organizationSchema';
+import { clusterSchema } from './clusterSchema';
 import { Typography } from '@mui/material';
-import { useAddOrganizationMutation, useGetOrganizationQuery, useUpdateOrganizationMutation } from '../../../globalState/organization/organizationApis';
+import { useAddClusterMutation, useGetClustersQuery, useUpdateClusterMutation } from '../../../globalState/cluster/clusterApis';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Alertbar from '../../../component/Alertbar';
-import { inputStyle } from './addOrUpdateOrganizationStyle';
+import { inputStyle } from './addOrUpdateClustersStyle';
+import Selector from '../../../component/selector/Selector';
 
-
-function AddOrUpdateOrganizationFields() {
+function AddOrUpdateClustersFields() {
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
@@ -24,23 +24,25 @@ function AddOrUpdateOrganizationFields() {
 
     let navigate = useNavigate()
 
-    const { pageNo } = useSelector(state => state.organization);
-    const { data, isSuccess } = useGetOrganizationQuery({ page: pageNo })
+    const { pageNo } = useSelector(state => state.cluster);
+    const { data, isSuccess } = useGetClustersQuery({ page: pageNo })
 
-    const organizationForUpdate = (isSuccess && data?.data) && data.data.find(ele => ele.id === Number(id))
+    const clusterForUpdate = (isSuccess && data?.data) && data.data.find(ele => ele.id === Number(id))
 
-    const [addOrganization] = useAddOrganizationMutation()
+    const [addCluster] = useAddClusterMutation()
 
-    const [updateOrganization] = useUpdateOrganizationMutation()
+    const [updateCluster] = useUpdateClusterMutation()
 
     const defaultValues = {
-        name: organizationForUpdate ? organizationForUpdate.name : "",
-        email: organizationForUpdate ? organizationForUpdate.email : "",
-        address: organizationForUpdate ? organizationForUpdate.address : ""
+        name: clusterForUpdate ? clusterForUpdate.name : "",
+        country_id: clusterForUpdate ? clusterForUpdate.country_id : "",
+        state_id: clusterForUpdate ? clusterForUpdate.state_id : "",
+        city_id: clusterForUpdate ? clusterForUpdate.city_id : "",
+        location: clusterForUpdate ? clusterForUpdate.location : ""
     }
 
-    const { register, handleSubmit, setError, reset, watch, formState: { errors } } = useForm({
-        resolver: zodResolver(organizationSchema),
+    const { register, handleSubmit, setError, setValue, reset, watch, formState: { errors } } = useForm({
+        resolver: zodResolver(clusterSchema),
         defaultValues: defaultValues
     });
 
@@ -48,39 +50,45 @@ function AddOrUpdateOrganizationFields() {
         if (!id) {
             reset({
                 name: "",
-                email: "",
-                address: ""
+                country_id: "",
+                state_id: "",
+                city_id: "",
+                location: ""
             });
-        } else if (organizationForUpdate) {
+        } else if (clusterForUpdate) {
             reset({
-                name: organizationForUpdate && organizationForUpdate.name,
-                email: organizationForUpdate && organizationForUpdate.email,
-                address: organizationForUpdate && organizationForUpdate.address
+                name: clusterForUpdate && clusterForUpdate.name,
+                country_id: clusterForUpdate && clusterForUpdate.country_id,
+                state_id: clusterForUpdate && clusterForUpdate.state_id,
+                city_id: clusterForUpdate && clusterForUpdate.city_id,
+                location: clusterForUpdate && clusterForUpdate.location
             });
         }
-    }, [id, organizationForUpdate, reset]);
+    }, [id, clusterForUpdate, reset]);
 
     const onSubmit = async (data) => {
         try {
             if (id) {
 
-                await updateOrganization({ id, updatedOrganizationData: data }).unwrap();
+                await updateCluster({ id, updatedClusterData: data }).unwrap();
 
                 setSnackbar({
                     open: true,
-                    message: 'Organization successfully updated!',
+                    message: 'Cluster successfully updated!',
                     severity: 'success'
                 });
 
                 setTimeout(() => {
-                    navigate("/admin/organization/view");
+                    navigate("/admin/cluster/view");
                 }, 3000);
 
             } else {
-                await addOrganization(data).unwrap();
+
+                await addCluster(data).unwrap();
+
                 setSnackbar({
                     open: true,
-                    message: 'Organization successfully added!',
+                    message: 'Cluster successfully added!',
                     severity: 'success'
                 });
             }
@@ -138,13 +146,13 @@ function AddOrUpdateOrganizationFields() {
                         </Stack>
                         <Stack width={"100%"}>
                             <TextField
-                                label="Email Address"
-                                {...register("email", { required: true })}
-                                value={watch("email") || ""}
+                                label="Location"
+                                {...register("location", { required: true })}
+                                value={watch("location") || ""}
                                 sx={inputStyle}
                                 fullWidth
                             />
-                            {errors.email && <Typography color={"red"} mt={".5rem"}>*{errors.email.message}</Typography>}
+                            {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
                         </Stack>
                     </Stack>
                     <Stack
@@ -152,14 +160,31 @@ function AddOrUpdateOrganizationFields() {
                         spacing={{ xs: 1, sm: 2, md: 6 }}
                     >
                         <Stack width={"100%"}>
-                            <TextField
-                                label="Address"
-                                {...register("address", { required: true })}
-                                value={watch("address") || ""}
-                                sx={inputStyle}
-                                fullWidth
+                            <Selector
+                                value={watch("country_id") || ""}
+                                onChange={(e) => setValue("country_id", e.target.value, { shouldValidate: true })}
+                                placeholder='Country'
+                                selectType="single"
                             />
-                            {errors.address && <Typography color={"red"} mt={".5rem"}>*{errors.address.message}</Typography>}
+                            {errors.country_id && <Typography color={"red"} mt={".5rem"}>*{errors.country_id.message}</Typography>}
+                        </Stack>
+                        <Stack width={"100%"}>
+                            <Selector
+                                value={watch("state_id") || ""}
+                                onChange={(e) => setValue("state_id", e.target.value, { shouldValidate: true })}
+                                placeholder='State'
+                                selectType="single"
+                            />
+                            {errors.state_id && <Typography color={"red"} mt={".5rem"}>*{errors.state_id.message}</Typography>}
+                        </Stack>
+                        <Stack width={"100%"}>
+                            <Selector
+                                value={watch("city_id") || ""}
+                                onChange={(e) => setValue("city_id", e.target.value, { shouldValidate: true })}
+                                placeholder='City'
+                                selectType="single"
+                            />
+                            {errors.city_id && <Typography color={"red"} mt={".5rem"}>*{errors.city_id.message}</Typography>}
                         </Stack>
                     </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>
@@ -195,4 +220,5 @@ function AddOrUpdateOrganizationFields() {
         </>
     )
 }
-export default AddOrUpdateOrganizationFields;
+
+export default AddOrUpdateClustersFields
