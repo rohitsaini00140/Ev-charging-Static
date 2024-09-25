@@ -3,10 +3,13 @@ import {
   Box,
   Typography,
   Container,
+  Button,
   TextField,
 } from "@mui/material";
-import { contact_haiding } from "./contactdesign";
-import { Grid } from "@mui/system";
+import { contact_haiding,contact_text,contactTextStyle,box_icon,submitButton } from "./contactdesign";
+import {  Grid, Stack } from "@mui/system";
+import { FaLocationDot,FaPhone  } from "react-icons/fa6";
+import { MdOutlineEmail } from "react-icons/md";
 
 const ContactUs = () => {
   return (
@@ -65,16 +68,57 @@ const ContactUs = () => {
       {/* // Form start here */}
       <Container>
         <Grid container spacing={2} sx={{ margin: "25px 0px" }}>
-          <Grid item size={{ sm: 12, md: 5 }}>
+          <Grid item size={{ sm: 12, md: 6 }}>
             <Typography variant="h3" sx={contact_haiding}>
-              Get a Quote
+              Contact Us
             </Typography>
-            <Typography variant="p">
-              Fill up the form and our Team Will get back to you within 24
-              hours.
+            <Typography variant="p" sx={contact_text}>
+               Get In Touch With Us
             </Typography>
+            <Box variant="p" sx={contactTextStyle}>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita praesentium autem culpa, maxime assumenda rerum eius similique quam ex beatae velit cum.
+            </Box>
+            <Stack flexDirection='row' sx={{margin:'30px 0px'}}>
+            <Box sx={box_icon}>
+            <FaLocationDot  style={{ color: 'white', fontSize: '16px' }} />
+            </Box>
+            <Box sx={{marginLeft:'15px',marginTop: '3px'}}>
+            <Typography variant="h3" sx={{fontSize:'17px',fontWeight:'600'}}>
+              Our Location
+            </Typography>
+            <Typography  variant="p" sx={contactTextStyle}>
+            418 | Sector-7, IMT Manesar Gurgaon Haryana-122050, India
+            </Typography>
+            </Box>
+           </Stack>
+           <Stack flexDirection='row' sx={{margin:'30px 0px'}}>
+            <Box sx={box_icon}>
+            <FaPhone  style={{ color: 'white', fontSize: '16px' }} />
+            </Box>
+            <Box sx={{marginLeft:'15px',marginTop: '3px'}}>
+            <Typography variant="h3" sx={{fontSize:'17px',fontWeight:'600'}}>
+              Phone Number
+            </Typography>
+            <Typography  variant="p" sx={contactTextStyle}>
+              1800 572 7592
+            </Typography>
+            </Box>
+           </Stack>
+           <Stack flexDirection='row' sx={{margin:'30px 0px'}}>
+            <Box sx={box_icon}>
+            <MdOutlineEmail  style={{ color: 'white', fontSize: '20px' }} />
+            </Box>
+            <Box sx={{marginLeft:'15px',marginTop: '3px'}}>
+            <Typography variant="h3" sx={{fontSize:'17px',fontWeight:'600'}}>
+              Email Address
+            </Typography>
+            <Typography  variant="p" sx={contactTextStyle}>
+             info@vnt.in
+            </Typography>
+            </Box>
+           </Stack>
           </Grid>
-          <Grid item  size={{ sm: 12, md: 7 }}>
+          <Grid item size={{ sm: 12, md: 6 }}>
             <Box component="form">
               <Grid container>
                 <Grid container spacing={2} size={12}>
@@ -105,6 +149,8 @@ const ContactUs = () => {
                     />
                   </Grid>
                 </Grid>
+            <Button sx={submitButton} type ="sumbit">Sumbit</Button>
+
               </Grid>
             </Box>
           </Grid>
