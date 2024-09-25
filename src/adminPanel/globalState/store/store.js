@@ -1,19 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { organizationApi } from "../organization/organizationApis";
+import { clusterApi } from "../cluster/clusterApis";
 import { zoneApi } from "../zone/zoneApis";
-import organizationSlices from "../organization/organizationSlices";
+import clusterSlices from "../cluster/clusterSlices";
 import zoneSlices from "../zone/zoneSlices";
 
 export const store = configureStore({
     reducer: {
-        [organizationApi.reducerPath]: organizationApi.reducer,
+        [clusterApi.reducerPath]: clusterApi.reducer,
         [zoneApi.reducerPath]: zoneApi.reducer,
-        organization: organizationSlices,
+        cluster: clusterSlices,
         zone: zoneSlices
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
         .concat(
-            organizationApi.middleware,
+            clusterApi.middleware,
             zoneApi.middleware
         )
 })

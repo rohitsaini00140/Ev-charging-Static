@@ -3,39 +3,39 @@ import Checkbox from '@mui/material/Checkbox';
 import Action from '../../../component/Action';
 import Label from "../../../component/lable/Lable"
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
-import { useRestoreDeletedOrganizationMutation, useSoftDeleteOrganizationMutation } from '../../../globalState/organization/organizationApis';
+import { useRestoreDeletedClusterMutation, useSoftDeleteClusterMutation } from '../../../globalState/cluster/clusterApis';
 import { Skeleton } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-function OrganizationTableRow({ allOrganizationData }) {
+function ClustersTableRow({ allClusterData }) {
 
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const timer = setTimeout(() => setLoading(false), 2000);
+        const timer = setTimeout(() => setLoading(false), 1000);
         return () => clearTimeout(timer);
     }, []);
 
 
-    const [softDeleteOrganization] = useSoftDeleteOrganizationMutation()
-    const [restoreDeletedOrganization] = useRestoreDeletedOrganizationMutation()
+    const [softDeleteCluster] = useSoftDeleteClusterMutation()
+    const [restoreDeletedCluster] = useRestoreDeletedClusterMutation()
 
     function onSoftDelete(data) {
         let dataId = data.id
-        softDeleteOrganization({ id: dataId, softDeletedOrganizationData: data })
+        softDeleteCluster({ id: dataId, softDeletedClusterData: data })
     }
 
     function onRestoreData(id) {
-        restoreDeletedOrganization(id)
+        restoreDeletedCluster(id)
     }
 
 
     return (
         <>
-            {allOrganizationData.length > 0
+            {allClusterData.length > 0
                 ?
-                allOrganizationData.map((data, i) => (
+                allClusterData.map((data, i) => (
                     <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.id}>
                         <StyledTableCell padding="checkbox">
                             {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Checkbox disableFocusRipple
@@ -63,7 +63,7 @@ function OrganizationTableRow({ allOrganizationData }) {
                             {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
                                 data={data}
                                 activeOrInactive={data.deleted_at}
-                                pathToNavigate={"/admin/organization/update"}
+                                pathToNavigate={"/admin/cluster/update"}
                                 onSoftDelete={onSoftDelete}
                                 onRestoreData={onRestoreData}
                             />}
@@ -79,4 +79,4 @@ function OrganizationTableRow({ allOrganizationData }) {
     );
 }
 
-export default OrganizationTableRow;
+export default ClustersTableRow;

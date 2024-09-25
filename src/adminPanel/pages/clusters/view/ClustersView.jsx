@@ -8,34 +8,34 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import Iconify from '../../../component/Iconify';
 import Scrollbar from '../../../component/scrollbar/Scrollbar';
-import OrganizationTableHead from "./OrganizationTableHead";
-import OrganizationTableToolbar from "./OrganizationTableToolbar";
+import ClustersTableHead from './ClustersTableHead';
+import ClustersTableToolbar from './ClustersTableToolbar';
 import { Link } from 'react-router-dom';
-import OrganizationTableRow from "./OrganizationTableRow";
-import { useGetOrganizationQuery } from '../../../globalState/organization/organizationApis';
+import ClustersTableRow from './ClustersTableRow';
+import { useGetClustersQuery } from '../../../globalState/cluster/clusterApis';
 import TablePagination from '../../../component/TablePagination';
 import { useDispatch, useSelector } from "react-redux";
-import { setOrganizationListPageNo } from "../../../globalState/organization/organizationSlices";
+import { setClusterListPageNo } from "../../../globalState/cluster/clusterSlices";
 
 
 // ----------------------------------------------------------------------
 
-function OrganizationView() {
+function ClustersView() {
 
     const dispatch = useDispatch()
 
-    const { pageNo } = useSelector(state => state.organization);
+    const { pageNo } = useSelector(state => state.cluster);
 
-    const { data, isSuccess } = useGetOrganizationQuery({ page: pageNo });
+    const { data, isSuccess } = useGetClustersQuery({ page: pageNo });
 
-    const allOrganizationData = isSuccess && data.data;
+    const allClusterData = isSuccess && data.data;
     const paginationData = isSuccess && data;
 
     const { last_page } = paginationData;
 
     const handlePageChange = (event, value) => {
-        sessionStorage.setItem('organizationListPageNo', JSON.stringify(value));
-        dispatch(setOrganizationListPageNo(value));
+        sessionStorage.setItem('clusterListPageNo', JSON.stringify(value));
+        dispatch(setClusterListPageNo(value));
     };
 
     return (
@@ -46,8 +46,8 @@ function OrganizationView() {
                 justifyContent="space-between"
                 mb={5}
             >
-                <Typography variant="h4" color="white">Organizations</Typography>
-                <Link to={"/admin/organization/add"}>
+                <Typography variant="h4" color="white">Clusters</Typography>
+                <Link to={"/admin/cluster/add"}>
                     <Button
                         variant="contained"
                         sx={{
@@ -57,23 +57,27 @@ function OrganizationView() {
                         }}
                         color="inherit"
                         startIcon={<Iconify icon="eva:plus-fill" />}>
-                        New Organization
+                        New Cluster
                     </Button>
                 </Link>
             </Stack>
             <Card sx={{ bgcolor: "#181837" }}>
-                <OrganizationTableToolbar allOrganizationData={allOrganizationData} />
+                <ClustersTableToolbar allClusterData={allClusterData} />
                 <Scrollbar>
                     <TableContainer sx={{ overflow: 'unset' }}>
                         <Table sx={{ minWidth: 800 }}>
-                            <OrganizationTableHead allOrganizationData={allOrganizationData} />
+                            <ClustersTableHead allClusterData={allClusterData} />
                             <TableBody>
-                                <OrganizationTableRow allOrganizationData={allOrganizationData} />
+                                {allClusterData.length > 0 ?
+                                    <ClustersTableRow allClusterData={allClusterData} />
+                                    :
+                                    <Typography align='center' color='white'>Empty</Typography>
+                                }
                             </TableBody>
                         </Table>
                     </TableContainer>
                 </Scrollbar>
-                {allOrganizationData.length > 0 && <TablePagination
+                {allClusterData.length > 0 && <TablePagination
                     count={last_page}
                     page={pageNo}
                     onPageChange={handlePageChange}
@@ -83,4 +87,4 @@ function OrganizationView() {
     );
 }
 
-export default OrganizationView;
+export default ClustersView;

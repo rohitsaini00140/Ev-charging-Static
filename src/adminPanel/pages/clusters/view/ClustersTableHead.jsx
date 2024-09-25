@@ -3,18 +3,18 @@ import Checkbox from '@mui/material/Checkbox';
 import TableHead from '@mui/material/TableHead';
 import { StyledTableCell } from '../../../component/tableStyle';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import { headLabel } from './organizationData';
+import { headLabel } from './clustersData';
 
 // ----------------------------------------------------------------------
 
-function OrganizationTableHead({ allOrganizationData }) {
+function ClustersTableHead({ allClusterData }) {
 
 
     return (
         <TableHead>
             <TableRow>
                 {
-                    allOrganizationData.length > 0 && <StyledTableCell padding="checkbox">
+                    allClusterData.length > 0 && <StyledTableCell padding="checkbox">
                         <Checkbox
                         // onChange={onHandleSelectAll}
                         // checked={selectAll}
@@ -32,7 +32,7 @@ function OrganizationTableHead({ allOrganizationData }) {
                     </StyledTableCell>
                 ))
                     // :
-                    // headLabel.slice(0, -1).map((headCell) => (
+                    // {headLabel.slice(0, -1).map((headCell) => (
                     //     <TableCell
                     //         sx={{ width: headCell.width, minWidth: headCell.minWidth }}
                     //     >
@@ -40,11 +40,11 @@ function OrganizationTableHead({ allOrganizationData }) {
                     //             {headCell.label}
                     //         </TableSortLabel>
                     //     </TableCell>
-                    // ))
+                    // ))}
                 }
             </TableRow>
         </TableHead>
     );
 }
 
-export default OrganizationTableHead;
+export default ClustersTableHead;

@@ -1,26 +1,27 @@
 import { useState, useEffect } from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import Action from '../../../component/Action';
-import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
-import Label from "../../../component/lable/Lable"
+import Action from '../../../../component/Action';
+import { StyledTableCell, StyledTableRow } from '../../../../component/tableStyle';
+import Label from "../../../../component/lable/Lable"
 import { Skeleton } from '@mui/material';
+import { allCounrtyData } from "./countryData"
 
 // ----------------------------------------------------------------------
 
-function ZoneTableRow({ allZoneData }) {
+function CountryTableRow() {
 
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const timer = setTimeout(() => setLoading(false), 2000);
+        const timer = setTimeout(() => setLoading(false), 1000);
         return () => clearTimeout(timer);
     }, []);
 
     return (
         <>
-            {allZoneData.length > 0
+            {allCounrtyData.length > 0
                 &&
-                allZoneData.map((data, i) => (
+                allCounrtyData.map((data, i) => (
                     < StyledTableRow hover tabIndex={-1} role="checkbox" key={data.ID}
                     >
                         <StyledTableCell padding="checkbox">
@@ -30,16 +31,14 @@ function ZoneTableRow({ allZoneData }) {
                             />}
                         </StyledTableCell>
                         <StyledTableCell>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : i + 1}</StyledTableCell>
-                        <StyledTableCell>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : (data.organization ? data.organization.name : "Not Selected")}</StyledTableCell>
                         <StyledTableCell>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.name}</StyledTableCell>
-                        <StyledTableCell>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.location}</StyledTableCell>
                         <StyledTableCell>
-                            <Label color={data.deleted_at ? 'error' : 'success'} >{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : (data.deleted_at === null ? 'Inactive' : 'Active')}</Label>
+                            <Label color={data.status === "Inactive" ? 'error' : 'success'} >{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : (data.status === "Inactive" ? 'Inactive' : 'Active')}</Label>
                         </StyledTableCell>
-                        <StyledTableCell>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : (new Date(data.created_at).toLocaleString())}</StyledTableCell>
+                        <StyledTableCell>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.created}</StyledTableCell>
                         <StyledTableCell>
                             {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
-                                activeOrInactive={data.deleted_at}
+                                // activeOrInactive={data.status}
                                 data={data}
                                 pathToNavigate={"/admin/zone/update"}
                             />}
@@ -51,4 +50,4 @@ function ZoneTableRow({ allZoneData }) {
     );
 }
 
-export default ZoneTableRow;
+export default CountryTableRow;

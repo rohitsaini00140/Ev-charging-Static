@@ -72,19 +72,73 @@ const navConfig = [
     ],
   },
   {
-    title: 'Organizations',
-    icon: icon('ic_organization'),
+    title: 'Clusters',
+    icon: icon('ic_cluster'),
     children: [
       {
         title: 'Add',
-        path: '/admin/organization/add',
+        path: '/admin/cluster/add',
         icon: icon('ic_circle'),
       },
       {
         title: 'View',
-        path: '/admin/organization/view',
+        path: '/admin/cluster/view',
         icon: icon('ic_circle'),
       },
+    ],
+  },
+  {
+    title: 'Address',
+    icon: icon('ic_address'),
+    children: [
+      {
+        title: 'Country',
+        icon: icon('ic_circle'),
+        children: [
+          {
+            title: 'Add',
+            path: '/admin/country/add',
+            icon: icon('ic_circle'),
+          },
+          {
+            title: 'View',
+            path: '/admin/country/view',
+            icon: icon('ic_circle'),
+          },
+        ],
+      },
+      {
+        title: 'State',
+        icon: icon('ic_circle'),
+        children: [
+          {
+            title: 'Add',
+            path: '/admin/state/add',
+            icon: icon('ic_circle'),
+          },
+          {
+            title: 'View',
+            path: '/admin/state/view',
+            icon: icon('ic_circle'),
+          },
+        ],
+      },
+      {
+        title: 'City',
+        icon: icon('ic_circle'),
+        children: [
+          {
+            title: 'Add',
+            path: '/admin/city/add',
+            icon: icon('ic_circle'),
+          },
+          {
+            title: 'View',
+            path: '/admin/city/view',
+            icon: icon('ic_circle'),
+          },
+        ],
+      }
     ],
   },
   {
@@ -103,22 +157,22 @@ const navConfig = [
       },
     ],
   },
-  {
-    title: 'Cluster',
-    icon: icon('ic_cluster'),
-    children: [
-      {
-        title: 'Add',
-        path: '/admin/cluster/add',
-        icon: icon('ic_circle'),
-      },
-      {
-        title: 'View',
-        path: '/admin/cluster/view',
-        icon: icon('ic_circle'),
-      },
-    ],
-  },
+  // {
+  //   title: 'Cluster',
+  //   icon: icon('ic_cluster'),
+  //   children: [
+  //     {
+  //       title: 'Add',
+  //       path: '/admin/cluster/add',
+  //       icon: icon('ic_circle'),
+  //     },
+  //     {
+  //       title: 'View',
+  //       path: '/admin/cluster/view',
+  //       icon: icon('ic_circle'),
+  //     },
+  //   ],
+  // },
 ];
 
 export default navConfig;
