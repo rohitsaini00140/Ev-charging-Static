@@ -7,14 +7,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { roleSchema } from './roleSchema';
 import { Typography } from '@mui/material';
-import { inputStyle } from './addRolesStyle';
+import { inputStyle } from '../../../../component/inputStyle';
 
 function AddRoleFields() {
 
     const defaultValues = {
-        name: "",
-        description: "",
-        status: "",
+        name: ""
     }
 
     const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm({
@@ -33,40 +31,14 @@ function AddRoleFields() {
     return (
         <form fullWidth onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={{ xs: 1, sm: 2, md: 4 }}>
-                <Stack
-                    direction={{ xs: 'column', sm: 'row' }}
-                    spacing={{ xs: 1, sm: 2, md: 12 }}
-                >
-                    <Stack width={"100%"}>
-                        <TextField
-                            label="Name"
-                            {...register("name", { required: true })}
-                            sx={inputStyle}
-                            fullWidth
-                        />
-                        {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
-                    </Stack>
-                    <Stack width={"100%"}>
-                        <Selector
-                            value={watch("status")}
-                            onChange={(e) => setValue("status", e.target.value, { shouldValidate: true })}
-                            placeholder='Status'
-                            selectType="single"
-                            options={["Active", "Inactive"]}
-                        />
-                        {errors.status && <Typography color={"red"} mt={".5rem"}>*{errors.status.message}</Typography>}
-                    </Stack>
-                </Stack>
                 <Stack width={"100%"}>
                     <TextField
-                        label="Description"
-                        {...register("description", { required: true })}
-                        fullWidth
+                        label="Name"
+                        {...register("name", { required: true })}
                         sx={inputStyle}
-                        multiline
-                        rows={4}
+                        fullWidth
                     />
-                    {errors.description && <Typography color={"red"} mt={".5rem"}>*{errors.description.message}</Typography>}
+                    {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
                 </Stack>
                 <Stack direction={"row"} justifyContent={"end"}>
                     <Button

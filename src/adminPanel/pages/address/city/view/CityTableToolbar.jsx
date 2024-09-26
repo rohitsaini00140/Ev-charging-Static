@@ -8,7 +8,7 @@ import Selector from '../../../../component/selector/Selector';
 
 // ----------------------------------------------------------------------
 
-function StateTableToolbar() {
+function CityTableToolbar() {
 
     return (
         <Toolbar
@@ -43,7 +43,7 @@ function StateTableToolbar() {
                         <Stack width={"100%"}>
                             <SearchInput
                                 sx={{ color: "white" }}
-                                placeholder="Search states..."
+                                placeholder="Search cities..."
                                 width={"100%"}
                             // onChange={(e) => handleSearchKeywords(e.target.value)}
                             // value={searchKeywords}
@@ -51,8 +51,9 @@ function StateTableToolbar() {
                         </Stack>
                         <Stack width={"100%"}>
                             <Selector
-                                placeholder='Select Country'
+                                placeholder='Select State'
                                 selectType="single"
+                            // options={["User", "Admin", "Moderator"]}
                             />
                         </Stack>
                         <Stack width={"100%"}>
@@ -94,4 +95,4 @@ function StateTableToolbar() {
     );
 }
 
-export default StateTableToolbar;
+export default CityTableToolbar;

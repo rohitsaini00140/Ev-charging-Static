@@ -8,7 +8,7 @@ import { Skeleton } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-function ClustersTableRow({ allClusterData }) {
+function ClustersTableRow({ allClusterData, currentPageNo }) {
 
     const [loading, setLoading] = useState(true);
 
@@ -44,7 +44,7 @@ function ClustersTableRow({ allClusterData }) {
                             />}
                         </StyledTableCell>
                         <StyledTableCell color={"white"} >
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : i + 1}
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : ((currentPageNo - 1) * 10 + (i + 1))}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.name}
@@ -72,7 +72,7 @@ function ClustersTableRow({ allClusterData }) {
                 ))
                 :
                 <StyledTableRow>
-                    <StyledTableCell align='center'>Loading...</StyledTableCell>
+                    <StyledTableCell align='center' colSpan={10}>Loading...</StyledTableCell>
                 </StyledTableRow>
             }
         </>

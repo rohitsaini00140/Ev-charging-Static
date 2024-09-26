@@ -88,6 +88,38 @@ const navConfig = [
     ],
   },
   {
+    title: 'Devices',
+    icon: icon('ic_device'),
+    children: [
+      {
+        title: 'Add',
+        path: '/admin/device/add',
+        icon: icon('ic_circle'),
+      },
+      {
+        title: 'View',
+        path: '/admin/device/view',
+        icon: icon('ic_circle'),
+      },
+    ],
+  },
+  {
+    title: 'Projects',
+    icon: icon('ic_project'),
+    children: [
+      {
+        title: 'Add',
+        path: '/admin/project/add',
+        icon: icon('ic_circle'),
+      },
+      {
+        title: 'View',
+        path: '/admin/project/view',
+        icon: icon('ic_circle'),
+      },
+    ],
+  },
+  {
     title: 'Address',
     icon: icon('ic_address'),
     children: [

@@ -11,7 +11,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Alertbar from '../../../component/Alertbar';
-import { inputStyle } from './addOrUpdateClustersStyle';
+import { inputStyle } from "../../../component/inputStyle"
 import Selector from '../../../component/selector/Selector';
 
 function AddOrUpdateClustersFields() {

@@ -1,7 +1,7 @@
 import Toolbar from '@mui/material/Toolbar';
 import SearchInput from '../../../../component/SearchInput';
-// import ExcelExport from '../../../component/ExcelExport';
-// import PdfExport from '../../../component/PdfExport';
+import ExcelExport from '../../../../component/ExcelExport';
+import PdfExport from '../../../../component/PdfExport';
 // import { fieldsToDownload, fieldMapping, filter } from './headLabel';
 import { Stack } from '@mui/material';
 import Selector from '../../../../component/selector/Selector';
@@ -76,18 +76,18 @@ function CountryTableToolbar() {
                 // ) : (
 
                 <Stack direction={'row'} alignItems={"center"} spacing={2} width={"100%"}>
-                    {/* <PdfExport
-                        data={allZoneData.length > 0 && allZoneData}
-                        fileName="Zones.pdf"
-                        fields={fieldsToDownload}
-                        fieldMapping={fieldMapping}
+                    <PdfExport
+                    // data={allZoneData.length > 0 && allZoneData}
+                    // fileName="Zones.pdf"
+                    // fields={fieldsToDownload}
+                    // fieldMapping={fieldMapping}
                     />
                     <ExcelExport
-                        data={allZoneData.length > 0 && allZoneData}
-                        fileName="Zones"
-                        fields={fieldsToDownload}
-                        fieldMapping={fieldMapping}
-                    /> */}
+                    // data={allZoneData.length > 0 && allZoneData}
+                    // fileName="Zones"
+                    // fields={fieldsToDownload}
+                    // fieldMapping={fieldMapping}
+                    />
                 </Stack>
                 // )
             }
