@@ -1,13 +1,12 @@
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import Selector from '../../../../component/selector/Selector';
 import { Button } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { countrySchema } from './countrySchema';
 import { Typography } from '@mui/material';
-import { inputStyle } from './addOrUpdateCountryStyle';
+import { inputStyle } from "../../../../component/inputStyle"
 
 function AddOrUpdateCountryFields() {
 

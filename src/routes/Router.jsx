@@ -24,7 +24,12 @@ import {
   AddOrUpdateCountry,
   AddOrUpdateState,
   StateView,
-  CountryView
+  CountryView,
+  CityView,
+  AddOrUpdateProject,
+  ProjectView,
+  AddOrUpdateDevice,
+  DeviceView
 }
   from "./AdminRouteImports.jsx"
 
@@ -75,8 +80,13 @@ function Router() {
                   <Route path="/state/add" element={<AddOrUpdateState />} />
                   <Route path="/state/view" element={<StateView />} />
                   <Route path="/city/add" element={<AddOrUpdateCity />} />
+                  <Route path="/city/view" element={<CityView />} />
                   <Route path="/country/add" element={<AddOrUpdateCountry />} />
                   <Route path="/country/view" element={<CountryView />} />
+                  <Route path="/project/add" element={<AddOrUpdateProject />} />
+                  <Route path="/project/view" element={<ProjectView />} />
+                  <Route path="/device/add" element={<AddOrUpdateDevice />} />
+                  <Route path="/device/view" element={<DeviceView />} />
                 </Routes>
               </Drawer>
             </ThemeProviderAdmin>

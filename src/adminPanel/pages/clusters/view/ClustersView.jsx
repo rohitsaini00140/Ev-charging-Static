@@ -16,6 +16,7 @@ import { useGetClustersQuery } from '../../../globalState/cluster/clusterApis';
 import TablePagination from '../../../component/TablePagination';
 import { useDispatch, useSelector } from "react-redux";
 import { setClusterListPageNo } from "../../../globalState/cluster/clusterSlices";
+import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 
 
 // ----------------------------------------------------------------------
@@ -69,9 +70,16 @@ function ClustersView() {
                             <ClustersTableHead allClusterData={allClusterData} />
                             <TableBody>
                                 {allClusterData.length > 0 ?
-                                    <ClustersTableRow allClusterData={allClusterData} />
+                                    <ClustersTableRow
+                                        allClusterData={allClusterData}
+                                        currentPageNo={pageNo}
+                                    />
                                     :
-                                    <Typography align='center' color='white'>Empty</Typography>
+                                    <StyledTableRow>
+                                        <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
+                                            <Typography color="white">Empty</Typography>
+                                        </StyledTableCell>
+                                    </StyledTableRow>
                                 }
                             </TableBody>
                         </Table>

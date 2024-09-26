@@ -1,18 +1,22 @@
+import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
-import Label from '../../../../component/lable/Lable';
-import { StyledTableCell, StyledTableRow } from '../../../../component/tableStyle';
-import Action from '../../../../component/Action';
-import { roleData } from './roleData';
+import TableCell from '@mui/material/TableCell';
+import Label from '../../../component/lable/Lable';
+import Iconify from '../../../component/Iconify';
+import ModalBox from '../../../component/ModalBox';
+import Action from '../../../component/Action';
+import { projectData } from './projectData';
+import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 
 // ----------------------------------------------------------------------
 
-function RoleTableRow() {
+function ProjectTableRow() {
 
     return (
         <>
-            {roleData.length > 0
+            {projectData.length > 0
                 &&
-                roleData.map((data, i) => (
+                projectData.map((data, i) => (
                     <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.ID}>
                         <StyledTableCell padding="checkbox">
                             <Checkbox disableFocusRipple
@@ -21,11 +25,13 @@ function RoleTableRow() {
                             />
                         </StyledTableCell>
                         <StyledTableCell>{i + 1}</StyledTableCell>
-                        <StyledTableCell>{data.Name}</StyledTableCell>
+                        <StyledTableCell>{data.name}</StyledTableCell>
+                        <StyledTableCell>{data.cluster}</StyledTableCell>
+                        <StyledTableCell>{data.user}</StyledTableCell>
+                        <StyledTableCell>{data.location}</StyledTableCell>
                         <StyledTableCell>
-                            <Label color={data.Status === 'Inactive' ? 'error' : 'success'} >{data.Status}</Label>
+                            <Label color={data.status === 'Inactive' ? 'error' : 'success'} >{data.status}</Label>
                         </StyledTableCell>
-                        <StyledTableCell>{data.createdAt}</StyledTableCell>
                         <StyledTableCell>
                             <Action data={data}
                             // pathToNavigate={"/category/update"} 
@@ -38,4 +44,4 @@ function RoleTableRow() {
     );
 }
 
-export default RoleTableRow;
+export default ProjectTableRow;

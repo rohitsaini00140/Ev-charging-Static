@@ -1,24 +1,25 @@
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import Selector from '../../../../component/selector/Selector';
+import Selector from '../../../component/selector/Selector';
 import { Button } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { citySchema } from './citySchema';
+import { projectSchema } from './projectSchema';
 import { Typography } from '@mui/material';
-import { inputStyle } from "../../../../component/inputStyle"
+import { inputStyle } from '../../../component/inputStyle';
 
-function AddOrUpdateCityFields() {
+function AddOrUpdateProjectFields() {
 
     const defaultValues = {
         name: "",
-        state_id: "",
-        postal_code: "",
+        cluster_id: "",
+        user_id: "",
+        location: ""
     }
 
     const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm({
-        resolver: zodResolver(citySchema),
+        resolver: zodResolver(projectSchema),
         defaultValues: defaultValues
     });
 
@@ -33,14 +34,28 @@ function AddOrUpdateCityFields() {
     return (
         <form fullWidth onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={{ xs: 1, sm: 2, md: 4 }}>
-                <Stack width={"100%"}>
-                    <TextField
-                        label="Name"
-                        {...register("name", { required: true })}
-                        sx={inputStyle}
-                        fullWidth
-                    />
-                    {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
+                <Stack
+                    direction={{ xs: 'column', sm: 'row' }}
+                    spacing={{ xs: 1, sm: 2, md: 6 }}
+                >
+                    <Stack width={"100%"}>
+                        <TextField
+                            label="Name"
+                            {...register("name", { required: true })}
+                            sx={inputStyle}
+                            fullWidth
+                        />
+                        {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
+                    </Stack>
+                    <Stack width={"100%"}>
+                        <TextField
+                            label="Location"
+                            {...register("location", { required: true })}
+                            sx={inputStyle}
+                            fullWidth
+                        />
+                        {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
+                    </Stack>
                 </Stack>
                 <Stack
                     direction={{ xs: 'column', sm: 'row' }}
@@ -48,21 +63,21 @@ function AddOrUpdateCityFields() {
                 >
                     <Stack width={"100%"}>
                         <Selector
-                            value={watch("state_id")}
-                            onChange={(e) => setValue("state_id", e.target.value, { shouldValidate: true })}
-                            placeholder='Select State'
+                            value={watch("cluster_id")}
+                            onChange={(e) => setValue("cluster_id", e.target.value, { shouldValidate: true })}
+                            placeholder='Select Cluster'
                             selectType="single"
                         />
-                        {errors.state_id && <Typography color={"red"} mt={".5rem"}>*{errors.state_id.message}</Typography>}
+                        {errors.cluster_id && <Typography color={"red"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
                     </Stack>
                     <Stack width={"100%"}>
-                        <TextField
-                            label="Postal code"
-                            {...register("postal_code", { required: true })}
-                            sx={inputStyle}
-                            fullWidth
+                        <Selector
+                            value={watch("user_id")}
+                            onChange={(e) => setValue("user_id", e.target.value, { shouldValidate: true })}
+                            placeholder='Select User'
+                            selectType="single"
                         />
-                        {errors.postal_code && <Typography color={"red"} mt={".5rem"}>*{errors.postal_code.message}</Typography>}
+                        {errors.user_id && <Typography color={"red"} mt={".5rem"}>*{errors.user_id.message}</Typography>}
                     </Stack>
                 </Stack>
                 <Stack direction={"row"} justifyContent={"end"}>
@@ -92,4 +107,4 @@ function AddOrUpdateCityFields() {
     )
 }
 
-export default AddOrUpdateCityFields;
+export default AddOrUpdateProjectFields;

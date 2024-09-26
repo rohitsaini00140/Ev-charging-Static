@@ -17,6 +17,12 @@ import AddOrUpdateCity from "../adminPanel/pages/address/city/addOrUpdate/AddOrU
 import AddOrUpdateCountry from "../adminPanel/pages/address/country/addOrUpdate/AddOrUpdateCountry.jsx";
 import StateView from "../adminPanel/pages/address/state/view/StateView.jsx";
 import CountryView from "../adminPanel/pages/address/country/view/CountryView.jsx";
+import CityView from "../adminPanel/pages/address/city/view/CityView.jsx";
+import AddOrUpdateProject from "../adminPanel/pages/projects/addOrUpdate/AddOrUpdateProject.jsx";
+import ProjectView from "../adminPanel/pages/projects/view/ProjectView.jsx";
+import AddOrUpdateDevice from "../adminPanel/pages/devices/addOrUpdate/AddOrUpdateDevice.jsx";
+import DeviceView from "../adminPanel/pages/devices/view/DeviceView.jsx";
+
 
 export {
     ThemeProviderAdmin,
@@ -37,5 +43,10 @@ export {
     AddOrUpdateCountry,
     AddOrUpdateState,
     StateView,
-    CountryView
+    CountryView,
+    CityView,
+    AddOrUpdateProject,
+    ProjectView,
+    AddOrUpdateDevice,
+    DeviceView
 }

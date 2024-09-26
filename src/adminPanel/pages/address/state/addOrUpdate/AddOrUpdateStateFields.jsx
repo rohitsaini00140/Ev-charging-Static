@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { stateSchema } from './stateSchema';
 import { Typography } from '@mui/material';
-import { inputStyle } from './addOrUpdateStateStyle';
+import { inputStyle } from "../../../../component/inputStyle"
 
 function AddOrUpdateStateFields() {
 

@@ -47,7 +47,7 @@ function RoleTableToolbar() {
                     >
                         <Stack width={"100%"}>
                             <SearchInput
-                                placeholder="Search role..."
+                                placeholder="Search roles..."
                                 width={"100%"}
                             // onChange={(e) => handleSearchKeywords(e.target.value)}
                             // value={searchKeywords}

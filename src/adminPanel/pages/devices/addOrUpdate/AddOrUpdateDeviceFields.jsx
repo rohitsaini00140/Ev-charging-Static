@@ -5,22 +5,23 @@ import { Button } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { userSchema } from './userSchema';
+import { deviceSchema } from './deviceSchema';
 import { Typography } from '@mui/material';
 import { inputStyle } from '../../../component/inputStyle';
 
-function AddOrUpdateUserFields() {
+function AddOrUpdateDeviceFields() {
 
     const defaultValues = {
         name: "",
-        email: "",
-        mobile_No: "",
-        role: "",
-        status: "",
+        project_id: "",
+        type: "",
+        location: "",
+        serial_number: "",
+        status: ""
     }
 
     const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm({
-        resolver: zodResolver(userSchema),
+        resolver: zodResolver(deviceSchema),
         defaultValues: defaultValues
     });
 
@@ -50,21 +51,21 @@ function AddOrUpdateUserFields() {
                     </Stack>
                     <Stack width={"100%"}>
                         <TextField
-                            label="Email Address"
-                            {...register("email", { required: true })}
+                            label="Serial No."
+                            {...register("serial_number", { required: true })}
                             sx={inputStyle}
                             fullWidth
                         />
-                        {errors.email && <Typography color={"red"} mt={".5rem"}>*{errors.email.message}</Typography>}
+                        {errors.serial_number && <Typography color={"red"} mt={".5rem"}>*{errors.serial_number.message}</Typography>}
                     </Stack>
                     <Stack width={"100%"}>
                         <TextField
-                            label="Mobile No."
-                            {...register("mobile_No", { required: true })}
+                            label="Location"
+                            {...register("location", { required: true })}
                             sx={inputStyle}
                             fullWidth
                         />
-                        {errors.mobile_No && <Typography color={"red"} mt={".5rem"}>*{errors.mobile_No.message}</Typography>}
+                        {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
                     </Stack>
                 </Stack>
                 <Stack
@@ -73,21 +74,28 @@ function AddOrUpdateUserFields() {
                 >
                     <Stack width={"100%"}>
                         <Selector
-                            value={watch("role")}
-                            onChange={(e) => setValue("role", e.target.value, { shouldValidate: true })}
-                            placeholder='Select Role'
+                            value={watch("project_id")}
+                            onChange={(e) => setValue("project_id", e.target.value, { shouldValidate: true })}
+                            placeholder='Select project'
                             selectType="single"
-                            options={["User", "Admin", "Moderator"]}
                         />
-                        {errors.role && <Typography color={"red"} mt={".5rem"}>*{errors.role.message}</Typography>}
+                        {errors.project_id && <Typography color={"red"} mt={".5rem"}>*{errors.project_id.message}</Typography>}
+                    </Stack>
+                    <Stack width={"100%"}>
+                        <Selector
+                            value={watch("type")}
+                            onChange={(e) => setValue("type", e.target.value, { shouldValidate: true })}
+                            placeholder='Select type'
+                            selectType="single"
+                        />
+                        {errors.type && <Typography color={"red"} mt={".5rem"}>*{errors.type.message}</Typography>}
                     </Stack>
                     <Stack width={"100%"}>
                         <Selector
                             value={watch("status")}
                             onChange={(e) => setValue("status", e.target.value, { shouldValidate: true })}
-                            placeholder='Status'
+                            placeholder='Select status'
                             selectType="single"
-                            options={["Active", "Inactive"]}
                         />
                         {errors.status && <Typography color={"red"} mt={".5rem"}>*{errors.status.message}</Typography>}
                     </Stack>
@@ -119,4 +127,4 @@ function AddOrUpdateUserFields() {
     )
 }
 
-export default AddOrUpdateUserFields;
+export default AddOrUpdateDeviceFields;

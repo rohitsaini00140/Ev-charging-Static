@@ -1,14 +1,19 @@
+import Tooltip from '@mui/material/Tooltip';
 import Toolbar from '@mui/material/Toolbar';
-import SearchInput from '../../../../component/SearchInput';
-import ExcelExport from '../../../../component/ExcelExport';
-import PdfExport from '../../../../component/PdfExport';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Iconify from '../../../component/Iconify';
+import MenuList from '../../../component/MenuList';
+import SearchInput from '../../../component/SearchInput';
+import ExcelExport from '../../../component/ExcelExport';
+import PdfExport from '../../../component/PdfExport';
 // import { fieldsToDownload, fieldMapping, filter } from './headLabel';
 import { Stack } from '@mui/material';
-import Selector from '../../../../component/selector/Selector';
+import Selector from '../../../component/selector/Selector';
 
 // ----------------------------------------------------------------------
 
-function StateTableToolbar() {
+function DeviceTableToolbar() {
 
     return (
         <Toolbar
@@ -42,8 +47,7 @@ function StateTableToolbar() {
                     >
                         <Stack width={"100%"}>
                             <SearchInput
-                                sx={{ color: "white" }}
-                                placeholder="Search states..."
+                                placeholder="Search devices..."
                                 width={"100%"}
                             // onChange={(e) => handleSearchKeywords(e.target.value)}
                             // value={searchKeywords}
@@ -51,15 +55,14 @@ function StateTableToolbar() {
                         </Stack>
                         <Stack width={"100%"}>
                             <Selector
-                                placeholder='Select Country'
+                                placeholder='Select project'
                                 selectType="single"
                             />
                         </Stack>
                         <Stack width={"100%"}>
                             <Selector
-                                placeholder='Select Status'
+                                placeholder='Select status'
                                 selectType="single"
-                                options={["Active", "Inactive"]}
                             />
                         </Stack>
                     </Stack>
@@ -76,17 +79,21 @@ function StateTableToolbar() {
 
                 <Stack direction={'row'} alignItems={"center"} spacing={2} width={"100%"}>
                     <PdfExport
-                    // data={allZoneData.length > 0 && allZoneData}
-                    // fileName="Zones.pdf"
+                    // data={allCategories.length > 0 && allCategories}
+                    // fileName="Categories.pdf"
                     // fields={fieldsToDownload}
                     // fieldMapping={fieldMapping}
                     />
                     <ExcelExport
-                    // data={allZoneData.length > 0 && allZoneData}
-                    // fileName="Zones"
+                    // data={allCategories.length > 0 && allCategories}
+                    // fileName="Categories"
                     // fields={fieldsToDownload}
                     // fieldMapping={fieldMapping}
                     />
+                    {/* <MenuList heading={<Iconify icon="ic:round-filter-list" />}
+                    // values={filter}
+                    // onChange={handleOrderChange}
+                    /> */}
                 </Stack>
                 // )
             }
@@ -94,4 +101,4 @@ function StateTableToolbar() {
     );
 }
 
-export default StateTableToolbar;
+export default DeviceTableToolbar;
