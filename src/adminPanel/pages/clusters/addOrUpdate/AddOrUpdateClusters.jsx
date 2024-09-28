@@ -3,10 +3,13 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import AddOrUpdateClustersFields from './AddOrUpdateClustersFields';
+import { useParams } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
 function AddOrUpdateClusters() {
+
+    let { id } = useParams()
 
     return (
         <Box
@@ -24,7 +27,7 @@ function AddOrUpdateClusters() {
                         backgroundColor: "#181837",
                     }}
                 >
-                    <Typography variant="h4" sx={{ mb: 3, color: "white" }}>Add Clusters</Typography>
+                    <Typography variant="h4" sx={{ mb: 3, color: "white" }}>{id ? "Update Cluster" : "Add Clusters"}</Typography>
                     <AddOrUpdateClustersFields />
                 </Card>
             </Stack>

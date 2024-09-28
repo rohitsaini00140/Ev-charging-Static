@@ -3,7 +3,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Action from '../../../component/Action';
 import Label from "../../../component/lable/Lable"
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
-import { useRestoreDeletedClusterMutation, useSoftDeleteClusterMutation } from '../../../globalState/cluster/clusterApis';
+import { useRestoreDeletedClusterMutation, useSoftDeleteClusterMutation } from '../../../../globalState/cluster/clusterApis';
 import { Skeleton } from '@mui/material';
 
 // ----------------------------------------------------------------------

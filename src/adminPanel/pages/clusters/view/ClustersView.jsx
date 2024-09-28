@@ -12,10 +12,10 @@ import ClustersTableHead from './ClustersTableHead';
 import ClustersTableToolbar from './ClustersTableToolbar';
 import { Link } from 'react-router-dom';
 import ClustersTableRow from './ClustersTableRow';
-import { useGetClustersQuery } from '../../../globalState/cluster/clusterApis';
+import { useGetClustersQuery } from '../../../../globalState/cluster/clusterApis';
 import TablePagination from '../../../component/TablePagination';
 import { useDispatch, useSelector } from "react-redux";
-import { setClusterListPageNo } from "../../../globalState/cluster/clusterSlices";
+import { setClusterListPageNo } from "../../../../globalState/cluster/clusterSlices";
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 
 

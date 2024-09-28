@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Button, TextField, Typography, Container, Box, Stack } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { FcGoogle } from "react-icons/fc";
@@ -8,33 +8,81 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginSchema } from "./logInSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useLoginUserMutation } from '../../../../globalState/userAuth/userApis';
+import Alertbar from '../../../../adminPanel/component/Alertbar';
 
 const companyLogo = require('../../../img/logo.png');
 
 function Login() {
 
+    const navigate = useNavigate()
+
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: '',
+        severity: 'success'
+    });
+
     // password show and hide
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const defaultValues = {
-        name: "",
+
+    const [loginUser] = useLoginUserMutation()
+
+    const defaultValues = useMemo(() => ({
         email: "",
-    }
-    const { register, handleSubmit, formState: { errors } } = useForm({
+        password: ""
+    }), []);
+
+    const { register, handleSubmit, setError, formState: { errors } } = useForm({
         resolver: zodResolver(loginSchema),
         defaultValues: defaultValues
     });
+
     const onSubmit = async (data) => {
         try {
-            console.log(data)
+            await loginUser(data).unwrap();
+            setSnackbar({
+                open: true,
+                message: 'Login successfully!',
+                severity: 'success'
+            });
+
+            setTimeout(() => {
+                navigate("/admin");
+            }, 2000);
+
         } catch (error) {
-            console.log(error)
+            setSnackbar({
+                open: true,
+                message: error.data.error,
+                severity: 'error'
+            });
+            if (error.data && error.data.errors) {
+                Object.entries(error.data.errors).forEach(([key, message]) => {
+                    setError(key, { type: "server", message: message[0] });
+                });
+            }
+            console.error("Error during submission:", error);
         }
     };
+
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbar((prevState) => ({
+            ...prevState,
+            open: false
+        }));
+    };
+
+
     return (
         <Grid container sx={{ minHeight: '100vh' }}>
             <Grid item xs={false} size={{ lg: 6 }}
@@ -72,7 +120,7 @@ function Login() {
                             width: '100%',
                         }}
                     >
-                        <Typography component="h1" sx={{fontWeight:'600',color:'#253745'}} variant="h5" textAlign={"center"}>
+                        <Typography component="h1" sx={{ fontWeight: '600', color: '#253745' }} variant="h5" textAlign={"center"}>
                             Login VNT! 👋
                         </Typography>
                         <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
@@ -83,7 +131,7 @@ function Login() {
                                 label="Email"
                                 sx={inputStyles}
                             />
-                            {errors.email && <Typography style={{fontSize:'.85rem'}} color={"red"}>*{errors.email.message}</Typography>}
+                            {errors.email && <Typography style={{ fontSize: '.85rem' }} color={"red"}>*{errors.email.message}</Typography>}
                             <TextField
                                 {...register("password", { required: true })}
                                 sx={inputStyles}
@@ -105,7 +153,7 @@ function Login() {
                                     ),
                                 }}
                             />
-                            {errors.password && <Typography style={{fontSize:'.85rem'}} color={"red"}>*{errors.password.message}</Typography>}
+                            {errors.password && <Typography style={{ fontSize: '.85rem' }} color={"red"}>*{errors.password.message}</Typography>}
                             <Button
                                 type="submit"
                                 fullWidth
@@ -114,12 +162,12 @@ function Login() {
                             >
                                 Login
                             </Button>
-                            <Link to={""} style={{ textDecoration: "none", fontSize: '15px', fontWeight:'600', color: "#253745" }}>
+                            <Link to={""} style={{ textDecoration: "none", fontSize: '15px', fontWeight: '600', color: "#253745" }}>
                                 Forgot Password?
                             </Link>
                             <Typography variant="body2" color="black" align="center" sx={{ mt: 2 }}>
                                 {'New on Our Platform ? '}
-                                <Link to={"/register"} style={{ textDecoration: "none", color: "#ff6600",fontWeight:'500' }}>
+                                <Link to={"/register"} style={{ textDecoration: "none", color: "#ff6600", fontWeight: '500' }}>
                                     Create an Account
                                 </Link>
                             </Typography>
@@ -138,13 +186,19 @@ function Login() {
                                     gap: "1.2rem"
                                 }}
                             >
-                                <FcGoogle sx={{cursor:'pointer'}} size={"1.5rem"} />
-                                <FacebookIcon sx={{ color: "#1877F2", fontSize: "1.5rem",cursor:'pointer' }} />
+                                <FcGoogle sx={{ cursor: 'pointer' }} size={"1.5rem"} />
+                                <FacebookIcon sx={{ color: "#1877F2", fontSize: "1.5rem", cursor: 'pointer' }} />
                             </Stack>
                         </Box>
                     </Box>
                 </Container>
             </Grid>
+            <Alertbar
+                open={snackbar.open}
+                onClose={handleCloseSnackbar}
+                severity={snackbar.severity}
+                message={snackbar.message}
+            />
         </Grid>
     );
 };
