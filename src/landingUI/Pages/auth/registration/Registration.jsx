@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Button, TextField, Typography, Container, Box } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { inputStyles } from '../../authPagesStyle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -10,34 +10,82 @@ import IconButton from '@mui/material/IconButton';
 import { registrationSchema } from "./registrationSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import Alertbar from '../../../../adminPanel/component/Alertbar';
+import { useRegisterUserMutation } from '../../../../globalState/userAuth/userApis';
 
 const companyLogo = require('../../../img/logo.png');
 
 function Registration() {
+
+    const navigate = useNavigate()
+
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: '',
+        severity: 'success'
+    });
+
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
 
-    const defaultValues = {
+    const [registerUser] = useRegisterUserMutation()
+
+    const defaultValues = useMemo(() => ({
         name: "",
         email: "",
         password: "",
-        confirm_Password: "",
-    }
-    const { register, handleSubmit, formState: { errors } } = useForm({
+        password_confirmation: "",
+    }), []);
+
+    const { register, handleSubmit, setError, formState: { errors } } = useForm({
         resolver: zodResolver(registrationSchema),
         defaultValues: defaultValues
     });
 
     const onSubmit = async (data) => {
         try {
-            console.log(data)
+            await registerUser(data).unwrap();
+
+            setSnackbar({
+                open: true,
+                message: 'Registered successfully!',
+                severity: 'success'
+            });
+
+            setTimeout(() => {
+                navigate("/logIn");
+            }, 2000);
+
         } catch (error) {
-            console.log(error)
+            setSnackbar({
+                open: true,
+                message: 'Error while submit',
+                severity: 'error'
+            });
+            if (error.data && error.data.errors) {
+                Object.entries(error.data.errors).forEach(([key, message]) => {
+                    setError(key, { type: "server", message: message[0] });
+                });
+            }
+            console.error("Error during submission:", error);
         }
     };
+
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbar((prevState) => ({
+            ...prevState,
+            open: false
+        }));
+    };
+
+
     return (
         <Grid container sx={{ minHeight: '100vh' }}>
             <Grid item xs={false} size={{ lg: 6 }}
@@ -77,7 +125,7 @@ function Registration() {
                             width: '100%',
                         }}
                     >
-                        <Typography component="h1" sx={{fontWeight:'600',color:'#253745'}} variant="h5" textAlign="center">
+                        <Typography component="h1" sx={{ fontWeight: '600', color: '#253745' }} variant="h5" textAlign="center">
                             Sign Up VNT! 👋
                         </Typography>
                         <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
@@ -89,7 +137,7 @@ function Registration() {
                                 sx={inputStyles}
                             />
                             {errors.name && (
-                                <Typography style={{fontSize:'.85rem'}} color="red">
+                                <Typography style={{ fontSize: '.85rem' }} color="red">
                                     *{errors.name.message}
                                 </Typography>
                             )}
@@ -101,7 +149,7 @@ function Registration() {
                                 sx={inputStyles}
                             />
                             {errors.email && (
-                                <Typography style={{fontSize:'.85rem'}} color="red">
+                                <Typography style={{ fontSize: '.85rem' }} color="red">
                                     *{errors.email.message}
                                 </Typography>
                             )}
@@ -127,12 +175,12 @@ function Registration() {
                                 }}
                             />
                             {errors.password && (
-                                <Typography style={{fontSize:'.85rem'}} color="red">
+                                <Typography style={{ fontSize: '.85rem' }} color="red">
                                     *{errors.password.message}
                                 </Typography>
                             )}
                             <TextField
-                                {...register("confirm_Password", { required: true })}
+                                {...register("password_confirmation", { required: true })}
                                 sx={inputStyles}
                                 margin="normal"
                                 label="Confirm password"
@@ -152,9 +200,9 @@ function Registration() {
                                     ),
                                 }}
                             />
-                            {errors.confirm_Password && (
-                                <Typography style={{fontSize:'.85rem'}} color="red">
-                                    *{errors.confirm_Password.message}
+                            {errors.password_confirmation && (
+                                <Typography style={{ fontSize: '.85rem' }} color="red">
+                                    *{errors.password_confirmation.message}
                                 </Typography>
                             )}
                             <Button
@@ -175,6 +223,12 @@ function Registration() {
                     </Box>
                 </Container>
             </Grid>
+            <Alertbar
+                open={snackbar.open}
+                onClose={handleCloseSnackbar}
+                severity={snackbar.severity}
+                message={snackbar.message}
+            />
         </Grid >
     );
 };

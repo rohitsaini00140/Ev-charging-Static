@@ -6,8 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { zoneSchema } from './zoneSchema';
 import { Typography } from '@mui/material';
-import { useAddZoneMutation, useUpdateZoneMutation } from "../../../globalState/zone/zoneApis"
-import { useGetZoneQuery } from '../../../globalState/zone/zoneApis';
+import { useAddZoneMutation, useUpdateZoneMutation } from "../../../../globalState/zone/zoneApis"
+import { useGetZoneQuery } from '../../../../globalState/zone/zoneApis';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
