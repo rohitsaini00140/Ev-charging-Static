@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+// import all component for landing page
+import { Home, Login, Registration,ContactUs,BlogPage } from "./LandingUi"
 // import all component for landing page
 import { Home, Login, Registration, ContactUs, AuthLayout, PublicLayout, ThemeProvider }
   from "./LandingRouteImports.jsx"
@@ -46,6 +47,7 @@ function Router() {
         >
           <Route path="/" element={<Home />} />
           <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/blogs" element={< BlogPage/>} />
         </Route>
         <Route
           element={

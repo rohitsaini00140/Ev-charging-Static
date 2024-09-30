@@ -1,17 +1,33 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  Container,
-  Button,
-  TextField,
-} from "@mui/material";
-import { contact_haiding,contact_text,contactTextStyle,box_icon,submitButton } from "./contactdesign";
-import {  Grid, Stack } from "@mui/system";
+import {Box,Typography,Container, Button,TextField,} from "@mui/material";
+import {contact_haiding,contact_text,contactTextStyle,input_style,box_icon,submitButton,error_position } from "./contactdesign";
+import { Grid, Stack } from "@mui/system";
 import { FaLocationDot,FaPhone  } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
+import { contactschema } from "./contactschema";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
 const ContactUs = () => {
+ const defaultValues = {
+    name: "",
+    city: "",
+    email: "",
+    mobile: "",
+    message: "",
+}
+const { register, handleSubmit, reset, formState: { errors } } = useForm({
+  resolver: zodResolver(contactschema),
+  defaultValues: defaultValues
+});
+const onSubmit = async (data) => {
+  try {
+      console.log(data)
+      reset(defaultValues)
+  } catch (error) {
+      console.log(error)
+  }
+};
   return (
     <>
       <Box className="contact_bg">
@@ -24,7 +40,7 @@ const ContactUs = () => {
             opacity: 0.7,
           }}
         />
-        <Box
+        {/* <Box
           sx={{
             height: "90vh",
             position: "absolute",
@@ -63,7 +79,7 @@ const ContactUs = () => {
               Go Green
             </Typography>
           </Typography>
-        </Box>
+        </Box> */}
       </Box>
       {/* // Form start here */}
       <Container>
@@ -83,7 +99,7 @@ const ContactUs = () => {
             <FaLocationDot  style={{ color: 'white', fontSize: '16px' }} />
             </Box>
             <Box sx={{marginLeft:'15px',marginTop: '3px'}}>
-            <Typography variant="h3" sx={{fontSize:'17px',fontWeight:'600'}}>
+            <Typography variant="h3" sx={{fontSize:'15px',fontWeight:'700',color:'#253745'}}>
               Our Location
             </Typography>
             <Typography  variant="p" sx={contactTextStyle}>
@@ -92,11 +108,11 @@ const ContactUs = () => {
             </Box>
            </Stack>
            <Stack flexDirection='row' sx={{margin:'30px 0px'}}>
-            <Box sx={box_icon}>
-            <FaPhone  style={{ color: 'white', fontSize: '16px' }} />
+            <Box style={{background:'rgb(2, 18, 30)'}} sx={box_icon}>
+            <FaPhone  style={{ color: 'white', fontSize: '16px'}} />
             </Box>
             <Box sx={{marginLeft:'15px',marginTop: '3px'}}>
-            <Typography variant="h3" sx={{fontSize:'17px',fontWeight:'600'}}>
+            <Typography variant="h3" sx={{fontSize:'15px',fontWeight:'700',color:'#253745'}}>
               Phone Number
             </Typography>
             <Typography  variant="p" sx={contactTextStyle}>
@@ -109,7 +125,7 @@ const ContactUs = () => {
             <MdOutlineEmail  style={{ color: 'white', fontSize: '20px' }} />
             </Box>
             <Box sx={{marginLeft:'15px',marginTop: '3px'}}>
-            <Typography variant="h3" sx={{fontSize:'17px',fontWeight:'600'}}>
+            <Typography variant="h3" sx={{fontSize:'15px',fontWeight:'700',color:'#253745'}}>
               Email Address
             </Typography>
             <Typography  variant="p" sx={contactTextStyle}>
@@ -119,38 +135,58 @@ const ContactUs = () => {
            </Stack>
           </Grid>
           <Grid item size={{ sm: 12, md: 6 }}>
-            <Box component="form">
+            <Box sx={{marginTop:'15px'}} component="form" onSubmit={handleSubmit(onSubmit)}>
               <Grid container>
                 <Grid container spacing={2} size={12}>
                   <Grid item size={{ xs:12, sm:12, md: 6,lg:6 }}>
-                    <TextField margin="normal" fullWidth label="First Name" />
+                  <Box sx={{ position: "relative",margin:'3px 0px' }}>
+                    <TextField margin="normal" sx={input_style} {...register("name")} fullWidth label="Your Name" />
+                    {errors.name && <Typography sx={error_position}>*{errors.name.message}</Typography>}
+                    </Box>
                   </Grid>
                   <Grid item size={{xs:12, sm:12, md: 6,lg:6}}>
-                    <TextField margin="normal" fullWidth label="Last Name" />
+                    <Box sx={{ position: "relative",margin:'3px 0px' }}>
+                    <TextField margin="normal"  sx={input_style}{...register("city")} fullWidth label="City Name" />
+                    {errors.city && <Typography sx={error_position}>*{errors.city.message}</Typography>}
+                    </Box>
                   </Grid>
                 </Grid>
                 <Grid container spacing={2} size={12}>
                   <Grid item size={{ xs:12, sm:12, md: 6,lg:6}}>
-                    <TextField margin="normal" fullWidth label="Email" />
+                    <Box sx={{ position: "relative", margin:'3px 0px' }}>
+                    <TextField sx={input_style} {...register("email")} margin="normal" fullWidth label="Email" />
+                    {errors.email && <Typography sx={error_position}>*{errors.email.message}</Typography>}
+                    </Box>
                   </Grid>
                   <Grid item size={{ xs:12, sm:12, md: 6,lg:6 }}>
-                    <TextField margin="normal" fullWidth label="Mobile No" />
-                  </Grid>
+                  <Box sx={{ position: "relative",margin:'3px 0px' }}>
+                  <TextField  sx={input_style} {...register("mobile")} margin="normal" fullWidth label="Mobile No"/>                   
+                   {errors.mobile && <Typography sx={error_position}>*{errors.mobile.message}</Typography>}
+                   </Box>
+                 </Grid>
                 </Grid>
                 <Grid container spacing={2} size={12}>
                   <Grid item size={{ sm: 12, md: 12 }}>
+                    <Box sx={{ position: "relative",margin:'3px 0px' }} >
                     <TextField
                       multiline
                       minRows={4}
                       placeholder="Message "
                       fullWidth
+                      {...register("message")}
                       margin="normal"
                       label="Message"
+                      sx={{
+                        "&. MuiFormLabel-root-MuiInputLabel-root":{
+                          fontSize: '0.8rem'
+                        }
+                      }}
                     />
-                  </Grid>
+                  {errors.message && <Typography sx={error_position} >*{errors.message.message}</Typography>}
+                  </Box>
+                 </Grid>
                 </Grid>
-            <Button sx={submitButton} type ="sumbit">Sumbit</Button>
-
+                <Button sx={submitButton} type ="sumbit">Sumbit</Button>
               </Grid>
             </Box>
           </Grid>

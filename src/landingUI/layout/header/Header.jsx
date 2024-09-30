@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+  
+const logo = require('../../img/logo.png');
+
+
 function Header() {
   const [isBgcolor, setIsBgcolor] = useState(false);
   const location = useLocation();
@@ -18,6 +22,7 @@ function Header() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   return (
     <Stack
       sx={{
@@ -37,7 +42,7 @@ function Header() {
       <Stack width={"10%"}>
         <Link to={"/"}>
           <img
-            src={"https://vnt.in/wp-content/uploads/2021/12/cropped-VNT-logo-transparent.png"}
+            src = {logo}
             alt="Logo"
             style={{ cursor: "pointer", width: "4rem" }}
           />

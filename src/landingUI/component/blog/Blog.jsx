@@ -6,36 +6,9 @@ import 'slick-carousel/slick/slick-theme.css';
 import './blog.css';
 import { Link } from 'react-router-dom';
 import { Container} from '@mui/system';
+import { blogPosts } from './Blogdata';
 // Sample blog posts
-const blogPosts = [
-  {
-    title: 'Maximizing Solar Yield: A Deep Dive into the Functionalities of String Monitoring Boxes',
-    image: 'https://vnt.in/wp-content/uploads/2022/08/OnPaste.20220817-180020-1-e1660740878914.png',
-    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi...',
-  },
-  {
-    title: 'Maximizing Solar Yield: A Deep Dive into the Functionalities of String Monitoring Boxes',
-    image: 'https://vnt.in/wp-content/uploads/2022/01/03-VNT-Logo-Mockup-1-scaled.jpg',
-    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi...',
-  },
-  {
-    title: 'Strategic Solar Integration: Boosting Manufacturing Efficiency With Our Tailored Solution',
-    image: 'https://vnt.in/wp-content/uploads/2022/07/VNT-SMB-Handbook-blog-banner-1.png',
-    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi...',
-  },
-  {
-    title: 'Fire Break-out at a Private Pipe Company: A Comprehensive Case Study',
-    image: 'https://vnt.in/wp-content/uploads/2022/04/mika-baumeister-TtsRECywMmc-unsplash-scaled.jpg',
-    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi...',
-  },
 
-  {
-    title: 'What are Fire Suppression Systems and How Do They Work?',
-    image: 'https://vnt.in/wp-content/uploads/2022/01/shutterstock_1303768399.jpg',
-    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi...',
-  },
-  // Add more posts as needed
-];
 function Blog() {
   const settings = {
     infinite: true,

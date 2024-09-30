@@ -1,4 +1,3 @@
-
 export const contact_haiding = {
   color: "rgb(87, 179, 62)",
   display: "block",
@@ -20,7 +19,6 @@ export const box_icon = {
   backgroundColor: 'rgb(87, 179, 62)',
   padding: '10px',
 };
-
 export const submitButton = {
   fontWeight: 600,
   marginTop: '15px',
@@ -29,7 +27,13 @@ export const submitButton = {
   color: 'white',
   background: 'rgb(87, 179, 62)',
 };
-
+export const error_position = {
+  position: "absolute",
+  bottom: "-11px",
+  left: 0,
+  color: "red",
+  fontSize: "12px",
+};
 export const contactTextStyle = {
   fontSize: '14px',
   textAlign: 'justify',
@@ -40,5 +44,15 @@ export const contactTextStyle = {
     sm:'10px'
   }
 };
+export const input_style = {
+  "& .MuiInputLabel-root": {
+    fontSize: "0.9rem",
+  },
+  "& .MuiInputBase-input": {
+    height: '1em'
+    },
+};
+
+
 
 
