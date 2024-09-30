@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { permissionSchema } from './permissionSchema';
 import { Typography } from '@mui/material';
-import { inputStyle } from './addPermissionStyle';
+import { inputStyle } from '../../../../component/inputStyle';
 
 function AddPermissionFields() {
 
@@ -35,7 +35,7 @@ function AddPermissionFields() {
             <Stack spacing={{ xs: 1, sm: 2, md: 4 }}>
                 <Stack
                     direction={{ xs: 'column', sm: 'row' }}
-                    spacing={{ xs: 1, sm: 2, md: 12 }}
+                    spacing={{ xs: 1, sm: 2, md: 6 }}
                 >
                     <Stack width={"100%"}>
                         <TextField

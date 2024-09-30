@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { userSchema } from './userSchema';
 import { Typography } from '@mui/material';
-import { inputStyle } from './addOrUpdateUserStyle';
+import { inputStyle } from '../../../component/inputStyle';
 
 function AddOrUpdateUserFields() {
 
@@ -69,7 +69,7 @@ function AddOrUpdateUserFields() {
                 </Stack>
                 <Stack
                     direction={{ xs: 'column', sm: 'row' }}
-                    spacing={{ xs: 1, sm: 2, md: 12 }}
+                    spacing={{ xs: 1, sm: 2, md: 6 }}
                 >
                     <Stack width={"100%"}>
                         <Selector

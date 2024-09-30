@@ -7,7 +7,7 @@ import { Skeleton } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-function ZoneStyledTableRow({ allZoneData }) {
+function ZoneTableRow({ allZoneData }) {
 
     const [loading, setLoading] = useState(true);
 
@@ -51,4 +51,4 @@ function ZoneStyledTableRow({ allZoneData }) {
     );
 }
 
-export default ZoneStyledTableRow;
+export default ZoneTableRow;

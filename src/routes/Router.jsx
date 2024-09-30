@@ -1,24 +1,38 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import all component for landing page
 import { Home, Login, Registration,ContactUs,BlogPage } from "./LandingUi"
+// import all component for landing page
+import { Home, Login, Registration, ContactUs, AuthLayout, PublicLayout, ThemeProvider }
+  from "./LandingRouteImports.jsx"
 
-import ThemeProviderAdmin from "../adminPanel/layouts/theme/ThemeProviderAdmin";
-import Drawer from "../adminPanel/layouts/sidebar/Drawer";
-import Dashboard from "../adminPanel/pages/dashboard/Dashboard";
-import AddOrUpdateUser from "../adminPanel/pages/user/add/AddOrUpdateUser.jsx";
-import AuthLayout from "./AuthLayout";
-import PublicLayout from "./PublicLayout";
-import UserView from "../adminPanel/pages/user/view/UserView";
-import ThemeProvider from "../landingUI/layout/theme/ThemeProvider";
-import OrganizationView from "../adminPanel/pages/organization/view/OrganizationView";
-import AddRoles from "../adminPanel/pages/roles&Permissions/roles/add/AddRoles";
-import RoleView from "../adminPanel/pages/roles&Permissions/roles/view/RoleView";
-import AddPermissions from "../adminPanel/pages/roles&Permissions/permissions/add/AddPermissions";
-import PermissionView from "../adminPanel/pages/roles&Permissions/permissions/view/PermissionView";
-import AddOrUpdateZone from "../adminPanel/pages/zone/addOrUpdate/AddOrUpdateZone.jsx";
-import ZoneView from "../adminPanel/pages/zone/view/ZoneView";
-import PermissionsToRole from "../adminPanel/pages/roles&Permissions/permissionsToRole/PermissionsToRole";
-import AddOrUpdateOrganization from "../adminPanel/pages/organization/addOrUpdate/AddOrUpdateOrganization";
+// import all component for Admin panel
+import {
+  ThemeProviderAdmin,
+  Drawer,
+  Dashboard,
+  AddOrUpdateUser,
+  UserView,
+  AddOrUpdateClusters,
+  ClustersView,
+  AddRoles,
+  RoleView,
+  AddPermissions,
+  PermissionView,
+  AddOrUpdateZone,
+  ZoneView,
+  PermissionsToRole,
+  AddOrUpdateCity,
+  AddOrUpdateCountry,
+  AddOrUpdateState,
+  StateView,
+  CountryView,
+  CityView,
+  AddOrUpdateProject,
+  ProjectView,
+  AddOrUpdateDevice,
+  DeviceView
+}
+  from "./AdminRouteImports.jsx"
 
 function Router() {
   return (
@@ -54,9 +68,9 @@ function Router() {
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/user/add" element={<AddOrUpdateUser />} />
                   <Route path="/user/view" element={<UserView />} />
-                  <Route path="/organization/add" element={<AddOrUpdateOrganization />} />
-                  <Route path="/organization/view" element={<OrganizationView />} />
-                  <Route path="/organization/update/:id" element={<AddOrUpdateOrganization />} />
+                  <Route path="/cluster/add" element={<AddOrUpdateClusters />} />
+                  <Route path="/cluster/view" element={<ClustersView />} />
+                  <Route path="/cluster/update/:id" element={<AddOrUpdateClusters />} />
                   <Route path="/role/add" element={<AddRoles />} />
                   <Route path="/role/view" element={<RoleView />} />
                   <Route path="/permission/add" element={<AddPermissions />} />
@@ -65,6 +79,16 @@ function Router() {
                   <Route path="/zone/add" element={<AddOrUpdateZone />} />
                   <Route path="/zone/view" element={<ZoneView />} />
                   <Route path="/zone/update/:id" element={<AddOrUpdateZone />} />
+                  <Route path="/state/add" element={<AddOrUpdateState />} />
+                  <Route path="/state/view" element={<StateView />} />
+                  <Route path="/city/add" element={<AddOrUpdateCity />} />
+                  <Route path="/city/view" element={<CityView />} />
+                  <Route path="/country/add" element={<AddOrUpdateCountry />} />
+                  <Route path="/country/view" element={<CountryView />} />
+                  <Route path="/project/add" element={<AddOrUpdateProject />} />
+                  <Route path="/project/view" element={<ProjectView />} />
+                  <Route path="/device/add" element={<AddOrUpdateDevice />} />
+                  <Route path="/device/view" element={<DeviceView />} />
                 </Routes>
               </Drawer>
             </ThemeProviderAdmin>

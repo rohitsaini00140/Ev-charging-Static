@@ -13,14 +13,14 @@ import TablePagination from '../../../component/TablePagination';
 import ZoneTableToolbar from './ZoneTableToolbar';
 import ZoneTableRow from './ZoneTableRow';
 import ZoneTableHead from './ZoneTableHead';
-import { useGetZoneQuery } from '../../../globalState/zone/zoneApis';
+import { useGetZoneQuery } from '../../../../globalState/zone/zoneApis';
 import { useDispatch, useSelector } from "react-redux";
-import { setZoneListPageNo } from '../../../globalState/zone/zoneSlices';
+import { setZoneListPageNo } from '../../../../globalState/zone/zoneSlices';
 
 // ----------------------------------------------------------------------
 
 function ZoneView() {
-    // 
+
     const dispatch = useDispatch()
 
     const { pageNo } = useSelector(state => state.zone);
