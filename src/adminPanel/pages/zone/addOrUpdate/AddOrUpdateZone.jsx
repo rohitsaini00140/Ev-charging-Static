@@ -7,7 +7,6 @@ import AddOrUpdateZoneField from './AddOrUpdateZoneFields';
 // ----------------------------------------------------------------------
 
 function AddOrUpdateZone() {
-
     return (
         <Box
             sx={{
