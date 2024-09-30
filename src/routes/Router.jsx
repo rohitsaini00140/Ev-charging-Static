@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import all component for landing page
-import { Home, Login, Registration,ContactUs } from "./LandingUi"
+import { Home, Login, Registration,ContactUs,BlogPage } from "./LandingUi"
 
 import ThemeProviderAdmin from "../adminPanel/layouts/theme/ThemeProviderAdmin";
 import Drawer from "../adminPanel/layouts/sidebar/Drawer";
@@ -33,6 +33,7 @@ function Router() {
         >
           <Route path="/" element={<Home />} />
           <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/blogs" element={< BlogPage/>} />
         </Route>
         <Route
           element={

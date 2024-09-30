@@ -53,6 +53,14 @@
   background-size: cover; 
   height: 500px; 
 }
+.vnt_bg{
+    background-image: url('../public/assets/images/vnt.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 500px;
+  }
+
 .contact_bg {
   background-image: url('../public/assets/images/contact.jpg');
   background-repeat: no-repeat;
