@@ -48,7 +48,6 @@ function Registration() {
     const onSubmit = async (data) => {
         try {
             await registerUser(data).unwrap();
-
             setSnackbar({
                 open: true,
                 message: 'Registered successfully!',

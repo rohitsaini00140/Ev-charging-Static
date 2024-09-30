@@ -18,31 +18,24 @@ import Alertbar from '../../../../adminPanel/component/Alertbar';
 const companyLogo = require('../../../img/logo.png');
 
 function Login() {
-
     const navigate = useNavigate()
-
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
         severity: 'success'
     });
-
     // password show and hide
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
     const [loginUser] = useLoginUserMutation()
-
     const defaultValues = useMemo(() => ({
         email: "",
         password: ""
     }), []);
-
     const { register, handleSubmit, setError, formState: { errors } } = useForm({
         resolver: zodResolver(loginSchema),
         defaultValues: defaultValues
     });
-
     const onSubmit = async (data) => {
         try {
             await loginUser(data).unwrap();
@@ -70,8 +63,6 @@ function Login() {
             console.error("Error during submission:", error);
         }
     };
-
-
     const handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -81,8 +72,6 @@ function Login() {
             open: false
         }));
     };
-
-
     return (
         <Grid container sx={{ minHeight: '100vh' }}>
             <Grid item xs={false} size={{ lg: 6 }}
