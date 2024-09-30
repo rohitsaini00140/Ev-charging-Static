@@ -6,9 +6,10 @@ import Quotes from "../component/quotes/Quotes"
 import Testimaonils from "../component/testimonails/Testimaonils"
 import WhoareWe from "../component/whoWeAre/WhoareWe"
 import WhyChoose from "../component/whyChoose/WhyChoose"
+
 // import Blog 
 function Home() {
-  return (
+   return (
     <div>
       <Banner />
       <ChargingStation/>
