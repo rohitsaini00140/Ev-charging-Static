@@ -52,7 +52,7 @@ function AdminHeader({ onOpenNav }) {
                     duration: theme.transitions.duration.shorter,
                 }),
                 ...(lgUp && {
-                    width: `calc(100% - ${NAV.WIDTH + 1}px)`,
+                    width: `calc(100% - ${NAV.WIDTH + .4}px)`,
                     height: HEADER.H_DESKTOP,
                 }),
             }}

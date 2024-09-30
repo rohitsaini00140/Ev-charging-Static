@@ -93,7 +93,7 @@ function AddOrUpdateClustersFields() {
                 message: 'Error while submitting.',
                 severity: 'error'
             });
-            if (!error.data.success && error.data.errors) {
+            if (error.data && error.data.errors) {
                 Object.entries(error.data.errors).forEach(([key, message]) => {
                     setError(key, { type: "server", message: message[0] });
                 });
@@ -124,7 +124,7 @@ function AddOrUpdateClustersFields() {
                     >
                         <Stack width={"100%"}>
                             <TextField
-                                label="Name"
+                                label="Cluster name"
                                 {...register("name", { required: true })}
                                 value={watch("name") || ""}
                                 sx={inputStyle}
@@ -133,21 +133,20 @@ function AddOrUpdateClustersFields() {
                             {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
-                            <TextField
-                                label="Location"
-                                {...register("location", { required: true })}
-                                value={watch("location") || ""}
-                                sx={inputStyle}
-                                fullWidth
+                            <Selector
+                                value={watch("country_id") || ""}
+                                onChange={(e) => setValue("country_id", e.target.value, { shouldValidate: true })}
+                                placeholder='Select country'
+                                selectType="single"
                             />
-                            {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
+                            {errors.country_id && <Typography color={"red"} mt={".5rem"}>*{errors.country_id.message}</Typography>}
                         </Stack>
                     </Stack>
                     <Stack
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 1, sm: 2, md: 6 }}
                     >
-                        <Stack width={"100%"}>
+                        {/* <Stack width={"100%"}>
                             <Selector
                                 value={watch("country_id") || ""}
                                 onChange={(e) => setValue("country_id", e.target.value, { shouldValidate: true })}
@@ -155,12 +154,12 @@ function AddOrUpdateClustersFields() {
                                 selectType="single"
                             />
                             {errors.country_id && <Typography color={"red"} mt={".5rem"}>*{errors.country_id.message}</Typography>}
-                        </Stack>
+                        </Stack> */}
                         <Stack width={"100%"}>
                             <Selector
                                 value={watch("state_id") || ""}
                                 onChange={(e) => setValue("state_id", e.target.value, { shouldValidate: true })}
-                                placeholder='State'
+                                placeholder='Select state'
                                 selectType="single"
                             />
                             {errors.state_id && <Typography color={"red"} mt={".5rem"}>*{errors.state_id.message}</Typography>}
@@ -169,11 +168,21 @@ function AddOrUpdateClustersFields() {
                             <Selector
                                 value={watch("city_id") || ""}
                                 onChange={(e) => setValue("city_id", e.target.value, { shouldValidate: true })}
-                                placeholder='City'
+                                placeholder='Select city'
                                 selectType="single"
                             />
                             {errors.city_id && <Typography color={"red"} mt={".5rem"}>*{errors.city_id.message}</Typography>}
                         </Stack>
+                    </Stack>
+                    <Stack width={"100%"}>
+                        <TextField
+                            label="Cluster location"
+                            {...register("location", { required: true })}
+                            value={watch("location") || ""}
+                            sx={inputStyle}
+                            fullWidth
+                        />
+                        {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
                     </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>
                         <Button
