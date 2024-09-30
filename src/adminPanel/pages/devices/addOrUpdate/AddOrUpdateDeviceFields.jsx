@@ -41,38 +41,6 @@ function AddOrUpdateDeviceFields() {
                     spacing={{ xs: 1, sm: 2, md: 6 }}
                 >
                     <Stack width={"100%"}>
-                        <TextField
-                            label="Name"
-                            {...register("name", { required: true })}
-                            sx={inputStyle}
-                            fullWidth
-                        />
-                        {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
-                    </Stack>
-                    <Stack width={"100%"}>
-                        <TextField
-                            label="Serial No."
-                            {...register("serial_number", { required: true })}
-                            sx={inputStyle}
-                            fullWidth
-                        />
-                        {errors.serial_number && <Typography color={"red"} mt={".5rem"}>*{errors.serial_number.message}</Typography>}
-                    </Stack>
-                    <Stack width={"100%"}>
-                        <TextField
-                            label="Location"
-                            {...register("location", { required: true })}
-                            sx={inputStyle}
-                            fullWidth
-                        />
-                        {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
-                    </Stack>
-                </Stack>
-                <Stack
-                    direction={{ xs: 'column', sm: 'row' }}
-                    spacing={{ xs: 1, sm: 2, md: 6 }}
-                >
-                    <Stack width={"100%"}>
                         <Selector
                             value={watch("project_id")}
                             onChange={(e) => setValue("project_id", e.target.value, { shouldValidate: true })}
@@ -82,6 +50,74 @@ function AddOrUpdateDeviceFields() {
                         {errors.project_id && <Typography color={"red"} mt={".5rem"}>*{errors.project_id.message}</Typography>}
                     </Stack>
                     <Stack width={"100%"}>
+                        <TextField
+                            label="Device name"
+                            {...register("name", { required: true })}
+                            sx={inputStyle}
+                            fullWidth
+                        />
+                        {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
+                    </Stack>
+                    {/* <Stack width={"100%"}>
+                        <TextField
+                            label="Serial No."
+                            {...register("serial_number", { required: true })}
+                            sx={inputStyle}
+                            fullWidth
+                        />
+                        {errors.serial_number && <Typography color={"red"} mt={".5rem"}>*{errors.serial_number.message}</Typography>}
+                    </Stack> */}
+                    {/* <Stack width={"100%"}>
+                        <TextField
+                            label="Location"
+                            {...register("location", { required: true })}
+                            sx={inputStyle}
+                            fullWidth
+                        />
+                        {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
+                    </Stack> */}
+                    <Stack width={"100%"}>
+                        <Selector
+                            value={watch("type")}
+                            onChange={(e) => setValue("type", e.target.value, { shouldValidate: true })}
+                            placeholder='Select device type'
+                            selectType="single"
+                        />
+                        {errors.type && <Typography color={"red"} mt={".5rem"}>*{errors.type.message}</Typography>}
+                    </Stack>
+                </Stack>
+                <Stack
+                    direction={{ xs: 'column', sm: 'row' }}
+                    spacing={{ xs: 1, sm: 2, md: 6 }}
+                >
+                    <Stack width={"100%"}>
+                        <TextField
+                            label="Device location"
+                            {...register("location", { required: true })}
+                            sx={inputStyle}
+                            fullWidth
+                        />
+                        {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
+                    </Stack>
+                    <Stack width={"100%"}>
+                        <TextField
+                            label="Device serial No."
+                            {...register("serial_number", { required: true })}
+                            sx={inputStyle}
+                            fullWidth
+                        />
+                        {errors.serial_number && <Typography color={"red"} mt={".5rem"}>*{errors.serial_number.message}</Typography>}
+                    </Stack>
+                    {/* <Stack width={"100%"}>
+                        <Selector
+                            value={watch("project_id")}
+                            onChange={(e) => setValue("project_id", e.target.value, { shouldValidate: true })}
+                            placeholder='Select project'
+                            selectType="single"
+                        />
+                        {errors.project_id && <Typography color={"red"} mt={".5rem"}>*{errors.project_id.message}</Typography>}
+                    </Stack> */}
+                    {/* <Stack width={"100%"}>
                         <Selector
                             value={watch("type")}
                             onChange={(e) => setValue("type", e.target.value, { shouldValidate: true })}
@@ -89,7 +125,7 @@ function AddOrUpdateDeviceFields() {
                             selectType="single"
                         />
                         {errors.type && <Typography color={"red"} mt={".5rem"}>*{errors.type.message}</Typography>}
-                    </Stack>
+                    </Stack> */}
                     <Stack width={"100%"}>
                         <Selector
                             value={watch("status")}

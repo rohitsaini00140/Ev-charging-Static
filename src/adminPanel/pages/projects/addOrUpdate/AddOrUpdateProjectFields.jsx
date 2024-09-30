@@ -39,29 +39,6 @@ function AddOrUpdateProjectFields() {
                     spacing={{ xs: 1, sm: 2, md: 6 }}
                 >
                     <Stack width={"100%"}>
-                        <TextField
-                            label="Name"
-                            {...register("name", { required: true })}
-                            sx={inputStyle}
-                            fullWidth
-                        />
-                        {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
-                    </Stack>
-                    <Stack width={"100%"}>
-                        <TextField
-                            label="Location"
-                            {...register("location", { required: true })}
-                            sx={inputStyle}
-                            fullWidth
-                        />
-                        {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
-                    </Stack>
-                </Stack>
-                <Stack
-                    direction={{ xs: 'column', sm: 'row' }}
-                    spacing={{ xs: 1, sm: 2, md: 6 }}
-                >
-                    <Stack width={"100%"}>
                         <Selector
                             value={watch("cluster_id")}
                             onChange={(e) => setValue("cluster_id", e.target.value, { shouldValidate: true })}
@@ -78,6 +55,29 @@ function AddOrUpdateProjectFields() {
                             selectType="single"
                         />
                         {errors.user_id && <Typography color={"red"} mt={".5rem"}>*{errors.user_id.message}</Typography>}
+                    </Stack>
+                </Stack>
+                <Stack
+                    direction={{ xs: 'column', sm: 'row' }}
+                    spacing={{ xs: 1, sm: 2, md: 6 }}
+                >
+                    <Stack width={"100%"}>
+                        <TextField
+                            label="Project name"
+                            {...register("name", { required: true })}
+                            sx={inputStyle}
+                            fullWidth
+                        />
+                        {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
+                    </Stack>
+                    <Stack width={"100%"}>
+                        <TextField
+                            label="Project location"
+                            {...register("location", { required: true })}
+                            sx={inputStyle}
+                            fullWidth
+                        />
+                        {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
                     </Stack>
                 </Stack>
                 <Stack direction={"row"} justifyContent={"end"}>

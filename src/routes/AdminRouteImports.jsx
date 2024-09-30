@@ -22,6 +22,7 @@ import AddOrUpdateProject from "../adminPanel/pages/projects/addOrUpdate/AddOrUp
 import ProjectView from "../adminPanel/pages/projects/view/ProjectView.jsx";
 import AddOrUpdateDevice from "../adminPanel/pages/devices/addOrUpdate/AddOrUpdateDevice.jsx";
 import DeviceView from "../adminPanel/pages/devices/view/DeviceView.jsx";
+import AddOrUpdatePermissionsToRole from "../adminPanel/pages/roles&Permissions/permissionsToRole/addOrUpdate/AddOrUpdatePermissionsToRole.jsx";
 
 
 export {
@@ -39,6 +40,7 @@ export {
     AddOrUpdateZone,
     ZoneView,
     PermissionsToRole,
+    AddOrUpdatePermissionsToRole,
     AddOrUpdateCity,
     AddOrUpdateCountry,
     AddOrUpdateState,

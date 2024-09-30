@@ -21,6 +21,9 @@ export const clusterApi = createApi({
             }),
             providesTags: ['cluster'],
         }),
+        // getClusterById: builder.query({
+        //     query: (id) => `/clusters/${id}`, // API endpoint to fetch cluster by id
+        // }),
         updateCluster: builder.mutation({
             query: ({ id, updatedClusterData }) => ({
                 url: `/api/organizations/update/${id}`,

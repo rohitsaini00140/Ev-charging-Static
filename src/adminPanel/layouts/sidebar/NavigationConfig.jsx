@@ -88,22 +88,6 @@ const navConfig = [
     ],
   },
   {
-    title: 'Devices',
-    icon: icon('ic_device'),
-    children: [
-      {
-        title: 'Add',
-        path: '/admin/device/add',
-        icon: icon('ic_circle'),
-      },
-      {
-        title: 'View',
-        path: '/admin/device/view',
-        icon: icon('ic_circle'),
-      },
-    ],
-  },
-  {
     title: 'Projects',
     icon: icon('ic_project'),
     children: [
@@ -120,75 +104,91 @@ const navConfig = [
     ],
   },
   {
-    title: 'Address',
-    icon: icon('ic_address'),
-    children: [
-      {
-        title: 'Country',
-        icon: icon('ic_circle'),
-        children: [
-          {
-            title: 'Add',
-            path: '/admin/country/add',
-            icon: icon('ic_circle'),
-          },
-          {
-            title: 'View',
-            path: '/admin/country/view',
-            icon: icon('ic_circle'),
-          },
-        ],
-      },
-      {
-        title: 'State',
-        icon: icon('ic_circle'),
-        children: [
-          {
-            title: 'Add',
-            path: '/admin/state/add',
-            icon: icon('ic_circle'),
-          },
-          {
-            title: 'View',
-            path: '/admin/state/view',
-            icon: icon('ic_circle'),
-          },
-        ],
-      },
-      {
-        title: 'City',
-        icon: icon('ic_circle'),
-        children: [
-          {
-            title: 'Add',
-            path: '/admin/city/add',
-            icon: icon('ic_circle'),
-          },
-          {
-            title: 'View',
-            path: '/admin/city/view',
-            icon: icon('ic_circle'),
-          },
-        ],
-      }
-    ],
-  },
-  {
-    title: 'Zone',
-    icon: icon('ic_zone'),
+    title: 'Devices',
+    icon: icon('ic_device'),
     children: [
       {
         title: 'Add',
-        path: '/admin/zone/add',
+        path: '/admin/device/add',
         icon: icon('ic_circle'),
       },
       {
         title: 'View',
-        path: '/admin/zone/view',
+        path: '/admin/device/view',
         icon: icon('ic_circle'),
       },
     ],
   },
+  // {
+  //   title: 'Address',
+  //   icon: icon('ic_address'),
+  //   children: [
+  //     {
+  //       title: 'Country',
+  //       icon: icon('ic_circle'),
+  //       children: [
+  //         {
+  //           title: 'Add',
+  //           path: '/admin/country/add',
+  //           icon: icon('ic_circle'),
+  //         },
+  //         {
+  //           title: 'View',
+  //           path: '/admin/country/view',
+  //           icon: icon('ic_circle'),
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       title: 'State',
+  //       icon: icon('ic_circle'),
+  //       children: [
+  //         {
+  //           title: 'Add',
+  //           path: '/admin/state/add',
+  //           icon: icon('ic_circle'),
+  //         },
+  //         {
+  //           title: 'View',
+  //           path: '/admin/state/view',
+  //           icon: icon('ic_circle'),
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       title: 'City',
+  //       icon: icon('ic_circle'),
+  //       children: [
+  //         {
+  //           title: 'Add',
+  //           path: '/admin/city/add',
+  //           icon: icon('ic_circle'),
+  //         },
+  //         {
+  //           title: 'View',
+  //           path: '/admin/city/view',
+  //           icon: icon('ic_circle'),
+  //         },
+  //       ],
+  //     }
+  //   ],
+  // },
+  // {
+  //   title: 'Zone',
+  //   icon: icon('ic_zone'),
+  //   children: [
+  //     {
+  //       title: 'Add',
+  //       path: '/admin/zone/add',
+  //       icon: icon('ic_circle'),
+  //     },
+  //     {
+  //       title: 'View',
+  //       path: '/admin/zone/view',
+  //       icon: icon('ic_circle'),
+  //     },
+  //   ],
+  // },
   // {
   //   title: 'Cluster',
   //   icon: icon('ic_cluster'),
