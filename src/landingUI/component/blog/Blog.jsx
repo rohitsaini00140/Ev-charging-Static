@@ -101,25 +101,13 @@ function Blog() {
                         },
                       }}
                     >
-                      <Link
-                        to= "/blogs"
-                        state={{ blogToShow: post }}
-                        style={{
-                          textDecoration: "none",
-                          transition: "0.20s",
-                          color: "rgb(12, 34, 38)",
-                          "&:hover": {
-                            color: "#434e51",
-                            transition: "0.20s",
-                          },
-                        }}
-                      >
-                        {post.title}
-                      </Link>
+              <Link className="blog_link" to= "/blogs" state={{ blogToShow: post }}>
+                {post.title}
+                </Link>
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {post.content}
-                    </Typography>
+                    <Typography variant="body2" sx={{textAlign:'justify'}} color="text.secondary">
+                    {post.content.split(' ').slice(0, 20).join(' ') + (post.content.split(' ').length > 20 ? '...' : '')}
+                  </Typography>
                   </CardContent>
                 </Card>
               </div>

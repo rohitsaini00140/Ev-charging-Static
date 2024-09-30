@@ -166,7 +166,7 @@ const onSubmit = async (data) => {
                  </Grid>
                 </Grid>
                 <Grid container spacing={2} size={12}>
-                  <Grid item size={{ sm: 12, md: 12 }}>
+                  <Grid item size={{ sm: 12, md: 12,xs:12 }}>
                     <Box sx={{ position: "relative",margin:'3px 0px' }} >
                     <TextField
                       multiline
@@ -195,5 +195,4 @@ const onSubmit = async (data) => {
     </>
   );
 };
-
 export default ContactUs;

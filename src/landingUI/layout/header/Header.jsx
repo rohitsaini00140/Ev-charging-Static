@@ -5,28 +5,31 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-  
-const logo = require('../../img/logo.png');
-
+const logo = require("../../img/logo.png");
 
 function Header() {
+  
   const [isBgcolor, setIsBgcolor] = useState(false);
   const location = useLocation();
-    useEffect(() => {
+
+  useEffect(() => {
     const handleScroll = () => {
       const sticky = 80;
       setIsBgcolor(window.scrollY > sticky);
     };
-    window.addEventListener('scroll', handleScroll);
+    if (location.pathname === '/') {
+      window.addEventListener("scroll", handleScroll);
+    }
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-
+  }, [location.pathname]);
   return (
     <Stack
       sx={{
-        bgcolor: isBgcolor ? "#02121e" : "transparent",
+        bgcolor: location.pathname === '/' 
+        ? (isBgcolor ? "#02121e" : "transparent") 
+        : "#02121e",
         height: "5.5rem",
         width: "100%",
         position: "fixed",
@@ -42,7 +45,7 @@ function Header() {
       <Stack width={"10%"}>
         <Link to={"/"}>
           <img
-            src = {logo}
+            src={logo}
             alt="Logo"
             style={{ cursor: "pointer", width: "4rem" }}
           />
@@ -56,7 +59,7 @@ function Header() {
           justifyContent: "center",
           gap: "2rem",
           fontFamily: "serif",
-          fontSize: "1.1rem"
+          fontSize: "1.1rem",
         }}
       >
         {menuData.map((ele, i) => (
@@ -64,13 +67,13 @@ function Header() {
             <Typography
               sx={{
                 cursor: "pointer",
-                transition:'0.5s',
+                transition: "0.5s",
 
                 "&:hover": {
                   color: "#61e93d",
-                  transition:'0.5s'
+                  transition: "0.5s",
                 },
-                color: location.pathname === ele.path ? "#ff6600" : "white"
+                color: location.pathname === ele.path ? "#ff6600" : "white",
               }}
             >
               {ele.name}
@@ -81,9 +84,9 @@ function Header() {
       <Stack
         sx={{
           width: "10%",
-          display: 'flex',
-          alignItems: 'flex-end',
-          padding: 1
+          display: "flex",
+          alignItems: "flex-end",
+          padding: 1,
         }}
       >
         <Link to={"/logIn"}>

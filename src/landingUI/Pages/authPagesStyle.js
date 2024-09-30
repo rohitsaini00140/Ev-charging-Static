@@ -5,20 +5,34 @@ import Grid from "@mui/material/Grid2";
 export const inputStyles = {
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            borderColor: 'black', // Default border color
+            borderColor: 'black',
         },
         '&:hover fieldset': {
-            borderColor: 'black', // Border color on hover
+            borderColor: 'black',
         },
         '&.Mui-focused fieldset': {
-            borderColor: 'black', // Border color when focused
+            borderColor: 'black',
         },
     },
     '& .MuiInputLabel-root': {
-        color: 'black', // Label color
+        color: 'black',
     },
     '& .MuiInputLabel-root.Mui-focused': {
-        color: 'black', // Label color when focused
+        color: 'black',
+    },
+    "& input:-webkit-autofill": {
+        WebkitBoxShadow: "0 0 0 1000px #d0dfd8 inset",
+        WebkitTextFillColor: "black",
+        transition: "background-color 5000s ease-in-out 0s",
+    },
+    "& input:-webkit-autofill:hover": {
+        WebkitBoxShadow: "0 0 0 1000px #d0dfd8 inset",
+    },
+    "& input:-webkit-autofill:focus": {
+        WebkitBoxShadow: "0 0 0 1000px #d0dfd8 inset",
+    },
+    "& input:-webkit-autofill:active": {
+        WebkitBoxShadow: "0 0 0 1000px #d0dfd8 inset",
     },
 };
 

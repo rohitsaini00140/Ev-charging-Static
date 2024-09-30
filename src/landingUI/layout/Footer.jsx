@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Grid, Typography, Link, CardContent, TextField, Button, Box } from '@mui/material';
+import { Container,Typography, Link, CardContent, TextField, Button, Box } from '@mui/material';
+import {Grid} from '@mui/system';
 import PhoneIcon from '@mui/icons-material/Phone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -60,7 +61,7 @@ function Footer() {
           }}
         />
         <Grid container spacing={3} justifyContent="center" sx={{ marginTop: '25px' }}>
-          <Grid item xs={12} sm={3}>
+          <Grid item size={{xs:12, sm:3}} >
             <img
               src={imageSrc}
               alt="VNT Logo"
@@ -68,7 +69,7 @@ function Footer() {
             />   <br />
             <b style={{ color: '#ffffffd1', margin: '15px 0px', display: 'block' }} >Greener. Connected.  Protected.</b>
             <CardContent sx={{ padding: '0px' }}>
-              <p style={{ margin: '0px 0px', color: '#ffffffd1', lineHeight: '18px', textAlign: 'left', fontSize: '14px' }}>At Vrinda Nano Technologies, our holistic approach is to address critical priorities, innovate extensive strategies, and engineer them for a greater purpose.</p>
+              <p style={{ margin: '0px 0px', color: '#ffffffd1', lineHeight: '18px', textAlign: 'justify', fontSize: '14px' }}>At Vrinda Nano Technologies, our holistic approach is to address critical priorities, innovate extensive strategies, and engineer them for a greater purpose.</p>
             </CardContent>
             <Typography variant="body2" color="#ffffffd1" sx={{ display: 'flex', marginTop: '15px' }}>
               <Link color="#fff" sx={{ textDecoration: 'none', marginLeft: '0px', background: '#434e51', width: '25px', height: '25px', borderRadius: '5px', display: 'grid', placeItems: 'center' }} href="https://www.linkedin.com/company/vrinda-nano-technologies/?originalSubdomain=in" target="_blank" > <LinkedInIcon sx={{
@@ -97,10 +98,10 @@ function Footer() {
               }} /></Link>
             </Typography>
           </Grid>
-          <Grid container item xs={12} sm={1}>
+          <Grid container item size={{xs:12, sm:1}}>
           </Grid>
-          <Grid container item xs={12} sm={8}>
-            <Grid item xs={12} sm={6} md={4} lg={4}>
+          <Grid container item size={{xs:12,sm:8}}>
+            <Grid item size={{xs:6,md:4,lg:4,sm:6}}>
               <Typography variant="h6" gutterBottom color="#61e93d">
                 Quick Links
               </Typography>
@@ -140,12 +141,12 @@ function Footer() {
                     color: '#61e93d',
                     transition: '0.20s'
                   }
-                }} href="#" color="#ffffffd1">
+                }} href="/contactus" color="#ffffffd1">
                   Contact Us
                 </Link>
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={4}>
+            <Grid item  size={{xs:12,sm:6,md:4,lg:4}}>
               <Typography variant="h6" gutterBottom color="#61e93d">
                 Useful Links
               </Typography>
@@ -190,7 +191,7 @@ function Footer() {
                 </Link>
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4}>
+            <Grid item size={{xs:12, sm:12,md:4,lg:4}}>
               <Typography variant="h6" gutterBottom color="#61e93d">
                 Contact Us
               </Typography>
