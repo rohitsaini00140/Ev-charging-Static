@@ -7,15 +7,9 @@
 .css-16janke-MuiStack-root>:not(style):not(style) {
   margin: auto !important;
 }
-.css-hud6bj-MuiLinearProgress-bar1 {
-  background-color: #56a745 !important;
-}
-.css-1e8gvwt-MuiLinearProgress-bar1 {
-  background-color: #253644 !important;
-}
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .css-19v7jyx-MuiContainer-root {
-    max-width: 1200px !important;
+      min-width: 1200px;
   }
 }
 @media (max-width: 768px) {
