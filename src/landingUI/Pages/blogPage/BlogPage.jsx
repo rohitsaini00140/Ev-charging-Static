@@ -1,11 +1,45 @@
-import { Box, Typography } from "@mui/material";
-import { Grid, Stack, Container } from "@mui/system";
-import { blogpara } from "./blogsStyle";
+import { Box, Typography,TextField,Button  } from "@mui/material";
+import { Grid, Stack, Container} from "@mui/system";
+import { blogpara, recent_img, recenet_haiding ,submitButton,error_position} from "./blogsStyle";
 import { useLocation } from "react-router-dom";
+import { blogPosts, deafult_blog } from "../../component/blog/Blogdata";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { input_style } from "../authPagesStyle";
+import { blog_schema } from "./blogScema";
+
+
+
+// short the data according to latest dates start here
+const sortedPosts = blogPosts.sort(
+  (a, b) => new Date(b.date) - new Date(a.date)
+);
+const latestThreePosts = sortedPosts.slice(0, 3);
+// short the data according to latest dates end here
 
 function BlogPage() {
+
   const { state } = useLocation();
-  
+
+  const dealfult_value ={
+    name:'',
+    email:'',
+    message:''
+  }
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    resolver: zodResolver(blog_schema),
+    defaultValues: dealfult_value
+  });
+
+  const onSubmit = async (data) => {
+    try {
+        console.log(data)
+        reset(dealfult_value)
+    } catch (error) {
+        console.log(error)
+    }
+  };
+
   return (
     <>
       <Box className="vnt_bg">
@@ -24,27 +58,96 @@ function BlogPage() {
           <Grid container spacing={1}>
             <Grid item size={{ xs: 12, sm: 8 }}>
               <Typography
-                sx={{ fontWeight: "700", fontSize: "27px", lineHeight: "35px" }}
+                sx={{fontWeight: "700", color:'#253745', fontSize: "27px", lineHeight: "35px" }}
                 variant="h3"
               >
-                {state.blogToShow.title}
+                {state ? state.blogToShow.title : deafult_blog.title}
               </Typography>
               <img
                 style={{ width: "65%", margin: "20px 0" }}
-                src={state.blogToShow.image}
+                src={state ? state.blogToShow.image : deafult_blog.image}
                 alt="VNT Blog"
               />
               <Typography sx={blogpara} variant="p">
-                {state.blogToShow.content}
+                {state ? state.blogToShow.content : deafult_blog.content}
               </Typography>
-            </Grid>
+              <Box component="form" onSubmit ={handleSubmit(onSubmit)} sx={{margin:"15px 0px"}}>
+             <Typography sx={{fontWeight:'700',fontSize:'24px',color:'#253745'}} variant="h6">Leave Your Comment</Typography>
+              <Box sx={{ position: "relative"}}>
+               <TextField margin="normal"  {...register("name")}    sx={input_style} fullWidth label="Your Name" />
+                 {errors.name && <Typography sx={error_position}>*{errors.name.message}</Typography>}
+               </Box>
+              <Box sx={{ position: "relative"}}>
+              <TextField margin="normal" {...register("email")} sx={input_style}  fullWidth label="Your Email" />
+               {errors.email && <Typography sx={error_position}>*{errors.email.message}</Typography>}
+              </Box>
+              <Box sx={{ position: "relative"}}>
+         <TextField margin="normal" multiline
+         {...register("message")}
+         minRows={4}
+      sx={input_style} 
+      placeholder="Please Write Comment here" 
+      fullWidth 
+      label="Message" />
+  {errors.message && <Typography sx={error_position}>*{errors.message.message}</Typography>}
+ </Box>
+ <Button sx={submitButton} type ="sumbit">Sumbit</Button>
+  </Box>
+        </Grid>
             <Grid item size={{ xs: 12, sm: 4 }}>
               <Typography
-                sx={{ fontWeight: "600", textAlign: "center" }}
+                sx={{
+                  fontWeight: "700",
+                  marginBottom: "20px",
+                  fontSize: "22px",
+                  color: "#253745",
+                }}
                 variant="h5"
               >
                 Recent Post
               </Typography>
+              {latestThreePosts.map((post, index) => (
+                <Stack
+                  sx={{ marginBottom: "35px" }}
+                  direction="row"
+                  spacing={2}
+                  key={index}
+                >
+                  <Box item>
+                    <img style={recent_img} src={post.image} alt="" />
+                  </Box>
+                  <Box item>
+                    <Typography
+                      sx={{
+                        fontWeight: "600",
+                        marginTop: "-4px",
+                        color: "rgb(255, 102, 0)",
+                        fontSize: "14px",
+                        display: "block",
+                      }}
+                      variant="span"
+                    >
+                      {post.blogSubject}
+                    </Typography>
+                    <Typography sx={recenet_haiding} variant="h3">
+                      {post.title}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: "12px",
+                        fontStyle: "italic",
+                        lineHeight: "22px",
+                        fontWeight: "600",
+                        color: "rgba(0, 0, 0, 0.6)",
+                      }}
+                      variant="p"
+                    >
+                      <b style={{ color: "#253745" }}>Posted Date</b>:{" "}
+                      {post.date}
+                    </Typography>
+                  </Box>
+                </Stack>
+              ))}
             </Grid>
           </Grid>
         </Container>
@@ -52,5 +155,4 @@ function BlogPage() {
     </>
   );
 }
-
 export default BlogPage;

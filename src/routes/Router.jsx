@@ -17,6 +17,7 @@ import {
   AddOrUpdateZone,
   ZoneView,
   PermissionsToRole,
+  AddOrUpdatePermissionsToRole,
   AddOrUpdateCity,
   AddOrUpdateCountry,
   AddOrUpdateState,
@@ -72,6 +73,7 @@ function Router() {
                   <Route path="/permission/add" element={<AddPermissions />} />
                   <Route path="/permission/view" element={<PermissionView />} />
                   <Route path="/roles&Permissions/permissionsToRole" element={<PermissionsToRole />} />
+                  <Route path="" element={<AddOrUpdatePermissionsToRole />} />
                   <Route path="/zone/add" element={<AddOrUpdateZone />} />
                   <Route path="/zone/view" element={<ZoneView />} />
                   <Route path="/zone/update/:id" element={<AddOrUpdateZone />} />

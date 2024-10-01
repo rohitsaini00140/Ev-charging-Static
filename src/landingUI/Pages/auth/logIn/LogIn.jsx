@@ -14,6 +14,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useLoginUserMutation } from '../../../../globalState/userAuth/userApis';
 import Alertbar from '../../../../adminPanel/component/Alertbar';
+import { error_position } from './loginStyle';
 
 const companyLogo = require('../../../img/logo.png');
 
@@ -52,7 +53,7 @@ function Login() {
         } catch (error) {
             setSnackbar({
                 open: true,
-                message: error.data.error,
+                message: error.data ? error.error.data : "error while submitting",
                 severity: 'error'
             });
             if (error.data && error.data.errors) {
@@ -84,7 +85,7 @@ function Login() {
                 }}
             >
                 <Typography variant='h3' fontWeight={"700"}>Find EV Charging Stations and Get Ready to <Typography color="#57b33e" variant='h3' fontWeight={"700"}>Go Green</Typography></Typography>
-                <img src={companyLogo} alt='error' style={{ width: "8rem" }} />
+                <Link to="/"> <img src={companyLogo} alt='error' style={{ width: "8rem" }} /> </Link> 
             </Grid>
             <Grid item size={{ lg: 6, xs: 12 }}
                 sx={{
@@ -113,6 +114,7 @@ function Login() {
                             Login VNT! 👋
                         </Typography>
                         <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
+                            <Box sx={{ position: "relative"}}>
                             <TextField
                                 {...register("email", { required: true })}
                                 margin="normal"
@@ -120,7 +122,9 @@ function Login() {
                                 label="Email"
                                 sx={inputStyles}
                             />
-                            {errors.email && <Typography style={{ fontSize: '.85rem' }} color={"red"}>*{errors.email.message}</Typography>}
+                           {errors.email && <Typography sx={error_position}>*{errors.email.message}</Typography>}
+                           </Box>
+                           <Box sx={{ position: "relative"}}>
                             <TextField
                                 {...register("password", { required: true })}
                                 sx={inputStyles}
@@ -142,7 +146,8 @@ function Login() {
                                     ),
                                 }}
                             />
-                            {errors.password && <Typography style={{ fontSize: '.85rem' }} color={"red"}>*{errors.password.message}</Typography>}
+                            {errors.password && <Typography sx={error_position}>*{errors.password.message}</Typography>}
+                            </Box>
                             <Button
                                 type="submit"
                                 fullWidth
