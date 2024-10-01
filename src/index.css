@@ -54,11 +54,22 @@
   height: 500px; 
 }
 .vnt_bg{
+     position: relative; /* Position ko relative karna hoga */
     background-image: url('../public/assets/images/vnt.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     height: 500px;
+  }
+  .vnt_bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #00000036; /* Light black overlay */
+    z-index: 0; /* Peeche rakhne ke liye */
   }
 
 .contact_bg {
@@ -67,6 +78,25 @@
   background-position: center center;
   background-size: cover;
   height: 500px;
+}
+
+.sevices_bg {
+  position: relative; /* Position ko relative karna hoga */
+  background-image: url('../src/landingUI/img/services.jfif');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 500px;
+}
+.sevices_bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #00000061; /* Light black overlay */
+  z-index: 0; /* Peeche rakhne ke liye */
 }
 
 .blog_link {
