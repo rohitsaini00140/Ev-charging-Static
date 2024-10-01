@@ -1,15 +1,15 @@
-import { Container, Grid,Box ,Stack,Button} from "@mui/material";
+import { Container,Box ,Stack,Button} from "@mui/material";
 import { Typography } from "@mui/material";
 import React from "react";
 import { FaCar } from "react-icons/fa";
 import { TbBulbFilled } from "react-icons/tb";
-
+import { Grid } from "@mui/system";
 function ChargingStation() {
 const imageSrc = require("../../img/car_new.png");
   return (
     <Container>
     <Grid container spacing={3} sx={{margin:'10px 0px'}}>
-  <Grid item xs={12} md={6}>
+  <Grid item size = {{xs:12,sm:6}}>
    <span style={{ color: 'rgb(87, 179, 62)', fontWeight: '600',fontSize:'18px' }}>About VNT EV</span>
     <Typography
       variant="h6"
@@ -89,7 +89,7 @@ const imageSrc = require("../../img/car_new.png");
           boxShadow: '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
           background: '#253745' 
         }} 
-      >  <FaCar style={{ fontSize: '25px', color: 'white' }} />  </Box>
+      ><FaCar style={{ fontSize: '25px', color: 'white' }} />  </Box>
       <Stack sx={{ paddingLeft:'18px'}}>
         <Typography
           variant="h6"
@@ -127,7 +127,7 @@ const imageSrc = require("../../img/car_new.png");
      More About Us
     </Button>
   </Grid>
-  <Grid item xs={12} md={6}>
+  <Grid item size = {{xs:12,sm:6}}>
     <img
       src={imageSrc}
       alt="VNT EV Machine"

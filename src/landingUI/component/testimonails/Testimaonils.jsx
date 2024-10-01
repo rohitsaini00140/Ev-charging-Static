@@ -1,8 +1,10 @@
 import React from 'react'
 import {Card, CardContent, CardMedia } from '@mui/material';
-import { Stack,Container,Grid,Typography } from "@mui/material";
+import { Stack,Container,Typography } from "@mui/material";
 import Slider from 'react-slick';
 import { RiDoubleQuotesR } from "react-icons/ri";
+import { Grid } from "@mui/system";
+
 
 const blogPosts = [
     {
@@ -82,7 +84,7 @@ function Testimaonils() {
     <Stack sx={{ background: '#02121e', padding: '60px 0', marginTop:'50px' }}>
     <Container>
     <Grid container spacing={3}>
-    <Grid item xs={12}  md={6} sx={{padding:{
+    <Grid item size = {{xs:12,md:6}} sx={{padding:{
   xs: '10px 10px',    
   sm: '10px 10px',    
   md: '10px 50px',    
@@ -100,7 +102,7 @@ function Testimaonils() {
             </Typography>
 
     </Grid>
-    <Grid item xs={12}  md={6}>
+    <Grid item size = {{xs:12,md:6}}>
     <Slider {...settings} sx={{marginTop: '30px'}}>
           {blogPosts.map((post, index) => (
             <div key={index}>
