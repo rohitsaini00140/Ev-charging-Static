@@ -142,7 +142,7 @@ function BlogPage() {
                       }}
                       variant="p"
                     >
-                      <b style={{ color: "#253745" }}>Post Date </b>:{" "}
+                      <b style={{ color: "#253745" }}>Posted Date </b>:{" "}
                       {post.date}
                     </Typography>
                   </Box>
