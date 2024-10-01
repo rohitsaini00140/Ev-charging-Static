@@ -16,10 +16,12 @@ const ContactUs = () => {
     mobile: "",
     message: "",
 }
+
 const { register, handleSubmit, reset, formState: { errors } } = useForm({
   resolver: zodResolver(contactschema),
   defaultValues: defaultValues
 });
+
 const onSubmit = async (data) => {
   try {
       console.log(data)
