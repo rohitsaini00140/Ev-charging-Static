@@ -86,7 +86,7 @@ function BlogPage() {
          {...register("message")}
          minRows={4}
       sx={input_style} 
-      placeholder="Please Write Comment here" 
+      placeholder="Please Write Comment here ?" 
       fullWidth 
       label="Message" />
   {errors.message && <Typography sx={error_position}>*{errors.message.message}</Typography>}
