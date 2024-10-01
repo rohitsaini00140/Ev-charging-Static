@@ -32,10 +32,10 @@ function WhyChoose() {
               alt="VNT EV Machine"
               style={{ width: '60px', height: '60px', margin: '0 auto' }} // Adjust style as needed
             /> 
-        <Typography variant='h6' sx={{fontWeight:'600',color:'rgb(12, 34, 38)'}}>
+        <Typography variant='h6' sx={{fontWeight:'700',color:'rgb(12, 34, 38)'}}>
           Fast Charging
         </Typography>
-        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.875rem',
+        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.94rem',
        lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
        </Box>
        <Box sx={{ margin: '20px 0px'}}>
@@ -44,10 +44,10 @@ function WhyChoose() {
               alt="VNT EV Machine"
               style={{ width: '60px', height: '60px', margin: '0 auto' }} // Adjust style as needed
             /> 
-        <Typography variant='h6' sx={{fontWeight:'600',color:'rgb(12, 34, 38)'}}>
+        <Typography variant='h6' sx={{fontWeight:'700',color:'rgb(12, 34, 38)'}}>
           Mangement System
         </Typography>
-        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.875rem',
+        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.94rem',
         lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
        </Box>
       </Grid>
@@ -65,10 +65,10 @@ function WhyChoose() {
               alt="VNT EV Machine"
               style={{ width: '60px', height: '60px', margin: '0 auto' }} // Adjust style as needed
             /> 
-             <Typography variant='h6' sx={{fontWeight:'600',color:'rgb(12, 34, 38)'}}>
+             <Typography variant='h6' sx={{fontWeight:'700',color:'rgb(12, 34, 38)'}}>
           Renewable Energy
         </Typography>
-        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.875rem',
+        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.94rem',
     lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
        </Box>
        <Box sx={{ margin: '20px 0px'}}>
@@ -77,10 +77,10 @@ function WhyChoose() {
               alt="VNT EV Machine"
               style={{ width: '60px', height: '40px', margin: '0 auto' }} // Adjust style as needed
             /> 
- <Typography variant='h6' sx={{fontWeight:'600',color:'rgb(12, 34, 38)'}}>
+ <Typography variant='h6' sx={{fontWeight:'700',color:'rgb(12, 34, 38)'}}>
          Hight Quality Charger
         </Typography>
-        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.875rem',
+        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.94rem',
     lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
 
        </Box>

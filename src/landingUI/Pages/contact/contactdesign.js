@@ -6,7 +6,7 @@ export const contact_haiding = {
   fontSize: "1.2rem",
 };
 export const contact_text = {
-  fontWeight: "600",
+  fontWeight: "700",
   fontSize: "29px",
   color: "#253745"
 }

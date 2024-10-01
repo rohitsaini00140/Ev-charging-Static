@@ -12,7 +12,7 @@ function Appspic() {
       <Box sx={{ background: '#f4faef', padding: '20px 40px'}}>
         <Grid container spacing={2}>
           <Grid item size = {{xs:12,sm:6}}>
-            <Typography variant="h6" sx={{fontWeight:'600', fontSize:'30px',lineHeight:'34px',marginTop:'13px'}}>
+            <Typography variant="h6" sx={{fontWeight:'700', fontSize:'30px',lineHeight:'34px',marginTop:'13px'}}>
                 GET Charged up<br />
                 Install Our Ev Charging APP Today
             </Typography>

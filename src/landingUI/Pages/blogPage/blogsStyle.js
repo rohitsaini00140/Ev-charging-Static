@@ -2,7 +2,11 @@ export const blogpara = {
   fontSize: "16px",
   textAlign: "justify",
   display: "block",
-  paddingRight:'50px',
+  paddingRight:{
+    xs:'0px',
+    md:'50px',
+    lg:'50px'
+  },
   lineHeight: '28px',
   color: 'rgba(0, 0, 0, 0.6)'
 };

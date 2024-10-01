@@ -30,7 +30,6 @@ function BlogPage() {
     resolver: zodResolver(blog_schema),
     defaultValues: dealfult_value
   });
-
   const onSubmit = async (data) => {
     try {
         console.log(data)
@@ -39,7 +38,6 @@ function BlogPage() {
         console.log(error)
     }
   };
-
   return (
     <>
       <Box className="sevices_bg">
@@ -64,7 +62,7 @@ function BlogPage() {
                 {state ? state.blogToShow.title : deafult_blog.title}
               </Typography>
               <img
-                style={{ width: "65%", margin: "20px 0" }}
+                style={{ width: "90%", margin: "20px 0" }}
                 src={state ? state.blogToShow.image : deafult_blog.image}
                 alt="VNT Blog"
               />
@@ -119,7 +117,7 @@ function BlogPage() {
                   <Box item>
                     <Typography
                       sx={{
-                        fontWeight: "600",
+                        fontWeight: "700",
                         marginTop: "-4px",
                         color: "rgb(255, 102, 0)",
                         fontSize: "14px",

@@ -90,7 +90,7 @@ const onSubmit = async (data) => {
             <Typography variant="h3" sx={contact_haiding}>
               Contact Us
             </Typography>
-            <Typography variant="p" sx={contact_text}>
+            <Typography  variant="p" sx={contact_text}>
                Get In Touch With Us
             </Typography>
             <Box variant="p" sx={contactTextStyle}>
@@ -101,7 +101,7 @@ const onSubmit = async (data) => {
             <FaLocationDot  style={{ color: 'white', fontSize: '16px' }} />
             </Box>
             <Box sx={{marginLeft:'15px',marginTop: '3px'}}>
-            <Typography variant="h3" sx={{fontSize:'15px',fontWeight:'700',color:'#253745'}}>
+            <Typography variant="h3" sx={{fontSize:'17px',fontWeight:'700',color:'#253745'}}>
               Our Location
             </Typography>
             <Typography  variant="p" sx={contactTextStyle}>
@@ -114,7 +114,7 @@ const onSubmit = async (data) => {
             <FaPhone  style={{ color: 'white', fontSize: '16px'}} />
             </Box>
             <Box sx={{marginLeft:'15px',marginTop: '3px'}}>
-            <Typography variant="h3" sx={{fontSize:'15px',fontWeight:'700',color:'#253745'}}>
+            <Typography variant="h3" sx={{fontSize:'17px',fontWeight:'700',color:'#253745'}}>
               Phone Number
             </Typography>
             <Typography  variant="p" sx={contactTextStyle}>
@@ -127,7 +127,7 @@ const onSubmit = async (data) => {
             <MdOutlineEmail  style={{ color: 'white', fontSize: '20px' }} />
             </Box>
             <Box sx={{marginLeft:'15px',marginTop: '3px'}}>
-            <Typography variant="h3" sx={{fontSize:'15px',fontWeight:'700',color:'#253745'}}>
+            <Typography variant="h3" sx={{fontSize:'17px',fontWeight:'700',color:'#253745'}}>
               Email Address
             </Typography>
             <Typography  variant="p" sx={contactTextStyle}>

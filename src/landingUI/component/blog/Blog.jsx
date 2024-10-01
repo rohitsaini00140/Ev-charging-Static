@@ -91,7 +91,8 @@ function Blog() {
                       component="div"
                       sx={{
                         margin: "3px 0px",
-                        fontWeight: "600",
+                        color:'#253745',
+                        fontWeight: "700",
                         fontSize: "18px",
                         cursor: "pointer",
                         zIndex: "999",
@@ -105,7 +106,7 @@ function Blog() {
                 {post.title}
                 </Link>
                     </Typography>
-                    <Typography variant="body2" sx={{textAlign:'justify'}} color="text.secondary">
+                    <Typography variant="body2" sx={{textAlign:'justify',fontSize:'14px'}} color="text.secondary">
                     {post.content.split(' ').slice(0, 20).join(' ') + (post.content.split(' ').length > 20 ? '...' : '')}
                   </Typography>
                   </CardContent>
