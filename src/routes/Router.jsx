@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import all component for landing page
-import { Home, Login, Registration, ContactUs,BlogPage, AuthLayout, PublicLayout, ThemeProvider }from "./LandingRouteImports.jsx"
+import { Home, Login, Registration, ContactUs,BlogPage, AuthLayout,Services, PublicLayout, ThemeProvider,About }from "./LandingRouteImports.jsx"
 // import all component for Admin panel
 import {
   ThemeProviderAdmin,
@@ -45,6 +45,8 @@ function Router() {
           <Route path="/" element={<Home />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/blogs" element={< BlogPage/>} />
+          <Route path="/services" element={< Services/>} />
+          <Route path="/about" element={< About/>} />
         </Route>
         <Route
           element={

@@ -42,7 +42,7 @@ function BlogPage() {
 
   return (
     <>
-      <Box className="vnt_bg">
+      <Box className="sevices_bg">
         <Box
           sx={{
             position: "relative",
