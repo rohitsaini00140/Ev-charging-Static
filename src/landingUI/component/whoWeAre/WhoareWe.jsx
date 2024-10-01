@@ -42,7 +42,7 @@ const [energyStorage] = useState(92);
               <Typography variant="body2" sx={{ color: '#253745' ,fontWeight:'700',fontSize:'24px',linHeight: '28px' }}>
                Professional Electric Vechicle Charging Solution For You
               </Typography>
-              <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.875rem',
+              <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.975rem',
           lineHeight: '1.43',display:'block',margin:'5px 0px',
            }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo rem architecto at error explicabo tempora Provident adipisci nemo rem architecto at error explicabo temporaProvident adipisci nemo rem architecto at error explicabo tempora</span>
             </Box>

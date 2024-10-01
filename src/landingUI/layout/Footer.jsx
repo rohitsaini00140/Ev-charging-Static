@@ -111,7 +111,7 @@ function Footer() {
                     color: '#61e93d',
                     transition: '0.20s'
                   }
-                }} href="#" color="#ffffffd1">
+                }} href="/about" color="#ffffffd1">
                   About Us
                 </Link>
               </Typography>

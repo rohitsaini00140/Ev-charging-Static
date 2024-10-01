@@ -7,11 +7,6 @@
 .css-16janke-MuiStack-root>:not(style):not(style) {
   margin: auto !important;
 }
-@media (min-width: 1200px) {
-  .css-19v7jyx-MuiContainer-root {
-      min-width: 1200px;
-  }
-}
 @media (max-width: 768px) {
   .css-1yjnhim-MuiStack-root>:not(style)~:not(style) {
     margin-left: 0px !important;
