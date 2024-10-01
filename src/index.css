@@ -53,6 +53,14 @@
   background-size: cover; 
   height: 500px; 
 }
+.vnt_bg{
+    background-image: url('../public/assets/images/vnt.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 500px;
+  }
+
 .contact_bg {
   background-image: url('../public/assets/images/contact.jpg');
   background-repeat: no-repeat;
@@ -60,6 +68,19 @@
   background-size: cover;
   height: 500px;
 }
+
+.blog_link {
+  text-decoration: none !important;
+  transition: 0.5s;
+  color: rgb(12, 34, 38);
+  cursor: pointer;
+}
+
+.blog_link:hover {
+  color: rgb(255, 102, 0);
+  transition: 0.5s;
+}
+
 @import 'simplebar-react/dist/simplebar.min.css';
 
 
