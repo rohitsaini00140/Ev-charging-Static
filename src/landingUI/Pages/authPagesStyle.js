@@ -36,6 +36,17 @@ export const inputStyles = {
     },
 };
 
+
+export const input_style = {
+    "& .MuiInputLabel-root": {
+      fontSize: "0.9rem",
+    },
+    "& .MuiInputBase-input": {
+      height: '1em'
+      },
+  };
+  
+
 export const FormContainer = styled(Box)(({ theme }) => ({
     width: "100%",
     maxWidth: "480px",
