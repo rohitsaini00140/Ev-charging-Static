@@ -8,7 +8,7 @@ function Services() {
   <Box className ='sevices_bg'>
   </Box>
   <Container>
-   <Typography sx={{margin:'20px 0px',fontWeight:'700'}} variant='h5'>Services</Typography>
+   <Typography sx={{margin:'20px 0px',fontWeight:'700'}} variant='h5'>All Services</Typography>
   </Container>
   </>
   )
