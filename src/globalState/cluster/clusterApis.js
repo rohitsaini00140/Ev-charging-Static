@@ -49,7 +49,6 @@ export const clusterApi = createApi({
         })
     }),
 })
-
 export const {
     useAddClusterMutation,
     useGetClustersQuery,

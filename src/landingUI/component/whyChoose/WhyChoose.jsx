@@ -50,6 +50,7 @@ function WhyChoose() {
         <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.94rem',
         lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
        </Box>
+
       </Grid>
       <Grid item size = {{xs:12, sm:6 ,md:4}} >
       <img
@@ -58,6 +59,8 @@ function WhyChoose() {
               style={{ width: '100%',paddingTop: '60px', height: 'auto', margin: '0 auto' }} // Adjust style as needed
             /> 
       </Grid>
+
+
       <Grid item size = {{xs:12, sm:6 ,md:4}} >
       <Box sx={{ margin: '20px 0px'}}>
       <img
@@ -81,11 +84,10 @@ function WhyChoose() {
          Hight Quality Charger
         </Typography>
         <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.94rem',
-    lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
-
+       lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
        </Box>
       </Grid>
-       </Grid>
+     </Grid>
      </Box>
    </Container>
    </>

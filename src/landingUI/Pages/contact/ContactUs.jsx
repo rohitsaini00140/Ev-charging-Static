@@ -42,46 +42,6 @@ const onSubmit = async (data) => {
             opacity: 0.7,
           }}
         />
-        {/* <Box
-          sx={{
-            height: "90vh",
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: { xs: "center", md: "flex-start" },
-          }}
-        >
-          <Typography
-            variant="h3"
-            sx={{
-              width: {
-                md: "38%",
-                xs: "80%",
-              },
-              color: "white",
-              marginLeft: { xs: "0", sm: "0", md: "5rem" },
-              margin: { xs: "0", sm: "0", md: "0 5rem" },
-              fontWeight: "700",
-              lineHeight: { xs: "42px", sm: "42px", md: "4rem" },
-              fontSize: { xs: "2rem", sm: "2rem", md: "3rem" },
-            }}
-          >
-            Find EV Charging Stations and Get Ready to
-            <Typography
-              variant="h3"
-              sx={{
-                color: "rgb(87, 179, 62)",
-                display: "inline",
-                paddingLeft: "1rem",
-                fontWeight: "700",
-                fontSize: { xs: "2rem", sm: "2rem", md: "3rem" },
-              }}
-            >
-              Go Green
-            </Typography>
-          </Typography>
-        </Box> */}
       </Box>
       {/* // Form start here */}
       <Container>
