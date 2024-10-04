@@ -1,11 +1,12 @@
 import { Box, Typography,TextField,Button  } from "@mui/material";
 import { Grid, Stack, Container} from "@mui/system";
 import { blogpara, recent_img, recenet_haiding ,submitButton,error_position} from "./blogsStyle";
-import { useLocation } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { input_style } from "../authPagesStyle";
 import { blog_schema } from "./blogScema";
+import { useState,useEffect } from "react";
 // import CommentsSection from "./Comment";
 import blogPosts  from "../../../data.json";
 
@@ -17,14 +18,20 @@ const latest_blog  = blogPosts.blogPosts[0]
 
 
 function BlogPage() {
-const { state } = useLocation();
+  const { state } = useLocation();
+  const [comments, setComments] = useState([]);
 
-// const default_blog = blogPosts.blogPosts[0];
-// const [comments, setComments] = useState([]); 
-// const state_comments = state.blogToShow?.comments || [];
+  console.log(comments);
 
-// Condition to determine which comments to send
-// const shouldSendComments = state_comments.length > 0 ? state_comments : default_blog.comments;
+  const default_blog = blogPosts.blogPosts[0];
+
+  // useEffect(() => {
+  //   if (state && Array.isArray(state.comments) && state.comments.length > 0) {
+  //     setComments(state.comments);
+  //   } else {
+  //     setComments([default_blog]);
+  //   }
+  // }, [state]);
 
 const sortedPosts = blog_data.sort(
   (a, b) => new Date(b.date) - new Date(a.date)
