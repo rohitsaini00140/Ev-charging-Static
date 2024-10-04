@@ -7,31 +7,24 @@ import { useForm } from 'react-hook-form';
 import { input_style } from "../authPagesStyle";
 import { blog_schema } from "./blogScema";
 import { useState,useEffect } from "react";
-// import CommentsSection from "./Comment";
+import CommentsSection from "./Comment";
 import blogPosts  from "../../../data.json";
-
-
-// all data for latetst 3 blog showing in page
+// for latest 3 blogs
 const blog_data = blogPosts.blogPosts 
+// fot latest blog
 const latest_blog  = blogPosts.blogPosts[0]
-
-
 
 function BlogPage() {
   const { state } = useLocation();
-  const [comments, setComments] = useState([]);
+  const [stateData, setStateData] = useState([]);
 
-  console.log(comments);
-
-  const default_blog = blogPosts.blogPosts[0];
-
-  // useEffect(() => {
-  //   if (state && Array.isArray(state.comments) && state.comments.length > 0) {
-  //     setComments(state.comments);
-  //   } else {
-  //     setComments([default_blog]);
-  //   }
-  // }, [state]);
+  useEffect(() => {
+    if (state) {
+      setStateData(state.blogToShow);
+    } else {
+      setStateData(latest_blog);
+    }
+  }, [state]);
 
 const sortedPosts = blog_data.sort(
   (a, b) => new Date(b.date) - new Date(a.date)
@@ -76,20 +69,18 @@ const dealfult_value ={
                 sx={{fontWeight: "700", color:'#253745', fontSize: "27px", lineHeight: "35px" }}
                 variant="h3"
               >
-                {state ? state.blogToShow.title : latest_blog.title}
+                {stateData && stateData.title}
               </Typography>
               <img
                 style={{ width: "90%", margin: "20px 0" }}
-                src={state ? state.blogToShow.images : latest_blog.images}
+                src={stateData && stateData.images}
                 alt="VNT Blog"
               />
               <Typography sx={blogpara} variant="p">
-              {state ? state.blogToShow.content : latest_blog.content}
+              {stateData && stateData.content}
               </Typography>
               <Typography sx={{fontWeight:'700',marginTop: '15px',fontSize:'24px',color:'#253745'}} variant="h6">Comments -:</Typography>
-               
-                {/* <CommentsSection  comments = {shouldSendComments}/>  */}
-              
+               <CommentsSection comments = {stateData && stateData.comments}/>
               <Box component="form" onSubmit ={handleSubmit(onSubmit)} sx={{margin:"15px 0px"}}>
              <Typography sx={{fontWeight:'700',fontSize:'24px',color:'#253745'}} variant="h6">Leave Your Comment</Typography>
               <Box sx={{ position: "relative"}}>
