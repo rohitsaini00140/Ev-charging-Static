@@ -8,11 +8,15 @@ import { clusterSchema } from './clusterSchema';
 import { Typography } from '@mui/material';
 import { useAddClusterMutation, useGetClustersQuery, useUpdateClusterMutation } from '../../../../globalState/cluster/clusterApis';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useMemo } from 'react';
 import Alertbar from '../../../component/Alertbar';
 import { inputStyle } from "../../../component/inputStyle"
-import Selector from '../../../component/selector/Selector';
+import { useGetGeocodeQuery } from '../../../../globalState/googleMap/googleMapApis';
+import { setAddress } from '../../../../globalState/googleMap/googleMapSlices';
+import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
+import { useGetCityQuery, useGetCountryQuery, useGetStateQuery } from '../../../../globalState/address/addressApi';
+import { setCountryId, setStateId } from '../../../../globalState/address/addressSlices';
 
 function AddOrUpdateClustersFields() {
     const [snackbar, setSnackbar] = useState({
@@ -23,11 +27,24 @@ function AddOrUpdateClustersFields() {
     let { id } = useParams()
 
     let navigate = useNavigate()
+    let dispatch = useDispatch()
 
     const { pageNo } = useSelector(state => state.cluster);
     const { data, isSuccess } = useGetClustersQuery({ page: pageNo })
+    const { address } = useSelector(state => state.googleMap)
+    const { countryId, stateId } = useSelector(state => state.address)
+    const { data: geoData, isSuccess: geoIsSuccess } = useGetGeocodeQuery({ address })
+    const { data: allCountry, isSuccess: countrySuccess } = useGetCountryQuery()
+    const { data: allState, isSuccess: stateSuccess } = useGetStateQuery(countryId)
+    const { data: allCity, isSuccess: citySuccess } = useGetCityQuery(stateId)
 
     const clusterForUpdate = (isSuccess && data?.data) && data.data.find(ele => ele.id === Number(id))
+
+    const country = countrySuccess && allCountry?.countries
+
+    const states = stateSuccess && allState?.states
+
+    const city = citySuccess && allCity?.cities
 
     const [addCluster] = useAddClusterMutation()
 
@@ -35,9 +52,9 @@ function AddOrUpdateClustersFields() {
 
     const defaultValues = useMemo(() => ({
         name: "",
-        country_id: "",
-        state_id: "",
-        city_id: "",
+        country_id: 0,
+        state_id: 0,
+        city_id: 0,
         location: ""
     }), []);
 
@@ -63,6 +80,22 @@ function AddOrUpdateClustersFields() {
 
     const onSubmit = async (data) => {
         try {
+            const selectedCountry = country.find(c => c.id === Number(data.country_id))?.name || '';
+            const selectedState = states.find(s => s.id === Number(data.state_id))?.name || '';
+            const selectedCity = city.find(ci => ci.id === Number(data.city_id))?.name || '';
+
+            const address = `${data.location}, ${selectedCity}, ${selectedState}, ${selectedCountry}`;
+            dispatch(setAddress(address));
+
+            if (geoIsSuccess && geoData && geoData.results.length > 0) {
+                const { lat, lng } = geoData.results[0].geometry.location;
+                data.latitude = lat;
+                data.longitude = lng;
+            } else {
+                setError("location", { type: "server", message: "Unable to fetch coordinates." });
+                throw new Error('Unable to fetch coordinates.');
+            }
+
             if (id) {
 
                 await updateCluster({ id, updatedClusterData: data }).unwrap();
@@ -79,6 +112,8 @@ function AddOrUpdateClustersFields() {
             } else {
 
                 await addCluster(data).unwrap();
+
+                reset(defaultValues)
 
                 setSnackbar({
                     open: true,
@@ -132,11 +167,14 @@ function AddOrUpdateClustersFields() {
                             {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
-                            <Selector
+                            <SearchableDropdown
+                                options={country.length > 0 ? country : []}
+                                placeholder="Select Country"
                                 value={watch("country_id") || ""}
-                                onChange={(e) => setValue("country_id", e.target.value, { shouldValidate: true })}
-                                placeholder='Select country'
-                                selectType="single"
+                                onChange={(newValue) => setValue("country_id", newValue,
+                                    { shouldValidate: true },
+                                    dispatch(setCountryId(newValue)),
+                                )}
                             />
                             {errors.country_id && <Typography color={"red"} mt={".5rem"}>*{errors.country_id.message}</Typography>}
                         </Stack>
@@ -145,30 +183,24 @@ function AddOrUpdateClustersFields() {
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 1, sm: 2, md: 6 }}
                     >
-                        {/* <Stack width={"100%"}>
-                            <Selector
-                                value={watch("country_id") || ""}
-                                onChange={(e) => setValue("country_id", e.target.value, { shouldValidate: true })}
-                                placeholder='Country'
-                                selectType="single"
-                            />
-                            {errors.country_id && <Typography color={"red"} mt={".5rem"}>*{errors.country_id.message}</Typography>}
-                        </Stack> */}
                         <Stack width={"100%"}>
-                            <Selector
+                            <SearchableDropdown
+                                options={states.length > 0 ? states : []}
+                                placeholder="Select State"
                                 value={watch("state_id") || ""}
-                                onChange={(e) => setValue("state_id", e.target.value, { shouldValidate: true })}
-                                placeholder='Select state'
-                                selectType="single"
+                                onChange={(newValue) => setValue("state_id", newValue,
+                                    { shouldValidate: true },
+                                    dispatch(setStateId(newValue)),
+                                )}
                             />
                             {errors.state_id && <Typography color={"red"} mt={".5rem"}>*{errors.state_id.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
-                            <Selector
+                            <SearchableDropdown
+                                options={city.length > 0 ? city : []}
+                                placeholder="Select City"
                                 value={watch("city_id") || ""}
-                                onChange={(e) => setValue("city_id", e.target.value, { shouldValidate: true })}
-                                placeholder='Select city'
-                                selectType="single"
+                                onChange={(newValue) => setValue("city_id", newValue, { shouldValidate: true })}
                             />
                             {errors.city_id && <Typography color={"red"} mt={".5rem"}>*{errors.city_id.message}</Typography>}
                         </Stack>

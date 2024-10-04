@@ -9,7 +9,7 @@ export const clusterApi = createApi({
     endpoints: (builder) => ({
         addCluster: builder.mutation({
             query: (clusterData) => ({
-                url: "/api/organizations/create",
+                url: "/api/clusters/create",
                 method: "POST",
                 body: clusterData,
             }),
