@@ -1,0 +1,55 @@
+{
+  "blogPosts": [
+    {
+      "id":"0",
+      "blogSubject": "VNT Machine",
+      "title": "Maximizing Solar Yield: A Deep Dive into the Functionalities of String Monitoring Boxes",
+      "posted_date": "05 Sep 2024",
+      "images": "https://vnt.in/wp-content/uploads/2022/01/03-VNT-Logo-Mockup-1-scaled.jpg",
+      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, comes from a line in section 1.10.32.There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dt anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+      "comments": [
+        {
+          "user": "Anil Kumar",
+          "email": "anil@example.com",
+          "comment": "Bahut accha blog hai but need to imporve",
+          "date": "2023-10-02"
+        },
+        {
+          "user": "Sita Kumari",
+          "email": "sita@example.com",
+          "comment": "Yeh vishay bahut rochak hai.",
+          "date": "2023-10-03"
+        }
+      ]
+    },
+    {
+      "id":"1",
+      "blogSubject": "VNT Charging",
+      "title": "Fire Break-out at a Private Pipe Company: A Comprehensive Case Study",
+      "posted_date": "10 Sep 2024",
+      "images": "http://139.59.66.21/static/media/blog3.0b81870c1d489a2d65a7.jpg",
+      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum,comes from a line in section 1.10.32.There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dt anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+      "comments": [
+        {
+          "user": "Rahul Saini",
+          "email": "rahul@example.com",
+          "comment": "Mujhe yeh blog pasand aaya!",
+          "date": "2023-10-05"
+        }
+      ]
+    },
+     {
+      "id":"2",
+      "blogSubject": "VNT Station",
+      "title": "Strategic Solar Integration: Boosting Manufacturing Efficiency With Our Tailored Solution",
+      "posted_date": "20 Sep 2024",
+      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum,comes from a line in section 1.10.32.There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dt anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+      "images": "https://vnt.in/wp-content/uploads/2022/01/03-VNT-Logo-Mockup-1-scaled.jpg",
+     "comments": [
+    {
+    "user": "Rohit Saini",
+    "email": "rohit@example.com",
+    "comment": "I like the blog and i was thinking that this is not relevent for me",
+    "date": "2023-10-05"
+  }
+ ]}]}

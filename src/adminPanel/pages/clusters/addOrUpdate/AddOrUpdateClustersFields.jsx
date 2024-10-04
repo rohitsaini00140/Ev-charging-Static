@@ -66,7 +66,6 @@ function AddOrUpdateClustersFields() {
             if (id) {
 
                 await updateCluster({ id, updatedClusterData: data }).unwrap();
-
                 setSnackbar({
                     open: true,
                     message: 'Cluster successfully updated!',
@@ -198,7 +197,7 @@ function AddOrUpdateClustersFields() {
                                 }
                             }}
                             type='submit'
-                        >
+                            >
                             <Icon
                                 icon="mdi:printer"
                                 style={{ fontSize: "1.2rem", color: "white", marginRight: ".3rem" }}

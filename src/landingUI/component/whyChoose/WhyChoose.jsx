@@ -1,6 +1,7 @@
 import React from 'react'
-import { Container,Box, Typography,Grid } from '@mui/material';
-import { Stack } from '@mui/system';
+import { Container,Box, Typography} from '@mui/material';
+import { Grid,Stack } from "@mui/system";
+
 function WhyChoose() {
  const imageSrc = require('../../img/machine.png');
  const icon1 = require('../../img/icon1.png');
@@ -24,19 +25,18 @@ function WhyChoose() {
       md: '10px 40px',      
     }}}>
       <Grid container spacing={3}>
-      <Grid item xs={12} sm={6}  md={4}>
+      <Grid item size = {{xs:12, sm:6 ,md:4}}>
       <Box sx={{ margin: '20px 0px'}}>
       <img
               src={icon1}
               alt="VNT EV Machine"
               style={{ width: '60px', height: '60px', margin: '0 auto' }} // Adjust style as needed
             /> 
-        <Typography variant='h6' sx={{fontWeight:'600',color:'rgb(12, 34, 38)'}}>
+        <Typography variant='h6' sx={{fontWeight:'700',color:'rgb(12, 34, 38)'}}>
           Fast Charging
         </Typography>
-        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.875rem',
-    lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
-
+        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.94rem',
+       lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
        </Box>
        <Box sx={{ margin: '20px 0px'}}>
       <img
@@ -44,32 +44,34 @@ function WhyChoose() {
               alt="VNT EV Machine"
               style={{ width: '60px', height: '60px', margin: '0 auto' }} // Adjust style as needed
             /> 
-        <Typography variant='h6' sx={{fontWeight:'600',color:'rgb(12, 34, 38)'}}>
+        <Typography variant='h6' sx={{fontWeight:'700',color:'rgb(12, 34, 38)'}}>
           Mangement System
         </Typography>
-        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.875rem',
-    lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
-
+        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.94rem',
+        lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
        </Box>
+
       </Grid>
-      <Grid item xs={12} sm={6}  md={4}>
+      <Grid item size = {{xs:12, sm:6 ,md:4}} >
       <img
               src={imageSrc}
               alt="VNT EV Machine"
               style={{ width: '100%',paddingTop: '60px', height: 'auto', margin: '0 auto' }} // Adjust style as needed
             /> 
       </Grid>
-      <Grid item xs={12} sm={6}  md={4}>
+
+
+      <Grid item size = {{xs:12, sm:6 ,md:4}} >
       <Box sx={{ margin: '20px 0px'}}>
       <img
               src={icon3}
               alt="VNT EV Machine"
               style={{ width: '60px', height: '60px', margin: '0 auto' }} // Adjust style as needed
             /> 
-             <Typography variant='h6' sx={{fontWeight:'600',color:'rgb(12, 34, 38)'}}>
+             <Typography variant='h6' sx={{fontWeight:'700',color:'rgb(12, 34, 38)'}}>
           Renewable Energy
         </Typography>
-        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.875rem',
+        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.94rem',
     lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
        </Box>
        <Box sx={{ margin: '20px 0px'}}>
@@ -78,15 +80,14 @@ function WhyChoose() {
               alt="VNT EV Machine"
               style={{ width: '60px', height: '40px', margin: '0 auto' }} // Adjust style as needed
             /> 
- <Typography variant='h6' sx={{fontWeight:'600',color:'rgb(12, 34, 38)'}}>
+ <Typography variant='h6' sx={{fontWeight:'700',color:'rgb(12, 34, 38)'}}>
          Hight Quality Charger
         </Typography>
-        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.875rem',
-    lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
-
+        <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.94rem',
+       lineHeight: '1.43',display:'block',margin:'5px 0px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo, rem architecto at error explicabo tempora molestias consequatur recusandae ratione</span>
        </Box>
       </Grid>
-       </Grid>
+     </Grid>
      </Box>
    </Container>
    </>

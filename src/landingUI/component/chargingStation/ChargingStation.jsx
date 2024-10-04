@@ -1,23 +1,23 @@
-import { Container, Grid,Box ,Stack,Button} from "@mui/material";
+import { Container,Box ,Stack,Button} from "@mui/material";
 import { Typography } from "@mui/material";
 import React from "react";
 import { FaCar } from "react-icons/fa";
 import { TbBulbFilled } from "react-icons/tb";
-
+import { Grid } from "@mui/system";
 function ChargingStation() {
 const imageSrc = require("../../img/car_new.png");
   return (
     <Container>
-    <Grid container spacing={3} sx={{margin:'10px 0px'}}>
-  <Grid item xs={12} md={6}>
-   <span style={{ color: 'rgb(87, 179, 62)', fontWeight: '600',fontSize:'18px' }}>About VNT EV</span>
+    <Grid container spacing={3} sx={{margin:'15px 0px'}}>
+  <Grid item size = {{xs:12,sm:6}}>
+    <Typography variant="h6" sx={{color: 'rgb(87, 179, 62)', fontWeight: '700',fontSize:'18px'}}>About VNT EV</Typography>
     <Typography
       variant="h6"
       sx={{ fontWeight: '700', margin:'7px 0px', color: '#253745',fontSize: '1.6rem',
         lineHeight: '30px',textTransform:'capitalize' }}
     >We provide  best solutions for <br /> your electric vehicle
     </Typography>
-    <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.875rem',
+    <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.975rem',
     lineHeight: '1.43',display:'block',margin:'5px 0px',
     }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo rem architecto at error explicabo tempora</span>
     <Stack direction="row" spacing={2} sx={{margin:'30px 0px'}}>
@@ -55,8 +55,8 @@ const imageSrc = require("../../img/car_new.png");
           variant="body2"
           sx={{ 
             color: 'rgba(0, 0, 0, 0.6)',
-            fontSize: '0.875rem',
-            lineHeight: '1.16',
+            fontSize: '15px',
+            lineHeight: '1.43',
             paddingRight:{
               xs: '16px',  // 16px padding on extra-small screens
               sm: '10px',  // 32px padding on small screens
@@ -89,7 +89,7 @@ const imageSrc = require("../../img/car_new.png");
           boxShadow: '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
           background: '#253745' 
         }} 
-      >  <FaCar style={{ fontSize: '25px', color: 'white' }} />  </Box>
+      ><FaCar style={{ fontSize: '25px', color: 'white' }} />  </Box>
       <Stack sx={{ paddingLeft:'18px'}}>
         <Typography
           variant="h6"
@@ -107,8 +107,8 @@ const imageSrc = require("../../img/car_new.png");
           variant="body2"
           sx={{ 
             color: 'rgba(0, 0, 0, 0.6)',
-            fontSize: '0.875rem',
-            lineHeight: '1.16',
+            fontSize: '15px',
+            lineHeight: '1.43',
             paddingRight:{
               xs: '16px',  // 16px padding on extra-small screens
               sm: '10px',  // 32px padding on small screens
@@ -127,7 +127,7 @@ const imageSrc = require("../../img/car_new.png");
      More About Us
     </Button>
   </Grid>
-  <Grid item xs={12} md={6}>
+  <Grid item size = {{xs:12,sm:6}}>
     <img
       src={imageSrc}
       alt="VNT EV Machine"

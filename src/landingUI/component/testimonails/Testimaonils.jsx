@@ -1,8 +1,10 @@
 import React from 'react'
 import {Card, CardContent, CardMedia } from '@mui/material';
-import { Stack,Container,Grid,Typography } from "@mui/material";
+import { Stack,Container,Typography } from "@mui/material";
 import Slider from 'react-slick';
 import { RiDoubleQuotesR } from "react-icons/ri";
+import { Grid } from "@mui/system";
+
 
 const blogPosts = [
     {
@@ -82,7 +84,7 @@ function Testimaonils() {
     <Stack sx={{ background: '#02121e', padding: '60px 0', marginTop:'50px' }}>
     <Container>
     <Grid container spacing={3}>
-    <Grid item xs={12}  md={6} sx={{padding:{
+    <Grid item size = {{xs:12,md:6}} sx={{padding:{
   xs: '10px 10px',    
   sm: '10px 10px',    
   md: '10px 50px',    
@@ -91,8 +93,8 @@ function Testimaonils() {
     }
        
     }}>
-    <span style={{ color: 'rgb(87, 179, 62)', textTransform:'uppercase', fontWeight: '600',fontSize:'16px' }}>Testimonials</span>
-    <Typography variant="h6" sx={{fontWeight:'600', fontSize:'30px', color: '#fff' , lineHeight:'38px',marginTop:'13px'}}>
+    <span style={{ color: 'rgb(87, 179, 62)', textTransform:'uppercase', fontWeight: '700',fontSize:'16px' }}>Testimonials</span>
+    <Typography variant="h6" sx={{fontWeight:'700', fontSize:'30px', color: '#fff' , lineHeight:'38px',marginTop:'13px'}}>
                 We are Trusted Over 40+ Countries WorldWide
             </Typography>
             <Typography variant="p" sx={{ fontSize:'14px', textAlign:'justify', display:'block', color: '#fff9',marginTop:'13px'}}>
@@ -100,18 +102,18 @@ function Testimaonils() {
             </Typography>
 
     </Grid>
-    <Grid item xs={12}  md={6}>
+    <Grid item size = {{xs:12,md:6}}>
     <Slider {...settings} sx={{marginTop: '30px'}}>
           {blogPosts.map((post, index) => (
             <div key={index}>
               <Card sx={{ margin: '0px 10px',padding: {
-                  xs: '30px 10px',    
-                  sm: '30px 0px',    
+                  xs: '10px 20px',    
+                  sm: '10px 20px',    
                   md: '30px 30px',    
                   lg: '30px 3px',  
                   xl: '30px 30px', 
               } }}>
-              <Typography sx={{fontStyle:'oblique'}} variant="body2" color="text.secondary">
+                 <Typography  variant="body2" sx={{fontSize:'15px',lineHeight:'1.55',textAlign:'justify'}} color="text.secondary">
                     {post.content}
                   </Typography>
                   <Grid container spacing={3}>
@@ -132,7 +134,7 @@ function Testimaonils() {
         variant="h5" 
         component="div" 
         sx={{
-          fontWeight: '600',
+          fontWeight: '700',
           fontSize: '18px',
           cursor: 'pointer',
           zIndex: '999',

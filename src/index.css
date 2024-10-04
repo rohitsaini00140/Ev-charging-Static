@@ -7,17 +7,6 @@
 .css-16janke-MuiStack-root>:not(style):not(style) {
   margin: auto !important;
 }
-.css-hud6bj-MuiLinearProgress-bar1 {
-  background-color: #56a745 !important;
-}
-.css-1e8gvwt-MuiLinearProgress-bar1 {
-  background-color: #253644 !important;
-}
-@media (min-width: 992px) {
-  .css-19v7jyx-MuiContainer-root {
-    max-width: 1200px !important;
-  }
-}
 @media (max-width: 768px) {
   .css-1yjnhim-MuiStack-root>:not(style)~:not(style) {
     margin-left: 0px !important;
@@ -54,11 +43,22 @@
   height: 500px; 
 }
 .vnt_bg{
+     position: relative; /* Position ko relative karna hoga */
     background-image: url('../public/assets/images/vnt.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     height: 500px;
+  }
+  .vnt_bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #00000036; /* Light black overlay */
+    z-index: 0; /* Peeche rakhne ke liye */
   }
 
 .contact_bg {
@@ -67,6 +67,25 @@
   background-position: center center;
   background-size: cover;
   height: 500px;
+}
+
+.sevices_bg {
+  position: relative; /* Position ko relative karna hoga */
+  background-image: url('../src/landingUI/img/services.jfif');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 500px;
+}
+.sevices_bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #00000061; /* Light black overlay */
+  z-index: 0; /* Peeche rakhne ke liye */
 }
 
 .blog_link {
@@ -79,6 +98,38 @@
 .blog_link:hover {
   color: rgb(255, 102, 0);
   transition: 0.5s;
+}
+.comment{
+  margin: 20px 0px;
+}
+.comment_name{
+  font-size: 15px;
+  color: #253745;
+}
+.comment button{
+border: none;
+background: none;
+}
+.reply {
+  color: #253745;
+  font-weight: 700;
+  margin-left: 12px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.likes{
+  margin-left: 8px;
+}
+.comment p{
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.comment_text{
+    margin: 2px 0px;
+    display: block;
+    text-align: justify;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
 }
 
 @import 'simplebar-react/dist/simplebar.min.css';

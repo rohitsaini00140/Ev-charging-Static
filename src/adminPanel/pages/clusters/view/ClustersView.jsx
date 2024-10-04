@@ -30,6 +30,8 @@ function ClustersView() {
     const { data, isSuccess } = useGetClustersQuery({ page: pageNo });
 
     const allClusterData = isSuccess && data.data;
+    console.log(allClusterData);
+    
     const paginationData = isSuccess && data;
 
     const { last_page } = paginationData;
