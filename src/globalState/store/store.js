@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { clusterApi } from "../cluster/clusterApis";
 import { zoneApi } from "../zone/zoneApis";
 import { userApi } from "../userAuth/userApis";
+import { projectApi } from "../projects/projectsApis";
 import { googleMapApi } from "../googleMap/googleMapApis";
 import { addressApi } from "../address/addressApi";
 import clusterSlices from "../cluster/clusterSlices";
@@ -14,6 +15,7 @@ export const store = configureStore({
         [clusterApi.reducerPath]: clusterApi.reducer,
         [zoneApi.reducerPath]: zoneApi.reducer,
         [userApi.reducerPath]: userApi.reducer,
+        [projectApi.reducerPath]: projectApi.reducer,
         [googleMapApi.reducerPath]: googleMapApi.reducer,
         [addressApi.reducerPath]: addressApi.reducer,
         cluster: clusterSlices,
@@ -26,6 +28,7 @@ export const store = configureStore({
             clusterApi.middleware,
             zoneApi.middleware,
             userApi.middleware,
+            projectApi.middleware,
             googleMapApi.middleware,
             addressApi.middleware
         )

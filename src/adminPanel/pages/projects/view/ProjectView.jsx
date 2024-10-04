@@ -10,14 +10,17 @@ import Iconify from '../../../component/Iconify';
 import Scrollbar from '../../../component/scrollbar/Scrollbar';
 import { Link } from 'react-router-dom';
 import TablePagination from '../../../component/TablePagination';
-import { projectData } from './projectData';
 import ProjectTableToolbar from './ProjectTableToolbar';
 import ProjectTableHead from './ProjectTableHead';
 import ProjectTableRow from './ProjectTableRow';
-
+import { StyledTableCell,StyledTableRow} from '../../../component/tableStyle';
+import { useGetProjectsQuery } from '../../../../globalState/projects/projectsApis';
 // ----------------------------------------------------------------------
 
 function ProjectView() {
+
+  const { data, isSuccess } = useGetProjectsQuery();
+  const allProjectsData = isSuccess && data.data;
 
   return (
     <Container>
@@ -46,17 +49,23 @@ function ProjectView() {
         <Scrollbar>
           <TableContainer sx={{ overflow: 'unset' }}>
             <Table sx={{ minWidth: 800 }}>
-              <ProjectTableHead />
+              <ProjectTableHead allProjectsData = {allProjectsData} />
               <TableBody>
-                <ProjectTableRow />
+                {allProjectsData.length > 0 ? <ProjectTableRow allProjectsData = {allProjectsData} /> 
+                :
+                <StyledTableRow>
+                <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
+                <Typography color="white">Empty</Typography>
+                </StyledTableCell>
+              </StyledTableRow>
+                }
               </TableBody>
             </Table>
           </TableContainer>
         </Scrollbar>
-        {(projectData.length > 0) && <TablePagination />}
+        {(allProjectsData.length > 0) && <TablePagination />}
       </Card>
     </Container>
   );
 }
-
 export default ProjectView;

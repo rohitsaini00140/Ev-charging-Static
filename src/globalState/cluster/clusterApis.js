@@ -32,6 +32,7 @@ export const clusterApi = createApi({
             }),
             invalidatesTags: ['cluster']
         }),
+
         softDeleteCluster: builder.mutation({
             query: ({ id, softDeletedClusterData }) => ({
                 url: `api/clusters/soft-delete/${id}`,
@@ -40,6 +41,8 @@ export const clusterApi = createApi({
             }),
             invalidatesTags: ['cluster']
         }),
+        
+        
         restoreDeletedCluster: builder.mutation({
             query: (id) => ({
                 url: `api/clusters/restore/${id}`,
