@@ -43,7 +43,7 @@ export const clusterApi = createApi({
         restoreDeletedCluster: builder.mutation({
             query: (id) => ({
                 url: `api/organizations/restore/${id}`,
-                method: "POST"
+                method: "POST",
             }),
             invalidatesTags: ['cluster']
         })
