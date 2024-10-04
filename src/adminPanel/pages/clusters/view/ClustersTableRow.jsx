@@ -30,7 +30,6 @@ function ClustersTableRow({ allClusterData, currentPageNo }) {
         restoreDeletedCluster(id)
     }
 
-
     return (
         <>
             {allClusterData.length > 0
@@ -50,16 +49,21 @@ function ClustersTableRow({ allClusterData, currentPageNo }) {
                             {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.name}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.email}
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.country_name}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.address}
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.state_name}
                         </StyledTableCell>
-                        <StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.city_name}
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.location}
+                        </StyledTableCell>
+                          <StyledTableCell>
                             <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
-                        </StyledTableCell>
-                        <StyledTableCell color={"#222245"}>{loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : (new Date(data.created_at).toLocaleString())}</StyledTableCell>
-                        <StyledTableCell>
+                         </StyledTableCell> 
+                          <StyledTableCell>
                             {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
                                 data={data}
                                 activeOrInactive={data.deleted_at}
@@ -78,5 +82,4 @@ function ClustersTableRow({ allClusterData, currentPageNo }) {
         </>
     );
 }
-
 export default ClustersTableRow;

@@ -6,8 +6,11 @@ import "slick-carousel/slick/slick-theme.css";
 import "./blog.css";
 import { Link } from "react-router-dom";
 import { Container } from "@mui/system";
-import { blogPosts } from "./Blogdata";
+// import { blogPosts } from "./Blogdata";
 // Sample blog posts
+import blogPosts  from "../../../data.json";
+
+const blogPosts_data = blogPosts?.blogPosts || [];
 
 function Blog() {
   const settings = {
@@ -74,7 +77,7 @@ function Blog() {
         </Typography>
         <Container>
           <Slider {...settings} sx={{ marginTop: "30px" }}>
-            {blogPosts.map((post, index) => (
+            {blogPosts_data.map((post, index) => (
               <div key={index}>
                 <Card sx={{ margin: "0px 10px" }}>
                   <CardMedia
@@ -82,7 +85,7 @@ function Blog() {
                     alt={post.title}
                     height="250"
                     borderRadius="5px"
-                    image={post.image}
+                    image={post.images}
                     title={post.title}
                   />
                   <CardContent>
@@ -102,7 +105,7 @@ function Blog() {
                         },
                       }}
                     >
-              <Link className="blog_link" to= "/blogs" state={{ blogToShow: post }}>
+                 <Link className="blog_link" to= "/blogs" state={{ blogToShow: post }}>
                 {post.title}
                 </Link>
                     </Typography>

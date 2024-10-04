@@ -49,6 +49,16 @@ export const submitButton = {
   color: 'white',
   background: 'rgb(87, 179, 62)',
 };
-
+export const replyButton = {
+  fontSize:'13px',fontWeight:'700',marginTop:'5px',color:'rgb(255, 102, 0)',cursor:'pointer'
+}
+export const read_more = {
+    color:'rgb(255, 102, 0)',
+    fontWeight: '600',
+    fontSize: '13px',
+    paddingLeft: '10px',
+    margin: '-5px',
+    textTransform: 'capitalize'
+}
 
 

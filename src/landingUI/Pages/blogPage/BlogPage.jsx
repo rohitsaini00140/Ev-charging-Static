@@ -1,27 +1,37 @@
 import { Box, Typography,TextField,Button  } from "@mui/material";
 import { Grid, Stack, Container} from "@mui/system";
 import { blogpara, recent_img, recenet_haiding ,submitButton,error_position} from "./blogsStyle";
-import { useLocation } from "react-router-dom";
-import { blogPosts, deafult_blog } from "../../component/blog/Blogdata";
+import { useLocation} from "react-router-dom";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { input_style } from "../authPagesStyle";
 import { blog_schema } from "./blogScema";
+import { useState,useEffect } from "react";
+import CommentsSection from "./Comment";
+import blogPosts  from "../../../data.json";
+// for latest 3 blogs
+const blog_data = blogPosts.blogPosts 
+// fot latest blog
+const latest_blog  = blogPosts.blogPosts[0]
 
+function BlogPage() {
+  const { state } = useLocation();
+  const [stateData, setStateData] = useState([]);
 
+  useEffect(() => {
+    if (state) {
+      setStateData(state.blogToShow);
+    } else {
+      setStateData(latest_blog);
+    }
+  }, [state]);
 
-// short the data according to latest dates start here
-const sortedPosts = blogPosts.sort(
+const sortedPosts = blog_data.sort(
   (a, b) => new Date(b.date) - new Date(a.date)
 );
 const latestThreePosts = sortedPosts.slice(0, 3);
-// short the data according to latest dates end here
 
-function BlogPage() {
-
-  const { state } = useLocation();
-
-  const dealfult_value ={
+const dealfult_value ={
     name:'',
     email:'',
     message:''
@@ -59,16 +69,18 @@ function BlogPage() {
                 sx={{fontWeight: "700", color:'#253745', fontSize: "27px", lineHeight: "35px" }}
                 variant="h3"
               >
-                {state ? state.blogToShow.title : deafult_blog.title}
+                {stateData && stateData.title}
               </Typography>
               <img
                 style={{ width: "90%", margin: "20px 0" }}
-                src={state ? state.blogToShow.image : deafult_blog.image}
+                src={stateData && stateData.images}
                 alt="VNT Blog"
               />
               <Typography sx={blogpara} variant="p">
-                {state ? state.blogToShow.content : deafult_blog.content}
+              {stateData && stateData.content}
               </Typography>
+              <Typography sx={{fontWeight:'700',marginTop: '15px',fontSize:'24px',color:'#253745'}} variant="h6">Comments -:</Typography>
+               <CommentsSection comments = {stateData && stateData.comments}/>
               <Box component="form" onSubmit ={handleSubmit(onSubmit)} sx={{margin:"15px 0px"}}>
              <Typography sx={{fontWeight:'700',fontSize:'24px',color:'#253745'}} variant="h6">Leave Your Comment</Typography>
               <Box sx={{ position: "relative"}}>
@@ -102,7 +114,7 @@ function BlogPage() {
                 }}
                 variant="h5"
               >
-                Recent Post
+              Recent Post
               </Typography>
               {latestThreePosts.map((post, index) => (
                 <Stack
@@ -112,7 +124,7 @@ function BlogPage() {
                   key={index}
                 >
                   <Box item>
-                    <img style={recent_img} src={post.image} alt="" />
+                    <img style={recent_img} src={post.images} alt="" />
                   </Box>
                   <Box item>
                     <Typography
@@ -141,7 +153,7 @@ function BlogPage() {
                       variant="p"
                     >
                       <b style={{ color: "#253745" }}>Posted Date </b>:{" "}
-                      {post.date}
+                      {post.posted_date}
                     </Typography>
                   </Box>
                 </Stack>

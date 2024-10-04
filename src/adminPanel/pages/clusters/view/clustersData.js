@@ -1,10 +1,11 @@
 export const headLabel = [
-    { id: "slNo.", label: "SLNo.", align: "center" },
+    { id: "slNo.", label: "SL No.", align: "center" },
     { id: 'name', label: 'Name' },
-    { id: 'email', label: 'EmailId' },
-    { id: 'address', label: 'Address' },
-    { id: "status", label: "Status" },
-    { id: 'createdAt', label: 'CreatedAt' },
+    { id: 'country_name', label: 'Country Name' },
+    { id: 'state_name', label: 'State Name' },
+    { id: "city_name", label: "City Name"},
+    { id: 'location', label: 'Location' },
+    { id: 'status', label: 'Status' },
     { id: 'action', label: 'Action', align: "center" }
 ]
 
