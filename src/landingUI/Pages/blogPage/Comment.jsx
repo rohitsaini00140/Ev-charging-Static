@@ -1,10 +1,8 @@
 import { Typography,Button,Box } from '@mui/material';
 import React, { useState } from 'react';
-// import { FaRegThumbsUp } from "react-icons/fa";
 import {read_more } from './blogsStyle';
 
-const Comment = ({ comment }) => {
-
+     const Comment = ({ comment }) => {
     const [isExpanded, setIsExpanded] = useState(false);
      const handleTogglereply = () => {
       setIsExpanded(!isExpanded);
@@ -27,9 +25,9 @@ const Comment = ({ comment }) => {
     const comments = props.comments
     return (
         <div>
-            {comments.map(comment => (
+         {Array.isArray(comments) && comments.map(comment => (
                 <Comment key={comment.id} comment={comment}/>
-            ))}
+            ))} 
         </div>
     );
 };

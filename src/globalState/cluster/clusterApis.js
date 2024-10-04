@@ -17,7 +17,7 @@ export const clusterApi = createApi({
         }),
         getClusters: builder.query({
             query: ({ page }) => ({
-                url: `/api/organizations/list?page=${page}`
+                url: `/api/clusters/list?page=${page}`
             }),
             providesTags: ['cluster'],
         }),
@@ -26,7 +26,7 @@ export const clusterApi = createApi({
         // }),
         updateCluster: builder.mutation({
             query: ({ id, updatedClusterData }) => ({
-                url: `/api/organizations/update/${id}`,
+                url: `/api/clusters/update/${id}`,
                 method: "PUT",
                 body: updatedClusterData
             }),
@@ -34,7 +34,7 @@ export const clusterApi = createApi({
         }),
         softDeleteCluster: builder.mutation({
             query: ({ id, softDeletedClusterData }) => ({
-                url: `api/organizations/soft-delete/${id}`,
+                url: `api/clusters/soft-delete/${id}`,
                 method: "POST",
                 body: softDeletedClusterData
             }),
@@ -42,7 +42,7 @@ export const clusterApi = createApi({
         }),
         restoreDeletedCluster: builder.mutation({
             query: (id) => ({
-                url: `api/organizations/restore/${id}`,
+                url: `api/clusters/restore/${id}`,
                 method: "POST"
             }),
             invalidatesTags: ['cluster']
