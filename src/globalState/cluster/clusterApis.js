@@ -15,6 +15,12 @@ export const clusterApi = createApi({
             }),
             invalidatesTags: ['cluster']
         }),
+        getAllClusters: builder.query({
+            query: () => ({
+                url: `/api/clusters`
+            }),
+            providesTags: ['cluster'],
+        }),
 
         getClusters: builder.query({
             query: ({ page }) => `/clusters/list?page=${page}`,
@@ -60,8 +66,12 @@ export const clusterApi = createApi({
 export const {
     useAddClusterMutation,
     useGetClustersQuery,
+<<<<<<< HEAD
+    useGetAllClustersQuery,
+=======
     useGetClusterByIdQuery,
     useGetFilteredClusterQuery,
+>>>>>>> 0f053c7021980869c17df0174aeffa012a93dbce
     useUpdateClusterMutation,
     useSoftDeleteClusterMutation,
     useRestoreDeletedClusterMutation

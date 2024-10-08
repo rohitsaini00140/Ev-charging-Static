@@ -8,7 +8,7 @@ export const projectApi = createApi({
     tagTypes: ["Projects"],
     endpoints: (builder) => ({
         getProjects: builder.query({
-            query: () => `/api/projects/list`,
+            query: ({page}) => `/api/projects/list?page=${page}`,
             providesTags: ['Projects'],
         }),
         softDeleteProjects: builder.mutation({
@@ -19,17 +19,24 @@ export const projectApi = createApi({
             }),
             invalidatesTags: ['Projects'],
         }),
-        
         softRestoreProjects: builder.mutation({
-            query: ({ id, softRestoredProjectsData }) => ({
+            query: (id) => ({
                 url: `api/projects/restore/${id}`,
                 method: "POST",
-                body: softRestoredProjectsData,
             }),
             invalidatesTags: ['Projects'],
         }),
+        addProjects: builder.mutation({
+            query: (projectsData) => ({
+                url: "/api/projects/create",
+                method: "POST",
+                body: projectsData,
+            }),
+            invalidatesTags: ['cluster']
+        }),
+
+
     }),
 });
-
 // Export the auto-generated hooks
-export const { useGetProjectsQuery, useSoftDeleteProjectsMutation,useSoftRestoreProjectsMutation } = projectApi;
+export const { useGetProjectsQuery, useSoftDeleteProjectsMutation,useSoftRestoreProjectsMutation,useAddProjectsMutation } = projectApi;

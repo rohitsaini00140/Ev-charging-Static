@@ -11,11 +11,8 @@ import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import { Skeleton } from '@mui/material';
 // ----------------------------------------------------------------------
 
-function ProjectTableRow(props) {
-
+function ProjectTableRow({allProjectsData,currentpage}) {
     const [loading, setLoading] = useState(true);
-    const allprojectData = props.allProjectsData || []
-
     useEffect(() => {
         const timer = setTimeout(() => setLoading(false), 1000);
         return () => clearTimeout(timer);
@@ -28,24 +25,27 @@ function ProjectTableRow(props) {
         let dataId = data.id
         softDeleteCluster({ id: dataId, softDeletedProjectsData: data })
     }
-
     function onRestoreData(id) {
         restoreDeletedCluster(id)
     }
     return (
         <>
-            {allprojectData.length > 0
+            {allProjectsData.length > 0
                 ?
-                allprojectData.map((data, i) => (
+                allProjectsData.map((data, i) => (
                     <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.ID}>
                         <StyledTableCell padding="checkbox">
                             <Checkbox disableFocusRipple
-                            // onChange={(e) => onHandleChange(e.target.checked, data["ID"])}
-                            // checked={selectedCategoryId.includes(data["ID"])}
                             />
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : i+1}
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : ((currentpage - 1) * 10 + (i + 1))}
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.cluster_name}
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
+                        {loading ? (<Skeleton animation="pulse" />) : (data.user_name ? data.user_name : '-')}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
                          {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.project_name}
@@ -53,12 +53,8 @@ function ProjectTableRow(props) {
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.project_location}
                         </StyledTableCell>
-                        <StyledTableCell color={"#222245"}>
-                        {loading ? (<Skeleton animation="pulse" />) : (data.user_name ? data.user_name : '-')}
-                        </StyledTableCell>
-                        <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.cluster_name}
-                        </StyledTableCell>
+                       
+                       
                         <StyledTableCell>
                             <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
                          </StyledTableCell> 

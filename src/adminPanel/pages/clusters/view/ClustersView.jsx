@@ -20,9 +20,7 @@ import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 
 
 // ----------------------------------------------------------------------
-
 function ClustersView() {
-
     const dispatch = useDispatch()
 
     const { pageNo, searchClusterKeywords } = useSelector(state => state.cluster);
@@ -39,11 +37,11 @@ function ClustersView() {
 
     const { last_page } = paginationFliteredData;
 
+
     const handlePageChange = (event, value) => {
         sessionStorage.setItem('clusterListPageNo', JSON.stringify(value));
         dispatch(setClusterListPageNo(value));
     };
-
     return (
         <Container>
             <Stack
