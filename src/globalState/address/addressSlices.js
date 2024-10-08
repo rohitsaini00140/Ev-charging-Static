@@ -10,9 +10,11 @@ const addressSlice = createSlice({
     },
     reducers: {
         setCountryId: (state, action) => {
+            console.log(action.payload)
             state.countryId = action.payload
         },
         setStateId: (state, action) => {
+            console.log(action.payload)
             state.stateId = action.payload
         }
     },
