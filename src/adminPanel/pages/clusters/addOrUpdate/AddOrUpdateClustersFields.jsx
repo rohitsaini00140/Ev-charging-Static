@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { clusterSchema } from './clusterSchema';
 import { Typography } from '@mui/material';
-import { useAddClusterMutation, useGetClustersQuery, useUpdateClusterMutation } from '../../../../globalState/cluster/clusterApis';
+import { useAddClusterMutation, useGetClusterByIdQuery, useGetClustersQuery, useUpdateClusterMutation } from '../../../../globalState/cluster/clusterApis';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useMemo } from 'react';
@@ -30,7 +30,8 @@ function AddOrUpdateClustersFields() {
     let dispatch = useDispatch()
 
     const { pageNo } = useSelector(state => state.cluster);
-    const { data, isSuccess } = useGetClustersQuery({ page: pageNo })
+    // const { data, isSuccess } = useGetClustersQuery({ page: pageNo })
+    const { data, isSuccess } = useGetClusterByIdQuery(id)
     const { address } = useSelector(state => state.googleMap)
     const { countryId, stateId } = useSelector(state => state.address)
     const { data: geoData, isSuccess: geoIsSuccess } = useGetGeocodeQuery({ address })
@@ -38,7 +39,9 @@ function AddOrUpdateClustersFields() {
     const { data: allState, isSuccess: stateSuccess } = useGetStateQuery(countryId)
     const { data: allCity, isSuccess: citySuccess } = useGetCityQuery(stateId)
 
-    const clusterForUpdate = (isSuccess && data?.data) && data.data.find(ele => ele.id === Number(id))
+    const clusterForUpdate = (isSuccess && data)
+
+    console.log(clusterForUpdate)
 
     const country = countrySuccess && allCountry?.countries
 
@@ -67,11 +70,13 @@ function AddOrUpdateClustersFields() {
         if (id && clusterForUpdate) {
             reset({
                 name: clusterForUpdate.name || "",
-                country_id: clusterForUpdate.country_id || "",
-                state_id: clusterForUpdate.state_id || "",
-                city_id: clusterForUpdate.city_id || "",
+                country_id: clusterForUpdate.country_id || 0,
+                state_id: clusterForUpdate.state_id || 0,
+                city_id: clusterForUpdate.city_id || 0,
                 location: clusterForUpdate.location || "",
             });
+            dispatch(setCountryId(clusterForUpdate.country_id))
+            dispatch(setStateId(clusterForUpdate.state_id))
         } else {
             reset(defaultValues);
         }
@@ -169,7 +174,7 @@ function AddOrUpdateClustersFields() {
                             <SearchableDropdown
                                 options={country.length > 0 ? country : []}
                                 placeholder="Select Country"
-                                value={watch("country_id") || ""}
+                                value={watch("country_id") || 0}
                                 onChange={(newValue) => setValue("country_id", newValue,
                                     { shouldValidate: true },
                                     dispatch(setCountryId(newValue)),
@@ -186,7 +191,7 @@ function AddOrUpdateClustersFields() {
                             <SearchableDropdown
                                 options={states.length > 0 ? states : []}
                                 placeholder="Select State"
-                                value={watch("state_id") || ""}
+                                value={watch("state_id") || 0}
                                 onChange={(newValue) => setValue("state_id", newValue,
                                     { shouldValidate: true },
                                     dispatch(setStateId(newValue)),
@@ -198,7 +203,7 @@ function AddOrUpdateClustersFields() {
                             <SearchableDropdown
                                 options={city.length > 0 ? city : []}
                                 placeholder="Select City"
-                                value={watch("city_id") || ""}
+                                value={watch("city_id") || 0}
                                 onChange={(newValue) => setValue("city_id", newValue, { shouldValidate: true })}
                             />
                             {errors.city_id && <Typography color={"red"} mt={".5rem"}>*{errors.city_id.message}</Typography>}
@@ -228,7 +233,7 @@ function AddOrUpdateClustersFields() {
                                 }
                             }}
                             type='submit'
-                            >
+                        >
                             <Icon
                                 icon="mdi:printer"
                                 style={{ fontSize: "1.2rem", color: "white", marginRight: ".3rem" }}
@@ -248,4 +253,4 @@ function AddOrUpdateClustersFields() {
     )
 }
 
-export default AddOrUpdateClustersFields
+export default AddOrUpdateClustersFields;
