@@ -66,12 +66,9 @@ export const clusterApi = createApi({
 export const {
     useAddClusterMutation,
     useGetClustersQuery,
-<<<<<<< HEAD
     useGetAllClustersQuery,
-=======
     useGetClusterByIdQuery,
     useGetFilteredClusterQuery,
->>>>>>> 0f053c7021980869c17df0174aeffa012a93dbce
     useUpdateClusterMutation,
     useSoftDeleteClusterMutation,
     useRestoreDeletedClusterMutation
