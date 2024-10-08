@@ -57,8 +57,7 @@ function AddOrUpdateClustersFields() {
         city_id: 0,
         location: ""
     }), []);
-
-
+    
     const { register, handleSubmit, setError, setValue, reset, watch, formState: { errors } } = useForm({
         resolver: zodResolver(clusterSchema),
         defaultValues: defaultValues

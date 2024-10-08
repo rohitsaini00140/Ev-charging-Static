@@ -1,15 +1,32 @@
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import Selector from '../../../component/selector/Selector';
 import { Button } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { projectSchema } from './projectSchema';
 import { Typography } from '@mui/material';
-import { inputStyle } from '../../../component/inputStyle';
 
+import { inputStyle } from '../../../component/inputStyle';
+import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
+import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
+import { useState } from 'react';
+import Alertbar from '../../../component/Alertbar';
+import { useAddProjectsMutation } from '../../../../globalState/projects/projectsApis';
 function AddOrUpdateProjectFields() {
+
+const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: '',
+        severity: 'success'
+});
+
+
+const [addProjects] = useAddProjectsMutation()
+
+
+ const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
+ const allcluters = clustersSuccess && clusters.clusters
 
     const defaultValues = {
         name: "",
@@ -17,21 +34,42 @@ function AddOrUpdateProjectFields() {
         user_id: "",
         location: ""
     }
-
-    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm({
+    const { register, handleSubmit, watch,reset, setValue, formState: { errors } } = useForm({
         resolver: zodResolver(projectSchema),
         defaultValues: defaultValues
     });
-
+    
     const onSubmit = async (data) => {
         try {
             console.log(data)
+            await addProjects(data).unwrap();
+            reset(defaultValues);
+            setSnackbar({
+                open: true,
+                message: 'Projects successfully added!',
+                severity: 'success'
+            });
         } catch (error) {
             console.log(error)
+            setSnackbar({
+                open: true,
+                message: 'Error while submitting.',
+                severity: 'error'
+            });
         }
     };
 
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbar((prevState) => ({
+            ...prevState,
+            open: false
+        }));
+    };
     return (
+        <>
         <form fullWidth onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={{ xs: 1, sm: 2, md: 4 }}>
                 <Stack
@@ -39,20 +77,23 @@ function AddOrUpdateProjectFields() {
                     spacing={{ xs: 1, sm: 2, md: 6 }}
                 >
                     <Stack width={"100%"}>
-                        <Selector
-                            value={watch("cluster_id")}
-                            onChange={(e) => setValue("cluster_id", e.target.value, { shouldValidate: true })}
-                            placeholder='Select Cluster'
-                            selectType="single"
-                        />
-                        {errors.cluster_id && <Typography color={"red"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
-                    </Stack>
+                    <SearchableDropdown
+                                options={Array.isArray(allcluters) && allcluters.length > 0 ? allcluters : []}
+                                placeholder="Select Cluters "
+                                value={watch("cluster_id") || ""}
+                                onChange={(newValue) => setValue("cluster_id", newValue,
+                                    { shouldValidate: true },
+                                    
+                            )}
+                    />
+                {errors.cluster_id && <Typography color={"red"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
+                  </Stack>
                     <Stack width={"100%"}>
-                        <Selector
-                            value={watch("user_id")}
-                            onChange={(e) => setValue("user_id", e.target.value, { shouldValidate: true })}
-                            placeholder='Select User'
-                            selectType="single"
+                    <TextField
+                            label="User Name"
+                            {...register("user_id", { required: true })}
+                            sx={inputStyle}
+                            fullWidth
                         />
                         {errors.user_id && <Typography color={"red"} mt={".5rem"}>*{errors.user_id.message}</Typography>}
                     </Stack>
@@ -104,7 +145,13 @@ function AddOrUpdateProjectFields() {
                 </Stack>
             </Stack>
         </form>
+         <Alertbar
+                open={snackbar.open}
+                onClose={handleCloseSnackbar}
+                severity={snackbar.severity}
+                message={snackbar.message}
+            />
+    </>
     )
 }
-
 export default AddOrUpdateProjectFields;

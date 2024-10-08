@@ -23,11 +23,9 @@ function ClustersTableRow({ allClusterData, currentPageNo }) {
         let dataId = data.id
         softDeleteCluster({ id: dataId, softDeletedClusterData: data })
     }
-
     function onRestoreData(id) {
         restoreDeletedCluster(id)
     }
-
     return (
         <>
             {allClusterData.length > 0

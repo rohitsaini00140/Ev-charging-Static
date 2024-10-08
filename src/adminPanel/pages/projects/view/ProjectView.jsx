@@ -13,14 +13,28 @@ import TablePagination from '../../../component/TablePagination';
 import ProjectTableToolbar from './ProjectTableToolbar';
 import ProjectTableHead from './ProjectTableHead';
 import ProjectTableRow from './ProjectTableRow';
+import { useDispatch, useSelector } from "react-redux";
+import { setClusterListPageNo } from '../../../../globalState/cluster/clusterSlices';
 import { StyledTableCell,StyledTableRow} from '../../../component/tableStyle';
 import { useGetProjectsQuery } from '../../../../globalState/projects/projectsApis';
 // ----------------------------------------------------------------------
 
 function ProjectView() {
+  
+  const dispatch = useDispatch()
 
-  const { data, isSuccess } = useGetProjectsQuery();
+  const { pageNo } = useSelector(state => state.cluster);
+
+  const { data, isSuccess } = useGetProjectsQuery({ page: pageNo });
   const allProjectsData = isSuccess && data.data;
+
+  const allPaginationData = isSuccess && data
+  const { last_page } = allPaginationData
+
+  const handlePageChange = (event, value) => {
+    sessionStorage.setItem('clusterListPageNo', JSON.stringify(value));
+    dispatch(setClusterListPageNo(value));
+  };
 
   return (
     <Container>
@@ -51,7 +65,7 @@ function ProjectView() {
             <Table sx={{ minWidth: 800 }}>
               <ProjectTableHead allProjectsData = {allProjectsData} />
               <TableBody>
-                {allProjectsData.length > 0 ? <ProjectTableRow allProjectsData = {allProjectsData} /> 
+                {allProjectsData.length > 0 ? <ProjectTableRow currentpage = {pageNo} allProjectsData = {allProjectsData} /> 
                 :
                 <StyledTableRow>
                 <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
@@ -63,7 +77,12 @@ function ProjectView() {
             </Table>
           </TableContainer>
         </Scrollbar>
-        {(allProjectsData.length > 0) && <TablePagination />}
+        {(allProjectsData.length > 0) && <TablePagination
+          count = {last_page}
+          onPageChange={handlePageChange}
+          page={pageNo}
+        
+        />}
       </Card>
     </Container>
   );

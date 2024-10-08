@@ -20,27 +20,20 @@ import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 
 
 // ----------------------------------------------------------------------
-
 function ClustersView() {
-
     const dispatch = useDispatch()
 
     const { pageNo } = useSelector(state => state.cluster);
-
     const { data, isSuccess } = useGetClustersQuery({ page: pageNo });
-
     const allClusterData = isSuccess && data.data;
-    console.log(allClusterData);
-    
     const paginationData = isSuccess && data;
-
     const { last_page } = paginationData;
 
+    
     const handlePageChange = (event, value) => {
         sessionStorage.setItem('clusterListPageNo', JSON.stringify(value));
         dispatch(setClusterListPageNo(value));
     };
-
     return (
         <Container>
             <Stack
