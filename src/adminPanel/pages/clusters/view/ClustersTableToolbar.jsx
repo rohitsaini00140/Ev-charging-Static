@@ -9,12 +9,42 @@ import ExcelExport from '../../../component/ExcelExport';
 import PdfExport from '../../../component/PdfExport';
 // import { fieldsToDownload, fieldMapping, filter } from './headLabel';
 import { Stack } from '@mui/material';
-import Selector from '../../../component/selector/Selector';
 import { fieldMapping, fieldsToDownload } from './clustersData';
+import { useDispatch, useSelector } from 'react-redux';
+import { setClusterListPageNo, setClusterKeywords } from '../../../../globalState/cluster/clusterSlices';
+import { setCountryId } from '../../../../globalState/address/addressSlices';
+import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
+import { useGetCountryQuery } from '../../../../globalState/address/addressApi';
 
 // ----------------------------------------------------------------------
 
 function ClustersTableToolbar({ allClusterData }) {
+
+    const dispatch = useDispatch()
+
+    const { searchClusterKeywords } = useSelector(state => state.cluster);
+
+    const { data: countryData, isSuccess: countrySuccess } = useGetCountryQuery()
+
+    const { countryId } = useSelector(state => state.address)
+
+    const allCountry = countrySuccess && countryData?.countries
+
+    console.log(allCountry)
+
+    function handleClusterKeywords(keyWords) {
+        sessionStorage.setItem('searchCluster', JSON.stringify(keyWords));
+        dispatch(setClusterKeywords(keyWords))
+        sessionStorage.removeItem('clusterListPageNo')
+        dispatch(setClusterListPageNo(1));
+    }
+
+    function handleSelectCountry(selectedCountry) {
+        // sessionStorage.setItem('orderType', JSON.stringify(orderType));
+        dispatch(setCountryId(selectedCountry))
+        sessionStorage.removeItem('clusterListPageNo')
+        dispatch(setClusterListPageNo(1));
+    }
 
     return (
         <Toolbar
@@ -52,22 +82,38 @@ function ClustersTableToolbar({ allClusterData }) {
                                 sx={{ color: "white" }}
                                 placeholder="Search clusters..."
                                 width={"100%"}
-                            // onChange={(e) => handleSearchKeywords(e.target.value)}
-                            // value={searchKeywords}
+                                onChange={(e) => handleClusterKeywords(e.target.value)}
+                                value={searchClusterKeywords}
                             />
                         </Stack>
-                        {/* <Stack width={"100%"}>
-                            <Selector
-                                placeholder='Select Role'
-                                selectType="single"
-                                options={["User", "Admin", "Moderator"]}
-                            />
-                        </Stack> */}
                         <Stack width={"100%"}>
-                            <Selector
-                                placeholder='Select Status'
-                                selectType="single"
-                                options={["Active", "Inactive"]}
+                            <SearchableDropdown
+                                options={allCountry || []}
+                                placeholder="Select Country"
+                                value={countryId || 0}
+                                onChange={handleSelectCountry}
+                            />
+                        </Stack>
+                        <Stack width={"100%"}>
+                            <SearchableDropdown
+                                options={[]}
+                                placeholder="Select State"
+                            // value={watch("state_id") || 0}
+                            // onChange={(newValue) => setValue("state_id", newValue,
+                            //     { shouldValidate: true },
+                            //     dispatch(setStateId(newValue)),
+                            // )}
+                            />
+                        </Stack>
+                        <Stack width={"100%"}>
+                            <SearchableDropdown
+                                options={[]}
+                                placeholder="Select City"
+                            // value={watch("state_id") || 0}
+                            // onChange={(newValue) => setValue("state_id", newValue,
+                            //     { shouldValidate: true },
+                            //     dispatch(setStateId(newValue)),
+                            // )}
                             />
                         </Stack>
                     </Stack>
