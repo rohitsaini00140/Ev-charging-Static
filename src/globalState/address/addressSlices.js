@@ -5,24 +5,42 @@ const addressSlice = createSlice({
     initialState: {
         countryId: "",
         stateId: "",
+        cityId: "",
+        countryName: "",
+        stateName: "",
+        cityName: "",
         loading: false,
         error: null,
     },
     reducers: {
         setCountryId: (state, action) => {
-            console.log(action.payload)
             state.countryId = action.payload
         },
         setStateId: (state, action) => {
-            console.log(action.payload)
             state.stateId = action.payload
-        }
+        },
+        setCityId: (state, action) => {
+            state.cityId = action.payload
+        },
+        setCountryName: (state, action) => {
+            state.countryName = action.payload
+        },
+        setStateName: (state, action) => {
+            state.stateName = action.payload
+        },
+        setCityName: (state, action) => {
+            state.cityName = action.payload
+        },
     },
 });
 
 export const {
     setCountryId,
-    setStateId
+    setStateId,
+    setCityId,
+    setCountryName,
+    setStateName,
+    setCityName
 } = addressSlice.actions;
 
 export default addressSlice.reducer;

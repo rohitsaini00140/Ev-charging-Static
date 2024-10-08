@@ -32,7 +32,7 @@ export const clusterApi = createApi({
         }),
 
         getFilteredCluster: builder.query({
-            query: ({ clusterName, page, countryId }) => `/clusters/list?page=${page}&cluster_name=${clusterName}&country_name=${countryId}`,
+            query: ({ clusterName, page, countryName, stateName, cityName }) => `/clusters/list?page=${page}&cluster_name=${clusterName}&country_name=${countryName}&state_name=${stateName}&city_name=${cityName}`,
             providesTags: ['cluster']
         }),
 

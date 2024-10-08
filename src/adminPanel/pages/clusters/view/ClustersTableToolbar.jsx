@@ -12,9 +12,9 @@ import { Stack } from '@mui/material';
 import { fieldMapping, fieldsToDownload } from './clustersData';
 import { useDispatch, useSelector } from 'react-redux';
 import { setClusterListPageNo, setClusterKeywords } from '../../../../globalState/cluster/clusterSlices';
-import { setCountryId } from '../../../../globalState/address/addressSlices';
+import { setCityId, setCityName, setCountryId, setCountryName, setStateId, setStateName } from '../../../../globalState/address/addressSlices';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
-import { useGetCountryQuery } from '../../../../globalState/address/addressApi';
+import { useGetCityQuery, useGetCountryQuery, useGetStateQuery } from '../../../../globalState/address/addressApi';
 
 // ----------------------------------------------------------------------
 
@@ -26,11 +26,17 @@ function ClustersTableToolbar({ allClusterData }) {
 
     const { data: countryData, isSuccess: countrySuccess } = useGetCountryQuery()
 
-    const { countryId } = useSelector(state => state.address)
+    const { countryId, stateId, cityId } = useSelector(state => state.address)
+
+    const { data: stateData, isSuccess: stateSuccess } = useGetStateQuery(countryId)
+
+    const { data: cityData, isSuccess: citySuccess } = useGetCityQuery(stateId)
 
     const allCountry = countrySuccess && countryData?.countries
 
-    console.log(allCountry)
+    const allState = stateSuccess && stateData?.states
+
+    const allCity = citySuccess && cityData?.cities
 
     function handleClusterKeywords(keyWords) {
         sessionStorage.setItem('searchCluster', JSON.stringify(keyWords));
@@ -40,8 +46,25 @@ function ClustersTableToolbar({ allClusterData }) {
     }
 
     function handleSelectCountry(selectedCountry) {
-        // sessionStorage.setItem('orderType', JSON.stringify(orderType));
+        const selectedCountryName = allCountry.find(ele => ele.id === selectedCountry)
         dispatch(setCountryId(selectedCountry))
+        dispatch(setCountryName(selectedCountryName ? selectedCountryName.name : ""))
+        sessionStorage.removeItem('clusterListPageNo')
+        dispatch(setClusterListPageNo(1));
+    }
+
+    function handleSelectState(selectedState) {
+        const selectedStateName = allState.find(ele => ele.id === selectedState)
+        dispatch(setStateId(selectedState))
+        dispatch(setStateName(selectedStateName ? selectedStateName.name : ""))
+        sessionStorage.removeItem('clusterListPageNo')
+        dispatch(setClusterListPageNo(1));
+    }
+
+    function handleSelectCity(selectedCity) {
+        const selectedCityName = allCity.find(ele => ele.id === selectedCity)
+        dispatch(setCityId(selectedCity))
+        dispatch(setCityName(selectedCityName ? selectedCityName.name : ""))
         sessionStorage.removeItem('clusterListPageNo')
         dispatch(setClusterListPageNo(1));
     }
@@ -96,24 +119,18 @@ function ClustersTableToolbar({ allClusterData }) {
                         </Stack>
                         <Stack width={"100%"}>
                             <SearchableDropdown
-                                options={[]}
+                                options={allState || []}
                                 placeholder="Select State"
-                            // value={watch("state_id") || 0}
-                            // onChange={(newValue) => setValue("state_id", newValue,
-                            //     { shouldValidate: true },
-                            //     dispatch(setStateId(newValue)),
-                            // )}
+                                value={stateId || 0}
+                                onChange={handleSelectState}
                             />
                         </Stack>
                         <Stack width={"100%"}>
                             <SearchableDropdown
-                                options={[]}
+                                options={allCity || []}
                                 placeholder="Select City"
-                            // value={watch("state_id") || 0}
-                            // onChange={(newValue) => setValue("state_id", newValue,
-                            //     { shouldValidate: true },
-                            //     dispatch(setStateId(newValue)),
-                            // )}
+                                value={cityId || 0}
+                                onChange={handleSelectCity}
                             />
                         </Stack>
                     </Stack>

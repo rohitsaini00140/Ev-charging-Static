@@ -25,9 +25,9 @@ function ClustersView() {
 
     const { pageNo, searchClusterKeywords } = useSelector(state => state.cluster);
 
-    const { countryId } = useSelector(state => state.address)
+    const { countryName, stateName, cityName } = useSelector(state => state.address)
 
-    const { data: filteredData, isSuccess: filteredDataSuccess } = useGetFilteredClusterQuery({ page: pageNo, clusterName: searchClusterKeywords, countryId });
+    const { data: filteredData, isSuccess: filteredDataSuccess } = useGetFilteredClusterQuery({ page: pageNo, clusterName: searchClusterKeywords, countryName, stateName, cityName });
 
     const filteredClusterData = filteredDataSuccess && filteredData.data
 
