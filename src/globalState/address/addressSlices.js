@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const addressSlice = createSlice({
     name: 'addressSlice',
     initialState: {
-        countryId: "",
-        stateId: "",
-        cityId: "",
-        countryName: "",
-        stateName: "",
-        cityName: "",
+        countryId: JSON.parse(sessionStorage.getItem("selectedCountryId")) || "",
+        stateId: JSON.parse(sessionStorage.getItem("selectedStateId")) || "",
+        cityId: JSON.parse(sessionStorage.getItem("selectedCityId")) || "",
+        countryName: JSON.parse(sessionStorage.getItem("selectedCountryName")) || "",
+        stateName: JSON.parse(sessionStorage.getItem("selectedStateName")) || "",
+        cityName: JSON.parse(sessionStorage.getItem("selectedCityName")) || "",
         loading: false,
         error: null,
     },
