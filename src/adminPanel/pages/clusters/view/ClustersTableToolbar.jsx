@@ -141,19 +141,19 @@ function ClustersTableToolbar({ allClusterData }) {
                     {/* // ) */}
                     <Stack
                         direction={{ xs: 'column', sm: 'row' }}
-                        spacing={{ xs: 1, sm: 2, md: 4 }}
+                        spacing={{ xs: 2, sm: 2, md: 4 }}
                         width={"100%"}
                     >
-                        <Stack width={"100%"}>
+                        <Stack width={{sm:"100%",}}>
                             <SearchInput
-                                sx={{ color: "white" }}
+                                sx={{ color: "white"}}
                                 placeholder="Search clusters..."
                                 width={"100%"}
                                 onChange={(e) => handleClusterKeywords(e.target.value)}
                                 value={searchClusterKeywords}
                             />
                         </Stack>
-                        <Stack width={"100%"}>
+                        <Stack width={"100%"}> 
                             <SearchableDropdown
                                 options={allCountry || []}
                                 placeholder="Select Country"
@@ -161,7 +161,7 @@ function ClustersTableToolbar({ allClusterData }) {
                                 onChange={handleSelectCountry}
                             />
                         </Stack>
-                        <Stack width={"100%"}>
+                        <Stack width={"100%"} >
                             <SearchableDropdown
                                 options={allState || []}
                                 placeholder="Select State"

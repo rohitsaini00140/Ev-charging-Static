@@ -4,12 +4,8 @@ import TableHead from '@mui/material/TableHead';
 import { StyledTableCell } from '../../../component/tableStyle';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { headLabel } from './clustersData';
-
 // ----------------------------------------------------------------------
-
 function ClustersTableHead({ allClusterData }) {
-
-
     return (
         <TableHead>
             <TableRow>

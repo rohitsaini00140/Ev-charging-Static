@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { projectSchema } from './projectSchema';
 import { Typography } from '@mui/material';
-
 import { inputStyle } from '../../../component/inputStyle';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
@@ -15,6 +14,7 @@ import Alertbar from '../../../component/Alertbar';
 import { useAddProjectsMutation } from '../../../../globalState/projects/projectsApis';
 
 function AddOrUpdateProjectFields() {
+
 const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
@@ -68,10 +68,10 @@ const [addProjects] = useAddProjectsMutation()
     return (
         <>
         <form fullWidth onSubmit={handleSubmit(onSubmit)}>
-            <Stack spacing={{ xs: 1, sm: 2, md: 4 }}>
+            <Stack spacing={{ xs: 4, sm: 4, md: 4 }}>
                 <Stack
                     direction={{ xs: 'column', sm: 'row' }}
-                    spacing={{ xs: 1, sm: 2, md: 6 }}
+                    spacing={{ xs: 4, sm: 4, md: 6 }}
                 >
                     <Stack width={"100%"}>
                     <SearchableDropdown
@@ -97,7 +97,7 @@ const [addProjects] = useAddProjectsMutation()
                 </Stack>
                 <Stack
                     direction={{ xs: 'column', sm: 'row' }}
-                    spacing={{ xs: 1, sm: 2, md: 6 }}
+                    spacing={{ xs: 4, sm: 4, md: 6 }}
                 >
                     <Stack width={"100%"}>
                         <TextField
