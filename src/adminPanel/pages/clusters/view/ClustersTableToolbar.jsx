@@ -167,6 +167,7 @@ function ClustersTableToolbar({ allClusterData }) {
                                 placeholder="Select State"
                                 value={stateId || 0}
                                 onChange={handleSelectState}
+                                noOptionText={"Select Country First"}
                             />
                         </Stack>
                         <Stack width={"100%"}>
@@ -175,6 +176,7 @@ function ClustersTableToolbar({ allClusterData }) {
                                 placeholder="Select City"
                                 value={cityId || 0}
                                 onChange={handleSelectCity}
+                                noOptionText={"Select State First"}
                             />
                         </Stack>
                     </Stack>
