@@ -16,7 +16,7 @@ function AddOrUpdateProject() {
             <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
                 <Card
                     sx={{
-                        p: 5,
+                        p:{ sm: 4,xs:2 },
                         width: 1,
                         maxWidth: "100%",
                         height: "auto",

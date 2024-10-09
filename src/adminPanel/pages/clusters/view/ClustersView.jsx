@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setClusterListPageNo } from "../../../../globalState/cluster/clusterSlices";
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 
-
 // ----------------------------------------------------------------------
 function ClustersView() {
     const dispatch = useDispatch()
@@ -36,7 +35,6 @@ function ClustersView() {
     const paginationFliteredData = filteredDataSuccess && filteredData;
 
     const { last_page } = paginationFliteredData;
-
 
     const handlePageChange = (event, value) => {
         sessionStorage.setItem('clusterListPageNo', JSON.stringify(value));
@@ -57,6 +55,7 @@ function ClustersView() {
                         sx={{
                             bgcolor: "#34345a",
                             boxShadow: 'none',
+                            padding: '12px 18px',
                             "&:hover": { bgcolor: "#34345a" }
                         }}
                         color="inherit"
@@ -80,7 +79,7 @@ function ClustersView() {
                                     :
                                     <StyledTableRow>
                                         <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
-                                            <Typography color="white">Empty</Typography>
+                                            <Typography color="white">No Data Found</Typography>
                                         </StyledTableCell>
                                     </StyledTableRow>
                                 }

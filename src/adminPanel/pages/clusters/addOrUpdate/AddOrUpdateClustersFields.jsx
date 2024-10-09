@@ -153,10 +153,10 @@ function AddOrUpdateClustersFields() {
     return (
         <>
             <form fullWidth onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing={{ xs: 1, sm: 2, md: 4 }}>
+                <Stack spacing={{ xs: 4, sm: 4, md: 4 }}>
                     <Stack
                         direction={{ xs: 'column', sm: 'row' }}
-                        spacing={{ xs: 1, sm: 2, md: 6 }}
+                        spacing={{ xs: 4, sm: 4, md: 6, }}
                     >
                         <Stack width={"100%"}>
                             <TextField
@@ -183,7 +183,7 @@ function AddOrUpdateClustersFields() {
                     </Stack>
                     <Stack
                         direction={{ xs: 'column', sm: 'row' }}
-                        spacing={{ xs: 1, sm: 2, md: 6 }}
+                        spacing={{ xs: 4, sm: 4, md: 6 }}
                     >
                         <Stack width={"100%"}>
                             <SearchableDropdown
