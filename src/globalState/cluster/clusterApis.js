@@ -17,7 +17,7 @@ export const clusterApi = createApi({
         }),
         getAllClusters: builder.query({
             query: () => ({
-                url: `/api/clusters`
+                url: `/clusters`
             }),
             providesTags: ['cluster'],
         }),
