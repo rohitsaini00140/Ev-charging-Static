@@ -28,9 +28,9 @@ function ClustersTableToolbar({ allClusterData }) {
 
     const { countryId, stateId, cityId } = useSelector(state => state.address)
 
-    const { data: stateData, isSuccess: stateSuccess } = useGetStateQuery(countryId)
+    const { data: stateData, isSuccess: stateSuccess } = useGetStateQuery(countryId, { skip: !countryId })
 
-    const { data: cityData, isSuccess: citySuccess } = useGetCityQuery(stateId)
+    const { data: cityData, isSuccess: citySuccess } = useGetCityQuery(stateId, { skip: !stateId })
 
     const allCountry = countrySuccess && countryData?.countries
 
@@ -46,25 +46,69 @@ function ClustersTableToolbar({ allClusterData }) {
     }
 
     function handleSelectCountry(selectedCountry) {
-        const selectedCountryName = allCountry.find(ele => ele.id === selectedCountry)
         dispatch(setCountryId(selectedCountry))
-        dispatch(setCountryName(selectedCountryName ? selectedCountryName.name : ""))
+
+        const selectedCountryName = allCountry.find(ele => ele.id === selectedCountry)
+        if (selectedCountryName) {
+            sessionStorage.setItem("selectedCountryId", JSON.stringify(selectedCountry))
+            sessionStorage.setItem("selectedCountryName", JSON.stringify(selectedCountryName.name))
+            dispatch(setCountryName(selectedCountryName.name))
+        } else {
+            sessionStorage.removeItem('selectedCountryId')
+            sessionStorage.removeItem('selectedStateId')
+            sessionStorage.removeItem('selectedCityId')
+            sessionStorage.removeItem('selectedCountryName')
+            sessionStorage.removeItem('selectedStateName')
+            sessionStorage.removeItem('selectedCityName')
+            dispatch(setCountryName(""))
+            dispatch(setStateName(""))
+            dispatch(setCityName(""))
+            dispatch(setCountryId(""))
+            dispatch(setStateId(""))
+            dispatch(setCityId(""))
+        }
         sessionStorage.removeItem('clusterListPageNo')
         dispatch(setClusterListPageNo(1));
     }
 
     function handleSelectState(selectedState) {
-        const selectedStateName = allState.find(ele => ele.id === selectedState)
         dispatch(setStateId(selectedState))
-        dispatch(setStateName(selectedStateName ? selectedStateName.name : ""))
+
+        const selectedStateName = allState.find(ele => ele.id === selectedState)
+        if (selectedStateName) {
+            sessionStorage.setItem("selectedStateId", JSON.stringify(selectedState))
+            sessionStorage.setItem("selectedStateName", JSON.stringify(selectedStateName.name))
+            dispatch(setStateName(selectedStateName.name))
+        } else {
+            sessionStorage.removeItem('selectedStateId')
+            sessionStorage.removeItem('selectedCityId')
+            sessionStorage.removeItem('selectedStateName')
+            sessionStorage.removeItem('selectedCityName')
+            dispatch(setStateName(""))
+            dispatch(setCityName(""))
+            dispatch(setStateId(""))
+            dispatch(setCityId(""))
+        }
         sessionStorage.removeItem('clusterListPageNo')
         dispatch(setClusterListPageNo(1));
     }
 
     function handleSelectCity(selectedCity) {
-        const selectedCityName = allCity.find(ele => ele.id === selectedCity)
         dispatch(setCityId(selectedCity))
-        dispatch(setCityName(selectedCityName ? selectedCityName.name : ""))
+
+        const selectedCityName = allCity.find(ele => ele.id === selectedCity)
+
+        if (selectedCityName) {
+            sessionStorage.setItem("selectedCityId", JSON.stringify(selectedCity))
+            sessionStorage.setItem("selectedCityName", JSON.stringify(selectedCityName.name))
+            dispatch(setCityName(selectedCityName.name))
+        } else {
+            sessionStorage.removeItem('selectedCityId')
+            sessionStorage.removeItem('selectedCityName')
+            dispatch(setCityName(""))
+            dispatch(setCityId(""))
+        }
+
         sessionStorage.removeItem('clusterListPageNo')
         dispatch(setClusterListPageNo(1));
     }

@@ -41,8 +41,6 @@ function AddOrUpdateClustersFields() {
 
     const clusterForUpdate = (isSuccess && data)
 
-    console.log(clusterForUpdate)
-
     const country = countrySuccess && allCountry?.countries
 
     const states = stateSuccess && allState?.states
