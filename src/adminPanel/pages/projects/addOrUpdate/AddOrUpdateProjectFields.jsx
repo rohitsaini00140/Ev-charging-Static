@@ -13,25 +13,22 @@ import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterA
 import { useState } from 'react';
 import Alertbar from '../../../component/Alertbar';
 import { useAddProjectsMutation } from '../../../../globalState/projects/projectsApis';
-function AddOrUpdateProjectFields() {
 
+function AddOrUpdateProjectFields() {
 const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
         severity: 'success'
 });
 
-
 const [addProjects] = useAddProjectsMutation()
-
-
- const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
- const allcluters = clustersSuccess && clusters.clusters
-
-    const defaultValues = {
+  const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
+  const allcluters = clustersSuccess && clusters.clusters
+ 
+  const defaultValues = {
         name: "",
-        cluster_id: "",
-        user_id: "",
+        cluster_id: 0,
+        user_id: 0,
         location: ""
     }
     const { register, handleSubmit, watch,reset, setValue, formState: { errors } } = useForm({

@@ -38,5 +38,4 @@ export const projectApi = createApi({
 
     }),
 });
-// Export the auto-generated hooks
 export const { useGetProjectsQuery, useSoftDeleteProjectsMutation,useSoftRestoreProjectsMutation,useAddProjectsMutation } = projectApi;
