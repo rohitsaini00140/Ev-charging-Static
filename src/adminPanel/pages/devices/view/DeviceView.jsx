@@ -18,7 +18,6 @@ import DeviceTableToolbar from './DeviceTableToolbar';
 // ----------------------------------------------------------------------
 
 function DeviceView() {
-
   return (
     <Container>
       <Stack
