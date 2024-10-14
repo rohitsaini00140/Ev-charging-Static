@@ -1,31 +1,34 @@
 import { Box } from '@mui/material';
-import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import AddOrUpdateProjectFields from './AddOrUpdateProjectFields';
+import { useParams } from 'react-router-dom';
 // ----------------------------------------------------------------------
 
 function AddOrUpdateProject() {
 
+    const { id } = useParams()
+
     return (
         <Box
             sx={{
-                height: 1,
+                height: 1
             }}
         >
             <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
-                <Card
+                <Stack
                     sx={{
-                        p:{ sm: 4,xs:2 },
+                        p: { sm: 4, xs: 2 },
                         width: 1,
                         maxWidth: "100%",
                         height: "auto",
                         backgroundColor: "#181837",
+                        borderRadius: "16px"
                     }}
                 >
-                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>Add Projects</Typography>
-                    <AddOrUpdateProjectFields/>
-                </Card>
+                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>{id ? "Update Products" : "Add Projects"}</Typography>
+                    <AddOrUpdateProjectFields />
+                </Stack>
             </Stack>
         </Box>
     );
