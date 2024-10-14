@@ -24,22 +24,23 @@ function AddOrUpdateClustersFields() {
         message: '',
         severity: 'success'
     });
-    let { id } = useParams()
+
+    const { id } = useParams()
 
     let navigate = useNavigate()
     let dispatch = useDispatch()
 
-    const { pageNo } = useSelector(state => state.cluster);
-    // const { data, isSuccess } = useGetClustersQuery({ page: pageNo })
     const { data, isSuccess } = useGetClusterByIdQuery(id)
     const { address } = useSelector(state => state.googleMap)
     const { countryId, stateId } = useSelector(state => state.address)
-    const { data: geoData, isSuccess: geoIsSuccess } = useGetGeocodeQuery({ address })
+    const { data: geoData, isSuccess: geoIsSuccess } = useGetGeocodeQuery({ address }, { skip: !address })
     const { data: allCountry, isSuccess: countrySuccess } = useGetCountryQuery()
-    const { data: allState, isSuccess: stateSuccess } = useGetStateQuery(countryId)
-    const { data: allCity, isSuccess: citySuccess } = useGetCityQuery(stateId)
+    const { data: allState, isSuccess: stateSuccess } = useGetStateQuery(countryId, { skip: !countryId })
+    const { data: allCity, isSuccess: citySuccess } = useGetCityQuery(stateId, { skip: !stateId })
 
     const clusterForUpdate = (isSuccess && data)
+
+    console.log(clusterForUpdate)
 
     const country = countrySuccess && allCountry?.countries
 
@@ -58,7 +59,7 @@ function AddOrUpdateClustersFields() {
         city_id: 0,
         location: ""
     }), []);
-    
+
     const { register, handleSubmit, setError, setValue, reset, watch, formState: { errors } } = useForm({
         resolver: zodResolver(clusterSchema),
         defaultValues: defaultValues

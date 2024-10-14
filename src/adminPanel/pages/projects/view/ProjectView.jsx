@@ -14,26 +14,31 @@ import ProjectTableToolbar from './ProjectTableToolbar';
 import ProjectTableHead from './ProjectTableHead';
 import ProjectTableRow from './ProjectTableRow';
 import { useDispatch, useSelector } from "react-redux";
-import { setClusterListPageNo } from '../../../../globalState/cluster/clusterSlices';
-import { StyledTableCell,StyledTableRow} from '../../../component/tableStyle';
-import { useGetProjectsQuery } from '../../../../globalState/projects/projectsApis';
+import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
+import { useGetFilteredProjectsQuery } from '../../../../globalState/projects/projectsApis';
+import { setProjectListPageNo } from '../../../../globalState/projects/projectsSlices';
 // ----------------------------------------------------------------------
 
 function ProjectView() {
-  
+
   const dispatch = useDispatch()
 
-  const { pageNo } = useSelector(state => state.cluster);
+  const { pageNo, searchProjectKeywords } = useSelector(state => state.project);
 
-  const { data, isSuccess } = useGetProjectsQuery({ page: pageNo });
-  const allProjectsData = isSuccess && data.data;
+  const { clusterName } = useSelector(state => state.cluster)
 
-  const allPaginationData = isSuccess && data
-  const { last_page } = allPaginationData
-  
+  const { adminName } = useSelector(state => state.admin)
+
+  const { data: filteredData, isSuccess: filteredDataSuccess } = useGetFilteredProjectsQuery({ page: pageNo, projectName: searchProjectKeywords, clusterName, userName: adminName });
+
+  const allProjectsData = filteredDataSuccess && filteredData?.data;
+
+  const paginationData = filteredDataSuccess && filteredData;
+
+  const { last_page } = paginationData
+
   const handlePageChange = (event, value) => {
-    sessionStorage.setItem('clusterListPageNo', JSON.stringify(value));
-    dispatch(setClusterListPageNo(value));
+    dispatch(setProjectListPageNo(value));
   };
 
   return (
@@ -63,28 +68,32 @@ function ProjectView() {
         <Scrollbar>
           <TableContainer sx={{ overflow: 'unset' }}>
             <Table sx={{ minWidth: 800 }}>
-              <ProjectTableHead allProjectsData = {allProjectsData} />
+              <ProjectTableHead allProjectsData={allProjectsData} />
               <TableBody>
-                {allProjectsData.length > 0 ? <ProjectTableRow currentpage = {pageNo} allProjectsData = {allProjectsData} /> 
-                :
-                <StyledTableRow>
-                <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
-                <Typography color="white">Empty</Typography>
-                </StyledTableCell>
-              </StyledTableRow>
+                {allProjectsData.length > 0 ?
+                  <ProjectTableRow
+                    currentpage={pageNo}
+                    allProjectsData={allProjectsData}
+                  />
+                  :
+                  <StyledTableRow>
+                    <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
+                      <Typography color="white">Empty</Typography>
+                    </StyledTableCell>
+                  </StyledTableRow>
                 }
               </TableBody>
             </Table>
           </TableContainer>
         </Scrollbar>
         {(allProjectsData.length > 0) && <TablePagination
-          count = {last_page}
+          count={last_page}
           onPageChange={handlePageChange}
           page={pageNo}
-        
         />}
       </Card>
     </Container>
   );
 }
+
 export default ProjectView;

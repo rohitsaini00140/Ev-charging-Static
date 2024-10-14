@@ -28,18 +28,16 @@ function ClustersView() {
 
     const { data: filteredData, isSuccess: filteredDataSuccess } = useGetFilteredClusterQuery({ page: pageNo, clusterName: searchClusterKeywords, countryName, stateName, cityName });
 
-    const filteredClusterData = filteredDataSuccess && filteredData.data
+    const allClusterData = filteredDataSuccess && filteredData?.data
 
-    const allClusterData = filteredClusterData
+    const paginationData = filteredDataSuccess && filteredData;
 
-    const paginationFliteredData = filteredDataSuccess && filteredData;
-
-    const { last_page } = paginationFliteredData;
+    const { last_page } = paginationData;
 
     const handlePageChange = (event, value) => {
-        sessionStorage.setItem('clusterListPageNo', JSON.stringify(value));
         dispatch(setClusterListPageNo(value));
     };
+    
     return (
         <Container>
             <Stack

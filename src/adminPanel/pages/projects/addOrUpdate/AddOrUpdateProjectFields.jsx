@@ -11,48 +11,107 @@ import SearchableDropdown from '../../../component/searchableDropdown/Searchable
 import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
 import { useState } from 'react';
 import Alertbar from '../../../component/Alertbar';
-import { useAddProjectsMutation } from '../../../../globalState/projects/projectsApis';
+import { useAddProjectsMutation, useGetProjectByIdQuery, useUpdateProjectsMutation } from '../../../../globalState/projects/projectsApis';
+import { useGetAdminQuery } from '../../../../globalState/adminAuth/adminApis';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
 
 function AddOrUpdateProjectFields() {
 
-const [snackbar, setSnackbar] = useState({
+    const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
         severity: 'success'
-});
+    });
 
-  const [addProjects] = useAddProjectsMutation()
-  const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
-  const allcluters = clustersSuccess && clusters.clusters
- 
-  const defaultValues = {
+    const { id } = useParams()
+
+    let navigate = useNavigate()
+
+    const { data, isSuccess } = useGetProjectByIdQuery(id)
+
+    const projectForUpdate = (isSuccess && data)
+
+    const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
+
+    const { data: admins, isSuccess: adminsSuccess } = useGetAdminQuery()
+
+    const allcluters = clustersSuccess && clusters.clusters
+
+    const allAdmins = adminsSuccess && admins.users
+
+    const [updateProjects] = useUpdateProjectsMutation()
+
+    const [addProjects] = useAddProjectsMutation()
+
+    const defaultValues = useMemo(() => ({
         name: "",
         cluster_id: 0,
         user_id: 0,
         location: ""
-    }
-    const { register, handleSubmit, watch,reset, setValue, formState: { errors } } = useForm({
+    }), []);
+
+    const { register, handleSubmit, watch, reset, setError, setValue, formState: { errors } } = useForm({
         resolver: zodResolver(projectSchema),
         defaultValues: defaultValues
     });
-    
+
+
+    useEffect(() => {
+        if (id && projectForUpdate) {
+            reset({
+                name: projectForUpdate.name || "",
+                cluster_id: projectForUpdate.cluster_id || 0,
+                user_id: projectForUpdate.user_id || 0,
+                location: projectForUpdate.location || ""
+            });
+        } else {
+            reset(defaultValues);
+        }
+    }, [id, projectForUpdate, reset, defaultValues]);
+
+
     const onSubmit = async (data) => {
         try {
-            console.log(data)
-            await addProjects(data).unwrap();
-            reset(defaultValues);
-            setSnackbar({
-                open: true,
-                message: 'Projects successfully added!',
-                severity: 'success'
-            });
+
+            if (id) {
+
+                await updateProjects({ id, updatedProjectData: data }).unwrap();
+                setSnackbar({
+                    open: true,
+                    message: 'Project successfully updated!',
+                    severity: 'success'
+                });
+
+                setTimeout(() => {
+                    navigate("/admin/project/view");
+                }, 3000);
+
+            } else {
+
+                await addProjects(data).unwrap();
+
+                reset(defaultValues)
+
+                setSnackbar({
+                    open: true,
+                    message: 'Cluster successfully added!',
+                    severity: 'success'
+                });
+            }
+
         } catch (error) {
-            console.log(error)
             setSnackbar({
                 open: true,
                 message: 'Error while submitting.',
                 severity: 'error'
             });
+            if (error.data && error.data.errors) {
+                Object.entries(error.data.errors).forEach(([key, message]) => {
+                    setError(key, { type: "server", message: message[0] });
+                });
+            }
+            console.error("Error during submission:", error);
         }
     };
 
@@ -65,90 +124,94 @@ const [snackbar, setSnackbar] = useState({
             open: false
         }));
     };
+
     return (
         <>
-        <form fullWidth onSubmit={handleSubmit(onSubmit)}>
-            <Stack spacing={{ xs: 4, sm: 4, md: 4 }}>
-                <Stack
-                    direction={{ xs: 'column', sm: 'row' }}
-                    spacing={{ xs: 4, sm: 4, md: 6 }}
-                >
-                    <Stack width={"100%"}>
-                    <SearchableDropdown
-                                options={Array.isArray(allcluters) && allcluters.length > 0 ? allcluters : []}
+            <form fullWidth onSubmit={handleSubmit(onSubmit)}>
+                <Stack spacing={{ xs: 4, sm: 4, md: 4 }}>
+                    <Stack
+                        direction={{ xs: 'column', sm: 'row' }}
+                        spacing={{ xs: 4, sm: 4, md: 6 }}
+                    >
+                        <Stack width={"100%"}>
+                            <SearchableDropdown
+                                options={allcluters.length > 0 ? allcluters : []}
                                 placeholder="Select Cluters "
                                 value={watch("cluster_id") || ""}
                                 onChange={(newValue) => setValue("cluster_id", newValue,
                                     { shouldValidate: true },
-                                    
-                            )}
-                    />
-                {errors.cluster_id && <Typography color={"red"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
-                  </Stack>
-                    <Stack width={"100%"}>
-                    <TextField
-                            label="User Name"
-                            {...register("user_id", { required: true })}
-                            sx={inputStyle}
-                            fullWidth
-                        />
-                        {errors.user_id && <Typography color={"red"} mt={".5rem"}>*{errors.user_id.message}</Typography>}
+                                )}
+                            />
+                            {errors.cluster_id && <Typography color={"red"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
+                        </Stack>
+                        <Stack width={"100%"}>
+                            <SearchableDropdown
+                                options={allAdmins.length > 0 ? allAdmins : []}
+                                placeholder="Select User "
+                                value={watch("user_id") || ""}
+                                onChange={(newValue) => setValue("user_id", newValue,
+                                    { shouldValidate: true },
+                                )}
+                            />
+                            {errors.user_id && <Typography color={"red"} mt={".5rem"}>*{errors.user_id.message}</Typography>}
+                        </Stack>
                     </Stack>
-                </Stack>
-                <Stack
-                    direction={{ xs: 'column', sm: 'row' }}
-                    spacing={{ xs: 4, sm: 4, md: 6 }}
-                >
-                    <Stack width={"100%"}>
-                        <TextField
-                            label="Project name"
-                            {...register("name", { required: true })}
-                            sx={inputStyle}
-                            fullWidth
-                        />
-                        {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
-                    </Stack>
-                    <Stack width={"100%"}>
-                        <TextField
-                            label="Project location"
-                            {...register("location", { required: true })}
-                            sx={inputStyle}
-                            fullWidth
-                        />
-                        {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
-                    </Stack>
-                </Stack>
-                <Stack direction={"row"} justifyContent={"end"}>
-                    <Button
-                        sx={{
-                            color: "white",
-                            borderRadius: "5px",
-                            bgcolor: "#0ab39c",
-                            width: "5rem",
-                            height: "2.5rem",
-                            BoxShadow: "none",
-                            '&:hover': {
-                                bgcolor: "#0ab39c"
-                            }
-                        }}
-                        type='submit'
+                    <Stack
+                        direction={{ xs: 'column', sm: 'row' }}
+                        spacing={{ xs: 4, sm: 4, md: 6 }}
                     >
-                        <Icon
-                            icon="mdi:printer"
-                            style={{ fontSize: "1.2rem", color: "white", marginRight: ".3rem" }}
-                        />
-                        Save
-                    </Button>
+                        <Stack width={"100%"}>
+                            <TextField
+                                label="Project name"
+                                {...register("name", { required: true })}
+                                value={watch("name") || ""}
+                                sx={inputStyle}
+                                fullWidth
+                            />
+                            {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
+                        </Stack>
+                        <Stack width={"100%"}>
+                            <TextField
+                                label="Project location"
+                                {...register("location", { required: true })}
+                                value={watch("location") || ""}
+                                sx={inputStyle}
+                                fullWidth
+                            />
+                            {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
+                        </Stack>
+                    </Stack>
+                    <Stack direction={"row"} justifyContent={"end"}>
+                        <Button
+                            sx={{
+                                color: "white",
+                                borderRadius: "5px",
+                                bgcolor: "#0ab39c",
+                                width: "5rem",
+                                height: "2.5rem",
+                                BoxShadow: "none",
+                                '&:hover': {
+                                    bgcolor: "#0ab39c"
+                                }
+                            }}
+                            type='submit'
+                        >
+                            <Icon
+                                icon="mdi:printer"
+                                style={{ fontSize: "1.2rem", color: "white", marginRight: ".3rem" }}
+                            />
+                            Save
+                        </Button>
+                    </Stack>
                 </Stack>
-            </Stack>
-        </form>
-         <Alertbar
+            </form>
+            <Alertbar
                 open={snackbar.open}
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
             />
-    </>
+        </>
     )
 }
 export default AddOrUpdateProjectFields;

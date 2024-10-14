@@ -12,21 +12,24 @@ import { Stack } from '@mui/material';
 import { fieldMapping, fieldsToDownload } from './clustersData';
 import { useDispatch, useSelector } from 'react-redux';
 import { setClusterListPageNo, setClusterKeywords } from '../../../../globalState/cluster/clusterSlices';
-import { setCityId, setCityName, setCountryId, setCountryName, setStateId, setStateName } from '../../../../globalState/address/addressSlices';
+import { setCityName, setCountryId, setCountryName, setStateId, setStateName } from '../../../../globalState/address/addressSlices';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 import { useGetCityQuery, useGetCountryQuery, useGetStateQuery } from '../../../../globalState/address/addressApi';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
 function ClustersTableToolbar({ allClusterData }) {
 
     const dispatch = useDispatch()
+    const location = useLocation()
 
     const { searchClusterKeywords } = useSelector(state => state.cluster);
 
     const { data: countryData, isSuccess: countrySuccess } = useGetCountryQuery()
 
-    const { countryId, stateId, cityId } = useSelector(state => state.address)
+    const { countryId, countryName, stateName, stateId, cityName } = useSelector(state => state.address)
 
     const { data: stateData, isSuccess: stateSuccess } = useGetStateQuery(countryId, { skip: !countryId })
 
@@ -38,80 +41,64 @@ function ClustersTableToolbar({ allClusterData }) {
 
     const allCity = citySuccess && cityData?.cities
 
-    function handleClusterKeywords(keyWords) {
-        sessionStorage.setItem('searchCluster', JSON.stringify(keyWords));
-        dispatch(setClusterKeywords(keyWords))
-        sessionStorage.removeItem('clusterListPageNo')
+    function handleSelect(option, type) {
+        switch (type) {
+            case 'cluster':
+                if (option) {
+                    dispatch(setClusterKeywords(option));
+                } else {
+                    dispatch(setClusterKeywords(''));
+                }
+                break;
+            case 'country':
+                if (option) {
+                    const selectedCountryData = allCountry.find(ele => ele.name === option)
+                    dispatch(setCountryId(selectedCountryData?.id))
+                    dispatch(setCountryName(option))
+                } else {
+                    dispatch(setCountryName(""))
+                    dispatch(setStateName(""))
+                    dispatch(setCityName(""))
+                    dispatch(setCountryId(""))
+                    dispatch(setStateId(""))
+                }
+                break;
+            case 'state':
+                if (option) {
+                    const selectedStateData = allState.find(ele => ele.name === option)
+                    dispatch(setStateId(selectedStateData?.id))
+                    dispatch(setStateName(option))
+                } else {
+                    dispatch(setStateName(""))
+                    dispatch(setCityName(""))
+                    dispatch(setStateId(""))
+                }
+                break;
+            case 'city':
+                if (option) {
+                    dispatch(setCityName(option))
+                } else {
+                    dispatch(setCityName(""))
+                }
+                break;
+            default:
+                break;
+        }
         dispatch(setClusterListPageNo(1));
     }
 
-    function handleSelectCountry(selectedCountry) {
-        dispatch(setCountryId(selectedCountry))
 
-        const selectedCountryName = allCountry.find(ele => ele.id === selectedCountry)
-        if (selectedCountryName) {
-            sessionStorage.setItem("selectedCountryId", JSON.stringify(selectedCountry))
-            sessionStorage.setItem("selectedCountryName", JSON.stringify(selectedCountryName.name))
-            dispatch(setCountryName(selectedCountryName.name))
-        } else {
-            sessionStorage.removeItem('selectedCountryId')
-            sessionStorage.removeItem('selectedStateId')
-            sessionStorage.removeItem('selectedCityId')
-            sessionStorage.removeItem('selectedCountryName')
-            sessionStorage.removeItem('selectedStateName')
-            sessionStorage.removeItem('selectedCityName')
+    useEffect(() => {
+        return () => {
             dispatch(setCountryName(""))
             dispatch(setStateName(""))
             dispatch(setCityName(""))
             dispatch(setCountryId(""))
             dispatch(setStateId(""))
-            dispatch(setCityId(""))
-        }
-        sessionStorage.removeItem('clusterListPageNo')
-        dispatch(setClusterListPageNo(1));
-    }
+            dispatch(setClusterKeywords(""))
+        };
+    }, [location, dispatch]);
 
-    function handleSelectState(selectedState) {
-        dispatch(setStateId(selectedState))
-
-        const selectedStateName = allState.find(ele => ele.id === selectedState)
-        if (selectedStateName) {
-            sessionStorage.setItem("selectedStateId", JSON.stringify(selectedState))
-            sessionStorage.setItem("selectedStateName", JSON.stringify(selectedStateName.name))
-            dispatch(setStateName(selectedStateName.name))
-        } else {
-            sessionStorage.removeItem('selectedStateId')
-            sessionStorage.removeItem('selectedCityId')
-            sessionStorage.removeItem('selectedStateName')
-            sessionStorage.removeItem('selectedCityName')
-            dispatch(setStateName(""))
-            dispatch(setCityName(""))
-            dispatch(setStateId(""))
-            dispatch(setCityId(""))
-        }
-        sessionStorage.removeItem('clusterListPageNo')
-        dispatch(setClusterListPageNo(1));
-    }
-
-    function handleSelectCity(selectedCity) {
-        dispatch(setCityId(selectedCity))
-
-        const selectedCityName = allCity.find(ele => ele.id === selectedCity)
-
-        if (selectedCityName) {
-            sessionStorage.setItem("selectedCityId", JSON.stringify(selectedCity))
-            sessionStorage.setItem("selectedCityName", JSON.stringify(selectedCityName.name))
-            dispatch(setCityName(selectedCityName.name))
-        } else {
-            sessionStorage.removeItem('selectedCityId')
-            sessionStorage.removeItem('selectedCityName')
-            dispatch(setCityName(""))
-            dispatch(setCityId(""))
-        }
-
-        sessionStorage.removeItem('clusterListPageNo')
-        dispatch(setClusterListPageNo(1));
-    }
 
     return (
         <Toolbar
@@ -144,39 +131,46 @@ function ClustersTableToolbar({ allClusterData }) {
                         spacing={{ xs: 2, sm: 2, md: 4 }}
                         width={"100%"}
                     >
-                        <Stack width={{sm:"100%",}}>
+                        <Stack width={{ sm: "100%" }}>
                             <SearchInput
-                                sx={{ color: "white"}}
+                                sx={{ color: "white" }}
                                 placeholder="Search clusters..."
                                 width={"100%"}
-                                onChange={(e) => handleClusterKeywords(e.target.value)}
+                                // onChange={(e) => handleClusterKeywords(e.target.value)}
+                                onChange={(e) => handleSelect(e.target.value, "cluster")}
                                 value={searchClusterKeywords}
                             />
                         </Stack>
-                        <Stack width={"100%"}> 
+                        <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allCountry || []}
                                 placeholder="Select Country"
-                                value={countryId || 0}
-                                onChange={handleSelectCountry}
+                                value={countryName || ""}
+                                // onChange={handleSelectCountry}
+                                onChange={(value) => handleSelect(value, "country")}
+                                filter={true}
                             />
                         </Stack>
                         <Stack width={"100%"} >
                             <SearchableDropdown
                                 options={allState || []}
                                 placeholder="Select State"
-                                value={stateId || 0}
-                                onChange={handleSelectState}
+                                value={stateName || ""}
+                                // onChange={handleSelectState}
+                                onChange={(value) => handleSelect(value, "state")}
                                 noOptionText={"Select Country First"}
+                                filter={true}
                             />
                         </Stack>
                         <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allCity || []}
                                 placeholder="Select City"
-                                value={cityId || 0}
-                                onChange={handleSelectCity}
+                                value={cityName || 0}
+                                // onChange={handleSelectCity}
+                                onChange={(value) => handleSelect(value, "city")}
                                 noOptionText={"Select State First"}
+                                filter={true}
                             />
                         </Stack>
                     </Stack>
