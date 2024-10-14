@@ -10,14 +10,35 @@ import Iconify from '../../../component/Iconify';
 import Scrollbar from '../../../component/scrollbar/Scrollbar';
 import { Link } from 'react-router-dom';
 import TablePagination from '../../../component/TablePagination';
-import { deviceData } from './deviceData';
+import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import DeviceTableHead from './DeviceTableHead';
 import DeviceTableRow from './DeviceTableRow';
 import DeviceTableToolbar from './DeviceTableToolbar';
+import { useDispatch, useSelector } from 'react-redux';
+import { useGetDeviceQuery } from '../../../../globalState/devices/deviceApis';
+import { setDeviceListPageNo } from '../../../../globalState/devices/deviceSlices';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // ----------------------------------------------------------------------
 
 function DeviceView() {
+
+  const dispatch = useDispatch()
+
+  const { pageNo } = useSelector(state => state.device);
+
+  const { data: deviceData, isSuccess: deviceSuccess, isLoading } = useGetDeviceQuery();
+
+  const allDeviceData = deviceSuccess && deviceData?.data
+
+  const paginationData = deviceSuccess && deviceData;
+
+  const { last_page } = paginationData;
+
+  const handlePageChange = (event, value) => {
+    dispatch(setDeviceListPageNo(value));
+  };
+
   return (
     <Container>
       <Stack
@@ -41,18 +62,39 @@ function DeviceView() {
         </Link>
       </Stack>
       <Card sx={{ bgcolor: "#181837" }}>
-        <DeviceTableToolbar />
-        <Scrollbar>
-          <TableContainer sx={{ overflow: 'unset' }}>
-            <Table sx={{ minWidth: 800 }}>
-              <DeviceTableHead />
-              <TableBody>
-                <DeviceTableRow />
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Scrollbar>
-        {(deviceData.length > 0) && <TablePagination />}
+        <DeviceTableToolbar allDeviceData={allDeviceData} />
+        {isLoading ? (
+          <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>
+            <Typography color="white" sx={{ mt: 2 }}>Loading...</Typography>
+          </Stack>
+        ) : (
+          <Scrollbar>
+            <TableContainer sx={{ overflow: 'unset' }}>
+              <Table sx={{ minWidth: 800 }}>
+                <DeviceTableHead allDeviceData={allDeviceData} />
+                <TableBody>
+                  {allDeviceData.length > 0 ? (
+                    <DeviceTableRow
+                      allDeviceData={allDeviceData}
+                      currentPageNo={pageNo}
+                    />
+                  ) : (
+                    <StyledTableRow>
+                      <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
+                        <Typography color="white">No Data Found</Typography>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Scrollbar>
+        )}
+        {allDeviceData.length > 0 && <TablePagination
+          count={last_page}
+          page={pageNo}
+          onPageChange={handlePageChange}
+        />}
       </Card>
     </Container>
   );

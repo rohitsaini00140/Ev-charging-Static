@@ -7,36 +7,72 @@ import ModalBox from '../../../component/ModalBox';
 import Action from '../../../component/Action';
 import { deviceData } from './deviceData';
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
+import { useState, useEffect } from 'react';
+import { Skeleton } from '@mui/material';
+import { useRestoreDeviceMutation, useSoftDeleteDeviceMutation } from '../../../../globalState/devices/deviceApis';
 
 // ----------------------------------------------------------------------
 
-function DeviceTableRow() {
+function DeviceTableRow({ allDeviceData, currentPageNo }) {
+
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 1000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const [softDeleteDevice] = useSoftDeleteDeviceMutation()
+    const [restoreDevice] = useRestoreDeviceMutation()
+
+    function onSoftDelete(data) {
+        let dataId = data.id
+        softDeleteDevice({ id: dataId, deletedDeviceData: data })
+    }
+    function onRestoreData(id) {
+        restoreDevice(id)
+    }
 
     return (
         <>
-            {deviceData.length > 0
+            {allDeviceData.length > 0
                 &&
-                deviceData.map((data, i) => (
-                    <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.ID}>
+                allDeviceData.map((data, i) => (
+                    <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.id}>
                         <StyledTableCell padding="checkbox">
-                            <Checkbox disableFocusRipple
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Checkbox disableFocusRipple
                             // onChange={(e) => onHandleChange(e.target.checked, data["ID"])}
                             // checked={selectedCategoryId.includes(data["ID"])}
-                            />
+                            />}
                         </StyledTableCell>
-                        <StyledTableCell>{i + 1}</StyledTableCell>
-                        <StyledTableCell>{data.name}</StyledTableCell>
-                        <StyledTableCell>{data.serialNo}</StyledTableCell>
-                        <StyledTableCell>{data.project}</StyledTableCell>
-                        <StyledTableCell>{data.type}</StyledTableCell>
-                        <StyledTableCell>{data.location}</StyledTableCell>
-                        <StyledTableCell>
-                            <Label color={data.status === 'Inactive' ? 'error' : 'success'} >{data.status}</Label>
+                        <StyledTableCell color={"white"} >
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : ((currentPageNo - 1) * 10 + (i + 1))}
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.device_name}
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.serial_number}
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.project_name}
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.type}
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.device_location}
                         </StyledTableCell>
                         <StyledTableCell>
-                            <Action data={data}
-                            // pathToNavigate={"/category/update"} 
-                            />
+                            <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
+                        </StyledTableCell>
+                        <StyledTableCell>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
+                                data={data}
+                                activeOrInactive={data.deleted_at}
+                                pathToNavigate={"/admin/device/update"}
+                                onSoftDelete={onSoftDelete}
+                                onRestoreData={onRestoreData}
+                            />}
                         </StyledTableCell>
                     </StyledTableRow>
                 ))
