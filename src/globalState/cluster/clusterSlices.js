@@ -3,8 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const clusterSlice = createSlice({
     name: 'cluster',
     initialState: {
-        pageNo: JSON.parse(sessionStorage.getItem('clusterListPageNo')) || 1,
-        searchClusterKeywords: JSON.parse(sessionStorage.getItem('searchCluster')) || "",
+        pageNo: 1,
+        searchClusterKeywords: "",
+        clusterName: "",
         loading: false,
         error: null,
     },
@@ -14,13 +15,17 @@ const clusterSlice = createSlice({
         },
         setClusterKeywords: (state, action) => {
             state.searchClusterKeywords = action.payload
+        },
+        setClusterName: (state, action) => {
+            state.clusterName = action.payload
         }
     },
 });
 
 export const {
     setClusterListPageNo,
-    setClusterKeywords
+    setClusterKeywords,
+    setClusterName
 } = clusterSlice.actions;
 
 export default clusterSlice.reducer;
