@@ -13,6 +13,7 @@ import googleMapSlices from "../googleMap/googleMapSlices";
 import addressSlices from "../address/addressSlices";
 import projectSlice from "../projects/projectsSlices";
 import adminSlice from "../adminAuth/adminSlice"
+import deviceSlice from "../devices/deviceSlices"
 
 export const store = configureStore({
     reducer: {
@@ -29,7 +30,8 @@ export const store = configureStore({
         googleMap: googleMapSlices,
         address: addressSlices,
         project: projectSlice,
-        admin: adminSlice
+        admin: adminSlice,
+        device: deviceSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
         .concat(

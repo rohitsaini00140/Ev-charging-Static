@@ -12,9 +12,9 @@ import { useMemo } from 'react';
 import { useGetAllProjectsQuery } from '../../../../globalState/projects/projectsApis';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 import Alertbar from '../../../component/Alertbar';
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
-import { useAddDeviceMutation } from '../../../../globalState/devices/deviceApis';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useAddDeviceMutation, useGetDeviceByIDQuery, useUpdateDeviceMutation } from '../../../../globalState/devices/deviceApis';
 
 function AddOrUpdateDeviceFields() {
 
@@ -25,12 +25,17 @@ function AddOrUpdateDeviceFields() {
     });
 
     const { id } = useParams()
+    const navigate = useNavigate()
 
     const { data: projectData, isSuccess: successProject } = useGetAllProjectsQuery()
+    const { data, isSuccess } = useGetDeviceByIDQuery(id)
+
+    const deviceForUpdate = isSuccess && data
 
     const allProjects = successProject && projectData?.projects
 
     const [addDevice] = useAddDeviceMutation()
+    const [updateDevice] = useUpdateDeviceMutation()
 
     const defaultValues = useMemo(() => ({
         name: "",
@@ -46,51 +51,49 @@ function AddOrUpdateDeviceFields() {
         defaultValues: defaultValues
     });
 
-    // useEffect(() => {
-    //     if (id && projectForUpdate) {
-    //         reset({
-    //             name:  || "",
-    //             project_id:  || 0,
-    //             type:  || "",
-    //             location:  || "",
-    //             serial_number:  || "",
-    //             status:  || ""
-    //         });
-    //     } else {
-    //         reset(defaultValues);
-    //     }
-    // }, [id, projectForUpdate, reset, defaultValues]);
+    useEffect(() => {
+        if (id && deviceForUpdate) {
+            reset({
+                name: deviceForUpdate.name || "",
+                project_id: deviceForUpdate.project_id || 0,
+                type: deviceForUpdate.type || "",
+                location: deviceForUpdate.location || "",
+                serial_number: deviceForUpdate.serial_number || "",
+                status: deviceForUpdate.status || ""
+            });
+        } else {
+            reset(defaultValues);
+        }
+    }, [id, deviceForUpdate, reset, defaultValues]);
 
     const onSubmit = async (data) => {
         try {
 
-            console.log(data)
+            if (id) {
 
-            // if (id) {
+                await updateDevice({ id, updatedDeviceData: data }).unwrap();
+                setSnackbar({
+                    open: true,
+                    message: 'Device successfully updated!',
+                    severity: 'success'
+                });
 
-            //     await updateProjects({ id, updatedProjectData: data }).unwrap();
-            //     setSnackbar({
-            //         open: true,
-            //         message: 'Project successfully updated!',
-            //         severity: 'success'
-            //     });
+                setTimeout(() => {
+                    navigate("/admin/device/view");
+                }, 3000);
 
-            //     setTimeout(() => {
-            //         navigate("/admin/project/view");
-            //     }, 3000);
+            } else {
 
-            // } else {
+                await addDevice(data).unwrap();
 
-            await addDevice(data).unwrap();
+                reset(defaultValues)
 
-            reset(defaultValues)
-
-            setSnackbar({
-                open: true,
-                message: 'Device successfully added!',
-                severity: 'success'
-            });
-            // }
+                setSnackbar({
+                    open: true,
+                    message: 'Device successfully added!',
+                    severity: 'success'
+                });
+            }
 
         } catch (error) {
             setSnackbar({
@@ -140,6 +143,7 @@ function AddOrUpdateDeviceFields() {
                             <TextField
                                 label="Device name"
                                 {...register("name", { required: true })}
+                                value={watch("name") || ""}
                                 sx={inputStyle}
                                 fullWidth
                             />
@@ -164,6 +168,7 @@ function AddOrUpdateDeviceFields() {
                             <TextField
                                 label="Device location"
                                 {...register("location", { required: true })}
+                                value={watch("location") || ""}
                                 sx={inputStyle}
                                 fullWidth
                             />
@@ -173,6 +178,7 @@ function AddOrUpdateDeviceFields() {
                             <TextField
                                 label="Device serial No."
                                 {...register("serial_number", { required: true })}
+                                value={watch("serial_number") || ""}
                                 sx={inputStyle}
                                 fullWidth
                             />

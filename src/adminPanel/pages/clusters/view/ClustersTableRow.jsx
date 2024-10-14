@@ -26,6 +26,7 @@ function ClustersTableRow({ allClusterData, currentPageNo }) {
     function onRestoreData(id) {
         restoreDeletedCluster(id)
     }
+
     return (
         <>
             {allClusterData.length > 0
@@ -56,10 +57,10 @@ function ClustersTableRow({ allClusterData, currentPageNo }) {
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.location}
                         </StyledTableCell>
-                          <StyledTableCell>
+                        <StyledTableCell>
                             <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
-                         </StyledTableCell> 
-                          <StyledTableCell>
+                        </StyledTableCell>
+                        <StyledTableCell>
                             {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
                                 data={data}
                                 activeOrInactive={data.deleted_at}
