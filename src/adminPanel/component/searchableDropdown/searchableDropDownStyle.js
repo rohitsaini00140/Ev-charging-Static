@@ -42,14 +42,14 @@ export const inputStyle = {
 };
 
 export const StyledPopper = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#34345a',  // Change dropdown background color
-    color: 'white',              // Text color for options
+    backgroundColor: '#34345a',
+    color: 'white',  
     borderRadius: '8px',
     "& .MuiAutocomplete-option": {
         backgroundColor: '#34345a',
         color: 'white',
         '&[data-focus="true"]': {
-            backgroundColor: '#5e5d8f',  // Change color on hover or focus
+            backgroundColor: '#5e5d8f',
         },
         '&[aria-selected="true"]': {
             backgroundColor: '#34345a',  // Change background when selected

@@ -8,9 +8,16 @@ import { useForm } from 'react-hook-form';
 import { deviceSchema } from './deviceSchema';
 import { Typography } from '@mui/material';
 import { inputStyle } from '../../../component/inputStyle';
+import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 
-function AddOrUpdateDeviceFields() {
+import { useGetAllProjectsQuery } from '../../../../globalState/projects/projectsApis';
 
+function AddOrUpdateDeviceFields(){
+   const {data: project , isSuccess:projectSucess } = useGetAllProjectsQuery()
+   const allprojects = projectSucess && project.projects
+   
+    console.log(allprojects);
+    
     const defaultValues = {
         name: "",
         project_id: "",
@@ -41,13 +48,16 @@ function AddOrUpdateDeviceFields() {
                     spacing={{ xs: 1, sm: 2, md: 6 }}
                 >
                     <Stack width={"100%"}>
-                        <Selector
-                            value={watch("project_id")}
-                            onChange={(e) => setValue("project_id", e.target.value, { shouldValidate: true })}
-                            placeholder='Select project'
-                            selectType="single"
-                        />
-                        {errors.project_id && <Typography color={"red"} mt={".5rem"}>*{errors.project_id.message}</Typography>}
+
+                    <SearchableDropdown
+                                options={Array.isArray(allprojects) && allprojects.length > 0 ? allprojects : []}
+                                placeholder="Select Project Name "
+                                value={watch("project_id") || ""}
+                                onChange={(newValue) => setValue("project_id", newValue,
+                                    { shouldValidate: true },
+                                    
+                            )}    />
+                       {errors.project_id && <Typography color={"red"} mt={".5rem"}>*{errors.project_id.message}</Typography>}
                     </Stack>
                     <Stack width={"100%"}>
                         <TextField

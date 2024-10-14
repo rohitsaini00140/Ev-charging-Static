@@ -30,7 +30,7 @@ function ProjectView() {
 
   const allPaginationData = isSuccess && data
   const { last_page } = allPaginationData
-
+  
   const handlePageChange = (event, value) => {
     sessionStorage.setItem('clusterListPageNo', JSON.stringify(value));
     dispatch(setClusterListPageNo(value));

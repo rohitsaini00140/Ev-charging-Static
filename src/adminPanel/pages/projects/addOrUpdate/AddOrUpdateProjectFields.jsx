@@ -21,7 +21,7 @@ const [snackbar, setSnackbar] = useState({
         severity: 'success'
 });
 
-const [addProjects] = useAddProjectsMutation()
+  const [addProjects] = useAddProjectsMutation()
   const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
   const allcluters = clustersSuccess && clusters.clusters
  

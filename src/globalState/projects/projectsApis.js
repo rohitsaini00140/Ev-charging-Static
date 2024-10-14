@@ -7,6 +7,10 @@ export const projectApi = createApi({
     }),
     tagTypes: ["Projects"],
     endpoints: (builder) => ({
+        getAllProjects: builder.query({
+            query: () => `/api/projects`,
+            providesTags: ['Projects'],
+        }),
         getProjects: builder.query({
             query: ({page}) => `/api/projects/list?page=${page}`,
             providesTags: ['Projects'],
@@ -38,4 +42,4 @@ export const projectApi = createApi({
 
     }),
 });
-export const { useGetProjectsQuery, useSoftDeleteProjectsMutation,useSoftRestoreProjectsMutation,useAddProjectsMutation } = projectApi;
+export const { useGetProjectsQuery, useSoftDeleteProjectsMutation,useSoftRestoreProjectsMutation,useAddProjectsMutation,useGetAllProjectsQuery } = projectApi;
