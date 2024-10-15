@@ -2,18 +2,18 @@ import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import TableHead from '@mui/material/TableHead';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import { deviceData, headLabel } from './deviceData';
+import { headLabel } from './deviceData';
 import { StyledTableCell } from '../../../component/tableStyle';
 
 // ----------------------------------------------------------------------
 
-function DeviceTableHead() {
+function DeviceTableHead({ allDeviceData }) {
 
     return (
         <TableHead>
             <TableRow>
                 {
-                    deviceData.length > 0 && <StyledTableCell padding="checkbox">
+                    allDeviceData.length > 0 && <StyledTableCell padding="checkbox">
                         <Checkbox
                         // onChange={onHandleSelectAll}
                         // checked={selectAll}

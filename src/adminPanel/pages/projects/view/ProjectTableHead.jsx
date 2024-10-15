@@ -5,18 +5,18 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import { headLabel } from './projectData';
 import { StyledTableCell } from '../../../component/tableStyle';
 // ----------------------------------------------------------------------
-function ProjectTableHead(props) {
+function ProjectTableHead({ allProjectsData }) {
     return (
         <TableHead>
             <TableRow>
-                 {
-                    props.allProjectsData.length > 0 && <StyledTableCell padding="checkbox">
+                {
+                    allProjectsData.length > 0 && <StyledTableCell padding="checkbox">
                         <Checkbox
                         // onChange={onHandleSelectAll}
                         // checked={selectAll}
                         />
                     </StyledTableCell>
-                  }
+                }
                 {headLabel.map((headCell) => (
                     <StyledTableCell
                         sx={{ width: headCell.width, minWidth: headCell.minWidth }}

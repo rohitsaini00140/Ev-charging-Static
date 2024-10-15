@@ -17,9 +17,23 @@ export const deviceApi = createApi({
             invalidatesTags: ['device']
         }),
 
+        // getDevice: builder.query({
+        //     query: ({ page, name, serial_number, type }) => `/devices/list?page=${page}&name=${name}&serial_number=${serial_number}&type=${type}`,
+        //     providesTags: ['device']
+        // }),
+
         getDevice: builder.query({
-            query: (page) => `/devices/list?page=${page}`,
-            providesTags: ['device']
+            query: ({ page, name, serial_number, type }) => {
+                const params = new URLSearchParams();
+                
+                if (page) params.append('page', page);
+                if (name) params.append('name', name);
+                if (serial_number) params.append('serial_number', serial_number);
+                if (type) params.append('type', type);
+
+                return `/devices/list?${params.toString()}`;
+            },
+            providesTags: ['device'],
         }),
 
         getDeviceByID: builder.query({
