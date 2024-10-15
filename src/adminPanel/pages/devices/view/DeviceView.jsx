@@ -17,7 +17,6 @@ import DeviceTableToolbar from './DeviceTableToolbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetDeviceQuery } from '../../../../globalState/devices/deviceApis';
 import { setDeviceListPageNo } from '../../../../globalState/devices/deviceSlices';
-import CircularProgress from '@mui/material/CircularProgress';
 
 // ----------------------------------------------------------------------
 
@@ -25,9 +24,9 @@ function DeviceView() {
 
   const dispatch = useDispatch()
 
-  const { pageNo } = useSelector(state => state.device);
+  const { pageNo, deviceName, deviceSerialNumber, deviceType } = useSelector(state => state.device);
 
-  const { data: deviceData, isSuccess: deviceSuccess, isLoading } = useGetDeviceQuery();
+  const { data: deviceData, isSuccess: deviceSuccess, isLoading } = useGetDeviceQuery({ page: pageNo, name: deviceName, serial_number: deviceSerialNumber, type: deviceType });
 
   const allDeviceData = deviceSuccess && deviceData?.data
 

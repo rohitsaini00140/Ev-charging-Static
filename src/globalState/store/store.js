@@ -7,6 +7,7 @@ import { googleMapApi } from "../googleMap/googleMapApis";
 import { addressApi } from "../address/addressApi";
 import { adminApi } from "../adminAuth/adminApis";
 import { deviceApi } from "../devices/deviceApis";
+import { rolesApi } from "../roles/rolesApi";
 import clusterSlices from "../cluster/clusterSlices";
 import zoneSlices from "../zone/zoneSlices";
 import googleMapSlices from "../googleMap/googleMapSlices";
@@ -25,6 +26,7 @@ export const store = configureStore({
         [addressApi.reducerPath]: addressApi.reducer,
         [adminApi.reducerPath]: adminApi.reducer,
         [deviceApi.reducerPath]: deviceApi.reducer,
+        [rolesApi.reducerPath]: rolesApi.reducer,
         cluster: clusterSlices,
         zone: zoneSlices,
         googleMap: googleMapSlices,
@@ -42,6 +44,7 @@ export const store = configureStore({
             googleMapApi.middleware,
             addressApi.middleware,
             adminApi.middleware,
-            deviceApi.middleware
+            deviceApi.middleware,
+            rolesApi.middleware
         )
 })

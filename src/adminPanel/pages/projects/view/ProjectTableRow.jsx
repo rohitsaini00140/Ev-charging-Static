@@ -1,7 +1,5 @@
-import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import { useState, useEffect } from 'react';
-import TableCell from '@mui/material/TableCell';
 import Label from '../../../component/lable/Lable';
 import Iconify from '../../../component/Iconify';
 import ModalBox from '../../../component/ModalBox';
@@ -13,6 +11,7 @@ import { Skeleton } from '@mui/material';
 
 function ProjectTableRow({ allProjectsData, currentpage }) {
     const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const timer = setTimeout(() => setLoading(false), 1000);
         return () => clearTimeout(timer);
@@ -25,15 +24,17 @@ function ProjectTableRow({ allProjectsData, currentpage }) {
         let dataId = data.id
         softDeleteCluster({ id: dataId, softDeletedProjectsData: data })
     }
+
     function onRestoreData(id) {
         restoreDeletedCluster(id)
     }
+
     return (
         <>
             {allProjectsData.length > 0
                 ?
                 allProjectsData.map((data, i) => (
-                    <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.ID}>
+                    <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.id}>
                         <StyledTableCell padding="checkbox">
                             <Checkbox disableFocusRipple
                             />
@@ -53,8 +54,6 @@ function ProjectTableRow({ allProjectsData, currentpage }) {
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.project_location}
                         </StyledTableCell>
-
-
                         <StyledTableCell>
                             <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
                         </StyledTableCell>

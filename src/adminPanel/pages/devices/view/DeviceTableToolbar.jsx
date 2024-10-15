@@ -9,11 +9,48 @@ import ExcelExport from '../../../component/ExcelExport';
 import PdfExport from '../../../component/PdfExport';
 // import { fieldsToDownload, fieldMapping, filter } from './headLabel';
 import { Stack } from '@mui/material';
-import Selector from '../../../component/selector/Selector';
+import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDeviceListPageNo, setDeviceName, setDeviceSerialNumber, setDeviceType } from '../../../../globalState/devices/deviceSlices';
 
 // ----------------------------------------------------------------------
 
+const data = [{ id: 1, name: "Type-A" }, { id: 2, name: "Type-B" }, { id: 3, name: "Type-C" }]
+
 function DeviceTableToolbar() {
+
+    const dispatch = useDispatch()
+
+    const { deviceName, deviceSerialNumber, deviceType } = useSelector(state => state.device)
+
+    function handleSelect(option, type) {
+        switch (type) {
+            case 'device':
+                if (option) {
+                    dispatch(setDeviceName(option));
+                } else {
+                    dispatch(setDeviceName(''));
+                }
+                break;
+            case 'serialNumber':
+                if (option) {
+                    dispatch(setDeviceSerialNumber(option));
+                } else {
+                    dispatch(setDeviceSerialNumber(''));
+                }
+                break;
+            case 'type':
+                if (option) {
+                    dispatch(setDeviceType(option));
+                } else {
+                    dispatch(setDeviceType(''));
+                }
+                break;
+            default:
+                break;
+        }
+        dispatch(setDeviceListPageNo(1));
+    }
 
     return (
         <Toolbar
@@ -49,20 +86,27 @@ function DeviceTableToolbar() {
                             <SearchInput
                                 placeholder="Search devices..."
                                 width={"100%"}
-                            // onChange={(e) => handleSearchKeywords(e.target.value)}
-                            // value={searchKeywords}
+                                sx={{ color: "white" }}
+                                onChange={(e) => handleSelect(e.target.value, "device")}
+                                value={deviceName}
                             />
                         </Stack>
                         <Stack width={"100%"}>
-                            <Selector
-                                placeholder='Select project'
-                                selectType="single"
+                            <SearchInput
+                                placeholder="Search serial number..."
+                                width={"100%"}
+                                sx={{ color: "white" }}
+                                onChange={(e) => handleSelect(e.target.value, "serialNumber")}
+                                value={deviceSerialNumber}
                             />
                         </Stack>
-                        <Stack width={"100%"}>
-                            <Selector
-                                placeholder='Select status'
-                                selectType="single"
+                        <Stack width={"100%"} >
+                            <SearchableDropdown
+                                options={data.length > 0 ? data : []}
+                                placeholder="Select type"
+                                value={deviceType}
+                                onChange={(value) => handleSelect(value, "type")}
+                                filter={true}
                             />
                         </Stack>
                     </Stack>
@@ -90,10 +134,6 @@ function DeviceTableToolbar() {
                     // fields={fieldsToDownload}
                     // fieldMapping={fieldMapping}
                     />
-                    {/* <MenuList heading={<Iconify icon="ic:round-filter-list" />}
-                    // values={filter}
-                    // onChange={handleOrderChange}
-                    /> */}
                 </Stack>
                 // )
             }
