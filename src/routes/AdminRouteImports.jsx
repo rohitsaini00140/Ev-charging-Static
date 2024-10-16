@@ -5,7 +5,7 @@ import AddOrUpdateUser from "../adminPanel/pages/user/addOrUpdate/AddOrUpdateUse
 import UserView from "../adminPanel/pages/user/view/UserView";
 import AddOrUpdateClusters from "../adminPanel/pages/clusters/addOrUpdate/AddOrUpdateClusters.jsx";
 import ClustersView from "../adminPanel/pages/clusters/view/ClustersView.jsx";
-import AddRoles from "../adminPanel/pages/roles&Permissions/roles/add/AddRoles";
+import AddOrUpdateRoles from "../adminPanel/pages/roles&Permissions/roles/addOrUpdate/AddOrUpdateRoles.jsx";
 import RoleView from "../adminPanel/pages/roles&Permissions/roles/view/RoleView";
 import AddPermissions from "../adminPanel/pages/roles&Permissions/permissions/add/AddPermissions";
 import PermissionView from "../adminPanel/pages/roles&Permissions/permissions/view/PermissionView";
@@ -33,7 +33,7 @@ export {
     UserView,
     AddOrUpdateClusters,
     ClustersView,
-    AddRoles,
+    AddOrUpdateRoles,
     RoleView,
     AddPermissions,
     PermissionView,

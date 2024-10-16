@@ -7,13 +7,13 @@ import { StyledTableCell } from '../../../../component/tableStyle';
 
 // ----------------------------------------------------------------------
 
-function RoleTableHead() {
+function RoleTableHead({ allRoleData }) {
 
     return (
         <TableHead>
             <TableRow>
                 {
-                    roleData.length > 0 && <StyledTableCell padding="checkbox">
+                    allRoleData.length > 0 && <StyledTableCell padding="checkbox">
                         <Checkbox
                         // onChange={onHandleSelectAll}
                         // checked={selectAll}

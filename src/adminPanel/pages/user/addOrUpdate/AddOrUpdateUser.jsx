@@ -3,10 +3,13 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import AddOrUpdateUserFields from './AddOrUpdateUserFields';
+import { useParams } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
 function AddOrUpdateUser() {
+
+    const { id } = useParams()
 
     return (
         <Box
@@ -24,7 +27,7 @@ function AddOrUpdateUser() {
                         backgroundColor: "#181837",
                     }}
                 >
-                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>Add Users</Typography>
+                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>{id ? "Update Users" : "Add Users"}</Typography>
                     <AddOrUpdateUserFields />
                 </Card>
             </Stack>

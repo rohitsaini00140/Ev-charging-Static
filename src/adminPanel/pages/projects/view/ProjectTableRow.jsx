@@ -7,7 +7,7 @@ import Action from '../../../component/Action';
 import { useSoftDeleteProjectsMutation, useSoftRestoreProjectsMutation } from '../../../../globalState/projects/projectsApis';
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import { Skeleton } from '@mui/material';
-// ----------------------------------------------------------------------
+
 
 function ProjectTableRow({ allProjectsData, currentpage }) {
     const [loading, setLoading] = useState(true);

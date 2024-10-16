@@ -7,5 +7,5 @@ export const userSchema = z.object({
         .trim()
         .min(1, "Mobile No. is required")
         .regex(/^([+]\d{2}[ ])?\d{10}$/, "Invalid mobile number"),
-    roles: z.number().int().min(1, "Role is required"),
+    role_id: z.number().int().min(1, "Role is required"),
 });

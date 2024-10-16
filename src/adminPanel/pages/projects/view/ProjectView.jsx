@@ -17,7 +17,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import { useGetFilteredProjectsQuery } from '../../../../globalState/projects/projectsApis';
 import { setProjectListPageNo } from '../../../../globalState/projects/projectsSlices';
-// ----------------------------------------------------------------------
 
 function ProjectView() {
 
@@ -29,7 +28,7 @@ function ProjectView() {
 
   const { adminName } = useSelector(state => state.admin)
 
-  const { data: filteredData, isSuccess: filteredDataSuccess } = useGetFilteredProjectsQuery({ page: pageNo, projectName: searchProjectKeywords, clusterName, userName: adminName });
+  const { data: filteredData, isSuccess: filteredDataSuccess, isLoading } = useGetFilteredProjectsQuery({ page: pageNo, projectName: searchProjectKeywords, clusterName, userName: adminName });
 
   const allProjectsData = filteredDataSuccess && filteredData?.data;
 
@@ -65,27 +64,32 @@ function ProjectView() {
       </Stack>
       <Card sx={{ bgcolor: "#181837" }}>
         <ProjectTableToolbar />
-        <Scrollbar>
-          <TableContainer sx={{ overflow: 'unset' }}>
-            <Table sx={{ minWidth: 800 }}>
-              <ProjectTableHead allProjectsData={allProjectsData} />
-              <TableBody>
-                {allProjectsData.length > 0 ?
-                  <ProjectTableRow
-                    currentpage={pageNo}
-                    allProjectsData={allProjectsData}
-                  />
-                  :
-                  <StyledTableRow>
-                    <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
-                      <Typography color="white">Empty</Typography>
-                    </StyledTableCell>
-                  </StyledTableRow>
-                }
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Scrollbar>
+        {isLoading ? (
+          <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>
+            <Typography color="white" sx={{ mt: 2 }}>Loading...</Typography>
+          </Stack>
+        ) : (<Scrollbar>
+            <TableContainer sx={{ overflow: 'unset' }}>
+              <Table sx={{ minWidth: 800 }}>
+                <ProjectTableHead allProjectsData={allProjectsData} />
+                <TableBody>
+                  {allProjectsData.length > 0 ?
+                    <ProjectTableRow
+                      currentpage={pageNo}
+                      allProjectsData={allProjectsData}
+                    />
+                    : (
+                      <StyledTableRow>
+                        <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
+                          <Typography color="white">No Data Found</Typography>
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Scrollbar>
+          )}
         {(allProjectsData.length > 0) && <TablePagination
           count={last_page}
           onPageChange={handlePageChange}

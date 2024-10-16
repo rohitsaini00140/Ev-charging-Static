@@ -12,7 +12,7 @@ import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterA
 import { useState } from 'react';
 import Alertbar from '../../../component/Alertbar';
 import { useAddProjectsMutation, useGetProjectByIdQuery, useUpdateProjectsMutation } from '../../../../globalState/projects/projectsApis';
-import { useGetAdminQuery } from '../../../../globalState/adminAuth/adminApis';
+import { useGetAllAdminQuery } from '../../../../globalState/adminAuth/adminApis';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 
@@ -25,7 +25,6 @@ function AddOrUpdateProjectFields() {
     });
 
     const { id } = useParams()
-
     let navigate = useNavigate()
 
     const { data, isSuccess } = useGetProjectByIdQuery(id)
@@ -34,7 +33,7 @@ function AddOrUpdateProjectFields() {
 
     const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
 
-    const { data: admins, isSuccess: adminsSuccess } = useGetAdminQuery()
+    const { data: admins, isSuccess: adminsSuccess } = useGetAllAdminQuery()
 
     const allcluters = clustersSuccess && clusters.clusters
 
@@ -210,6 +209,7 @@ function AddOrUpdateProjectFields() {
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
+                position={{ vertical: 'bottom', horizontal: 'center' }}
             />
         </>
     )

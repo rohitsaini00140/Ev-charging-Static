@@ -10,7 +10,7 @@ import {
   UserView,
   AddOrUpdateClusters,
   ClustersView,
-  AddRoles,
+  AddOrUpdateRoles,
   RoleView,
   AddPermissions,
   PermissionView,
@@ -68,12 +68,13 @@ function Router() {
 
                   <Route path="/user/add" element={<AddOrUpdateUser />} />
                   <Route path="/user/view" element={<UserView />} />
+                  <Route path="/user/update/:id" element={<AddOrUpdateUser />} />
 
                   <Route path="/cluster/add" element={<AddOrUpdateClusters />} />
                   <Route path="/cluster/view" element={<ClustersView />} />
                   <Route path="/cluster/update/:id" element={<AddOrUpdateClusters />} />
 
-                  <Route path="/role/add" element={<AddRoles />} />
+                  <Route path="/role/add" element={<AddOrUpdateRoles />} />
                   <Route path="/role/view" element={<RoleView />} />
 
                   <Route path="/permission/add" element={<AddPermissions />} />

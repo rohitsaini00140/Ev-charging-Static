@@ -14,7 +14,7 @@ import { setProjectKeywords, setProjectListPageNo } from '../../../../globalStat
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
 import { setClusterName } from '../../../../globalState/cluster/clusterSlices';
-import { useGetAdminQuery } from '../../../../globalState/adminAuth/adminApis';
+import { useGetAllAdminQuery } from '../../../../globalState/adminAuth/adminApis';
 import { setAdminName } from '../../../../globalState/adminAuth/adminSlice';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -34,7 +34,7 @@ function ProjectTableToolbar() {
 
     const { data: clusterData, isSuccess: clusterSuccess } = useGetAllClustersQuery()
 
-    const { data: userData, isSuccess: userSuccess } = useGetAdminQuery()
+    const { data: userData, isSuccess: userSuccess } = useGetAllAdminQuery()
 
     const allCluster = clusterSuccess && clusterData?.clusters
 
