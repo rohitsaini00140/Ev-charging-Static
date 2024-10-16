@@ -1,14 +1,15 @@
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
-function Alertbar({ open, onClose, severity, message }) {
+function Alertbar({ open, onClose, severity, message, position, sx }) {
 
     return (
         <Snackbar
             open={open}
             autoHideDuration={2000}
             onClose={onClose}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            anchorOrigin={position}
+            sx={sx}
         >
             <Alert
                 onClose={onClose}

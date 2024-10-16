@@ -8,6 +8,15 @@ export const rolesApi = createApi({
     tagTypes: ["Roles"],
     endpoints: (builder) => ({
 
+        createRoles: builder.mutation({
+            query: (roleData) => ({
+                url: "/roles/create",
+                method: "POST",
+                body: roleData,
+            }),
+            invalidatesTags: ['Roles']
+        }),
+
         getAllRoles: builder.query({
             query: () => `/roles`,
             providesTags: ['Roles']
@@ -16,5 +25,6 @@ export const rolesApi = createApi({
     }),
 });
 export const {
+    useCreateRolesMutation,
     useGetAllRolesQuery
 } = rolesApi;

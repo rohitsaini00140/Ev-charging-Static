@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { clusterSchema } from './clusterSchema';
 import { Typography } from '@mui/material';
-import { useAddClusterMutation, useGetClusterByIdQuery, useGetClustersQuery, useUpdateClusterMutation } from '../../../../globalState/cluster/clusterApis';
+import { useAddClusterMutation, useGetClusterByIdQuery, useUpdateClusterMutation } from '../../../../globalState/cluster/clusterApis';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useMemo } from 'react';
@@ -247,6 +247,7 @@ function AddOrUpdateClustersFields() {
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
+                position={{ vertical: 'bottom', horizontal: 'center' }}
             />
         </>
     )

@@ -25,7 +25,7 @@ function Login() {
         message: '',
         severity: 'success'
     });
-    // password show and hide
+
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const [loginUser] = useLoginUserMutation()
@@ -53,7 +53,7 @@ function Login() {
         } catch (error) {
             setSnackbar({
                 open: true,
-                message: error.data ? error.error.data : "error while submitting",
+                message: (error?.data) ? (error?.data?.error) : "error while submitting",
                 severity: 'error'
             });
             if (error.data && error.data.errors) {
@@ -85,7 +85,7 @@ function Login() {
                 }}
             >
                 <Typography variant='h3' fontWeight={"700"}>Find EV Charging Stations and Get Ready to <Typography color="#57b33e" variant='h3' fontWeight={"700"}>Go Green</Typography></Typography>
-                <Link to="/"> <img src={companyLogo} alt='error' style={{ width: "8rem" }} /> </Link> 
+                <Link to="/"> <img src={companyLogo} alt='error' style={{ width: "8rem" }} /> </Link>
             </Grid>
             <Grid item size={{ lg: 6, xs: 12 }}
                 sx={{
@@ -114,39 +114,39 @@ function Login() {
                             Login VNT! 👋
                         </Typography>
                         <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
-                            <Box sx={{ position: "relative"}}>
-                            <TextField
-                                {...register("email", { required: true })}
-                                margin="normal"
-                                fullWidth
-                                label="Email"
-                                sx={inputStyles}
-                            />
-                           {errors.email && <Typography sx={error_position}>*{errors.email.message}</Typography>}
-                           </Box>
-                           <Box sx={{ position: "relative"}}>
-                            <TextField
-                                {...register("password", { required: true })}
-                                sx={inputStyles}
-                                margin="normal"
-                                label="Password"
-                                fullWidth
-                                type={showPassword ? 'text' : 'password'}
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                edge="end"
-                                            >
-                                                {showPassword ? <VisibilityOff sx={{ color: "#57b33e" }} /> : <Visibility sx={{ color: "#57b33e" }} />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                            {errors.password && <Typography sx={error_position}>*{errors.password.message}</Typography>}
+                            <Box sx={{ position: "relative" }}>
+                                <TextField
+                                    {...register("email", { required: true })}
+                                    margin="normal"
+                                    fullWidth
+                                    label="Email"
+                                    sx={inputStyles}
+                                />
+                                {errors.email && <Typography sx={error_position}>*{errors.email.message}</Typography>}
+                            </Box>
+                            <Box sx={{ position: "relative" }}>
+                                <TextField
+                                    {...register("password", { required: true })}
+                                    sx={inputStyles}
+                                    margin="normal"
+                                    label="Password"
+                                    fullWidth
+                                    type={showPassword ? 'text' : 'password'}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    edge="end"
+                                                >
+                                                    {showPassword ? <VisibilityOff sx={{ color: "#57b33e" }} /> : <Visibility sx={{ color: "#57b33e" }} />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
+                                {errors.password && <Typography sx={error_position}>*{errors.password.message}</Typography>}
                             </Box>
                             <Button
                                 type="submit"
@@ -192,6 +192,13 @@ function Login() {
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
+                position={{ vertical: 'top', horizontal: 'right' }}
+                sx={{
+                    position: 'fixed',
+                    bottom: '30rem',
+                    right: '17rem !important',
+                    zIndex: 1400,
+                }}
             />
         </Grid>
     );

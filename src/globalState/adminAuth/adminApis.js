@@ -8,8 +8,17 @@ export const adminApi = createApi({
     tagTypes: ["admins"],
     endpoints: (builder) => ({
 
-        getAdmin: builder.query({
+        getAllAdmin: builder.query({
             query: () => `/users`,
+        }),
+
+        getAdmin: builder.query({
+            query: (pageNo) => `/users/list?page=${pageNo}`,
+            providesTags: ['admins'],
+        }),
+
+        getAdminById: builder.query({
+            query: (id) => `/users/show/${id}`,
         }),
 
         createAdmin: builder.mutation({
@@ -19,6 +28,32 @@ export const adminApi = createApi({
                 body: adminData
             }),
             invalidatesTags: ['admins']
+        }),
+
+        updateAdmin: builder.mutation({
+            query: ({ id, updatedAdminData }) => ({
+                url: `/users/update/${id}`,
+                method: "PUT",
+                body: updatedAdminData
+            }),
+            invalidatesTags: ['admins']
+        }),
+
+        softDeleteAdmin: builder.mutation({
+            query: ({ id, softDeletedAdminData }) => ({
+                url: `/users/soft-delete/${id}`,
+                method: "POST",
+                body: softDeletedAdminData
+            }),
+            invalidatesTags: ['admins']
+        }),
+
+        restoreDeletedAdmin: builder.mutation({
+            query: (id) => ({
+                url: `/users/restore/${id}`,
+                method: "POST"
+            }),
+            invalidatesTags: ['admins']
         })
 
     })
@@ -26,5 +61,10 @@ export const adminApi = createApi({
 
 export const {
     useGetAdminQuery,
-    useCreateAdminMutation
+    useGetAllAdminQuery,
+    useGetAdminByIdQuery,
+    useCreateAdminMutation,
+    useUpdateAdminMutation,
+    useSoftDeleteAdminMutation,
+    useRestoreDeletedAdminMutation
 } = adminApi;

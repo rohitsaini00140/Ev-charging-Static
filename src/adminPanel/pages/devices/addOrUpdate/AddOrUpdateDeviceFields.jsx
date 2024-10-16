@@ -224,6 +224,7 @@ function AddOrUpdateDeviceFields() {
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
+                position={{ vertical: 'bottom', horizontal: 'center' }}
             />
         </>
     )

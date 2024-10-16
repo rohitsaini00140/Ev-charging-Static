@@ -8,10 +8,11 @@ import { useForm } from 'react-hook-form';
 import { userSchema } from './userSchema';
 import { Typography } from '@mui/material';
 import { inputStyle } from '../../../component/inputStyle';
-import { useMemo, useState } from 'react';
-import { useCreateAdminMutation } from '../../../../globalState/adminAuth/adminApis';
+import { useMemo, useState, useEffect } from 'react';
+import { useCreateAdminMutation, useGetAdminByIdQuery, useUpdateAdminMutation } from '../../../../globalState/adminAuth/adminApis';
 import Alertbar from '../../../component/Alertbar';
 import { useGetAllRolesQuery } from '../../../../globalState/roles/rolesApi';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function AddOrUpdateUserFields() {
 
@@ -21,17 +22,25 @@ function AddOrUpdateUserFields() {
         severity: 'success'
     });
 
+    const { id } = useParams()
+    let navigate = useNavigate()
+
+    const { data, isSuccess } = useGetAdminByIdQuery(id)
+
+    const adminForUpdate = (isSuccess && data)
+
     const { data: roleData, isSuccess: roleSuccess } = useGetAllRolesQuery()
 
     const allRoleData = roleSuccess && roleData?.roles
 
     const [createAdmin] = useCreateAdminMutation()
+    const [updateAdmin] = useUpdateAdminMutation()
 
     const defaultValues = useMemo(() => ({
         name: "",
         email: "",
         phone: "",
-        roles: 0,
+        role_id: 0,
     }), []);
 
     const { register, handleSubmit, watch, setValue, setError, reset, formState: { errors } } = useForm({
@@ -39,18 +48,47 @@ function AddOrUpdateUserFields() {
         defaultValues: defaultValues
     });
 
+    useEffect(() => {
+        if (id && adminForUpdate) {
+            reset({
+                name: adminForUpdate.name || "",
+                email: adminForUpdate.email || "",
+                phone: adminForUpdate.phone || "",
+                role_id: adminForUpdate.role_id || 0,
+            });
+        } else {
+            reset(defaultValues);
+        }
+    }, [id, adminForUpdate, reset, defaultValues]);
+
     const onSubmit = async (data) => {
         try {
-            console.log(data)
-            await createAdmin(data).unwrap();
 
-            reset(defaultValues)
+            if (id) {
 
-            setSnackbar({
-                open: true,
-                message: 'Admin successfully created!',
-                severity: 'success'
-            })
+                await updateAdmin({ id, updatedAdminData: data }).unwrap();
+                setSnackbar({
+                    open: true,
+                    message: 'Admin successfully updated!',
+                    severity: 'success'
+                });
+
+                setTimeout(() => {
+                    navigate("/admin/user/view");
+                }, 3000);
+
+            } else {
+
+                await createAdmin(data).unwrap();
+
+                reset(defaultValues)
+
+                setSnackbar({
+                    open: true,
+                    message: 'Admin successfully created!',
+                    severity: 'success'
+                })
+            }
 
         } catch (error) {
             setSnackbar({
@@ -124,12 +162,12 @@ function AddOrUpdateUserFields() {
                             <SearchableDropdown
                                 options={allRoleData.length > 0 ? allRoleData : []}
                                 placeholder="Select roles"
-                                value={watch("roles") || 0}
-                                onChange={(newValue) => setValue("roles", newValue,
+                                value={watch("role_id") || 0}
+                                onChange={(newValue) => setValue("role_id", newValue,
                                     { shouldValidate: true },
                                 )}
                             />
-                            {errors.roles && <Typography color={"red"} mt={".5rem"}>*{errors.roles.message}</Typography>}
+                            {errors.role_id && <Typography color={"red"} mt={".5rem"}>*{errors.role_id.message}</Typography>}
                         </Stack>
                     </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>
@@ -161,6 +199,7 @@ function AddOrUpdateUserFields() {
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
+                position={{ vertical: 'bottom', horizontal: 'center' }}
             />
         </>
     )

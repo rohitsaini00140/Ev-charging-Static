@@ -13,11 +13,18 @@ import TablePagination from '../../../../component/TablePagination';
 import RoleTableToolbar from './RoleTableToolbar';
 import RoleTableHead from './RoleTableHead';
 import RoleTableRow from './RoleTableRow';
-import { roleData } from './roleData';
-
-// ----------------------------------------------------------------------
+import { StyledTableCell, StyledTableRow } from '../../../../component/tableStyle';
+import { useGetAllRolesQuery } from '../../../../../globalState/roles/rolesApi';
 
 function RoleView() {
+
+  const { data: roleData, isSuccess: roleSuccess, isLoading } = useGetAllRolesQuery()
+
+  const allRoleData = roleSuccess && roleData?.roles;
+
+  // const handlePageChange = (event, value) => {
+  //   dispatch(setProjectListPageNo(value));
+  // };
 
   return (
     <Container>
@@ -44,17 +51,38 @@ function RoleView() {
       </Stack>
       <Card sx={{ bgcolor: "#181837" }}>
         <RoleTableToolbar />
-        <Scrollbar>
-          <TableContainer sx={{ overflow: 'unset' }}>
-            <Table sx={{ minWidth: 800 }}>
-              <RoleTableHead />
-              <TableBody>
-                <RoleTableRow />
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Scrollbar>
-        {(roleData.length > 0) && <TablePagination />}
+        {isLoading ? (
+          <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>
+            <Typography color="white" sx={{ mt: 2 }}>Loading...</Typography>
+          </Stack>
+        ) :
+          (<Scrollbar>
+            <TableContainer sx={{ overflow: 'unset' }}>
+              <Table sx={{ minWidth: 800 }}>
+                <RoleTableHead allRoleData={allRoleData} />
+                <TableBody>
+                  {allRoleData.length > 0 ?
+                    <RoleTableRow
+                      // currentpage={pageNo}
+                      allRoleData={allRoleData}
+                    />
+                    : (
+                      <StyledTableRow>
+                        <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
+                          <Typography color="white">No Data Found</Typography>
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Scrollbar>
+          )}
+        {(allRoleData.length > 0) && <TablePagination
+        // count={last_page}
+        // onPageChange={handlePageChange}
+        // page={pageNo}
+        />}
       </Card>
     </Container>
   );

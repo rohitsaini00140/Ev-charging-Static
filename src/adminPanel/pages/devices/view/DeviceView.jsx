@@ -61,33 +61,32 @@ function DeviceView() {
         </Link>
       </Stack>
       <Card sx={{ bgcolor: "#181837" }}>
-        <DeviceTableToolbar allDeviceData={allDeviceData} />
+        <DeviceTableToolbar />
         {isLoading ? (
           <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>
             <Typography color="white" sx={{ mt: 2 }}>Loading...</Typography>
           </Stack>
-        ) : (
-          <Scrollbar>
-            <TableContainer sx={{ overflow: 'unset' }}>
-              <Table sx={{ minWidth: 800 }}>
-                <DeviceTableHead allDeviceData={allDeviceData} />
-                <TableBody>
-                  {allDeviceData.length > 0 ? (
-                    <DeviceTableRow
-                      allDeviceData={allDeviceData}
-                      currentPageNo={pageNo}
-                    />
-                  ) : (
-                    <StyledTableRow>
-                      <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
-                        <Typography color="white">No Data Found</Typography>
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Scrollbar>
+        ) : (<Scrollbar>
+          <TableContainer sx={{ overflow: 'unset' }}>
+            <Table sx={{ minWidth: 800 }}>
+              <DeviceTableHead allDeviceData={allDeviceData} />
+              <TableBody>
+                {allDeviceData.length > 0 ? (
+                  <DeviceTableRow
+                    allDeviceData={allDeviceData}
+                    currentPageNo={pageNo}
+                  />
+                ) : (
+                  <StyledTableRow>
+                    <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
+                      <Typography color="white">No Data Found</Typography>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Scrollbar>
         )}
         {allDeviceData.length > 0 && <TablePagination
           count={last_page}
