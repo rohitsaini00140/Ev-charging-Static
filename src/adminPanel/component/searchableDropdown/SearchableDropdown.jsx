@@ -2,7 +2,6 @@ import { Autocomplete, TextField } from '@mui/material';
 import { inputStyle, StyledPopper } from './searchableDropDownStyle';
 
 function SearchableDropdown({ options, placeholder, value, onChange, noOptionText, filter }) {
-
     return (
         <Autocomplete
             disablePortal
@@ -18,5 +17,4 @@ function SearchableDropdown({ options, placeholder, value, onChange, noOptionTex
     );
 
 }
-
 export default SearchableDropdown;
