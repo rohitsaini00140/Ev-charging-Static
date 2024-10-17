@@ -106,7 +106,7 @@ function DeviceTableToolbar() {
                                 placeholder="Select type"
                                 value={deviceType}
                                 onChange={(value) => handleSelect(value, "type")}
-                                filter={true}
+                                type={"name"}
                             />
                         </Stack>
                     </Stack>

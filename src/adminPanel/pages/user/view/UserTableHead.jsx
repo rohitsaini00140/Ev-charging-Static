@@ -7,13 +7,13 @@ import { StyledTableCell } from '../../../component/tableStyle';
 
 // ----------------------------------------------------------------------
 
-function UserTableHead({ allAdminData }) {
+function UserTableHead({ allUserData }) {
 
     return (
         <TableHead>
             <TableRow>
                 {
-                    allAdminData.length > 0 && <StyledTableCell padding="checkbox">
+                    allUserData.length > 0 && <StyledTableCell padding="checkbox">
                         <Checkbox
                         // onChange={onHandleSelectAll}
                         // checked={selectAll}
@@ -24,6 +24,7 @@ function UserTableHead({ allAdminData }) {
                 {headLabel.map((headCell) => (
                     <StyledTableCell
                         sx={{ width: headCell.width, minWidth: headCell.minWidth }}
+                        key={headCell.id}
                     >
                         <TableSortLabel hideSortIcon>
                             {headCell.label}

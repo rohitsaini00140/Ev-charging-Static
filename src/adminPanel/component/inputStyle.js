@@ -32,11 +32,14 @@ export const inputStyle = {
     },
     "& input:-webkit-autofill:hover": {
         WebkitBoxShadow: "0 0 0 1000px #34345a inset",
+        WebkitTextFillColor: "white",
     },
     "& input:-webkit-autofill:focus": {
         WebkitBoxShadow: "0 0 0 1000px #34345a inset",
+        WebkitTextFillColor: "white",
     },
     "& input:-webkit-autofill:active": {
         WebkitBoxShadow: "0 0 0 1000px #34345a inset",
+        WebkitTextFillColor: "white",
     },
 }

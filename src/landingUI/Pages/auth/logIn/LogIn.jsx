@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginSchema } from "./logInSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useLoginUserMutation } from '../../../../globalState/userAuth/userApis';
+import { useLoginUserMutation } from '../../../../globalState/user/userApis';
 import Alertbar from '../../../../adminPanel/component/Alertbar';
 import { error_position } from './loginStyle';
 

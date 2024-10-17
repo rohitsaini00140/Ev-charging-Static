@@ -148,7 +148,7 @@ function ClustersTableToolbar({ allClusterData }) {
                                 value={countryName || ""}
                                 // onChange={handleSelectCountry}
                                 onChange={(value) => handleSelect(value, "country")}
-                                filter={true}
+                                type={"name"}
                             />
                         </Stack>
                         <Stack width={"100%"} >
@@ -159,7 +159,7 @@ function ClustersTableToolbar({ allClusterData }) {
                                 // onChange={handleSelectState}
                                 onChange={(value) => handleSelect(value, "state")}
                                 noOptionText={"Select Country First"}
-                                filter={true}
+                                type={"name"}
                             />
                         </Stack>
                         <Stack width={"100%"}>
@@ -170,7 +170,7 @@ function ClustersTableToolbar({ allClusterData }) {
                                 // onChange={handleSelectCity}
                                 onChange={(value) => handleSelect(value, "city")}
                                 noOptionText={"Select State First"}
-                                filter={true}
+                                type={"name"}
                             />
                         </Stack>
                     </Stack>

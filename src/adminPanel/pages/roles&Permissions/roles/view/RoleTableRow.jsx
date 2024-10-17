@@ -4,6 +4,7 @@ import { StyledTableCell, StyledTableRow } from '../../../../component/tableStyl
 import Action from '../../../../component/Action';
 import { useState, useEffect } from 'react';
 import { Skeleton } from '@mui/material';
+import { useRestoreDeletedRoleMutation, useSoftDeleteRoleMutation } from '../../../../../globalState/roles/rolesApi';
 
 // ----------------------------------------------------------------------
 
@@ -14,6 +15,18 @@ function RoleTableRow({ allRoleData }) {
         const timer = setTimeout(() => setLoading(false), 1000);
         return () => clearTimeout(timer);
     }, []);
+
+    const [softDeleteRole] = useSoftDeleteRoleMutation()
+    const [restoreDeletedRole] = useRestoreDeletedRoleMutation()
+
+    function onSoftDelete(data) {
+        let dataId = data.id
+        softDeleteRole({ id: dataId, softDeletedRoleData: data })
+    }
+
+    function onRestoreData(id) {
+        restoreDeletedRole(id)
+    }
 
     return (
         <>
@@ -29,13 +42,16 @@ function RoleTableRow({ allRoleData }) {
                         </StyledTableCell>
                         <StyledTableCell> {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : i + 1}</StyledTableCell>
                         <StyledTableCell> {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.name}</StyledTableCell>
-                        {/* <StyledTableCell>
-                            <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
-                        </StyledTableCell> */}
-                        {/* <StyledTableCell>{data.createdAt}</StyledTableCell> */}
                         <StyledTableCell>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action data={data}
-                            // pathToNavigate={"/category/update"} 
+                            <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
+                        </StyledTableCell>
+                        <StyledTableCell>
+                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
+                                data={data}
+                                activeOrInactive={data.deleted_at}
+                                pathToNavigate={"/admin/project/update"}
+                                onSoftDelete={onSoftDelete}
+                                onRestoreData={onRestoreData}
                             />}
                         </StyledTableCell>
                     </StyledTableRow>
