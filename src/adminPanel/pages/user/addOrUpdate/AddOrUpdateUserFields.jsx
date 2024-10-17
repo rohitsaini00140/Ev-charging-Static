@@ -9,7 +9,7 @@ import { userSchema } from './userSchema';
 import { Typography } from '@mui/material';
 import { inputStyle } from '../../../component/inputStyle';
 import { useMemo, useState, useEffect } from 'react';
-import { useCreateAdminMutation, useGetAdminByIdQuery, useUpdateAdminMutation } from '../../../../globalState/adminAuth/adminApis';
+import { useCreateUserMutation, useGetUserByIdQuery, useUpdateUserMutation } from '../../../../globalState/user/userApis';
 import Alertbar from '../../../component/Alertbar';
 import { useGetAllRolesQuery } from '../../../../globalState/roles/rolesApi';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -25,16 +25,16 @@ function AddOrUpdateUserFields() {
     const { id } = useParams()
     let navigate = useNavigate()
 
-    const { data, isSuccess } = useGetAdminByIdQuery(id)
+    const { data, isSuccess } = useGetUserByIdQuery(id, { skip: !id })
 
-    const adminForUpdate = (isSuccess && data)
+    const userForUpdate = (isSuccess && data)
 
     const { data: roleData, isSuccess: roleSuccess } = useGetAllRolesQuery()
 
     const allRoleData = roleSuccess && roleData?.roles
 
-    const [createAdmin] = useCreateAdminMutation()
-    const [updateAdmin] = useUpdateAdminMutation()
+    const [createUser] = useCreateUserMutation()
+    const [updateUser] = useUpdateUserMutation()
 
     const defaultValues = useMemo(() => ({
         name: "",
@@ -49,27 +49,27 @@ function AddOrUpdateUserFields() {
     });
 
     useEffect(() => {
-        if (id && adminForUpdate) {
+        if (id && userForUpdate) {
             reset({
-                name: adminForUpdate.name || "",
-                email: adminForUpdate.email || "",
-                phone: adminForUpdate.phone || "",
-                role_id: adminForUpdate.role_id || 0,
+                name: userForUpdate.name || "",
+                email: userForUpdate.email || "",
+                phone: userForUpdate.phone || "",
+                role_id: userForUpdate.role_id || 0,
             });
         } else {
             reset(defaultValues);
         }
-    }, [id, adminForUpdate, reset, defaultValues]);
+    }, [id, userForUpdate, reset, defaultValues]);
 
     const onSubmit = async (data) => {
         try {
 
             if (id) {
 
-                await updateAdmin({ id, updatedAdminData: data }).unwrap();
+                await updateUser({ id, updatedUserData: data }).unwrap();
                 setSnackbar({
                     open: true,
-                    message: 'Admin successfully updated!',
+                    message: 'User successfully updated!',
                     severity: 'success'
                 });
 
@@ -79,13 +79,13 @@ function AddOrUpdateUserFields() {
 
             } else {
 
-                await createAdmin(data).unwrap();
+                await createUser(data).unwrap();
 
                 reset(defaultValues)
 
                 setSnackbar({
                     open: true,
-                    message: 'Admin successfully created!',
+                    message: 'User successfully created!',
                     severity: 'success'
                 })
             }

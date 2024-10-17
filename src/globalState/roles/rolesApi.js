@@ -22,9 +22,28 @@ export const rolesApi = createApi({
             providesTags: ['Roles']
         }),
 
+        softDeleteRole: builder.mutation({
+            query: ({ id, softDeletedRoleData }) => ({
+                url: `/roles/soft-delete/${id}`,
+                method: "POST",
+                body: softDeletedRoleData,
+            }),
+            invalidatesTags: ['Roles'],
+        }),
+
+        restoreDeletedRole: builder.mutation({
+            query: (id) => ({
+                url: `/roles/restore/${id}`,
+                method: "POST",
+            }),
+            invalidatesTags: ['Roles'],
+        }),
+
     }),
 });
 export const {
     useCreateRolesMutation,
-    useGetAllRolesQuery
+    useGetAllRolesQuery,
+    useSoftDeleteRoleMutation,
+    useRestoreDeletedRoleMutation
 } = rolesApi;

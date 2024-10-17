@@ -14,8 +14,8 @@ import { setProjectKeywords, setProjectListPageNo } from '../../../../globalStat
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
 import { setClusterName } from '../../../../globalState/cluster/clusterSlices';
-import { useGetAllAdminQuery } from '../../../../globalState/adminAuth/adminApis';
-import { setAdminName } from '../../../../globalState/adminAuth/adminSlice';
+import { useGetAllUserQuery } from '../../../../globalState/user/userApis';
+import { setUserName } from '../../../../globalState/user/userSlice';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -30,11 +30,11 @@ function ProjectTableToolbar() {
 
     const { clusterName } = useSelector(state => state.cluster)
 
-    const { adminName } = useSelector(state => state.admin)
+    const { userName } = useSelector(state => state.user)
 
     const { data: clusterData, isSuccess: clusterSuccess } = useGetAllClustersQuery()
 
-    const { data: userData, isSuccess: userSuccess } = useGetAllAdminQuery()
+    const { data: userData, isSuccess: userSuccess } = useGetAllUserQuery()
 
     const allCluster = clusterSuccess && clusterData?.clusters
 
@@ -58,9 +58,9 @@ function ProjectTableToolbar() {
                 break;
             case 'user':
                 if (option) {
-                    dispatch(setAdminName(option));
+                    dispatch(setUserName(option));
                 } else {
-                    dispatch(setAdminName(''));
+                    dispatch(setUserName(''));
                 }
                 break;
             default:
@@ -73,7 +73,7 @@ function ProjectTableToolbar() {
         return () => {
             dispatch(setProjectKeywords(''));
             dispatch(setClusterName(''));
-            dispatch(setAdminName(''));
+            dispatch(setUserName(''));
         };
     }, [location, dispatch]);
 
@@ -117,22 +117,22 @@ function ProjectTableToolbar() {
                                 value={searchProjectKeywords}
                             />
                         </Stack>
-                        <Stack width={"100%"} >
+                        <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allCluster.length > 0 ? allCluster : []}
                                 placeholder="Select Cluster"
                                 value={clusterName || ""}
                                 onChange={(value) => handleSelect(value, "cluster")}
-                                filter={true}
+                                type={"name"}
                             />
                         </Stack>
                         <Stack width={"100%"} >
                             <SearchableDropdown
                                 options={allUser.length > 0 ? allUser : []}
                                 placeholder="Select User"
-                                value={adminName || ""}
+                                value={userName || ""}
                                 onChange={(value) => handleSelect(value, "user")}
-                                filter={true}
+                                type={"name"}
                             />
                         </Stack>
                     </Stack>

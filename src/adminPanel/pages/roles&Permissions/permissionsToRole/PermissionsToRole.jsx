@@ -6,10 +6,17 @@ import Scrollbar from "../../../component/scrollbar/Scrollbar"
 import { permissionsToRoleData, allRoles, allPermissions } from './permissionsToRoleData';
 import { Grid } from '@mui/system';
 import Checkbox from '@mui/material/Checkbox';
-
-// ----------------------------------------------------------------------
+import { useGetAllRolesQuery } from '../../../../globalState/roles/rolesApi';
+import { useGetAllPermissionsQuery } from '../../../../globalState/permission/permissionApis';
 
 function PermissionToRole() {
+
+    const { data: roleData, isSuccess: roleSuccess } = useGetAllRolesQuery()
+
+    const { data: permissionData, isSuccess: permissionSuccess } = useGetAllPermissionsQuery()
+
+    const allRoleData = roleSuccess && roleData?.roles
+    const allPermissionData = permissionSuccess && permissionData?.permissions
 
     return (
         <Container>
@@ -23,8 +30,9 @@ function PermissionToRole() {
             </Stack>
             <Card sx={{ p: "2rem", bgcolor: "#181837" }}>
                 <Scrollbar>
-                    {
-                        allRoles.map((role, i) => {
+                    {allRoleData.length > 0
+                        &&
+                        allRoleData.map((role, i) => {
                             return <Grid container
                                 sx={{
                                     display: "flex",
@@ -34,14 +42,15 @@ function PermissionToRole() {
                                 size={12}
                             >
                                 <Grid size={{ sm: 2, xs: 12 }}>
-                                    <Typography key={i} variant='h6' color="white">{role}:</Typography>
+                                    <Typography key={i} variant='h6' color="white">{role.name}:</Typography>
                                 </Grid>
                                 <Grid sx={{ display: "flex", flexDirection: "row" }} size={{ sm: 10, xs: 12 }}>
-                                    {
-                                        allPermissions.map((permission, i) => {
+                                    {allPermissionData.length > 0
+                                        &&
+                                        allPermissionData.map((permission, i) => {
                                             return <Stack sx={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                                                 <Checkbox />
-                                                <Typography key={i} color="white">{permission}</Typography>
+                                                <Typography key={i} color="white" sx={{ whiteSpace: "nowrap" }}>{permission.permission_name}</Typography>
                                             </Stack>
                                         })
                                     }

@@ -12,7 +12,7 @@ import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterA
 import { useState } from 'react';
 import Alertbar from '../../../component/Alertbar';
 import { useAddProjectsMutation, useGetProjectByIdQuery, useUpdateProjectsMutation } from '../../../../globalState/projects/projectsApis';
-import { useGetAllAdminQuery } from '../../../../globalState/adminAuth/adminApis';
+import { useGetAllUserQuery } from '../../../../globalState/user/userApis';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 
@@ -33,11 +33,11 @@ function AddOrUpdateProjectFields() {
 
     const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
 
-    const { data: admins, isSuccess: adminsSuccess } = useGetAllAdminQuery()
+    const { data: usersData, isSuccess: usersSuccess } = useGetAllUserQuery()
 
     const allcluters = clustersSuccess && clusters.clusters
 
-    const allAdmins = adminsSuccess && admins.users
+    const allUsersData = usersSuccess && usersData?.users
 
     const [updateProjects] = useUpdateProjectsMutation()
 
@@ -145,7 +145,7 @@ function AddOrUpdateProjectFields() {
                         </Stack>
                         <Stack width={"100%"}>
                             <SearchableDropdown
-                                options={allAdmins.length > 0 ? allAdmins : []}
+                                options={allUsersData.length > 0 ? allUsersData : []}
                                 placeholder="Select User "
                                 value={watch("user_id") || ""}
                                 onChange={(newValue) => setValue("user_id", newValue,
