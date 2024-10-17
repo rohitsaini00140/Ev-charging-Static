@@ -9,15 +9,7 @@ import AddOrUpdateRoles from "../adminPanel/pages/roles&Permissions/roles/addOrU
 import RoleView from "../adminPanel/pages/roles&Permissions/roles/view/RoleView";
 import AddPermissions from "../adminPanel/pages/roles&Permissions/permissions/add/AddPermissions";
 import PermissionView from "../adminPanel/pages/roles&Permissions/permissions/view/PermissionView";
-import AddOrUpdateZone from "../adminPanel/pages/zone/addOrUpdate/AddOrUpdateZone.jsx";
-import ZoneView from "../adminPanel/pages/zone/view/ZoneView";
 import PermissionsToRole from "../adminPanel/pages/roles&Permissions/permissionsToRole/PermissionsToRole";
-import AddOrUpdateState from "../adminPanel/pages/address/state/addOrUpdate/AddOrUpdateState.jsx";
-import AddOrUpdateCity from "../adminPanel/pages/address/city/addOrUpdate/AddOrUpdateCity.jsx";
-import AddOrUpdateCountry from "../adminPanel/pages/address/country/addOrUpdate/AddOrUpdateCountry.jsx";
-import StateView from "../adminPanel/pages/address/state/view/StateView.jsx";
-import CountryView from "../adminPanel/pages/address/country/view/CountryView.jsx";
-import CityView from "../adminPanel/pages/address/city/view/CityView.jsx";
 import AddOrUpdateProject from "../adminPanel/pages/projects/addOrUpdate/AddOrUpdateProject.jsx";
 import ProjectView from "../adminPanel/pages/projects/view/ProjectView.jsx";
 import AddOrUpdateDevice from "../adminPanel/pages/devices/addOrUpdate/AddOrUpdateDevice.jsx";
@@ -37,16 +29,8 @@ export {
     RoleView,
     AddPermissions,
     PermissionView,
-    AddOrUpdateZone,
-    ZoneView,
     PermissionsToRole,
     AddOrUpdatePermissionsToRole,
-    AddOrUpdateCity,
-    AddOrUpdateCountry,
-    AddOrUpdateState,
-    StateView,
-    CountryView,
-    CityView,
     AddOrUpdateProject,
     ProjectView,
     AddOrUpdateDevice,

@@ -10,10 +10,55 @@ import PdfExport from '../../../component/PdfExport';
 // import { fieldsToDownload, fieldMapping, filter } from './headLabel';
 import { Stack } from '@mui/material';
 import Selector from '../../../component/selector/Selector';
+import SearchableDropdown from "../../../component/searchableDropdown/SearchableDropdown"
+import { useSelector, useDispatch } from 'react-redux';
+import { setUserListPageNo, setUserName, setUserStatus } from '../../../../globalState/user/userSlice';
+import { useGetAllRolesQuery } from '../../../../globalState/roles/rolesApi';
+import { setRoleName } from '../../../../globalState/roles/rolesSlices';
 
 // ----------------------------------------------------------------------
 
 function UserTableToolbar() {
+
+    const dispatch = useDispatch()
+
+    const { pageNo, userName, status } = useSelector(state => state.user)
+
+    const { roleName } = useSelector(state => state.role)
+
+    const { data: rolesData, isSuccess: rolesSuccess } = useGetAllRolesQuery()
+
+    const allRoleData = rolesSuccess && rolesData?.roles
+
+    function handleSelect(option, type) {
+        switch (type) {
+            case 'user':
+                if (option) {
+                    dispatch(setUserName(option));
+                } else {
+                    dispatch(setUserName(''));
+                }
+                break;
+            case 'role':
+                if (option) {
+                    dispatch(setRoleName(option));
+                } else {
+                    dispatch(setRoleName(''));
+                }
+                break;
+            case 'status':
+                if (option) {
+                    console.log(option)
+                    dispatch(setUserStatus(option));
+                } else {
+                    dispatch(setUserStatus(''));
+                }
+                break;
+            default:
+                break;
+        }
+        dispatch(setUserListPageNo(1));
+    }
 
     return (
         <Toolbar
@@ -49,20 +94,34 @@ function UserTableToolbar() {
                             <SearchInput
                                 placeholder="Search users..."
                                 width={"100%"}
-                            // onChange={(e) => handleSearchKeywords(e.target.value)}
-                            // value={searchKeywords}
+                                sx={{ color: "white" }}
+                                onChange={(e) => handleSelect(e.target.value, "user")}
+                                value={userName}
+                            />
+                        </Stack>
+                        <Stack width={"100%"} >
+                            <SearchableDropdown
+                                options={allRoleData.length > 0 ? allRoleData : []}
+                                placeholder="Select role"
+                                value={roleName}
+                                onChange={(value) => handleSelect(value, "role")}
+                            // filter={true}
+                            />
+                        </Stack>
+                        <Stack width={"100%"} >
+                            <SearchableDropdown
+                                options={[]}
+                                placeholder="Select permission"
+                                // value={clusterName || ""}
+                                onChange={(value) => handleSelect(value, "permission")}
+                            // filter={true}
                             />
                         </Stack>
                         <Stack width={"100%"}>
                             <Selector
-                                placeholder='Select Role'
-                                selectType="single"
-                                options={["User", "Admin", "Moderator"]}
-                            />
-                        </Stack>
-                        <Stack width={"100%"}>
-                            <Selector
-                                placeholder='Select Status'
+                                value={status}
+                                onChange={(e) => handleSelect(e.target.value, "status")}
+                                placeholder='Select status'
                                 selectType="single"
                                 options={["Active", "Inactive"]}
                             />

@@ -9,7 +9,6 @@ import TableContainer from '@mui/material/TableContainer';
 import Iconify from '../../../../component/Iconify';
 import Scrollbar from '../../../../component/scrollbar/Scrollbar';
 import { Link } from 'react-router-dom';
-import TablePagination from '../../../../component/TablePagination';
 import RoleTableToolbar from './RoleTableToolbar';
 import RoleTableHead from './RoleTableHead';
 import RoleTableRow from './RoleTableRow';
@@ -21,10 +20,6 @@ function RoleView() {
   const { data: roleData, isSuccess: roleSuccess, isLoading } = useGetAllRolesQuery()
 
   const allRoleData = roleSuccess && roleData?.roles;
-
-  // const handlePageChange = (event, value) => {
-  //   dispatch(setProjectListPageNo(value));
-  // };
 
   return (
     <Container>
@@ -62,27 +57,21 @@ function RoleView() {
                 <RoleTableHead allRoleData={allRoleData} />
                 <TableBody>
                   {allRoleData.length > 0 ?
-                    <RoleTableRow
-                      // currentpage={pageNo}
-                      allRoleData={allRoleData}
-                    />
-                    : (
+                    <RoleTableRow allRoleData={allRoleData} />
+                    :
+                    (
                       <StyledTableRow>
                         <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
                           <Typography color="white">No Data Found</Typography>
                         </StyledTableCell>
                       </StyledTableRow>
-                    )}
+                    )
+                  }
                 </TableBody>
               </Table>
             </TableContainer>
           </Scrollbar>
           )}
-        {(allRoleData.length > 0) && <TablePagination
-        // count={last_page}
-        // onPageChange={handlePageChange}
-        // page={pageNo}
-        />}
       </Card>
     </Container>
   );

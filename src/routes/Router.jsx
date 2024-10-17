@@ -14,16 +14,8 @@ import {
   RoleView,
   AddPermissions,
   PermissionView,
-  AddOrUpdateZone,
-  ZoneView,
   PermissionsToRole,
   AddOrUpdatePermissionsToRole,
-  AddOrUpdateCity,
-  AddOrUpdateCountry,
-  AddOrUpdateState,
-  StateView,
-  CountryView,
-  CityView,
   AddOrUpdateProject,
   ProjectView,
   AddOrUpdateDevice,
@@ -81,19 +73,6 @@ function Router() {
                   <Route path="/permission/view" element={<PermissionView />} />
                   <Route path="/roles&Permissions/permissionsToRole" element={<PermissionsToRole />} />
                   <Route path="" element={<AddOrUpdatePermissionsToRole />} />
-
-                  <Route path="/zone/add" element={<AddOrUpdateZone />} />
-                  <Route path="/zone/view" element={<ZoneView />} />
-                  <Route path="/zone/update/:id" element={<AddOrUpdateZone />} />
-
-                  <Route path="/state/add" element={<AddOrUpdateState />} />
-                  <Route path="/state/view" element={<StateView />} />
-
-                  <Route path="/city/add" element={<AddOrUpdateCity />} />
-                  <Route path="/city/view" element={<CityView />} />
-
-                  <Route path="/country/add" element={<AddOrUpdateCountry />} />
-                  <Route path="/country/view" element={<CountryView />} />
 
                   <Route path="/project/add" element={<AddOrUpdateProject />} />
                   <Route path="/project/update/:id" element={<AddOrUpdateProject />} />

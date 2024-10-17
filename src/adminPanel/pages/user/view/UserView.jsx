@@ -13,9 +13,9 @@ import UserTableToolbar from './UserTableToolbar';
 import { Link } from 'react-router-dom';
 import UserTableRow from './UserTableRow';
 import TablePagination from '../../../component/TablePagination';
-import { useGetAdminQuery } from '../../../../globalState/adminAuth/adminApis';
+import { useGetUsersQuery } from '../../../../globalState/user/userApis';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAdminPageNo } from '../../../../globalState/adminAuth/adminSlice';
+import { setUserListPageNo } from '../../../../globalState/user/userSlice';
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 
 // ----------------------------------------------------------------------
@@ -24,18 +24,20 @@ function UserView() {
 
   const dispatch = useDispatch()
 
-  const { pageNo } = useSelector(state => state.admin)
+  const { pageNo, userName, status } = useSelector(state => state.user)
 
-  const { data: allAdmins, isSuccess: adminSuccess, isLoading } = useGetAdminQuery({ page: pageNo });
+  const { roleName } = useSelector(state => state.role)
 
-  const allAdminData = adminSuccess && allAdmins?.data;
+  const { data: allUsers, isSuccess: userSuccess, isLoading } = useGetUsersQuery({ page: pageNo, name: userName, status, role_id: roleName });
 
-  const paginationData = adminSuccess && allAdmins;
+  const allUserData = userSuccess && allUsers?.data;
+
+  const paginationData = userSuccess && allUsers;
 
   const { last_page } = paginationData
 
   const handlePageChange = (event, value) => {
-    dispatch(setAdminPageNo(value));
+    dispatch(setUserListPageNo(value));
   };
 
 
@@ -72,12 +74,12 @@ function UserView() {
           <Scrollbar>
             <TableContainer sx={{ overflow: 'unset' }}>
               <Table sx={{ minWidth: 800 }}>
-                <UserTableHead allAdminData={allAdminData} />
+                <UserTableHead allUserData={allUserData} />
                 <TableBody>
-                  {allAdminData.length > 0 ?
+                  {allUserData.length > 0 ?
                     <UserTableRow
                       currentpage={pageNo}
-                      allAdminData={allAdminData}
+                      allUserData={allUserData}
                     />
                     :
                     (
@@ -92,7 +94,7 @@ function UserView() {
             </TableContainer>
           </Scrollbar>
         )}
-        {(allAdminData.length > 0) && <TablePagination
+        {(allUserData.length > 0) && <TablePagination
           count={last_page}
           onPageChange={handlePageChange}
           page={pageNo}

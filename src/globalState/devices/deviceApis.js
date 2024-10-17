@@ -17,11 +17,6 @@ export const deviceApi = createApi({
             invalidatesTags: ['device']
         }),
 
-        // getDevice: builder.query({
-        //     query: ({ page, name, serial_number, type }) => `/devices/list?page=${page}&name=${name}&serial_number=${serial_number}&type=${type}`,
-        //     providesTags: ['device']
-        // }),
-
         getDevice: builder.query({
             query: ({ page, name, serial_number, type }) => {
                 const params = new URLSearchParams();

@@ -11,7 +11,7 @@ import { registrationSchema } from "./registrationSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import Alertbar from '../../../../adminPanel/component/Alertbar';
-import { useRegisterUserMutation } from '../../../../globalState/userAuth/userApis';
+import { useRegisterUserMutation } from '../../../../globalState/user/userApis';
 import { reg_error_position } from './registrationStyle';
 
 
@@ -49,6 +49,7 @@ function Registration() {
 
     const onSubmit = async (data) => {
         try {
+            console.log(data)
             await registerUser(data).unwrap();
             setSnackbar({
                 open: true,
@@ -63,7 +64,7 @@ function Registration() {
         } catch (error) {
             setSnackbar({
                 open: true,
-                message: 'Error while submit',
+                message: 'Error while submitting',
                 severity: 'error'
             });
             if (error.data && error.data.errors) {
@@ -101,7 +102,7 @@ function Registration() {
                 <Typography variant='h3' fontWeight="700">
                     Find EV Charging Stations and Get Ready to <Typography color="#57b33e" variant='h3' fontWeight="700">Go Green</Typography>
                 </Typography>
-              <Link to ="/"> <img src={companyLogo} alt='company logo' style={{ width: "8rem", marginTop: '1rem' }} /></Link> 
+                <Link to="/"> <img src={companyLogo} alt='company logo' style={{ width: "8rem", marginTop: '1rem' }} /></Link>
             </Grid>
             <Grid item size={{ lg: 6, xs: 12 }}
                 sx={{
@@ -130,92 +131,92 @@ function Registration() {
                             Sign Up VNT! 👋
                         </Typography>
                         <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
-                        <Box sx={{ position: "relative"}}>
-                            <TextField
-                                {...register("name", { required: true })}
-                                margin="normal"
-                                fullWidth
-                                label="Name"
-                                sx={inputStyles}
-                            />
-                            {errors.name && (
-                                <Typography sx={reg_error_position}>
-                                    *{errors.name.message}
-                                </Typography>
-                            )}
-                         </Box>
-                         <Box sx={{ position: "relative"}}>
-                            <TextField
-                                {...register("email", { required: true })}
-                                margin="normal"
-                                fullWidth
-                                label="Email"
-                                sx={inputStyles}
-                            />
-                            {errors.email && (
-                                <Typography sx={reg_error_position}>
-                                    *{errors.email.message}
-                                </Typography>
-                            )}
-                           </Box>
+                            <Box sx={{ position: "relative" }}>
+                                <TextField
+                                    {...register("name", { required: true })}
+                                    margin="normal"
+                                    fullWidth
+                                    label="Name"
+                                    sx={inputStyles}
+                                />
+                                {errors.name && (
+                                    <Typography sx={reg_error_position}>
+                                        *{errors.name.message}
+                                    </Typography>
+                                )}
+                            </Box>
+                            <Box sx={{ position: "relative" }}>
+                                <TextField
+                                    {...register("email", { required: true })}
+                                    margin="normal"
+                                    fullWidth
+                                    label="Email"
+                                    sx={inputStyles}
+                                />
+                                {errors.email && (
+                                    <Typography sx={reg_error_position}>
+                                        *{errors.email.message}
+                                    </Typography>
+                                )}
+                            </Box>
 
-                           <Box sx={{ position: "relative"}}>
-                            <TextField
-                                {...register("password", { required: true })}
-                                sx={inputStyles}
-                                margin="normal"
-                                label="Password"
-                                fullWidth
-                                type={showPassword ? 'text' : 'password'}
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                edge="end"
-                                            >
-                                                {showPassword ? <VisibilityOff sx={{ color: "#57b33e" }} /> : <Visibility sx={{ color: "#57b33e" }} />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                            {errors.password && (
-                                <Typography sx={reg_error_position}>
-                                    *{errors.password.message}
-                                </Typography>
-                            )}
-                          </Box>
-                             
-                          <Box sx={{ position: "relative"}}>
-                            <TextField
-                                {...register("password_confirmation", { required: true })}
-                                sx={inputStyles}
-                                margin="normal"
-                                label="Confirm password"
-                                fullWidth
-                                type={showConfirmPassword ? 'text' : 'password'}
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowConfirmPassword}
-                                                edge="end"
-                                            >
-                                                {showConfirmPassword ? <VisibilityOff sx={{ color: "#57b33e" }} /> : <Visibility sx={{ color: "#57b33e" }} />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                            {errors.password_confirmation && (
-                                <Typography sx={reg_error_position}>
-                                    *{errors.password_confirmation.message}
-                                </Typography>
-                            )}
-                           </Box>
+                            <Box sx={{ position: "relative" }}>
+                                <TextField
+                                    {...register("password", { required: true })}
+                                    sx={inputStyles}
+                                    margin="normal"
+                                    label="Password"
+                                    fullWidth
+                                    type={showPassword ? 'text' : 'password'}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    edge="end"
+                                                >
+                                                    {showPassword ? <VisibilityOff sx={{ color: "#57b33e" }} /> : <Visibility sx={{ color: "#57b33e" }} />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
+                                {errors.password && (
+                                    <Typography sx={reg_error_position}>
+                                        *{errors.password.message}
+                                    </Typography>
+                                )}
+                            </Box>
+
+                            <Box sx={{ position: "relative" }}>
+                                <TextField
+                                    {...register("password_confirmation", { required: true })}
+                                    sx={inputStyles}
+                                    margin="normal"
+                                    label="Confirm password"
+                                    fullWidth
+                                    type={showConfirmPassword ? 'text' : 'password'}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowConfirmPassword}
+                                                    edge="end"
+                                                >
+                                                    {showConfirmPassword ? <VisibilityOff sx={{ color: "#57b33e" }} /> : <Visibility sx={{ color: "#57b33e" }} />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
+                                {errors.password_confirmation && (
+                                    <Typography sx={reg_error_position}>
+                                        *{errors.password_confirmation.message}
+                                    </Typography>
+                                )}
+                            </Box>
                             <Button
                                 type="submit"
                                 fullWidth
@@ -239,6 +240,7 @@ function Registration() {
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
+                position={{ vertical: 'bottom', horizontal: 'center' }}
             />
         </Grid >
     );
