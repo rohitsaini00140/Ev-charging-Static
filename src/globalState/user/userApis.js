@@ -13,11 +13,10 @@ export const userApi = createApi({
         }),
 
         getUsers: builder.query({
-            query: ({ page, role_id, permission_id, name, status }) => {
+            query: ({ page, role_id, name, status }) => {
                 const params = new URLSearchParams();
                 if (page) params.append('page', page);
                 if (role_id) params.append('role_id', role_id);
-                if (permission_id) params.append('permission_id', permission_id);
                 if (name) params.append('name', name);
                 if (status) params.append('status', status);
 

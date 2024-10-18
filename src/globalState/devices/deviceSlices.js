@@ -7,6 +7,7 @@ const deviceSlice = createSlice({
         deviceName: "",
         deviceSerialNumber: "",
         deviceType: "",
+        deviceStatus: "",
         loading: false,
         error: null,
     },
@@ -23,6 +24,9 @@ const deviceSlice = createSlice({
         setDeviceType: (state, action) => {
             state.deviceType = action.payload
         },
+        setDeviceStatus: (state, action) => {
+            state.deviceStatus = action.payload
+        },
     },
 });
 
@@ -30,7 +34,8 @@ export const {
     setDeviceListPageNo,
     setDeviceName,
     setDeviceSerialNumber,
-    setDeviceType
+    setDeviceType,
+    setDeviceStatus
 } = deviceSlice.actions;
 
 export default deviceSlice.reducer;

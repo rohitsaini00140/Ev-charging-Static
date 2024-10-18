@@ -10,7 +10,7 @@ import PdfExport from '../../../component/PdfExport';
 // import { fieldsToDownload, fieldMapping, filter } from './headLabel';
 import { Stack } from '@mui/material';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
-import { setProjectKeywords, setProjectListPageNo } from '../../../../globalState/projects/projectsSlices';
+import { setProjectKeywords, setProjectListPageNo, setProjectStatus } from '../../../../globalState/projects/projectsSlices';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
 import { setClusterName } from '../../../../globalState/cluster/clusterSlices';
@@ -18,6 +18,7 @@ import { useGetAllUserQuery } from '../../../../globalState/user/userApis';
 import { setUserName } from '../../../../globalState/user/userSlice';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import Selector from '../../../component/selector/Selector';
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +27,7 @@ function ProjectTableToolbar() {
     const dispatch = useDispatch()
     const location = useLocation()
 
-    const { searchProjectKeywords } = useSelector(state => state.project)
+    const { searchProjectKeywords, projectStatus } = useSelector(state => state.project)
 
     const { clusterName } = useSelector(state => state.cluster)
 
@@ -61,6 +62,13 @@ function ProjectTableToolbar() {
                     dispatch(setUserName(option));
                 } else {
                     dispatch(setUserName(''));
+                }
+                break;
+            case 'status':
+                if (option) {
+                    dispatch(setProjectStatus(option));
+                } else {
+                    dispatch(setProjectStatus(''));
                 }
                 break;
             default:
@@ -133,6 +141,15 @@ function ProjectTableToolbar() {
                                 value={userName || ""}
                                 onChange={(value) => handleSelect(value, "user")}
                                 type={"name"}
+                            />
+                        </Stack>
+                        <Stack width={"100%"}>
+                            <Selector
+                                value={projectStatus}
+                                onChange={(e) => handleSelect(e.target.value, "status")}
+                                placeholder='Select status'
+                                selectType="single"
+                                options={["Active", "Inactive"]}
                             />
                         </Stack>
                     </Stack>

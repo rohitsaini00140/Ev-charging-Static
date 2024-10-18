@@ -5,6 +5,7 @@ const projectSlice = createSlice({
     initialState: {
         pageNo: 1,
         searchProjectKeywords: "",
+        projectStatus: "",
         loading: false,
         error: null,
     },
@@ -14,13 +15,17 @@ const projectSlice = createSlice({
         },
         setProjectKeywords: (state, action) => {
             state.searchProjectKeywords = action.payload
+        },
+        setProjectStatus: (state, action) => {
+            state.projectStatus = action.payload
         }
     },
 });
 
 export const {
     setProjectListPageNo,
-    setProjectKeywords
+    setProjectKeywords,
+    setProjectStatus
 } = projectSlice.actions;
 
 export default projectSlice.reducer;

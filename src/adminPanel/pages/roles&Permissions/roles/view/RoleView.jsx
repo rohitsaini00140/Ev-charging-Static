@@ -14,10 +14,13 @@ import RoleTableHead from './RoleTableHead';
 import RoleTableRow from './RoleTableRow';
 import { StyledTableCell, StyledTableRow } from '../../../../component/tableStyle';
 import { useGetAllRolesQuery } from '../../../../../globalState/roles/rolesApi';
+import { useSelector } from 'react-redux';
 
 function RoleView() {
 
-  const { data: roleData, isSuccess: roleSuccess, isLoading } = useGetAllRolesQuery()
+  const { roleStatus } = useSelector(state => state.role)
+
+  const { data: roleData, isSuccess: roleSuccess, isLoading } = useGetAllRolesQuery({ status: roleStatus })
 
   const allRoleData = roleSuccess && roleData?.roles;
 

@@ -12,7 +12,7 @@ import ClustersTableHead from './ClustersTableHead';
 import ClustersTableToolbar from './ClustersTableToolbar';
 import { Link } from 'react-router-dom';
 import ClustersTableRow from './ClustersTableRow';
-import { useGetClustersQuery, useGetFilteredClusterQuery } from '../../../../globalState/cluster/clusterApis';
+import { useGetFilteredClusterQuery } from '../../../../globalState/cluster/clusterApis';
 import TablePagination from '../../../component/TablePagination';
 import { useDispatch, useSelector } from "react-redux";
 import { setClusterListPageNo } from "../../../../globalState/cluster/clusterSlices";
@@ -22,11 +22,11 @@ import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 function ClustersView() {
     const dispatch = useDispatch()
 
-    const { pageNo, searchClusterKeywords } = useSelector(state => state.cluster);
+    const { pageNo, searchClusterKeywords, clusterStatus } = useSelector(state => state.cluster);
 
     const { countryName, stateName, cityName } = useSelector(state => state.address)
 
-    const { data: filteredData, isSuccess: filteredDataSuccess, isLoading } = useGetFilteredClusterQuery({ page: pageNo, clusterName: searchClusterKeywords, countryName, stateName, cityName });
+    const { data: filteredData, isSuccess: filteredDataSuccess, isLoading } = useGetFilteredClusterQuery({ page: pageNo, clusterName: searchClusterKeywords, countryName, stateName, cityName, status: clusterStatus });
 
     const allClusterData = filteredDataSuccess && filteredData?.data
 
