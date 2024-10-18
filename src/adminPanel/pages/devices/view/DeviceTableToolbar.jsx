@@ -86,7 +86,7 @@ function DeviceTableToolbar() {
                             <SearchInput
                                 placeholder="Search devices..."
                                 width={"100%"}
-                                sx={{ color: "white" }}
+                                sx={{ color: "white",background:'#3e403d0f' }}
                                 onChange={(e) => handleSelect(e.target.value, "device")}
                                 value={deviceName}
                             />
@@ -95,7 +95,7 @@ function DeviceTableToolbar() {
                             <SearchInput
                                 placeholder="Search serial number..."
                                 width={"100%"}
-                                sx={{ color: "white" }}
+                                sx={{ color: "white",background:'#3e403d0f' }}
                                 onChange={(e) => handleSelect(e.target.value, "serialNumber")}
                                 value={deviceSerialNumber}
                             />
@@ -105,6 +105,7 @@ function DeviceTableToolbar() {
                                 options={data.length > 0 ? data : []}
                                 placeholder="Select type"
                                 value={deviceType}
+                                sx={{ color: "white",background:'#3e403d0f' }}
                                 onChange={(value) => handleSelect(value, "type")}
                                 type={"name"}
                             />

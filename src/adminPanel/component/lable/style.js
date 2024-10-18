@@ -55,7 +55,7 @@ export const StyledLabel = styled(Box)(({ theme, ownerState }) => {
   };
 
   return {
-    height: 24,
+    height: 30,
     minWidth: 24,
     lineHeight: 0,
     borderRadius: 6,

@@ -58,7 +58,7 @@ function Nav({ openNav, onCloseNav }) {
             />
 
             <Box sx={{ ml: 2 }}>
-                <Typography variant="subtitle2" color='rgb(87 179 62)'>{account.displayName}</Typography>
+                <Typography variant="subtitle2" color='#1ce33b'>{account.displayName}</Typography>
 
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                     {account.role}
@@ -110,7 +110,7 @@ function Nav({ openNav, onCloseNav }) {
                         height: 1,
                         position: 'fixed',
                         width: NAV.WIDTH,
-                        backgroundColor: "#181837",
+                        backgroundColor: "#141d20",
                         borderRight: (theme) => `dashed 1px ${theme.palette.Boxider}`,
                     }}
                 >
@@ -123,7 +123,7 @@ function Nav({ openNav, onCloseNav }) {
                     PaperProps={{
                         sx: {
                             width: NAV.WIDTH,
-                            backgroundColor: "#181837",
+                            backgroundColor: "#141d20",
                         },
                     }}
                 >
@@ -184,7 +184,7 @@ function NavItem({ item, level = 0 }) {
                         }),
                     }}
                 >
-                    <Box component="span" sx={{ width: iconSize, height: iconSize, mr: 2, color: 'rgb(87 179 62)' }}>
+                    <Box component="span" sx={{ width: iconSize, height: iconSize, mr: 2, color: '#1ce33b' }}>
                         {item.icon}
                     </Box>
                     <Box component="span" color={"white"}>{item.title}</Box>

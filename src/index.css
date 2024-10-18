@@ -131,6 +131,20 @@ background: none;
     color: rgba(0, 0, 0, 0.6);
     font-size: 14px;
 }
+.css-1lsism9{
+  background: #1d282c !important;
+}
+
+
+/* active and inactive color and bg color changes */
+.css-2v00vb{
+color: white !important;
+background-color: #ff6384 !important;
+}
+.css-qlcv4k-MuiStack-root{
+
+  background-color: #3e403d0f !important;
+}
 
 @import 'simplebar-react/dist/simplebar.min.css';
 

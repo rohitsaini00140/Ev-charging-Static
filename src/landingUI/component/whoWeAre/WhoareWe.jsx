@@ -36,15 +36,15 @@ const [energyStorage] = useState(92);
                 textAlign: 'left',
               }}
             >
-              <Typography variant="h6" sx={{ color: 'rgb(87, 179, 62)', fontSize:'18px',  fontWeight:'700' }}>
+              <Typography variant="h6" sx={{ color: 'rgb(87, 179, 62)', fontSize:'22px',  fontWeight:'700' }}>
                 Who We Are
               </Typography>
-              <Typography variant="body2" sx={{ color: '#253745' ,fontWeight:'700',fontSize:'24px',linHeight: '28px' }}>
+              <Typography variant="body2" sx={{ color: '#253745',margin:'6px 0px' ,fontWeight:'700',fontSize:'20px',linHeight: '28px' }}>
                Professional Electric Vechicle Charging Solution For You
               </Typography>
               <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.975rem',
-          lineHeight: '1.43',display:'block',margin:'5px 0px',
-           }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo rem architecto at error explicabo tempora Provident adipisci nemo rem architecto at error explicabo temporaProvident adipisci nemo rem architecto at error explicabo tempora</span>
+             lineHeight: '1.43',display:'block',margin:'5px 0px',
+              }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci nemo rem architecto at error explicabo tempora Provident adipisci nemo rem architecto at error explicabo temporaProvident adipisci nemo rem architecto at error explicabo tempora</span>
             </Box>
             <Box sx={{padding: {
                     xs: '20px 10px',

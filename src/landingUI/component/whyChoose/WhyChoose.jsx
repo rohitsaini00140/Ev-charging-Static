@@ -12,10 +12,10 @@ function WhyChoose() {
         <>
          <Container>
            <Stack sx={{textAlign:'center'}}>
-         <Typography variant="h6" sx={{ color: 'rgb(87, 179, 62)', fontSize:'25px',  fontWeight:'700' }}>
+         <Typography variant="h6" sx={{ color: 'rgb(87, 179, 62)', fontSize:'22px',  fontWeight:'700' }}>
               Why Choose Us
               </Typography>
-              <Typography variant="body2" sx={{ color: '#253745' ,fontWeight:'700',fontSize:'24px',linHeight: '28px' }}>
+              <Typography variant="body2" sx={{ color: '#253745' ,fontWeight:'700',fontSize:'20px',linHeight: '19px' }}>
               VNT EV Charging is the Biggest EV Charging Station in the World
               </Typography>
               </Stack>

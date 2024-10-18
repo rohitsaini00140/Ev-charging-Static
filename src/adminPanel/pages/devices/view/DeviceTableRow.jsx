@@ -39,34 +39,39 @@ function DeviceTableRow({ allDeviceData, currentPageNo }) {
                 allDeviceData.map((data, i) => (
                     <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.id}>
                         <StyledTableCell padding="checkbox">
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Checkbox disableFocusRipple
+                            {loading ? <Skeleton sx={{ bgcolor: '#3e403d0f' }} animation="pulse" /> : <Checkbox disableFocusRipple
                             // onChange={(e) => onHandleChange(e.target.checked, data["ID"])}
                             // checked={selectedCategoryId.includes(data["ID"])}
                             />}
                         </StyledTableCell>
                         <StyledTableCell color={"white"} >
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : ((currentPageNo - 1) * 10 + (i + 1))}
+                            {loading ? <Skeleton sx={{ bgcolor: '#3e403d0f' }} animation="pulse" /> : ((currentPageNo - 1) * 10 + (i + 1))}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.device_name}
+                            {loading ? <Skeleton sx={{ bgcolor: '#3e403d0f' }} animation="pulse" /> : data.device_name}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.serial_number}
+                            {loading ? <Skeleton sx={{ bgcolor: '#3e403d0f' }} animation="pulse" /> : data.serial_number}
                         </StyledTableCell>
+                        
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.project_name}
+                            {loading ? <Skeleton sx={{ bgcolor: '#3e403d0f' }} animation="pulse" /> : data.project_name}
                         </StyledTableCell>
+
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.type}
+                            {loading ? <Skeleton sx={{ bgcolor: '#3e403d0f' }} animation="pulse" /> : data.type}
                         </StyledTableCell>
+
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.device_location}
+                            {loading ? <Skeleton sx={{ bgcolor: '#3e403d0f' }} animation="pulse" /> : data.device_location}
                         </StyledTableCell>
+                         
                         <StyledTableCell>
-                            <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
+                        <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
                         </StyledTableCell>
+                        
                         <StyledTableCell>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
+                            {loading ? <Skeleton sx={{ bgcolor: '#3e403d0f' }} animation="pulse" /> : <Action
                                 data={data}
                                 activeOrInactive={data.deleted_at}
                                 pathToNavigate={"/admin/device/update"}
