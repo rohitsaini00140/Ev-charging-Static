@@ -33,8 +33,8 @@ function TargetProgressBar() {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: 'center',
-                boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)',
-                bgcolor: "#34345a",
+                boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)',
+                bgcolor: "#3e403d0f",
             }}
         >
             <Typography variant="h5" color="white" gutterBottom>

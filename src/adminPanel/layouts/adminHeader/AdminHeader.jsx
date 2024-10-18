@@ -5,20 +5,16 @@ import Toolbar from '@mui/material/Toolbar';
 import { useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import { useResponsive } from '../../customHooks/useResponsive';
-import { bgBlur } from "../theme/css"
+// import { bgBlur } from "../theme/css"
 import Iconify from '../../component/Iconify';
 // import Searchbar from './Searchbar';
 import { NAV, HEADER } from '../sidebar/configLayout';
 import Account from './Account';
 import Notification from './Notification';
-
 // ----------------------------------------------------------------------
-
 function AdminHeader({ onOpenNav }) {
     const theme = useTheme();
-
     const lgUp = useResponsive('up', 'lg');
-
     const renderContent = (
         <>
             {!lgUp && (
@@ -26,11 +22,8 @@ function AdminHeader({ onOpenNav }) {
                     <Iconify icon="eva:menu-2-fill" />
                 </IconButton>
             )}
-
             {/* <Searchbar /> */}
-
             <Box sx={{ flexGrow: 1 }} />
-
             <Stack direction="row" alignItems="center" spacing={1}>
                 <Notification />
                 <Account />
@@ -42,7 +35,7 @@ function AdminHeader({ onOpenNav }) {
         <AppBar
             sx={{
                 boxShadow: 'none',
-                bgcolor: "#222245",
+                bgcolor: "#1d282c",
                 height: HEADER.H_MOBILE,
                 zIndex: theme.zIndex.appBar + 1,
                 // ...bgBlur({
@@ -61,7 +54,8 @@ function AdminHeader({ onOpenNav }) {
                 sx={{
                     height: 1,
                     px: { lg: 5 },
-                    bgcolor: "#222245",
+                    bgcolor: "#1d282c",
+                    boxShadow:'0px 4px 12px rgba(87, 179, 62, 0.2)'
                 }}
             >
                 {renderContent}

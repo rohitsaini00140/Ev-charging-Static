@@ -44,23 +44,26 @@ function DeviceView() {
         direction="row"
         alignItems="center"
         justifyContent="space-between"
-        mb={5}
+        m={3}
       >
         <Typography variant="h4" color="white">Devices</Typography>
         <Link to={"/admin/device/add"}>
           <Button
             variant="contained"
             sx={{
-              bgcolor: "#34345a",
-              boxShadow: 'none',
-              "&:hover": { bgcolor: "#34345a" }
+              bgcolor: "#3e403d0f",
+              boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)',
+              // border:'1px solid #20c997',
+              // color:'#20c997',
+              padding:'10px 10px',
+              bgcolor: "#20c997",color:'white',
             }}
             startIcon={<Iconify icon="eva:plus-fill" />}>
             New Device
           </Button>
         </Link>
       </Stack>
-      <Card sx={{ bgcolor: "#181837" }}>
+      <Card sx={{ bgcolor: "#3e403d0f",boxShadow:'0px 4px 12px rgba(87, 179, 62, 0.2)' }}>
         <DeviceTableToolbar />
         {isLoading ? (
           <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>

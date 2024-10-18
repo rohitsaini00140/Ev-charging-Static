@@ -1,7 +1,7 @@
 import { Paper, styled } from '@mui/material';
 
 export const inputStyle = {
-    backgroundColor: "#34345a",
+    backgroundColor: "#3e403d0f",
     borderRadius: "8px",
     "& .MuiInputBase-input": {
         color: "white",
@@ -45,7 +45,7 @@ export const inputStyle = {
 };
 
 export const StyledPopper = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#34345a',
+    backgroundColor: '#3e403d0f',
     color: 'white',
     borderRadius: '8px',
     boxShadow: `
@@ -55,13 +55,13 @@ export const StyledPopper = styled(Paper)(({ theme }) => ({
         0px 3px 14px 2px rgba(145, 158, 171, 0.12)
     `,
     "& .MuiAutocomplete-option": {
-        backgroundColor: '#34345a',
+        backgroundColor: '#3e403d0f',
         color: 'white',
         '&[data-focus="true"]': {
             backgroundColor: '#5e5d8f',
         },
         '&[aria-selected="true"]': {
-            backgroundColor: '#34345a',
+            backgroundColor: '#3e403d0f',
         },
     },
 }));

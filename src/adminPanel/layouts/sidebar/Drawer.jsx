@@ -13,7 +13,6 @@ function Drawer({ children }) {
     return (
         <>
             <AdminHeader onOpenNav={() => setOpenNav(true)} />
-
             <Box
                 sx={{
                     minHeight: 1,

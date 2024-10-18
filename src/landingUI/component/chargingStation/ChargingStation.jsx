@@ -10,12 +10,12 @@ const imageSrc = require("../../img/car_new.png");
     <Container>
     <Grid container spacing={3} sx={{margin:'15px 0px'}}>
   <Grid item size = {{xs:12,sm:6}}>
-    <Typography variant="h6" sx={{color: 'rgb(87, 179, 62)', fontWeight: '700',fontSize:'18px'}}>About VNT EV</Typography>
+    <Typography variant="h6" sx={{color: 'rgb(87, 179, 62)', fontWeight: '700',fontSize:'22px'}}>About VNT EV</Typography>
     <Typography
       variant="h6"
       sx={{ fontWeight: '700', margin:'7px 0px', color: '#253745',fontSize: '1.6rem',
         lineHeight: '30px',textTransform:'capitalize' }}
-    >We provide  best solutions for <br /> your electric vehicle
+      >We provide  best solutions for your electric vehicle
     </Typography>
     <span style={{ textAlign:'justify', color:'rgba(0, 0, 0, 0.6)',fontSize:' 0.975rem',
     lineHeight: '1.43',display:'block',margin:'5px 0px',

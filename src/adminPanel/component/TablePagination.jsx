@@ -7,7 +7,7 @@ function TablePagination({ count, page, onPageChange }) {
     const paginationStyle = {
         "& .MuiPaginationItem-root": {
             color: 'white',
-            borderColor: '#34345a'
+            borderColor: '#3e403d0f'
         },
         "& .MuiPaginationItem-previousNext": {
             color: 'white',
