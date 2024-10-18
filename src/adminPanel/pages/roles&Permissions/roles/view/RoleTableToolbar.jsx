@@ -10,10 +10,24 @@ import PdfExport from '../../../../component/PdfExport';
 // import { fieldsToDownload, fieldMapping, filter } from './headLabel';
 import { Stack } from '@mui/material';
 import Selector from '../../../../component/selector/Selector';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRoleStatus } from '../../../../../globalState/roles/rolesSlices';
 
 // ----------------------------------------------------------------------
 
 function RoleTableToolbar() {
+
+    const dispatch = useDispatch()
+
+    const { roleStatus } = useSelector(state => state.role)
+
+    function handleSelect(option) {
+        if (option) {
+            dispatch(setRoleStatus(option))
+        } else {
+            dispatch(setRoleStatus(""))
+        }
+    }
 
     return (
         <Toolbar
@@ -62,7 +76,9 @@ function RoleTableToolbar() {
                         </Stack> */}
                         <Stack width={"100%"}>
                             <Selector
-                                placeholder='Select Status'
+                                value={roleStatus}
+                                onChange={(e) => handleSelect(e.target.value)}
+                                placeholder='Select status'
                                 selectType="single"
                                 options={["Active", "Inactive"]}
                             />

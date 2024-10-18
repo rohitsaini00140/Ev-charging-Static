@@ -24,9 +24,9 @@ function DeviceView() {
 
   const dispatch = useDispatch()
 
-  const { pageNo, deviceName, deviceSerialNumber, deviceType } = useSelector(state => state.device);
+  const { pageNo, deviceName, deviceSerialNumber, deviceType, deviceStatus } = useSelector(state => state.device);
 
-  const { data: deviceData, isSuccess: deviceSuccess, isLoading } = useGetDeviceQuery({ page: pageNo, name: deviceName, serial_number: deviceSerialNumber, type: deviceType });
+  const { data: deviceData, isSuccess: deviceSuccess, isLoading } = useGetDeviceQuery({ page: pageNo, name: deviceName, serial_number: deviceSerialNumber, type: deviceType, status: deviceStatus });
 
   const allDeviceData = deviceSuccess && deviceData?.data
 

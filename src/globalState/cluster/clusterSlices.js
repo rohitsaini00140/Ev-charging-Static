@@ -6,6 +6,7 @@ const clusterSlice = createSlice({
         pageNo: 1,
         searchClusterKeywords: "",
         clusterName: "",
+        clusterStatus: "",
         loading: false,
         error: null,
     },
@@ -18,6 +19,9 @@ const clusterSlice = createSlice({
         },
         setClusterName: (state, action) => {
             state.clusterName = action.payload
+        },
+        setClusterStatus: (state, action) => {
+            state.clusterStatus = action.payload
         }
     },
 });
@@ -25,7 +29,8 @@ const clusterSlice = createSlice({
 export const {
     setClusterListPageNo,
     setClusterKeywords,
-    setClusterName
+    setClusterName,
+    setClusterStatus
 } = clusterSlice.actions;
 
 export default clusterSlice.reducer;

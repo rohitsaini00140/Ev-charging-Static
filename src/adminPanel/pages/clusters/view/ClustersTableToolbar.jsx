@@ -11,12 +11,13 @@ import PdfExport from '../../../component/PdfExport';
 import { Stack } from '@mui/material';
 import { fieldMapping, fieldsToDownload } from './clustersData';
 import { useDispatch, useSelector } from 'react-redux';
-import { setClusterListPageNo, setClusterKeywords } from '../../../../globalState/cluster/clusterSlices';
+import { setClusterListPageNo, setClusterKeywords, setClusterStatus } from '../../../../globalState/cluster/clusterSlices';
 import { setCityName, setCountryId, setCountryName, setStateId, setStateName } from '../../../../globalState/address/addressSlices';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 import { useGetCityQuery, useGetCountryQuery, useGetStateQuery } from '../../../../globalState/address/addressApi';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import Selector from '../../../component/selector/Selector';
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +26,7 @@ function ClustersTableToolbar({ allClusterData }) {
     const dispatch = useDispatch()
     const location = useLocation()
 
-    const { searchClusterKeywords } = useSelector(state => state.cluster);
+    const { searchClusterKeywords, clusterStatus } = useSelector(state => state.cluster);
 
     const { data: countryData, isSuccess: countrySuccess } = useGetCountryQuery()
 
@@ -81,6 +82,14 @@ function ClustersTableToolbar({ allClusterData }) {
                     dispatch(setCityName(""))
                 }
                 break;
+            case 'status':
+                if (option) {
+                    console.log(option)
+                    dispatch(setClusterStatus(option))
+                } else {
+                    dispatch(setClusterStatus(""))
+                }
+                break;
             default:
                 break;
         }
@@ -95,6 +104,7 @@ function ClustersTableToolbar({ allClusterData }) {
             dispatch(setCityName(""))
             dispatch(setCountryId(""))
             dispatch(setStateId(""))
+            dispatch(setClusterStatus(""))
             dispatch(setClusterKeywords(""))
         };
     }, [location, dispatch]);
@@ -136,7 +146,6 @@ function ClustersTableToolbar({ allClusterData }) {
                                 sx={{ color: "white" }}
                                 placeholder="Search clusters..."
                                 width={"100%"}
-                                // onChange={(e) => handleClusterKeywords(e.target.value)}
                                 onChange={(e) => handleSelect(e.target.value, "cluster")}
                                 value={searchClusterKeywords}
                             />
@@ -146,7 +155,6 @@ function ClustersTableToolbar({ allClusterData }) {
                                 options={allCountry || []}
                                 placeholder="Select Country"
                                 value={countryName || ""}
-                                // onChange={handleSelectCountry}
                                 onChange={(value) => handleSelect(value, "country")}
                                 type={"name"}
                             />
@@ -156,7 +164,6 @@ function ClustersTableToolbar({ allClusterData }) {
                                 options={allState || []}
                                 placeholder="Select State"
                                 value={stateName || ""}
-                                // onChange={handleSelectState}
                                 onChange={(value) => handleSelect(value, "state")}
                                 noOptionText={"Select Country First"}
                                 type={"name"}
@@ -167,10 +174,18 @@ function ClustersTableToolbar({ allClusterData }) {
                                 options={allCity || []}
                                 placeholder="Select City"
                                 value={cityName || 0}
-                                // onChange={handleSelectCity}
                                 onChange={(value) => handleSelect(value, "city")}
                                 noOptionText={"Select State First"}
                                 type={"name"}
+                            />
+                        </Stack>
+                        <Stack width={"100%"}>
+                            <Selector
+                                value={clusterStatus}
+                                onChange={(e) => handleSelect(e.target.value, "status")}
+                                placeholder='Select status'
+                                selectType="single"
+                                options={["Active", "Inactive"]}
                             />
                         </Stack>
                     </Stack>

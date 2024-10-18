@@ -28,7 +28,17 @@ export const projectApi = createApi({
         }),
 
         getFilteredProjects: builder.query({
-            query: ({ page, clusterName, projectName, userName }) => `/projects/list?page=${page}&project_name=${projectName}&cluster_name=${clusterName}&user_name=${userName}`,
+            query: ({ page, clusterName, projectName, userName, status }) => {
+                const params = new URLSearchParams();
+
+                if (page) params.append('page', page);
+                if (clusterName) params.append('cluster_name', clusterName);
+                if (projectName) params.append('project_name', projectName);
+                if (userName) params.append('user_name', userName);
+                if (status) params.append('status', status);
+
+                return `/clusters/list?${params.toString()}`;
+            },
             providesTags: ['Projects']
         }),
 

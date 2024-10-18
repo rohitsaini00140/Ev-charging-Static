@@ -27,19 +27,27 @@ function Login() {
     });
 
     const [showPassword, setShowPassword] = useState(false);
+
     const handleClickShowPassword = () => setShowPassword((show) => !show);
+
     const [loginUser] = useLoginUserMutation()
+
     const defaultValues = useMemo(() => ({
         email: "",
         password: ""
     }), []);
+
     const { register, handleSubmit, setError, formState: { errors } } = useForm({
         resolver: zodResolver(loginSchema),
         defaultValues: defaultValues
     });
     const onSubmit = async (data) => {
         try {
-            await loginUser(data).unwrap();
+            // await loginUser(data).unwrap();
+            const result = await loginUser(data).unwrap();
+            const token = result;
+            console.log('Token:', token);
+            console.log(document.cookie); // Outputs the cookies that are accessible via JavaScript
             setSnackbar({
                 open: true,
                 message: 'Login successfully!',

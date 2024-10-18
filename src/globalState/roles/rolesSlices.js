@@ -5,6 +5,7 @@ const roleSlice = createSlice({
     initialState: {
         pageNo: 1,
         roleName: "",
+        roleStatus: "",
         loading: false,
         error: null,
     },
@@ -14,13 +15,17 @@ const roleSlice = createSlice({
         },
         setRoleName: (state, action) => {
             state.roleName = action.payload
-        }
+        },
+        setRoleStatus: (state, action) => {
+            state.roleStatus = action.payload
+        },
     },
 });
 
 export const {
     setRoleListPageNo,
-    setRoleName
+    setRoleName,
+    setRoleStatus
 } = roleSlice.actions;
 
 export default roleSlice.reducer;

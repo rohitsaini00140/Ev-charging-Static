@@ -22,7 +22,7 @@ function UserTableToolbar() {
 
     const dispatch = useDispatch()
 
-    const { pageNo, userName, status } = useSelector(state => state.user)
+    const { userName, status } = useSelector(state => state.user)
 
     const { roleName } = useSelector(state => state.role)
 
@@ -105,16 +105,6 @@ function UserTableToolbar() {
                                 placeholder="Select role"
                                 value={roleName}
                                 onChange={(value) => handleSelect(value, "role")}
-                            // filter={true}
-                            />
-                        </Stack>
-                        <Stack width={"100%"} >
-                            <SearchableDropdown
-                                options={[]}
-                                placeholder="Select permission"
-                                // value={clusterName || ""}
-                                onChange={(value) => handleSelect(value, "permission")}
-                            // filter={true}
                             />
                         </Stack>
                         <Stack width={"100%"}>

@@ -11,7 +11,8 @@ import PdfExport from '../../../component/PdfExport';
 import { Stack } from '@mui/material';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDeviceListPageNo, setDeviceName, setDeviceSerialNumber, setDeviceType } from '../../../../globalState/devices/deviceSlices';
+import Selector from "../../../component/selector/Selector"
+import { setDeviceListPageNo, setDeviceName, setDeviceSerialNumber, setDeviceStatus, setDeviceType } from '../../../../globalState/devices/deviceSlices';
 
 // ----------------------------------------------------------------------
 
@@ -21,7 +22,7 @@ function DeviceTableToolbar() {
 
     const dispatch = useDispatch()
 
-    const { deviceName, deviceSerialNumber, deviceType } = useSelector(state => state.device)
+    const { deviceName, deviceSerialNumber, deviceType, deviceStatus } = useSelector(state => state.device)
 
     function handleSelect(option, type) {
         switch (type) {
@@ -44,6 +45,13 @@ function DeviceTableToolbar() {
                     dispatch(setDeviceType(option));
                 } else {
                     dispatch(setDeviceType(''));
+                }
+                break;
+            case 'status':
+                if (option) {
+                    dispatch(setDeviceStatus(option));
+                } else {
+                    dispatch(setDeviceStatus(''));
                 }
                 break;
             default:
@@ -107,6 +115,15 @@ function DeviceTableToolbar() {
                                 value={deviceType}
                                 onChange={(value) => handleSelect(value, "type")}
                                 type={"name"}
+                            />
+                        </Stack>
+                        <Stack width={"100%"}>
+                            <Selector
+                                value={deviceStatus}
+                                onChange={(e) => handleSelect(e.target.value, "status")}
+                                placeholder='Select status'
+                                selectType="single"
+                                options={["Active", "Inactive"]}
                             />
                         </Stack>
                     </Stack>

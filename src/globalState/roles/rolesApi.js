@@ -18,7 +18,7 @@ export const rolesApi = createApi({
         }),
 
         getAllRoles: builder.query({
-            query: () => `/roles`,
+            query: ({ status }) => `/roles/list?status=${status}`,
             providesTags: ['Roles']
         }),
 
@@ -37,6 +37,15 @@ export const rolesApi = createApi({
                 method: "POST",
             }),
             invalidatesTags: ['Roles'],
+        }),
+
+        createRoles: builder.mutation({
+            query: (roleData) => ({
+                url: "/roles/create",
+                method: "POST",
+                body: roleData,
+            }),
+            invalidatesTags: ['Roles']
         }),
 
     }),

@@ -32,7 +32,18 @@ export const clusterApi = createApi({
         }),
 
         getFilteredCluster: builder.query({
-            query: ({ clusterName, page, countryName, stateName, cityName }) => `/clusters/list?page=${page}&cluster_name=${clusterName}&country_name=${countryName}&state_name=${stateName}&city_name=${cityName}`,
+            query: ({ clusterName, page, countryName, stateName, cityName, status }) => {
+                const params = new URLSearchParams();
+
+                if (page) params.append('page', page);
+                if (clusterName) params.append('cluster_name', clusterName);
+                if (countryName) params.append('country_name', countryName);
+                if (stateName) params.append('state_name', stateName);
+                if (cityName) params.append('city_name', cityName);
+                if (status) params.append('status', status);
+
+                return `/clusters/list?${params.toString()}`;
+            },
             providesTags: ['cluster']
         }),
 

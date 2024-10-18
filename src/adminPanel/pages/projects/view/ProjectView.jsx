@@ -22,13 +22,13 @@ function ProjectView() {
 
   const dispatch = useDispatch()
 
-  const { pageNo, searchProjectKeywords } = useSelector(state => state.project);
+  const { pageNo, searchProjectKeywords, projectStatus } = useSelector(state => state.project);
 
   const { clusterName } = useSelector(state => state.cluster)
 
   const { userName } = useSelector(state => state.user)
 
-  const { data: filteredData, isSuccess: filteredDataSuccess, isLoading } = useGetFilteredProjectsQuery({ page: pageNo, projectName: searchProjectKeywords, clusterName, userName });
+  const { data: filteredData, isSuccess: filteredDataSuccess, isLoading } = useGetFilteredProjectsQuery({ page: pageNo, projectName: searchProjectKeywords, clusterName, userName, status: projectStatus });
 
   const allProjectsData = filteredDataSuccess && filteredData?.data;
 
@@ -69,27 +69,27 @@ function ProjectView() {
             <Typography color="white" sx={{ mt: 2 }}>Loading...</Typography>
           </Stack>
         ) : (<Scrollbar>
-            <TableContainer sx={{ overflow: 'unset' }}>
-              <Table sx={{ minWidth: 800 }}>
-                <ProjectTableHead allProjectsData={allProjectsData} />
-                <TableBody>
-                  {allProjectsData.length > 0 ?
-                    <ProjectTableRow
-                      currentpage={pageNo}
-                      allProjectsData={allProjectsData}
-                    />
-                    : (
-                      <StyledTableRow>
-                        <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
-                          <Typography color="white">No Data Found</Typography>
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    )}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Scrollbar>
-          )}
+          <TableContainer sx={{ overflow: 'unset' }}>
+            <Table sx={{ minWidth: 800 }}>
+              <ProjectTableHead allProjectsData={allProjectsData} />
+              <TableBody>
+                {allProjectsData.length > 0 ?
+                  <ProjectTableRow
+                    currentpage={pageNo}
+                    allProjectsData={allProjectsData}
+                  />
+                  : (
+                    <StyledTableRow>
+                      <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
+                        <Typography color="white">No Data Found</Typography>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Scrollbar>
+        )}
         {(allProjectsData.length > 0) && <TablePagination
           count={last_page}
           onPageChange={handlePageChange}
