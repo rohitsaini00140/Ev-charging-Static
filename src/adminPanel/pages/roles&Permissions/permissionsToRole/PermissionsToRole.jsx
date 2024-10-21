@@ -75,12 +75,16 @@ import Typography from '@mui/material/Typography';
 import Scrollbar from "../../../component/scrollbar/Scrollbar";
 import { Grid } from '@mui/system';
 import Checkbox from '@mui/material/Checkbox';
-import { useGetAllRolesQuery } from '../../../../globalState/roles/rolesApi';
+import { useGetRolesQuery } from '../../../../globalState/roles/rolesApi';
 import { useGetAllPermissionsQuery } from '../../../../globalState/permission/permissionApis';
-import { Divider } from '@mui/material';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
+import SearchableDropdown from "../../../component/searchableDropdown/SearchableDropdown"
+
+const actionsName = ["View", "Add", "Update", "Soft delete", "Restore"]
 
 function PermissionToRole() {
-    const { data: roleData, isSuccess: roleSuccess, error: roleError } = useGetAllRolesQuery();
+    const { data: roleData, isSuccess: roleSuccess, error: roleError } = useGetRolesQuery();
     const { data: permissionData, isSuccess: permissionSuccess, error: permissionError } = useGetAllPermissionsQuery();
 
     if (roleError || permissionError) {
@@ -89,6 +93,10 @@ function PermissionToRole() {
 
     const allRoleData = roleSuccess && roleData?.roles;
     const allPermissionData = permissionSuccess && permissionData?.permissions;
+    const allPermissionDataKeys = allPermissionData.length > 0 && allPermissionData.map(ele => ele.controller_name);
+    // const allActions = Object.values(allPermissionData[0])
+
+    console.log(allPermissionData.length)
 
     return (
         <Container>
@@ -102,17 +110,28 @@ function PermissionToRole() {
             </Stack>
             <Card sx={{ p: "2rem", bgcolor: "#181837" }}>
                 <Scrollbar>
-                    {/* Only render if both roles and permissions are available */}
-                    {allRoleData?.length > 0 && allPermissionData?.length > 0 ? (
-                        <>
-                            <Grid container sx={{ borderBottom: '1px solid #ccc', pb: 2 }}>
+                    {/* Wrap everything in a Box with overflowX to allow horizontal scrolling */}
+                    {allRoleData?.length > 0 && actionsName?.length > 0 ? (
+                        <Box sx={{ overflowX: 'auto' }}>
+                            <Stack width={"100%"} sx={{ margin: "2rem 0rem" }}>
+                                {/* <Typography variant="h6" color="white" mb={2}>Roles</Typography> */}
+                                <SearchableDropdown
+                                    options={[]}
+                                    placeholder="Select role"
+                                // value={watch("role_id") || 0}
+                                // onChange={(newValue) => setValue("role_id", newValue,
+                                //     { shouldValidate: true },
+                                // )}
+                                />
+                            </Stack>
+                            <Grid container sx={{ borderBottom: '1px solid #ccc', pb: 2, flexWrap: 'nowrap', minWidth: '600px' }}>
                                 {/* Table Header */}
-                                <Grid item size={{ xs: 2 }}>
+                                <Grid item sx={{ minWidth: 200 }}>
                                     <Typography variant="h6" color="white">Permissions</Typography>
                                 </Grid>
-                                {allRoleData.map((role, i) => (
-                                    <Grid item key={i} sx={{ textAlign: 'center', borderLeft: '1px solid #ccc', pl: 2, pr: 2 }}>
-                                        <Typography variant="h6" color="white">{role.name}</Typography>
+                                {actionsName.map((action, i) => (
+                                    <Grid item key={i} sx={{ textAlign: 'center', minWidth: 150 }}>
+                                        <Typography variant="h6" color="white">{action}</Typography>
                                     </Grid>
                                 ))}
                             </Grid>
@@ -120,28 +139,32 @@ function PermissionToRole() {
                             <Divider sx={{ mb: 2 }} />
 
                             {/* Permissions List */}
-                            {allPermissionData.map((permission, i) => (
-                                <Grid container key={i} sx={{ mb: 2, alignItems: 'center' }}>
-                                    {/* Permission Name */}
-                                    <Grid item size={{ xs: 2 }}>
-                                        <Typography color="white" sx={{ whiteSpace: 'nowrap' }}>{permission.permission_name}</Typography>
-                                    </Grid>
-
-                                    {/* Role Permissions Checkboxes */}
-                                    {allRoleData.map((role, j) => (
-                                        <Grid item key={j} sx={{ textAlign: 'center' }}>
-                                            <Checkbox />
+                            {allPermissionDataKeys.length > 0
+                                &&
+                                allPermissionDataKeys.map((permission, i) => (
+                                    <Grid container key={i} sx={{ mb: 2, alignItems: 'center', flexWrap: 'nowrap', minWidth: '600px' }}>
+                                        {/* Permission Name */}
+                                        <Grid item sx={{ minWidth: 200 }}>
+                                            <Typography color="white" sx={{ whiteSpace: 'nowrap' }}>{permission.charAt(0).toUpperCase() + permission.slice(1).toLowerCase()}
+                                            </Typography>
                                         </Grid>
-                                    ))}
-                                </Grid>
-                            ))}
-                        </>
+
+                                        {/* Role Permissions Checkboxes */}
+                                        {actionsName.map((action, j) => (
+                                            <Grid item key={j} sx={{ textAlign: 'center', minWidth: 150 }}>
+                                                <Checkbox />
+                                            </Grid>
+                                        ))}
+                                    </Grid>
+                                ))
+                            }
+                        </Box>
                     ) : (
                         <Typography color="white">Loading roles and permissions...</Typography>
                     )}
                 </Scrollbar>
             </Card>
-        </Container >
+        </Container>
     );
 }
 

@@ -68,6 +68,7 @@ function Router() {
 
                   <Route path="/role/add" element={<AddOrUpdateRoles />} />
                   <Route path="/role/view" element={<RoleView />} />
+                  <Route path="/role/update/:id" element={<AddOrUpdateRoles />} />
 
                   <Route path="/permission/add" element={<AddPermissions />} />
                   <Route path="/permission/view" element={<PermissionView />} />

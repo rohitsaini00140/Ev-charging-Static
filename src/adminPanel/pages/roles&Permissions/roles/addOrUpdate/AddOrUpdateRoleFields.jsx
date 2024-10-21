@@ -7,9 +7,10 @@ import { useForm } from 'react-hook-form';
 import { roleSchema } from './roleSchema';
 import { Typography } from '@mui/material';
 import { inputStyle } from '../../../../component/inputStyle';
-import { useState, useMemo } from 'react';
-import { useCreateRolesMutation } from '../../../../../globalState/roles/rolesApi';
+import { useState, useMemo, useEffect } from 'react';
+import { useCreateRolesMutation, useGetRoleByIdQuery, useUpdateRoleMutation } from '../../../../../globalState/roles/rolesApi';
 import Alertbar from '../../../../component/Alertbar';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function AddOrUpdateRoleFields() {
 
@@ -19,31 +20,64 @@ function AddOrUpdateRoleFields() {
         severity: 'success'
     });
 
+    const { id } = useParams()
+    const navigate = useNavigate()
+
+    const { data, isSuccess } = useGetRoleByIdQuery(id, { skip: !id })
+
+    const roleForUpdate = (isSuccess && data)
+
     const [createRoles] = useCreateRolesMutation()
+    const [updateRole] = useUpdateRoleMutation()
 
     const defaultValues = useMemo(() => ({
         name: ""
     }), []);
 
-    const { register, handleSubmit, watch, setValue, setError, reset, formState: { errors } } = useForm({
+    const { register, handleSubmit, watch, setError, reset, formState: { errors } } = useForm({
         resolver: zodResolver(roleSchema),
         defaultValues: defaultValues
     });
 
+    useEffect(() => {
+        if (id && roleForUpdate) {
+            reset({
+                name: roleForUpdate.name || "",
+            });
+        } else {
+            reset(defaultValues);
+        }
+    }, [id, roleForUpdate, reset, defaultValues]);
+
     const onSubmit = async (data) => {
 
         try {
-            console.log(data)
 
-            await createRoles(data).unwrap();
+            if (id) {
 
-            reset(defaultValues)
+                await updateRole({ id, updatedRoleData: data }).unwrap();
+                setSnackbar({
+                    open: true,
+                    message: 'Role successfully updated!',
+                    severity: 'success'
+                });
 
-            setSnackbar({
-                open: true,
-                message: 'Role successfully created!',
-                severity: 'success'
-            })
+                setTimeout(() => {
+                    navigate("/admin/role/view");
+                }, 3000);
+
+            } else {
+
+                await createRoles(data).unwrap();
+
+                reset(defaultValues)
+
+                setSnackbar({
+                    open: true,
+                    message: 'Role successfully created!',
+                    severity: 'success'
+                })
+            }
 
         } catch (error) {
 
