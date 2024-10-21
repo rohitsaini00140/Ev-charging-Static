@@ -17,9 +17,28 @@ export const rolesApi = createApi({
             invalidatesTags: ['Roles']
         }),
 
+        getRoles: builder.query({
+            query: () => `/roles`,
+            providesTags: ['Roles']
+        }),
+
         getAllRoles: builder.query({
             query: ({ status }) => `/roles/list?status=${status}`,
             providesTags: ['Roles']
+        }),
+
+        getRoleById: builder.query({
+            query: (id) => `/roles/show/${id}`,
+            providesTags: ['Roles']
+        }),
+
+        updateRole: builder.mutation({
+            query: ({ updatedRoleData, id }) => ({
+                url: `/roles/update/${id}`,
+                method: "PUT",
+                body: updatedRoleData,
+            }),
+            invalidatesTags: ['Roles']
         }),
 
         softDeleteRole: builder.mutation({
@@ -39,20 +58,14 @@ export const rolesApi = createApi({
             invalidatesTags: ['Roles'],
         }),
 
-        createRoles: builder.mutation({
-            query: (roleData) => ({
-                url: "/roles/create",
-                method: "POST",
-                body: roleData,
-            }),
-            invalidatesTags: ['Roles']
-        }),
-
     }),
 });
 export const {
     useCreateRolesMutation,
+    useUpdateRoleMutation,
     useGetAllRolesQuery,
+    useGetRolesQuery,
+    useGetRoleByIdQuery,
     useSoftDeleteRoleMutation,
     useRestoreDeletedRoleMutation
 } = rolesApi;

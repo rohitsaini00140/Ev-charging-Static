@@ -49,7 +49,7 @@ function RoleTableRow({ allRoleData }) {
                             {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
                                 data={data}
                                 activeOrInactive={data.deleted_at}
-                                pathToNavigate={"/admin/project/update"}
+                                pathToNavigate={"/admin/role/update"}
                                 onSoftDelete={onSoftDelete}
                                 onRestoreData={onRestoreData}
                             />}
