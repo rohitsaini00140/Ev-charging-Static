@@ -14,7 +14,7 @@ import SearchableDropdown from "../../../component/searchableDropdown/Searchable
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserListPageNo, setUserName, setUserStatus } from '../../../../globalState/user/userSlice';
 import { useGetAllRolesQuery } from '../../../../globalState/roles/rolesApi';
-import { setRoleName } from '../../../../globalState/roles/rolesSlices';
+import { setRole } from '../../../../globalState/roles/rolesSlices';
 
 // ----------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ function UserTableToolbar() {
 
     const { userName, status } = useSelector(state => state.user)
 
-    const { roleName } = useSelector(state => state.role)
+    const { role } = useSelector(state => state.role)
 
     const { data: rolesData, isSuccess: rolesSuccess } = useGetAllRolesQuery()
 
@@ -41,9 +41,9 @@ function UserTableToolbar() {
                 break;
             case 'role':
                 if (option) {
-                    dispatch(setRoleName(option));
+                    dispatch(setRole(option));
                 } else {
-                    dispatch(setRoleName(''));
+                    dispatch(setRole(''));
                 }
                 break;
             case 'status':
@@ -103,7 +103,7 @@ function UserTableToolbar() {
                             <SearchableDropdown
                                 options={allRoleData.length > 0 ? allRoleData : []}
                                 placeholder="Select role"
-                                value={roleName}
+                                value={role}
                                 onChange={(value) => handleSelect(value, "role")}
                             />
                         </Stack>

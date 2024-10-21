@@ -6,6 +6,7 @@ import { addressApi } from "../address/addressApi"
 import { userApi } from "../user/userApis"
 import { deviceApi } from "../devices/deviceApis"
 import { rolesApi } from "../roles/rolesApi"
+import { permissionsApi } from "../permission/permissionApis"
 import clusterSlices from "../cluster/clusterSlices"
 import googleMapSlices from "../googleMap/googleMapSlices"
 import addressSlices from "../address/addressSlices"
@@ -13,7 +14,7 @@ import projectSlice from "../projects/projectsSlices"
 import userSlice from "../user/userSlice"
 import deviceSlice from "../devices/deviceSlices"
 import rolesSlice from "../roles/rolesSlices"
-import { permissionsApi } from "../permission/permissionApis"
+import permissionSlice from "../permission/permissionSlices"
 
 export const store = configureStore({
     reducer: {
@@ -31,7 +32,8 @@ export const store = configureStore({
         project: projectSlice,
         user: userSlice,
         device: deviceSlice,
-        role: rolesSlice
+        role: rolesSlice,
+        permission: permissionSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
         .concat(
