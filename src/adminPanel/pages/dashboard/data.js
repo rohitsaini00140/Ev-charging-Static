@@ -1,8 +1,8 @@
 import Iconify from '../../component/Iconify';
 
 export const dashboardCardData = {
-    type: "New Customer",
-    totalCount: "7,461",
+    type: "Active Users",
+    totalCount: "7,461 +",
     Percentage: "25%",
     incOrDec: "inc",
     duration: "Since last week",
@@ -12,8 +12,8 @@ export const dashboardCardData = {
 }
 
 export const dashboardCardData2 = {
-    type: "Sales Revenue",
-    totalCount: "₹28,947",
+    type: "Toal Projects",
+    totalCount: "947 +",
     Percentage: "25%",
     incOrDec: "dec",
     duration: "Since last week",
@@ -23,14 +23,24 @@ export const dashboardCardData2 = {
 }
 
 export const dashboardCardData3 = {
-    type: "Profit",
-    totalCount: "₹3,241",
+    type: "Total Clusters",
+    totalCount: "241 +",
     Percentage: "25%",
     incOrDec: "inc",
     duration: "Since last week",
     arrowIcon: <Iconify icon="ph:arrow-up-thin" sx={{ fontSize: "1rem" }} />,
     typeIcon: <Iconify icon="bi:cash-stack" sx={{ fontSize: "1.5rem", color: "#99ff00" }} />,
-    bgColor: "#E6FFB3"
+    bgColor: "#557710"
+}
+export const dashboardCardData4 = {
+    type: "Total Device",
+    totalCount: "500 +",
+    Percentage: "25%",
+    incOrDec: "inc",
+    duration: "Since last week",
+    arrowIcon: <Iconify icon="ph:arrow-up-thin" sx={{ fontSize: "1rem" }} />,
+    typeIcon: <Iconify icon="bi:cash-stack" sx={{ fontSize: "1.5rem", color: "white" }} />,
+    bgColor: "#20c997"
 }
 
 export const lineChartData = [

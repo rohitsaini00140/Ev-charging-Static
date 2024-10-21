@@ -3,7 +3,6 @@ import { Stack } from '@mui/system';
 import { Typography } from '@mui/material';
 
 function TablePagination({ count, page, onPageChange }) {
-
     const paginationStyle = {
         "& .MuiPaginationItem-root": {
             color: 'white',
@@ -12,8 +11,10 @@ function TablePagination({ count, page, onPageChange }) {
         "& .MuiPaginationItem-previousNext": {
             color: 'white',
         },
+        ".css-ax0zxn-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
+            background: '#20c997',
+        }
     }
-
     return (
         <Stack spacing={2} justifyContent={"center"} alignItems={"center"} p={2} bgcolor="#181837">
             <Pagination

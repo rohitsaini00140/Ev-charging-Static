@@ -118,7 +118,7 @@ function ClustersTableToolbar({ allClusterData }) {
                 display: 'flex',
                 flexDirection: "column",
                 gap: "1rem",
-                bgcolor: "#181837"
+                bgcolor: "rgb(29, 40, 44)"
                 // p: (theme) => theme.spacing(0, 1, 0, 3),
                 // ...(selectedCategoryId.length > 0 && {
                 //     color: 'primary.main',
@@ -134,7 +134,6 @@ function ClustersTableToolbar({ allClusterData }) {
                 // ) : 
                 // (
                 <>
-
                     {/* // ) */}
                     <Stack
                         direction={{ xs: 'column', sm: 'row' }}
@@ -143,7 +142,7 @@ function ClustersTableToolbar({ allClusterData }) {
                     >
                         <Stack width={{ sm: "100%" }}>
                             <SearchInput
-                                sx={{ color: "white" }}
+                                sx={{ color: "white",background:"rgb(29, 40, 44)" }}
                                 placeholder="Search clusters..."
                                 width={"100%"}
                                 onChange={(e) => handleSelect(e.target.value, "cluster")}

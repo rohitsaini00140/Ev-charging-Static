@@ -1,5 +1,5 @@
 export const inputStyle = {
-    backgroundColor: "#34345a",
+    backgroundColor: "#1d282c",
     color: "white",
     borderRadius: "8px",
     "& .MuiOutlinedInput-notchedOutline": {

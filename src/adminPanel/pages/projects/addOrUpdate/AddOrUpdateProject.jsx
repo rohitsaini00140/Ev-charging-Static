@@ -6,9 +6,7 @@ import { useParams } from 'react-router-dom';
 // ----------------------------------------------------------------------
 
 function AddOrUpdateProject() {
-
     const { id } = useParams()
-
     return (
         <Box
             sx={{
@@ -22,7 +20,7 @@ function AddOrUpdateProject() {
                         width: 1,
                         maxWidth: "100%",
                         height: "auto",
-                        backgroundColor: "#181837",
+                        backgroundColor: "rgb(29, 40, 44)",
                         borderRadius: "16px"
                     }}
                 >

@@ -24,7 +24,7 @@ function AddOrUpdateUser() {
                         width: 1,
                         maxWidth: "100%",
                         height: "auto",
-                        backgroundColor: "#181837",
+                        backgroundColor: "rgb(29, 40, 44)",
                     }}
                 >
                     <Typography variant="h4" color="white" sx={{ mb: 3 }}>{id ? "Update Users" : "Add Users"}</Typography>

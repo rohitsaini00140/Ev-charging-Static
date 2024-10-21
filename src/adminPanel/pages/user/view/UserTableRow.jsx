@@ -44,15 +44,15 @@ function UserTableRow({ allUserData, currentpage }) {
                             // checked={selectedCategoryId.includes(data["ID"])}
                             />
                         </StyledTableCell>
-                        <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.name}</StyledTableCell>
-                        <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.email}</StyledTableCell>
-                        <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.phone}</StyledTableCell>
-                        <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.role?.role_name}</StyledTableCell>
+                        <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.name}</StyledTableCell>
+                        <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.email}</StyledTableCell>
+                        <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.phone}</StyledTableCell>
+                        <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.role?.role_name}</StyledTableCell>
                         <StyledTableCell>
                             <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
                         </StyledTableCell>
                         <StyledTableCell>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
+                            {loading ? <Skeleton sx={{ bgcolor: '#1D282C' }} animation="pulse" /> : <Action
                                 data={data}
                                 activeOrInactive={data.deleted_at}
                                 pathToNavigate={"/admin/user/update"}

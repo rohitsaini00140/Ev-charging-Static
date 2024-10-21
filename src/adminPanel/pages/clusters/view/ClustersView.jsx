@@ -44,17 +44,16 @@ function ClustersView() {
                 direction="row"
                 alignItems="center"
                 justifyContent="space-between"
-                mb={5}
+                m={3}
             >
                 <Typography variant="h4" color="white">Clusters</Typography>
                 <Link to={"/admin/cluster/add"}>
                     <Button
                         variant="contained"
                         sx={{
-                            bgcolor: "#34345a",
+                            bgcolor: "#20c997",
                             boxShadow: 'none',
                             padding: '12px 18px',
-                            "&:hover": { bgcolor: "#34345a" }
                         }}
                         color="inherit"
                         startIcon={<Iconify icon="eva:plus-fill" />}>
@@ -62,7 +61,7 @@ function ClustersView() {
                     </Button>
                 </Link>
             </Stack>
-            <Card sx={{ bgcolor: "#181837" }}>
+            <Card sx={{ bgcolor: "rgb(29, 40, 44)",boxShadow:"0px 4px 12px rgba(87, 179, 62, 0.2)" }}>
                 <ClustersTableToolbar allClusterData={allClusterData} />
                 {isLoading ? (
                     <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>

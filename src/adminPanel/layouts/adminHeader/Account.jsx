@@ -65,6 +65,7 @@ function Account() {
                     src={account.photoURL}
                     alt={account.displayName}
                     sx={{
+                        background:'#20c997',
                         width: 36,
                         height: 36,
                         border: (theme) => `solid 2px ${theme.palette.background.default}`,
