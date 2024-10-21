@@ -37,7 +37,7 @@ export const projectApi = createApi({
                 if (userName) params.append('user_name', userName);
                 if (status) params.append('status', status);
 
-                return `/clusters/list?${params.toString()}`;
+                return `/projects/list?${params.toString()}`;
             },
             providesTags: ['Projects']
         }),
