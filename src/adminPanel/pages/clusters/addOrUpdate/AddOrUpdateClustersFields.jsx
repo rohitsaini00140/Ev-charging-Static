@@ -167,7 +167,7 @@ function AddOrUpdateClustersFields() {
                                 sx={inputStyle}
                                 fullWidth
                             />
-                            {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
+                            {errors.name && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.name.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
                             <SearchableDropdown
@@ -179,7 +179,7 @@ function AddOrUpdateClustersFields() {
                                     dispatch(setCountryId(newValue)),
                                 )}
                             />
-                            {errors.country_id && <Typography color={"red"} mt={".5rem"}>*{errors.country_id.message}</Typography>}
+                            {errors.country_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.country_id.message}</Typography>}
                         </Stack>
                     </Stack>
                     <Stack
@@ -196,7 +196,7 @@ function AddOrUpdateClustersFields() {
                                     dispatch(setStateId(newValue)),
                                 )}
                             />
-                            {errors.state_id && <Typography color={"red"} mt={".5rem"}>*{errors.state_id.message}</Typography>}
+                            {errors.state_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.state_id.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
                             <SearchableDropdown
@@ -205,7 +205,7 @@ function AddOrUpdateClustersFields() {
                                 value={watch("city_id") || 0}
                                 onChange={(newValue) => setValue("city_id", newValue, { shouldValidate: true })}
                             />
-                            {errors.city_id && <Typography color={"red"} mt={".5rem"}>*{errors.city_id.message}</Typography>}
+                            {errors.city_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.city_id.message}</Typography>}
                         </Stack>
                     </Stack>
                     <Stack width={"100%"}>
@@ -216,7 +216,7 @@ function AddOrUpdateClustersFields() {
                             sx={inputStyle}
                             fullWidth
                         />
-                        {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
+                        {errors.location && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.location.message}</Typography>}
                     </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>
                         <Button

@@ -45,7 +45,7 @@ export const inputStyle = {
 };
 
 export const StyledPopper = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#34345a',
+    backgroundColor: '#1d282c',
     color: 'white',
     borderRadius: '8px',
     boxShadow: `
@@ -55,13 +55,13 @@ export const StyledPopper = styled(Paper)(({ theme }) => ({
         0px 3px 14px 2px rgba(145, 158, 171, 0.12)
     `,
     "& .MuiAutocomplete-option": {
-        backgroundColor: '#34345a',
+        backgroundColor: '#1d282c',
         color: 'white',
         '&[data-focus="true"]': {
-            backgroundColor: '#34345a',
+            backgroundColor: '#1d282c',
         },
         '&[aria-selected="true"]': {
-            backgroundColor: '#34345a',
+            backgroundColor: '#1d282c',
         },
     },
 }));

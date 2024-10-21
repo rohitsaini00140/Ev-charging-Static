@@ -13,7 +13,7 @@ const MenuProps = {
     PaperProps: {
         style: {
             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            backgroundColor: "#34345a"
+            backgroundColor: "#1d282c"
         },
     },
 };
@@ -24,7 +24,7 @@ function getStyles(option, value, theme) {
             Array.isArray(value) && value.indexOf(option) === -1
                 ? theme.typography.fontWeightRegular
                 : theme.typography.fontWeightMedium,
-        color: "white"
+             color: "white"
     };
 }
 
@@ -36,7 +36,7 @@ function Selector({ placeholder, selectType, value, onChange, options }) {
             <FormControl fullWidth>
                 <Select
                     sx={{
-                        backgroundColor: "#34345a",
+                        backgroundColor: "#1d282c",
                         borderRadius: "8px",
                         ...inputStyle
                     }}
@@ -47,14 +47,14 @@ function Selector({ placeholder, selectType, value, onChange, options }) {
                     onChange={onChange}
                     input={<OutlinedInput sx={{
                         "& .MuiInputBase-input": {
-                            color: "white"
+                            color: "white",
+                            background:'#1d282c'
                         },
                     }} />}
                     renderValue={(selected) => {
                         if (selected.length === 0) {
                             return <em style={{ color: 'white' }}>{placeholder}</em>;
                         }
-
                         return Array.isArray(selected) ? selected.join(', ') : selected;
                     }}
                     MenuProps={MenuProps}
@@ -69,7 +69,7 @@ function Selector({ placeholder, selectType, value, onChange, options }) {
                             value={option}
                             style={getStyles(option, value, theme)}
                         >
-                            {option}
+                         {option}
                         </MenuItem>
                     ))}
                 </Select>

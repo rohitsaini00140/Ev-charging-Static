@@ -119,7 +119,6 @@ function AddOrUpdateDeviceFields() {
             open: false
         }));
     };
-
     return (
         <>
             <form fullWidth onSubmit={handleSubmit(onSubmit)}>
@@ -137,7 +136,7 @@ function AddOrUpdateDeviceFields() {
                                     { shouldValidate: true },
                                 )}
                             />
-                            {errors.project_id && <Typography color={"red"} mt={".5rem"}>*{errors.project_id.message}</Typography>}
+                            {errors.project_id && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.project_id.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
                             <TextField
@@ -147,7 +146,7 @@ function AddOrUpdateDeviceFields() {
                                 sx={inputStyle}
                                 fullWidth
                             />
-                            {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
+                            {errors.name && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.name.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
                             <Selector
@@ -157,7 +156,7 @@ function AddOrUpdateDeviceFields() {
                                 selectType="single"
                                 options={["Type-A", "Type-B", "Type-C"]}
                             />
-                            {errors.type && <Typography color={"red"} mt={".5rem"}>*{errors.type.message}</Typography>}
+                            {errors.type && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.type.message}</Typography>}
                         </Stack>
                     </Stack>
                     <Stack
@@ -172,7 +171,7 @@ function AddOrUpdateDeviceFields() {
                                 sx={inputStyle}
                                 fullWidth
                             />
-                            {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
+                            {errors.location && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.location.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
                             <TextField
@@ -182,7 +181,7 @@ function AddOrUpdateDeviceFields() {
                                 sx={inputStyle}
                                 fullWidth
                             />
-                            {errors.serial_number && <Typography color={"red"} mt={".5rem"}>*{errors.serial_number.message}</Typography>}
+                            {errors.serial_number && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.serial_number.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
                             <Selector
@@ -192,7 +191,7 @@ function AddOrUpdateDeviceFields() {
                                 selectType="single"
                                 options={["Active", "Inactive"]}
                             />
-                            {errors.status && <Typography color={"red"} mt={".5rem"}>*{errors.status.message}</Typography>}
+                            {errors.status && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.status.message}</Typography>}
                         </Stack>
                     </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>

@@ -142,8 +142,11 @@ color: white !important;
 background-color: #ff6384 !important;
 }
 .css-qlcv4k-MuiStack-root{
-
   background-color: #3e403d0f !important;
+}
+.css-ajc9v9{
+  color: white !important;
+  background-color: #20c997 !important;
 }
 
 @import 'simplebar-react/dist/simplebar.min.css';

@@ -46,7 +46,7 @@ function Action({ data, pathToNavigate, onSoftDelete, onRestoreData, activeOrIna
                 anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
                 transformOrigin={{ vertical: 'top', horizontal: 'right' }}
                 PaperProps={{
-                    sx: { width: 140, bgcolor: '#34345a', color: "white" },
+                    sx: { width: 140,border: '0.1px solid white', bgcolor: '#1D282C',boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)', color: "white" },
                 }}
             >
                 {!activeOrInactive ? (

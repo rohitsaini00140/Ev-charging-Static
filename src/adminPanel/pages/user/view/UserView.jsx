@@ -48,23 +48,24 @@ function UserView() {
         direction="row"
         alignItems="center"
         justifyContent="space-between"
-        mb={5}
+        m={3}
       >
         <Typography variant="h4" color="white">Users</Typography>
         <Link to={"/admin/user/add"}>
           <Button
             variant="contained"
             sx={{
-              bgcolor: "#34345a",
+              bgcolor: "#20c997",
               boxShadow: 'none',
-              "&:hover": { bgcolor: "#34345a" }
+              padding:'10px 10px',
+              "&:hover": { bgcolor: "#20c997" }
             }}
             startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button>
         </Link>
       </Stack>
-      <Card sx={{ bgcolor: "#181837" }}>
+      <Card sx={{ bgcolor: "rgb(29, 40, 44)",boxShadow:'0px 4px 12px rgba(87, 179, 62, 0.2)' }}>
         <UserTableToolbar />
         {isLoading ? (
           <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>

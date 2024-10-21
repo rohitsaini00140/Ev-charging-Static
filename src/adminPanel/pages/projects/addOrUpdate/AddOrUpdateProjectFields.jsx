@@ -141,7 +141,7 @@ function AddOrUpdateProjectFields() {
                                     { shouldValidate: true },
                                 )}
                             />
-                            {errors.cluster_id && <Typography color={"red"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
+                            {errors.cluster_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
                             <SearchableDropdown
@@ -152,7 +152,7 @@ function AddOrUpdateProjectFields() {
                                     { shouldValidate: true },
                                 )}
                             />
-                            {errors.user_id && <Typography color={"red"} mt={".5rem"}>*{errors.user_id.message}</Typography>}
+                            {errors.user_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.user_id.message}</Typography>}
                         </Stack>
                     </Stack>
                     <Stack
@@ -167,7 +167,7 @@ function AddOrUpdateProjectFields() {
                                 sx={inputStyle}
                                 fullWidth
                             />
-                            {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
+                            {errors.name && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.name.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
                             <TextField
@@ -177,7 +177,7 @@ function AddOrUpdateProjectFields() {
                                 sx={inputStyle}
                                 fullWidth
                             />
-                            {errors.location && <Typography color={"red"} mt={".5rem"}>*{errors.location.message}</Typography>}
+                            {errors.location && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.location.message}</Typography>}
                         </Stack>
                     </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>

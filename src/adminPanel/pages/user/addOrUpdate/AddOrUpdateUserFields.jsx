@@ -131,7 +131,7 @@ function AddOrUpdateUserFields() {
                                 sx={inputStyle}
                                 fullWidth
                             />
-                            {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
+                            {errors.name && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.name.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
                             <TextField
@@ -141,7 +141,7 @@ function AddOrUpdateUserFields() {
                                 sx={inputStyle}
                                 fullWidth
                             />
-                            {errors.email && <Typography color={"red"} mt={".5rem"}>*{errors.email.message}</Typography>}
+                            {errors.email && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.email.message}</Typography>}
                         </Stack>
                     </Stack>
                     <Stack
@@ -156,7 +156,7 @@ function AddOrUpdateUserFields() {
                                 sx={inputStyle}
                                 fullWidth
                             />
-                            {errors.phone && <Typography color={"red"} mt={".5rem"}>*{errors.phone.message}</Typography>}
+                            {errors.phone && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.phone.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
                             <SearchableDropdown
@@ -167,7 +167,7 @@ function AddOrUpdateUserFields() {
                                     { shouldValidate: true },
                                 )}
                             />
-                            {errors.role_id && <Typography color={"red"} mt={".5rem"}>*{errors.role_id.message}</Typography>}
+                            {errors.role_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.role_id.message}</Typography>}
                         </Stack>
                     </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>

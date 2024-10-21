@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import AddOrUpdateDeviceFields from './AddOrUpdateDeviceFields';
 // ----------------------------------------------------------------------
 function AddOrUpdateDevice() {
-
     return (
         <Box
         sx={{
@@ -16,7 +15,6 @@ function AddOrUpdateDevice() {
                         p: 5,
                         width: 1,
                         maxWidth: "100%",
-                        backgroundColor: "#181837",
                         borderRadius:'16px'
                     }}
                 >

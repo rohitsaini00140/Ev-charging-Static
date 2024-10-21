@@ -1,5 +1,5 @@
 export const inputStyle = {
-    backgroundColor: "#34345a",
+    backgroundColor: "#1d282c",
     borderRadius: "8px",
     "& .MuiInputBase-input": {
         color: "white",
@@ -26,20 +26,20 @@ export const inputStyle = {
     // autofill
 
     "& input:-webkit-autofill": {
-        WebkitBoxShadow: "0 0 0 1000px #34345a inset",
+        WebkitBoxShadow: "0 0 0 1000px rgb(29, 40, 44) inset",
         WebkitTextFillColor: "white",
         transition: "background-color 5000s ease-in-out 0s",
     },
     "& input:-webkit-autofill:hover": {
-        WebkitBoxShadow: "0 0 0 1000px #34345a inset",
+        WebkitBoxShadow: "0 0 0 1000px rgb(29, 40, 44) inset",
         WebkitTextFillColor: "white",
     },
     "& input:-webkit-autofill:focus": {
-        WebkitBoxShadow: "0 0 0 1000px #34345a inset",
+        WebkitBoxShadow: "0 0 0 1000px rgb(29, 40, 44) inset",
         WebkitTextFillColor: "white",
     },
     "& input:-webkit-autofill:active": {
-        WebkitBoxShadow: "0 0 0 1000px #34345a inset",
+        WebkitBoxShadow: "0 0 0 1000px rgb(29, 40, 44) inset",
         WebkitTextFillColor: "white",
     },
 }

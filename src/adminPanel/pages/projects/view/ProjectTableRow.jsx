@@ -40,25 +40,25 @@ function ProjectTableRow({ allProjectsData, currentpage }) {
                             />
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : ((currentpage - 1) * 10 + (i + 1))}
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : ((currentpage - 1) * 10 + (i + 1))}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.cluster_name}
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster_name}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
                             {loading ? (<Skeleton animation="pulse" />) : (data.user_name ? data.user_name : '-')}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.project_name}
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.project_name}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.project_location}
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.project_location}
                         </StyledTableCell>
                         <StyledTableCell>
                             <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
                         </StyledTableCell>
                         <StyledTableCell>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : <Action
                                 data={data}
                                 activeOrInactive={data.deleted_at}
                                 pathToNavigate={"/admin/project/update"}

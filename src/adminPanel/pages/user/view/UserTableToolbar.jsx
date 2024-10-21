@@ -94,7 +94,7 @@ function UserTableToolbar() {
                             <SearchInput
                                 placeholder="Search users..."
                                 width={"100%"}
-                                sx={{ color: "white" }}
+                                sx={{ color: "white",background:'rgb(29, 40, 44)' }}
                                 onChange={(e) => handleSelect(e.target.value, "user")}
                                 value={userName}
                             />
