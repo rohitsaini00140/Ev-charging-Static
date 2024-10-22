@@ -54,7 +54,11 @@ function ClustersView() {
                             bgcolor: "#20c997",
                             boxShadow: 'none',
                             padding: '12px 18px',
-                        }}
+                            '&:hover': {
+                              bgcolor: "#20c997", // Maintain the same color on hover
+                            },
+                          }}
+                          
                         color="inherit"
                         startIcon={<Iconify icon="eva:plus-fill" />}>
                         New Cluster

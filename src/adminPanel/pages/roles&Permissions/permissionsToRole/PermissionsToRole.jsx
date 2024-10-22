@@ -219,7 +219,7 @@ function PermissionToRole() {
                 <Typography variant="h4" color="white">{id ? 'Update' : 'Create'} Role Permissions</Typography>
             </Stack>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Card sx={{ p: "2rem", bgcolor: "#181837" }}>
+                <Card sx={{ p: "2rem", bgcolor: "#3e403d0f" }}>
                     <Scrollbar>
                         {allRoleData?.length > 0 && actionsName?.length > 0 ? (
                             <Box sx={{ overflowX: 'auto' }}>
