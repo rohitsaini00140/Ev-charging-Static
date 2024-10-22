@@ -1,8 +1,6 @@
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
-import { Button } from '@mui/material';
-import { Icon } from '@iconify/react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -178,26 +176,6 @@ function AddOrUpdateUserFields() {
                         </Stack>
                     </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>
-                        {/* <Button
-                            sx={{
-                                color: "white",
-                                borderRadius: "5px",
-                                bgcolor: "#0ab39c",
-                                width: "5rem",
-                                height: "2.5rem",
-                                BoxShadow: "none",
-                                '&:hover': {
-                                    bgcolor: "#0ab39c"
-                                }
-                            }}
-                            type='submit'
-                        >
-                            <Icon
-                                icon="mdi:printer"
-                                style={{ fontSize: "1.2rem", color: "white", marginRight: ".3rem" }}
-                            />
-                            Save
-                        </Button> */}
                         <LoadingButton
                             loading={loading}
                             type='submit'
