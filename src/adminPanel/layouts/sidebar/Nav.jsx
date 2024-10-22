@@ -27,9 +27,7 @@ const account = {
 
 function Nav({ openNav, onCloseNav }) {
     const pathname = usePathname();
-
     const upLg = useResponsive('up', 'lg');
-
     useEffect(() => {
         if (openNav) {
             onCloseNav();
@@ -184,7 +182,7 @@ function NavItem({ item, level = 0 }) {
                         }),
                     }}
                 >
-                    <Box component="span" sx={{ width: iconSize, height: iconSize, mr: 2, color: '#1ce33b' }}>
+                    <Box component="span" sx={{ width: iconSize, height: iconSize, mr: 2, color: '#20c997' }}>
                         {item.icon}
                     </Box>
                     <Box component="span" color={"white"}>{item.title}</Box>

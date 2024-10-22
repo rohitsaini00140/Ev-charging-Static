@@ -1,15 +1,10 @@
 import Box from '@mui/material/Box';
 import { useResponsive } from '../../customHooks/useResponsive';
 import { NAV, HEADER } from './configLayout';
-
-
 // ----------------------------------------------------------------------
-
 const SPACING = 8;
-
 function Sidebar({ children, sx, ...other }) {
     const lgUp = useResponsive('up', 'lg');
-
     return (
         <Box
             component="main"
@@ -18,7 +13,7 @@ function Sidebar({ children, sx, ...other }) {
                 minHeight: 1,
                 display: 'flex',
                 flexDirection: 'column',
-                bgcolor: "#222245",
+                bgcolor: "#1d282c",
                 py: `${HEADER.H_MOBILE + SPACING}px`,
                 ...(lgUp && {
                     px: 2,

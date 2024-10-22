@@ -2,7 +2,7 @@ import Iconify from '../../component/Iconify';
 
 export const dashboardCardData = {
     type: "Active Users",
-    totalCount: "7,461 +",
+    totalCount: "7000",
     Percentage: "25%",
     incOrDec: "inc",
     duration: "Since last week",
@@ -10,36 +10,40 @@ export const dashboardCardData = {
     typeIcon: <Iconify icon="fa-solid:users" sx={{ fontSize: "1.5rem", color: "#ff6600" }} />,
     bgColor: "#f9f3e7"
 }
-
 export const dashboardCardData2 = {
     type: "Toal Projects",
-    totalCount: "947 +",
+    totalCount: "900",
     Percentage: "25%",
     incOrDec: "dec",
     duration: "Since last week",
     arrowIcon: <Iconify icon="ph:arrow-down-thin" sx={{ fontSize: "1rem" }} />,
-    typeIcon: <Iconify icon="raphael:barchart" sx={{ fontSize: "1.5rem", color: "#00ffff" }} />,
+    typeIcon: <Iconify icon="si:projects-line" sx={{ fontSize: "1.5rem", color: "#00ffff" }} />,
     bgColor: "#CCFFFF"
 }
 
 export const dashboardCardData3 = {
     type: "Total Clusters",
-    totalCount: "241 +",
+    totalCount: "250",
     Percentage: "25%",
     incOrDec: "inc",
     duration: "Since last week",
     arrowIcon: <Iconify icon="ph:arrow-up-thin" sx={{ fontSize: "1rem" }} />,
-    typeIcon: <Iconify icon="bi:cash-stack" sx={{ fontSize: "1.5rem", color: "#99ff00" }} />,
+    typeIcon: <Iconify icon="clarity:cluster-solid" sx={{ fontSize: "1.5rem", color: "#99ff00" }} />,
     bgColor: "#557710"
 }
 export const dashboardCardData4 = {
     type: "Total Device",
-    totalCount: "500 +",
+    totalCount: "500",
     Percentage: "25%",
     incOrDec: "inc",
     duration: "Since last week",
     arrowIcon: <Iconify icon="ph:arrow-up-thin" sx={{ fontSize: "1rem" }} />,
-    typeIcon: <Iconify icon="bi:cash-stack" sx={{ fontSize: "1.5rem", color: "white" }} />,
+    typeIcon: (
+        <Iconify
+          icon="fa-solid:charging-station"
+          sx={{ fontSize: "1.5rem", color: "white" }}
+        />
+      ),
     bgColor: "#20c997"
 }
 
