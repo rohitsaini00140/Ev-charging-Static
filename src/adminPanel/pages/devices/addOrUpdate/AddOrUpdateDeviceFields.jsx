@@ -1,8 +1,8 @@
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Selector from '../../../component/selector/Selector';
-import { Button } from '@mui/material';
-import { Icon } from '@iconify/react';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { deviceSchema } from './deviceSchema';
@@ -17,6 +17,8 @@ import { useState, useEffect } from 'react';
 import { useAddDeviceMutation, useGetDeviceByIDQuery, useUpdateDeviceMutation } from '../../../../globalState/devices/deviceApis';
 
 function AddOrUpdateDeviceFields() {
+
+    const [loading, setLoading] = useState(false);
 
     const [snackbar, setSnackbar] = useState({
         open: false,
@@ -67,6 +69,7 @@ function AddOrUpdateDeviceFields() {
     }, [id, deviceForUpdate, reset, defaultValues]);
 
     const onSubmit = async (data) => {
+        setLoading(true);
         try {
 
             if (id) {
@@ -107,6 +110,8 @@ function AddOrUpdateDeviceFields() {
                 });
             }
             console.error("Error during submission:", error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -195,26 +200,26 @@ function AddOrUpdateDeviceFields() {
                         </Stack>
                     </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>
-                        <Button
+                        <LoadingButton
+                            loading={loading}
+                            type='submit'
                             sx={{
-                                color: "white",
-                                borderRadius: "5px",
-                                bgcolor: "#0ab39c",
-                                width: "5rem",
-                                height: "2.5rem",
-                                BoxShadow: "none",
+                                bgcolor: '#0ab39c',
+                                color: 'white',
+                                '& .MuiLoadingButton-loadingIndicator': {
+                                    color: 'white'
+                                },
                                 '&:hover': {
-                                    bgcolor: "#0ab39c"
+                                    bgcolor: '#089d88',
+                                    color: 'white',
                                 }
                             }}
-                            type='submit'
+                            loadingPosition="start"
+                            startIcon={<SaveIcon />}
+                            variant="outlined"
                         >
-                            <Icon
-                                icon="mdi:printer"
-                                style={{ fontSize: "1.2rem", color: "white", marginRight: ".3rem" }}
-                            />
                             Save
-                        </Button>
+                        </LoadingButton>
                     </Stack>
                 </Stack>
             </form>

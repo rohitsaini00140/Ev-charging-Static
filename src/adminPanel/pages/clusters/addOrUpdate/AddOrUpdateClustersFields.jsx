@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
-import { Icon } from '@iconify/react';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { clusterSchema } from './clusterSchema';
@@ -19,6 +19,9 @@ import { useGetCityQuery, useGetCountryQuery, useGetStateQuery } from '../../../
 import { setCountryId, setStateId } from '../../../../globalState/address/addressSlices';
 
 function AddOrUpdateClustersFields() {
+
+    const [loading, setLoading] = useState(false);
+
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
@@ -80,6 +83,8 @@ function AddOrUpdateClustersFields() {
     }, [id, clusterForUpdate, reset, defaultValues]);
 
     const onSubmit = async (data) => {
+        setLoading(true);
+
         try {
             const selectedCountry = country.find(c => c.id === Number(data.country_id))?.name || '';
             const selectedState = states.find(s => s.id === Number(data.state_id))?.name || '';
@@ -134,6 +139,8 @@ function AddOrUpdateClustersFields() {
                 });
             }
             console.error("Error during submission:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -227,26 +234,26 @@ function AddOrUpdateClustersFields() {
                         {errors.location && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.location.message}</Typography>}
                     </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>
-                        <Button
+                        <LoadingButton
+                            loading={loading}
+                            type='submit'
                             sx={{
-                                color: "white",
-                                borderRadius: "5px",
-                                bgcolor: "#0ab39c",
-                                width: "5rem",
-                                height: "2.5rem",
-                                boxShadow: "none",
+                                bgcolor: '#0ab39c',
+                                color: 'white',
+                                '& .MuiLoadingButton-loadingIndicator': {
+                                    color: 'white'
+                                },
                                 '&:hover': {
-                                    bgcolor: "#0ab39c"
+                                    bgcolor: '#089d88',
+                                    color: 'white',
                                 }
                             }}
-                            type='submit'
+                            loadingPosition="start"
+                            startIcon={<SaveIcon />}
+                            variant="outlined"
                         >
-                            <Icon
-                                icon="mdi:printer"
-                                style={{ fontSize: "1.2rem", color: "white", marginRight: ".3rem" }}
-                            />
                             Save
-                        </Button>
+                        </LoadingButton>
                     </Stack>
                 </Stack>
             </form>
