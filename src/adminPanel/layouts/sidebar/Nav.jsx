@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 
 const account = {
     displayName: 'VNT Admin',
-    email: 'vnt@gmail.com',
+    // email: 'vnt@gmail.com',
     photoURL: '/assets/images/avatar.svg',
 };
 // ----------------------------------------------------------------------
@@ -56,8 +56,8 @@ function Nav({ openNav, onCloseNav }) {
             />
 
             <Box sx={{ ml: 2 }}>
-                <Typography variant="subtitle2" color='#1ce33b'>{account.displayName}</Typography>
-                <Typography color='#1ce33b' fontSize={".7rem"}>{account.email}</Typography>
+                <Typography variant="subtitle2" color='#20c997'>{account.displayName}</Typography>
+                <Typography color='#20c997' fontSize={".7rem"}>{account.email}</Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                     {account.role}
                 </Typography>

@@ -87,11 +87,13 @@ function Account() {
                         mt: 1,
                         ml: 0.75,
                         width: 200,
+                        background:'#141d20',
+                        color:'white'
                     },
                 }}
             >
                 <Box sx={{ my: 1.5, px: 2 }}>
-                    <Typography variant="subtitle2" noWrap>
+                    <Typography variant="subtitle2" color={'#20c997'} noWrap>
                         {account.displayName}
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
@@ -99,7 +101,7 @@ function Account() {
                     </Typography>
                 </Box>
 
-                <Divider sx={{ borderStyle: 'dashed' }} />
+                <Divider sx={{ borderStyle: 'dashed',borderColor:'#637381' }} />
 
                 {MENU_OPTIONS.map((option) => (
                     <MenuItem key={option.label} onClick={handleClose}>
@@ -107,13 +109,13 @@ function Account() {
                     </MenuItem>
                 ))}
 
-                <Divider sx={{ borderStyle: 'dashed', m: 0 }} />
+                <Divider sx={{ borderStyle: 'dashed', borderColor:'#637381', m: 0 }} />
 
                 <MenuItem
                     disableRipple
                     disableTouchRipple
                     onClick={handleClose}
-                    sx={{ typography: 'body2', color: 'error.main', py: 1.5 }}
+                    sx={{ typography: 'body2', fontWeight:'600', color: 'error.main', py: 1.5 }}
                 >
                     Logout
                 </MenuItem>
