@@ -118,7 +118,7 @@ function AddOrUpdateRoleFields() {
                             sx={inputStyle}
                             fullWidth
                         />
-                        {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
+                        {errors.name && <Typography fontSize={'14px'} color={"#ff6384"} mt={".5rem"}>*{errors.name.message}</Typography>}
                     </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>
                         <Button

@@ -52,7 +52,7 @@ function UserTableRow({ allUserData, currentpage }) {
                             <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
                         </StyledTableCell>
                         <StyledTableCell>
-                            {loading ? <Skeleton sx={{ bgcolor: '#1D282C' }} animation="pulse" /> : <Action
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : <Action
                                 data={data}
                                 activeOrInactive={data.deleted_at}
                                 pathToNavigate={"/admin/user/update"}

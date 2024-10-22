@@ -47,8 +47,9 @@ function PermissionTableToolbar() {
                     >
                         <Stack width={"100%"}>
                             <SearchInput
-                                placeholder="Search permissions..."
+                                placeholder="Search Permissions..."
                                 width={"100%"}
+                                sx={{background:'#3e403d0f',color:'white'}}
                             // onChange={(e) => handleSearchKeywords(e.target.value)}
                             // value={searchKeywords}
                             />
