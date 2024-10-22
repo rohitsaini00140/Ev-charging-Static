@@ -30,7 +30,7 @@ function AddOrUpdateClustersFields() {
     let navigate = useNavigate()
     let dispatch = useDispatch()
 
-    const { data, isSuccess } = useGetClusterByIdQuery(id)
+    const { data, isSuccess } = useGetClusterByIdQuery(id, { skip: !id })
     const { address } = useSelector(state => state.googleMap)
     const { countryId, stateId } = useSelector(state => state.address)
     const { data: geoData, isSuccess: geoIsSuccess } = useGetGeocodeQuery({ address }, { skip: !address })
@@ -39,8 +39,6 @@ function AddOrUpdateClustersFields() {
     const { data: allCity, isSuccess: citySuccess } = useGetCityQuery(stateId, { skip: !stateId })
 
     const clusterForUpdate = (isSuccess && data)
-
-    console.log(clusterForUpdate)
 
     const country = countrySuccess && allCountry?.countries
 
@@ -174,10 +172,16 @@ function AddOrUpdateClustersFields() {
                                 options={country.length > 0 ? country : []}
                                 placeholder="Select Country"
                                 value={watch("country_id") || 0}
-                                onChange={(newValue) => setValue("country_id", newValue,
-                                    { shouldValidate: true },
-                                    dispatch(setCountryId(newValue)),
-                                )}
+                                onChange={(newValue) => {
+                                    setValue("country_id", newValue, { shouldValidate: true });
+                                    dispatch(setCountryId(newValue));
+
+                                    if (!newValue) {
+                                        setValue("state_id", 0, { shouldValidate: true });
+                                        dispatch(setStateId(0));
+                                        setValue("city_id", 0, { shouldValidate: true });
+                                    }
+                                }}
                             />
                             {errors.country_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.country_id.message}</Typography>}
                         </Stack>
@@ -191,10 +195,14 @@ function AddOrUpdateClustersFields() {
                                 options={states.length > 0 ? states : []}
                                 placeholder="Select State"
                                 value={watch("state_id") || 0}
-                                onChange={(newValue) => setValue("state_id", newValue,
-                                    { shouldValidate: true },
-                                    dispatch(setStateId(newValue)),
-                                )}
+                                onChange={(newValue) => {
+                                    setValue("state_id", newValue, { shouldValidate: true });
+                                    dispatch(setStateId(newValue));
+
+                                    if (!newValue) {
+                                        setValue("city_id", 0, { shouldValidate: true });
+                                    }
+                                }}
                             />
                             {errors.state_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.state_id.message}</Typography>}
                         </Stack>

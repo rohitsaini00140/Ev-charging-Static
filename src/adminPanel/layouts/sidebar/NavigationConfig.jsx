@@ -13,30 +13,9 @@ const navConfig = [
     icon: icon('ic_dashboard'),
   },
   {
-    title: 'Users',
-    icon: icon('ic_user'),
-    children: [
-      {
-        title: 'Add',
-        path: '/admin/user/add',
-        icon: icon('ic_circle'),
-      },
-      {
-        title: 'View',
-        path: '/admin/user/view',
-        icon: icon('ic_circle'),
-      },
-    ],
-  },
-  {
     title: 'Roles & Permissions',
     icon: icon('ic_roleAndPermission'),
     children: [
-      {
-        title: 'Permissions to Role',
-        path: '/admin/roles&Permissions/permissionsToRole',
-        icon: icon('ic_circle'),
-      },
       {
         title: 'Roles',
         icon: icon('ic_circle'),
@@ -54,20 +33,41 @@ const navConfig = [
         ],
       },
       {
-        title: 'Permissions',
+        title: 'Assign Permissions',
+        path: '/admin/roles&Permissions/permissionsToRole',
         icon: icon('ic_circle'),
-        children: [
-          {
-            title: 'Add',
-            path: '/admin/permission/add',
-            icon: icon('ic_circle'),
-          },
-          {
-            title: 'View',
-            path: '/admin/permission/view',
-            icon: icon('ic_circle'),
-          },
-        ],
+      },
+      // {
+      //   title: 'Permissions',
+      //   icon: icon('ic_circle'),
+      //   children: [
+      //     {
+      //       title: 'Add',
+      //       path: '/admin/permission/add',
+      //       icon: icon('ic_circle'),
+      //     },
+      //     {
+      //       title: 'View',
+      //       path: '/admin/permission/view',
+      //       icon: icon('ic_circle'),
+      //     },
+      //   ],
+      // },
+    ],
+  },
+  {
+    title: 'Users',
+    icon: icon('ic_user'),
+    children: [
+      {
+        title: 'Add',
+        path: '/admin/user/add',
+        icon: icon('ic_circle'),
+      },
+      {
+        title: 'View',
+        path: '/admin/user/view',
+        icon: icon('ic_circle'),
       },
     ],
   },
