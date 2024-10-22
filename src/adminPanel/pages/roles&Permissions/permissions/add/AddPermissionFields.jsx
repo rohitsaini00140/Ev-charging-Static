@@ -44,7 +44,7 @@ function AddPermissionFields() {
                             sx={inputStyle}
                             fullWidth
                         />
-                        {errors.name && <Typography color={"red"} mt={".5rem"}>*{errors.name.message}</Typography>}
+                        {errors.name && <Typography fontSize={'14px'} color={"#ff6384"} mt={".5rem"}>*{errors.name.message}</Typography>}
                     </Stack>
                     <Stack width={"100%"}>
                         <Selector
@@ -54,7 +54,7 @@ function AddPermissionFields() {
                             selectType="single"
                             options={["Active", "Inactive"]}
                         />
-                        {errors.status && <Typography color={"red"} mt={".5rem"}>*{errors.status.message}</Typography>}
+                        {errors.status && <Typography fontSize={'14px'} color={"#ff6384"} mt={".5rem"}>*{errors.status.message}</Typography>}
                     </Stack>
                 </Stack>
                 <Stack width={"100%"}>
@@ -66,7 +66,7 @@ function AddPermissionFields() {
                         sx={inputStyle}
                         rows={4}
                     />
-                    {errors.description && <Typography color={"red"} mt={".5rem"}>*{errors.description.message}</Typography>}
+                    {errors.description && <Typography fontSize={'14px'} color={"#ff6384"} mt={".5rem"}>*{errors.description.message}</Typography>}
                 </Stack>
                 <Stack direction={"row"} justifyContent={"end"}>
                     <Button
@@ -85,7 +85,7 @@ function AddPermissionFields() {
                     >
                         <Icon
                             icon="mdi:printer"
-                            style={{ fontSize: "1.2rem", color: "white", marginRight: ".3rem" }}
+                            style={{ fontSize: "1.2rem",  color: "white", marginRight: ".3rem" }}
                         />
                         Save
                     </Button>

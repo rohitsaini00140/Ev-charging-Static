@@ -21,7 +21,8 @@ function AddPermissions() {
                         width: 1,
                         maxWidth: "100%",
                         height: "auto",
-                        backgroundColor: "#181837",
+                        backgroundColor: "#3e403d0f",
+                        boxShadow:'0px 4px 12px rgba(87, 179, 62, 0.2)'
                     }}
                 >
                     <Typography variant="h4" sx={{ mb: 3 }} color="white">Add Permissions</Typography>

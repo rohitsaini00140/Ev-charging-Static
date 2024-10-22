@@ -25,16 +25,17 @@ function PermissionView() {
                 direction="row"
                 alignItems="center"
                 justifyContent="space-between"
-                mb={5}
+                m={3}
             >
                 <Typography variant="h4" color="white">Permissions</Typography>
                 <Link to={"/admin/permission/add"}>
                     <Button
                         variant="contained"
                         sx={{
-                            bgcolor: "#34345a",
+                            bgcolor: "#20c997",
                             boxShadow: 'none',
-                            "&:hover": { bgcolor: "#34345a" }
+                            padding:'10px 10px',
+                            "&:hover": { bgcolor: "#20c997" }
                         }}
                         color="inherit"
                         startIcon={<Iconify icon="eva:plus-fill" />}>
@@ -42,7 +43,7 @@ function PermissionView() {
                     </Button>
                 </Link>
             </Stack>
-            <Card sx={{ bgcolor: "#181837" }}>
+            <Card sx={{ bgcolor: "#3e403d0f" }}>
                 <PermissionTableToolbar />
                 <Scrollbar>
                     <TableContainer sx={{ overflow: 'unset' }}>

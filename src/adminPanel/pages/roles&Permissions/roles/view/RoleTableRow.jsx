@@ -10,7 +10,6 @@ import { useRestoreDeletedRoleMutation, useSoftDeleteRoleMutation } from '../../
 
 function RoleTableRow({ allRoleData }) {
     const [loading, setLoading] = useState(true);
-
     useEffect(() => {
         const timer = setTimeout(() => setLoading(false), 1000);
         return () => clearTimeout(timer);
@@ -23,11 +22,9 @@ function RoleTableRow({ allRoleData }) {
         let dataId = data.id
         softDeleteRole({ id: dataId, softDeletedRoleData: data })
     }
-
     function onRestoreData(id) {
         restoreDeletedRole(id)
     }
-
     return (
         <>
             {allRoleData.length > 0
@@ -40,13 +37,13 @@ function RoleTableRow({ allRoleData }) {
                             // checked={selectedCategoryId.includes(data["ID"])}
                             />
                         </StyledTableCell>
-                        <StyledTableCell> {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : i + 1}</StyledTableCell>
-                        <StyledTableCell> {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : data.name}</StyledTableCell>
+                        <StyledTableCell> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : i + 1}</StyledTableCell>
+                        <StyledTableCell> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.name}</StyledTableCell>
                         <StyledTableCell>
                             <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
                         </StyledTableCell>
                         <StyledTableCell>
-                            {loading ? <Skeleton sx={{ bgcolor: '#34345a' }} animation="pulse" /> : <Action
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : <Action
                                 data={data}
                                 activeOrInactive={data.deleted_at}
                                 pathToNavigate={"/admin/role/update"}
