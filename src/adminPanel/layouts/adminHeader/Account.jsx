@@ -14,16 +14,16 @@ import IconButton from '@mui/material/IconButton';
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
-    {
-        label: 'Home',
-        icon: 'eva:home-fill',
-    },
+    // {
+    //     label: 'Home',
+    //     icon: 'eva:home-fill',
+    // },
     {
         label: 'Profile',
         icon: 'eva:person-fill',
     },
     {
-        label: 'Settings',
+        label: 'Change Password',
         icon: 'eva:settings-2-fill',
     },
 ];
@@ -42,8 +42,8 @@ function Account() {
     };
 
     const account = {
-        displayName: 'Aditya Shaw',
-        email: 'aadi@gmail.com',
+        displayName: 'VNT Admin',
+        email: 'vnt@gmail.com',
         photoURL: '/assets/images/avatars/avatar_25.jpg',
     };
 
@@ -65,7 +65,7 @@ function Account() {
                     src={account.photoURL}
                     alt={account.displayName}
                     sx={{
-                        background:'#20c997',
+                        background: '#20c997',
                         width: 36,
                         height: 36,
                         border: (theme) => `solid 2px ${theme.palette.background.default}`,

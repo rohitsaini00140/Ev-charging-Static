@@ -3,6 +3,7 @@ export const inputStyle = {
     borderRadius: "8px",
     "& .MuiInputBase-input": {
         color: "white",
+        caretColor: "white", 
     },
     "& .MuiInputLabel-root": {
         color: "white",
@@ -29,17 +30,21 @@ export const inputStyle = {
         WebkitBoxShadow: "0 0 0 1000px rgb(29, 40, 44) inset",
         WebkitTextFillColor: "white",
         transition: "background-color 5000s ease-in-out 0s",
+        caretColor: "white", 
     },
     "& input:-webkit-autofill:hover": {
         WebkitBoxShadow: "0 0 0 1000px rgb(29, 40, 44) inset",
         WebkitTextFillColor: "white",
+        caretColor: "white", 
     },
     "& input:-webkit-autofill:focus": {
         WebkitBoxShadow: "0 0 0 1000px rgb(29, 40, 44) inset",
         WebkitTextFillColor: "white",
+        caretColor: "white", 
     },
     "& input:-webkit-autofill:active": {
         WebkitBoxShadow: "0 0 0 1000px rgb(29, 40, 44) inset",
         WebkitTextFillColor: "white",
+        caretColor: "white", 
     },
 }

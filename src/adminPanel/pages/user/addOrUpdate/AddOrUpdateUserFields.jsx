@@ -3,6 +3,8 @@ import TextField from '@mui/material/TextField';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 import { Button } from '@mui/material';
 import { Icon } from '@iconify/react';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { userSchema } from './userSchema';
@@ -11,10 +13,12 @@ import { inputStyle } from '../../../component/inputStyle';
 import { useMemo, useState, useEffect } from 'react';
 import { useCreateUserMutation, useGetUserByIdQuery, useUpdateUserMutation } from '../../../../globalState/user/userApis';
 import Alertbar from '../../../component/Alertbar';
-import { useGetAllRolesQuery } from '../../../../globalState/roles/rolesApi';
+import { useGetRolesQuery } from '../../../../globalState/roles/rolesApi';
 import { useParams, useNavigate } from 'react-router-dom';
 
 function AddOrUpdateUserFields() {
+
+    const [loading, setLoading] = useState(false);
 
     const [snackbar, setSnackbar] = useState({
         open: false,
@@ -29,7 +33,7 @@ function AddOrUpdateUserFields() {
 
     const userForUpdate = (isSuccess && data)
 
-    const { data: roleData, isSuccess: roleSuccess } = useGetAllRolesQuery()
+    const { data: roleData, isSuccess: roleSuccess } = useGetRolesQuery()
 
     const allRoleData = roleSuccess && roleData?.roles
 
@@ -62,6 +66,7 @@ function AddOrUpdateUserFields() {
     }, [id, userForUpdate, reset, defaultValues]);
 
     const onSubmit = async (data) => {
+        setLoading(true);
         try {
 
             if (id) {
@@ -102,6 +107,8 @@ function AddOrUpdateUserFields() {
                 });
             }
             console.error("Error during submission:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -171,7 +178,7 @@ function AddOrUpdateUserFields() {
                         </Stack>
                     </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>
-                        <Button
+                        {/* <Button
                             sx={{
                                 color: "white",
                                 borderRadius: "5px",
@@ -190,7 +197,27 @@ function AddOrUpdateUserFields() {
                                 style={{ fontSize: "1.2rem", color: "white", marginRight: ".3rem" }}
                             />
                             Save
-                        </Button>
+                        </Button> */}
+                        <LoadingButton
+                            loading={loading}
+                            type='submit'
+                            sx={{
+                                bgcolor: '#0ab39c',
+                                color: 'white',
+                                '& .MuiLoadingButton-loadingIndicator': {
+                                    color: 'white'
+                                },
+                                '&:hover': {
+                                    bgcolor: '#089d88',
+                                    color: 'white',
+                                }
+                            }}
+                            loadingPosition="start"
+                            startIcon={<SaveIcon />}
+                            variant="outlined"
+                        >
+                            Save
+                        </LoadingButton>
                     </Stack>
                 </Stack>
             </form>
