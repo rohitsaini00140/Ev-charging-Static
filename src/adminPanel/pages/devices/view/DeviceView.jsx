@@ -77,7 +77,6 @@ function DeviceView() {
           alignItems="center"
           justifyContent="space-between"
           m={3}
-          mt={"7rem"}
         >
           <Typography variant="h4" color="white">Devices</Typography>
           <Link to={"/admin/device/add"}>
@@ -136,8 +135,8 @@ function DeviceView() {
         onClose={handleCloseSnackbar}
         severity={snackbar.severity}
         message={snackbar.message}
-        position={{ vertical: 'top', horizontal: 'right' }}
-        sx={{ mt: "6rem" }}
+        position={{ vertical: 'top', horizontal: 'center' }}
+        sx={{ mt: "5rem" }}
       />
     </>
   );
