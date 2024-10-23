@@ -7,37 +7,34 @@ import { dashboardCardData, dashboardCardData2, dashboardCardData3, dashboardCar
 // import LineChart from '../../component/charts/LineChart';
 import TargetProgressBar from '../../component/targetProgressBar/TargetProgressBar';
 import BarChart from '../../component/charts/BarChart';
+import { useGetAllProjectsQuery } from '../../../globalState/projects/projectsApis';
 import { useGetAllUserQuery } from '../../../globalState/user/userApis';
-
+const role = JSON.parse(sessionStorage.getItem("role"))
 
 function Dashboard() {
-
   // User Data Dyamic
   const { data: usersData, isSuccess: usersSuccess } = useGetAllUserQuery()
   const allUsersData = usersSuccess && usersData?.users
-  
-
-
-
-
-
+  // const { data: projectsData, isSuccess: projectsSuccess } = useGetAllProjectsQuery()
+  // const allprojectsData = projectsSuccess && projectsData?.projects
+  // console.log(allprojectsData);
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ m: 2 }} color="white">
-        Hi, Welcome back 👋
+        {`Welcome ${role?.user?.name} 👋`}
       </Typography>
       <Grid container spacing={1}>
         {/* <Grid container > */}
-        <Grid size={{ xs: 12, md: 3 }}>
-          <DashboardCard counterData = {allUsersData.length}  data={dashboardCardData} />
+        <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
+          <DashboardCard counterData = {allUsersData.length} data={dashboardCardData} />
         </Grid>
-        <Grid size={{ xs: 12, md: 3 }}>
+        <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
           <DashboardCard counterData = {allUsersData.length} data={dashboardCardData2} />
         </Grid>
-        <Grid size={{ xs: 12, md: 3 }}>
+        {role?.user?.role?.name === "Superadmin" && <Grid size={{ xs: 12, md: 3 }}>
           <DashboardCard counterData = {allUsersData.length} data={dashboardCardData3} />
-        </Grid>
-        <Grid size={{ xs: 12, md: 3 }}>
+        </Grid>}
+        <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
           <DashboardCard counterData = {allUsersData.length} data={dashboardCardData4} />
         </Grid>
         {/* </Grid> */}

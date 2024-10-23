@@ -9,6 +9,11 @@ import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import { Skeleton } from '@mui/material';
 
 
+
+const role = JSON.parse(sessionStorage.getItem("role"))
+
+
+
 function ProjectTableRow({ allProjectsData, currentpage }) {
     const [loading, setLoading] = useState(true);
 
@@ -42,9 +47,9 @@ function ProjectTableRow({ allProjectsData, currentpage }) {
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : ((currentpage - 1) * 10 + (i + 1))}
                         </StyledTableCell>
-                        <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster ? data.cluster.cluster_name : '-' }
-                        </StyledTableCell>
+                       {role?.user?.role?.name === "Superadmin" && <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster_name}
+                        </StyledTableCell>}
                         {/* <StyledTableCell color={"#222245"}>
                             {loading ? (<Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" />) : (data.user_name ? data.user_name : '-')}
                         </StyledTableCell> */}

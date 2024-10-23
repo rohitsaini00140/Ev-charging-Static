@@ -20,7 +20,9 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Selector from '../../../component/selector/Selector';
 
-// ----------------------------------------------------------------------
+
+const role = JSON.parse(sessionStorage.getItem("role"))
+
 
 function ProjectTableToolbar() {
 
@@ -125,7 +127,7 @@ function ProjectTableToolbar() {
                                 value={searchProjectKeywords}
                             />
                         </Stack>
-                        <Stack width={"100%"}>
+                        {role?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allCluster.length > 0 ? allCluster : []}
                                 placeholder="Select Cluster"
@@ -133,7 +135,7 @@ function ProjectTableToolbar() {
                                 onChange={(value) => handleSelect(value, "cluster")}
                                 type={"name"}
                             />
-                        </Stack>
+                        </Stack>}
                         {/* <Stack width={"100%"} >
                             <SearchableDropdown
                                 options={allUser.length > 0 ? allUser : []}

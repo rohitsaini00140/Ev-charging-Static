@@ -56,9 +56,9 @@ function AddOrUpdateClustersFields() {
     const defaultValues = useMemo(() => ({
         name: "",
         email: "",
-        country_id: 0,
-        state_id: 0,
-        city_id: 0,
+        country_id: null,
+        state_id: null,
+        city_id: null,
         location: ""
     }), []);
 
@@ -71,10 +71,9 @@ function AddOrUpdateClustersFields() {
         if (id && clusterForUpdate) {
             reset({
                 name: clusterForUpdate.name || "",
-                email: clusterForUpdate.email || "",
-                country_id: clusterForUpdate.country_id || 0,
-                state_id: clusterForUpdate.state_id || 0,
-                city_id: clusterForUpdate.city_id || 0,
+                country_id: clusterForUpdate.country_id || null,
+                state_id: clusterForUpdate.state_id || null,
+                city_id: clusterForUpdate.city_id || null,
                 location: clusterForUpdate.location || "",
             });
             dispatch(setCountryId(clusterForUpdate.country_id))
@@ -183,15 +182,15 @@ function AddOrUpdateClustersFields() {
                             <SearchableDropdown
                                 options={country.length > 0 ? country : []}
                                 placeholder="Select Country"
-                                value={watch("country_id") || 0}
+                                value={watch("country_id")}
                                 onChange={(newValue) => {
                                     setValue("country_id", newValue, { shouldValidate: true });
                                     dispatch(setCountryId(newValue));
 
                                     if (!newValue) {
-                                        setValue("state_id", 0, { shouldValidate: true });
-                                        dispatch(setStateId(0));
-                                        setValue("city_id", 0, { shouldValidate: true });
+                                        setValue("state_id", null, { shouldValidate: true });
+                                        dispatch(setStateId(null));
+                                        setValue("city_id", null, { shouldValidate: true });
                                     }
                                 }}
                             />
@@ -201,13 +200,13 @@ function AddOrUpdateClustersFields() {
                             <SearchableDropdown
                                 options={states.length > 0 ? states : []}
                                 placeholder="Select State"
-                                value={watch("state_id") || 0}
+                                value={watch("state_id")}
                                 onChange={(newValue) => {
                                     setValue("state_id", newValue, { shouldValidate: true });
                                     dispatch(setStateId(newValue));
 
                                     if (!newValue) {
-                                        setValue("city_id", 0, { shouldValidate: true });
+                                        setValue("city_id", null, { shouldValidate: true });
                                     }
                                 }}
                             />
@@ -217,7 +216,7 @@ function AddOrUpdateClustersFields() {
                             <SearchableDropdown
                                 options={city.length > 0 ? city : []}
                                 placeholder="Select City"
-                                value={watch("city_id") || 0}
+                                value={watch("city_id")}
                                 onChange={(newValue) => setValue("city_id", newValue, { shouldValidate: true })}
                             />
                             {errors.city_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.city_id.message}</Typography>}

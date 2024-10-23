@@ -16,11 +16,20 @@ import { Collapse } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
+// const account = {
+//     displayName: 'VNT Admin',
+//     // email: 'vnt@gmail.com',
+//     photoURL: '/assets/images/avatar.svg',
+// };
+
+const role = JSON.parse(sessionStorage.getItem("role"))
+
 const account = {
-    displayName: 'VNT Admin',
-    // email: 'vnt@gmail.com',
+    // displayName: role?.user?.name,
+    designation: role?.user?.role?.name,
     photoURL: '/assets/images/avatar.svg',
 };
+
 // ----------------------------------------------------------------------
 function Nav({ openNav, onCloseNav }) {
     const pathname = usePathname();
@@ -53,8 +62,8 @@ function Nav({ openNav, onCloseNav }) {
             />
 
             <Box sx={{ ml: 2 }}>
-                <Typography variant="subtitle2" color='#20c997'>{account.displayName}</Typography>
-                <Typography color='#20c997' fontSize={".7rem"}>{account.email}</Typography>
+                {/* <Typography variant="subtitle2" color='#20c997'>{account.displayName}</Typography> */}
+                <Typography color='#20c997' variant="subtitle2">{account.designation}</Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                     {account.role}
                 </Typography>

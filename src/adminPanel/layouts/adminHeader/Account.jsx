@@ -41,9 +41,11 @@ function Account() {
         setOpen(null);
     };
 
+    const role = JSON.parse(sessionStorage.getItem("role"))
+
     const account = {
-        displayName: 'VNT Admin',
-        email: 'vnt@gmail.com',
+        displayName: role?.user?.name,
+        email: role?.user?.email,
         photoURL: '/assets/images/avatars/avatar_25.jpg',
     };
 

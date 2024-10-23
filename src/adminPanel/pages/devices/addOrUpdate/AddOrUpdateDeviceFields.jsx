@@ -16,7 +16,13 @@ import Alertbar from '../../../component/Alertbar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAddDeviceMutation, useGetDeviceByIDQuery, useUpdateDeviceMutation } from '../../../../globalState/devices/deviceApis';
-import { margin } from '@mui/system';
+
+
+
+const role = JSON.parse(sessionStorage.getItem("role"))
+
+
+
 
 function AddOrUpdateDeviceFields() {
 
@@ -39,7 +45,7 @@ function AddOrUpdateDeviceFields() {
     const deviceForUpdate = isSuccess && data
 
     const allProjects = successProject && projectData?.projects
-    const allclusters= successclusters && clustersData?.clusters
+    const allclusters = successclusters && clustersData?.clusters
 
     const [addDevice] = useAddDeviceMutation()
     const [updateDevice] = useUpdateDeviceMutation()
@@ -87,8 +93,8 @@ function AddOrUpdateDeviceFields() {
                 navigate("/admin/device/view", { state: { message: 'Device successfully added!', severity: 'success' } });
             }
 
-            }
-            catch (error) {
+        }
+        catch (error) {
             setSnackbar({
                 open: true,
                 message: 'Error while submitting.',
@@ -122,7 +128,7 @@ function AddOrUpdateDeviceFields() {
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 3, sm: 2, md: 6 }}
                     >
-                         <Stack width={"100%"}>
+                        {role?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allclusters.length > 0 ? allclusters : []}
                                 placeholder="Select Cluster"
@@ -132,7 +138,7 @@ function AddOrUpdateDeviceFields() {
                                 )}
                             />
                             {errors.cluster_id && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
-                        </Stack> 
+                        </Stack>}
                         <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allProjects.length > 0 ? allProjects : []}
@@ -144,7 +150,7 @@ function AddOrUpdateDeviceFields() {
                             />
                             {errors.project_id && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.project_id.message}</Typography>}
                         </Stack>
-                        
+
 
                         <Stack width={"100%"}>
                             <TextField
@@ -156,13 +162,13 @@ function AddOrUpdateDeviceFields() {
                             />
                             {errors.name && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.name.message}</Typography>}
                         </Stack>
-                     
+
                     </Stack>
                     <Stack
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 3, sm: 2, md: 6 }}
-                         >
-                           <Stack width={"100%"}>
+                    >
+                        <Stack width={"100%"}>
                             <Selector
                                 value={watch("type")}
                                 onChange={(e) => setValue("type", e.target.value, { shouldValidate: true })}
@@ -197,7 +203,7 @@ function AddOrUpdateDeviceFields() {
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 3, sm: 2, md: 6 }}
                     >
-                       {/* <Stack width={"100%"}>
+                        {/* <Stack width={"100%"}>
                             <Selector
                                 value={watch("status")}
                                 onChange={(e) => setValue("status", e.target.value, { shouldValidate: true })}
@@ -207,7 +213,7 @@ function AddOrUpdateDeviceFields() {
                             />
                             {errors.status && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.status.message}</Typography>}
                         </Stack> */}
-                  </Stack>
+                    </Stack>
                     <Stack direction={"row"} justifyContent={"end"}>
                         <LoadingButton
                             loading={loading}
@@ -215,8 +221,8 @@ function AddOrUpdateDeviceFields() {
                             sx={{
                                 bgcolor: '#0ab39c',
                                 color: 'white',
-                                borderColor:'#0ab39c',
-                                padding:"10px 15px",
+                                borderColor: '#0ab39c',
+                                padding: "10px 15px",
                                 '& .MuiLoadingButton-loadingIndicator': {
                                     color: 'white'
                                 },
@@ -242,7 +248,7 @@ function AddOrUpdateDeviceFields() {
                 position={{ vertical: 'top', horizontal: 'right' }}
                 sx={{ mt: "6rem" }}
             />
-         
+
         </>
     )
 }
