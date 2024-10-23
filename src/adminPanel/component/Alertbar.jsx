@@ -9,7 +9,11 @@ function Alertbar({ open, onClose, severity, message, position, sx }) {
             autoHideDuration={2000}
             onClose={onClose}
             anchorOrigin={position}
-            sx={sx}
+            sx={{
+                position: 'absolute',
+                zIndex: 0,
+                ...sx,
+            }}
         >
             <Alert
                 onClose={onClose}

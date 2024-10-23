@@ -75,15 +75,8 @@ function AddOrUpdateDeviceFields() {
             if (id) {
 
                 await updateDevice({ id, updatedDeviceData: data }).unwrap();
-                setSnackbar({
-                    open: true,
-                    message: 'Device successfully updated!',
-                    severity: 'success'
-                });
 
-                setTimeout(() => {
-                    navigate("/admin/device/view");
-                }, 3000);
+                navigate("/admin/device/view", { state: { message: 'Device successfully updated!', severity: 'success' } });
 
             } else {
 
@@ -91,11 +84,7 @@ function AddOrUpdateDeviceFields() {
 
                 reset(defaultValues)
 
-                setSnackbar({
-                    open: true,
-                    message: 'Device successfully added!',
-                    severity: 'success'
-                });
+                navigate("/admin/device/view", { state: { message: 'Device successfully added!', severity: 'success' } });
             }
 
         } catch (error) {
@@ -228,7 +217,8 @@ function AddOrUpdateDeviceFields() {
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
-                position={{ vertical: 'bottom', horizontal: 'center' }}
+                position={{ vertical: 'top', horizontal: 'right' }}
+                sx={{ mt: "6rem" }}
             />
         </>
     )

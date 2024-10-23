@@ -15,8 +15,28 @@ import RoleTableRow from './RoleTableRow';
 import { StyledTableCell, StyledTableRow } from '../../../../component/tableStyle';
 import { useGetAllRolesQuery } from '../../../../../globalState/roles/rolesApi';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import Alertbar from '../../../../component/Alertbar';
 
 function RoleView() {
+
+  const location = useLocation();
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: 'success'
+  });
+
+  useEffect(() => {
+    if (location.state && location.state.message) {
+      setSnackbar({
+        open: true,
+        message: location.state.message,
+        severity: location.state.severity
+      });
+    }
+  }, [location.state]);
 
   const { roleStatus } = useSelector(state => state.role)
 
@@ -24,60 +44,82 @@ function RoleView() {
 
   const allRoleData = roleSuccess && roleData?.roles;
 
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbar((prevState) => ({
+      ...prevState,
+      open: false
+    }));
+  };
+
+
   return (
-    <Container>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        m={5}
-      >
-        <Typography variant="h4" color="white">Roles</Typography>
-        <Link to={"/admin/role/add"}>
-          <Button
-            variant="contained"
-            sx={{
-              bgcolor: "#20c997",
-              boxShadow: 'none',
-              padding:'10px 10px',
-              "&:hover": { bgcolor: "#20c997" }
-            }}
-            color="inherit"
-            startIcon={<Iconify icon="eva:plus-fill" />}>
-            New Role
-          </Button>
-        </Link>
-      </Stack>
-      <Card sx={{ bgcolor: "#3e403d0f",boxShadow:'0px 4px 12px rgba(87, 179, 62, 0.2)' }}>
-        <RoleTableToolbar />
-        {isLoading ? (
-          <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>
-            <Typography color="white" sx={{ mt: 2 }}>Loading...</Typography>
-          </Stack>
-        ) :
-          (<Scrollbar>
-            <TableContainer sx={{ overflow: 'unset' }}>
-              <Table sx={{ minWidth: 800 }}>
-                <RoleTableHead allRoleData={allRoleData} />
-                <TableBody>
-                  {allRoleData.length > 0 ?
-                    <RoleTableRow allRoleData={allRoleData} />
-                    :
-                    (
-                      <StyledTableRow>
-                        <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
-                          <Typography color="white">No Data Found</Typography>
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    )
-                  }
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Scrollbar>
-          )}
-      </Card>
-    </Container>
+    <>
+      <Container>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          m={5}
+        >
+          <Typography variant="h4" color="white">Roles</Typography>
+          <Link to={"/admin/role/add"}>
+            <Button
+              variant="contained"
+              sx={{
+                bgcolor: "#20c997",
+                boxShadow: 'none',
+                padding: '10px 10px',
+                "&:hover": { bgcolor: "#20c997" }
+              }}
+              color="inherit"
+              startIcon={<Iconify icon="eva:plus-fill" />}>
+              New Role
+            </Button>
+          </Link>
+        </Stack>
+        <Card sx={{ bgcolor: "#3e403d0f", boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)' }}>
+          <RoleTableToolbar />
+          {isLoading ? (
+            <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>
+              <Typography color="white" sx={{ mt: 2 }}>Loading...</Typography>
+            </Stack>
+          ) :
+            (<Scrollbar>
+              <TableContainer sx={{ overflow: 'unset' }}>
+                <Table sx={{ minWidth: 800 }}>
+                  <RoleTableHead allRoleData={allRoleData} />
+                  <TableBody>
+                    {allRoleData.length > 0 ?
+                      <RoleTableRow allRoleData={allRoleData} />
+                      :
+                      (
+                        <StyledTableRow>
+                          <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
+                            <Typography color="white">No Data Found</Typography>
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      )
+                    }
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Scrollbar>
+            )}
+        </Card>
+      </Container>
+      <Alertbar
+        open={snackbar.open}
+        onClose={handleCloseSnackbar}
+        severity={snackbar.severity}
+        message={snackbar.message}
+        position={{ vertical: 'top', horizontal: 'right' }}
+        sx={{ mt: "6rem" }}
+      />
+    </>
   );
 }
 
