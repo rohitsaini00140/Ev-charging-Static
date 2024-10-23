@@ -9,16 +9,22 @@ import TargetProgressBar from '../../component/targetProgressBar/TargetProgressB
 import BarChart from '../../component/charts/BarChart';
 import { useGetAllProjectsQuery } from '../../../globalState/projects/projectsApis';
 import { useGetAllUserQuery } from '../../../globalState/user/userApis';
+import { useGetAllClustersQuery } from '../../../globalState/cluster/clusterApis';
+import { useGetAllDeviceQuery } from '../../../globalState/devices/deviceApis';
+
 const role = JSON.parse(sessionStorage.getItem("role"))
 
 function Dashboard() {
-  // User Data Dyamic
-  const { data: usersData, isSuccess: usersSuccess } = useGetAllUserQuery()
-  const allUsersData = usersSuccess && usersData?.users
+const { data: usersData, isSuccess: usersSuccess } = useGetAllUserQuery();
+const { data: projectsData, isSuccess: projectsSuccess } = useGetAllProjectsQuery();
+const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery();
+const { data: devices, isSuccess: devicesSuccess } = useGetAllDeviceQuery();
 
-  // const { data: projectsData, isSuccess: projectsSuccess } = useGetAllProjectsQuery()
-  // const allprojectsData = projectsSuccess && projectsData?.projects
-  // console.log(allprojectsData);
+const allUsersData = usersSuccess ? usersData?.users : [];
+const allProjectsData = projectsSuccess ? projectsData?.projects : [];
+const allClusters = clustersSuccess ? clusters?.clusters : [];
+const allDevices = devicesSuccess ? devices?.devices : [];
+
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ m: 2 }} color="white">
@@ -26,24 +32,18 @@ function Dashboard() {
       </Typography>
       <Grid container spacing={1}>
         {/* <Grid container > */}
+        {role?.user?.role?.name === "Superadmin" && <Grid size={{ xs: 12, md: 3 }}>
+          <DashboardCard counter = {allClusters.length}  data={dashboardCardData3} />
+        </Grid>}
         <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
           <DashboardCard counter = {allUsersData.length}  data={dashboardCardData} />
         </Grid>
         <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
-          <DashboardCard counter = {allUsersData.length}  data={dashboardCardData2} />
+          <DashboardCard counter = {allProjectsData.length}  data={dashboardCardData2} />
         </Grid>
-        {role?.user?.role?.name === "Superadmin" && <Grid size={{ xs: 12, md: 3 }}>
-          <DashboardCard counter = {allUsersData.length}  data={dashboardCardData3} />
-        </Grid>}
         <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
-          <DashboardCard counter = {allUsersData.length}  data={dashboardCardData4} />
+          <DashboardCard counter = {allDevices.length}  data={dashboardCardData4} />
         </Grid>
-        {/* </Grid> */}
-        {/* <Grid size={{ xs: 12, md: 8 }} sx={{ bgcolor: "#3e403d0f", borderRadius: "1rem", boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)', }}>
-          <Card sx={{ p: '2rem', bgcolor: "#3e403d0f" }}>
-            <LineChart />
-          </Card>
-        </Grid> */}
       </Grid>
       <Grid container spacing={2} mt={"2.5rem"}>
         <Grid size={{ md: 4, xs: 12 }}>

@@ -37,6 +37,11 @@ export const deviceApi = createApi({
             providesTags: ['device'],
         }),
 
+        getAllDevice: builder.query({
+            query: () => `/devices`,
+            providesTags: ['device'],
+        }),
+
         updateDevice: builder.mutation({
             query: ({ updatedDeviceData, id }) => ({
                 url: `/devices/update/${id}`,
@@ -68,6 +73,7 @@ export const deviceApi = createApi({
 export const {
     useAddDeviceMutation,
     useGetDeviceQuery,
+    useGetAllDeviceQuery,
     useGetDeviceByIDQuery,
     useUpdateDeviceMutation,
     useSoftDeleteDeviceMutation,
