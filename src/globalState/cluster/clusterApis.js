@@ -29,6 +29,7 @@ export const clusterApi = createApi({
 
         getClusterById: builder.query({
             query: (id) => `/clusters/show/${id}`,
+            providesTags: ['cluster'],
         }),
 
         getFilteredCluster: builder.query({

@@ -61,7 +61,7 @@ function RoleTableToolbar() {
                     >
                         <Stack width={"100%"}>
                             <SearchInput
-                                placeholder="Search roles..."
+                                placeholder="Search Role"
                                 width={"100%"}
                                 sx={{background:'#3e403d0f',color:'white'}}
 
@@ -80,7 +80,7 @@ function RoleTableToolbar() {
                             <Selector
                                 value={roleStatus}
                                 onChange={(e) => handleSelect(e.target.value)}
-                                placeholder='Select status'
+                                placeholder='Select Status'
                                 selectType="single"
                                 options={["Active", "Inactive"]}
                             />

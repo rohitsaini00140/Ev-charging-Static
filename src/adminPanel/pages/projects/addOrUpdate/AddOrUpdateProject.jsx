@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import AddOrUpdateProjectFields from './AddOrUpdateProjectFields';
 import { useParams } from 'react-router-dom';
 // ----------------------------------------------------------------------
-
 function AddOrUpdateProject() {
     const { id } = useParams()
     return (
@@ -24,7 +23,7 @@ function AddOrUpdateProject() {
                         borderRadius: "16px"
                     }}
                 >
-                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>{id ? "Update Products" : "Add Projects"}</Typography>
+                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>{id ? "Update Project" : "Add Project"}</Typography>
                     <AddOrUpdateProjectFields />
                 </Stack>
             </Stack>

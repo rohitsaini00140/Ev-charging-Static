@@ -1,7 +1,7 @@
 import Iconify from '../../component/Iconify';
 
 export const dashboardCardData = {
-    type: "Active Users",
+    type: "Total Users",
     totalCount: "7000",
     Percentage: "25%",
     incOrDec: "inc",

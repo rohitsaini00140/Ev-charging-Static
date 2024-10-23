@@ -155,7 +155,7 @@ function AddOrUpdateClustersFields() {
                     >
                         <Stack width={"100%"}>
                             <TextField
-                                label="Cluster name"
+                                label="Cluster Name"
                                 {...register("name", { required: true })}
                                 value={watch("name") || ""}
                                 sx={inputStyle}
@@ -165,7 +165,7 @@ function AddOrUpdateClustersFields() {
                         </Stack>
                         <Stack width={"100%"}>
                             <TextField
-                                label="Cluster email"
+                                label="Cluster Email"
                                 {...register("email", { required: true })}
                                 value={watch("email") || ""}
                                 sx={inputStyle}
@@ -224,7 +224,7 @@ function AddOrUpdateClustersFields() {
                     </Stack>
                     <Stack width={"100%"}>
                         <TextField
-                            label="Cluster location"
+                            label="Cluster Location"
                             {...register("location", { required: true })}
                             value={watch("location") || ""}
                             sx={inputStyle}
@@ -239,6 +239,8 @@ function AddOrUpdateClustersFields() {
                             sx={{
                                 bgcolor: '#0ab39c',
                                 color: 'white',
+                                borderColor:'#0ab39c',
+                                padding:"10px 15px",
                                 '& .MuiLoadingButton-loadingIndicator': {
                                     color: 'white'
                                 },

@@ -69,6 +69,8 @@ function AddOrUpdateUserFields() {
                 email: userForUpdate.email || "",
                 phone: userForUpdate.phone || "",
                 role_id: userForUpdate.role_id || 0,
+                cluster_id: userForUpdate.cluster_id || 0,
+                
             });
         } else {
             reset(defaultValues);
@@ -194,6 +196,8 @@ function AddOrUpdateUserFields() {
                             sx={{
                                 bgcolor: '#0ab39c',
                                 color: 'white',
+                                borderColor:'#0ab39c',
+                                padding:"10px 15px",
                                 '& .MuiLoadingButton-loadingIndicator': {
                                     color: 'white'
                                 },

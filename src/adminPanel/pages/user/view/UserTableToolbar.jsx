@@ -92,7 +92,7 @@ function UserTableToolbar() {
                     >
                         <Stack width={"100%"}>
                             <SearchInput
-                                placeholder="Search users..."
+                                placeholder="Search User"
                                 width={"100%"}
                                 sx={{ color: "white",background:'rgb(29, 40, 44)' }}
                                 onChange={(e) => handleSelect(e.target.value, "user")}
@@ -102,7 +102,7 @@ function UserTableToolbar() {
                         <Stack width={"100%"} >
                             <SearchableDropdown
                                 options={allRoleData.length > 0 ? allRoleData : []}
-                                placeholder="Select role"
+                                placeholder="Select Role"
                                 value={role}
                                 onChange={(value) => handleSelect(value, "role")}
                             />
@@ -111,7 +111,7 @@ function UserTableToolbar() {
                             <Selector
                                 value={status}
                                 onChange={(e) => handleSelect(e.target.value, "status")}
-                                placeholder='Select status'
+                                placeholder='Select Status'
                                 selectType="single"
                                 options={["Active", "Inactive"]}
                             />

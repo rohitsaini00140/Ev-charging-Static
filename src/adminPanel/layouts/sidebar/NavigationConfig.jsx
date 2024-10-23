@@ -3,11 +3,8 @@ import SvgColor from '../../component/svgColor';
 const icon = (name) => (
   <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />
 );
-
 const role = JSON.parse(sessionStorage.getItem("role"))
-
 const navConfig = role?.user?.role?.name !== "Superadmin" ?
-
   [
     {
       title: 'dashboard',
