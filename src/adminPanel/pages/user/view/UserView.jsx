@@ -23,6 +23,11 @@ import Alertbar from '../../../component/Alertbar';
 
 // ----------------------------------------------------------------------
 
+
+const role = JSON.parse(sessionStorage.getItem("role"))
+
+
+
 function UserView() {
 
   const [snackbar, setSnackbar] = useState({
@@ -54,7 +59,11 @@ function UserView() {
 
   const { data: allUsers, isSuccess: userSuccess, isLoading } = useGetUsersQuery({ page: pageNo, name: userName, status, role_id: roleName });
 
-  const allUserData = userSuccess && allUsers?.data;
+  // const allUserData = userSuccess && (allUsers?.data).map(ele => ele?.name === role?.user?.name);
+
+  const allUserData = role?.user?.role?.name === "Superadmin" ? userSuccess && (allUsers?.data) : userSuccess && allUsers?.data?.filter(ele => ele?.name === role?.user?.name);
+
+  console.log(allUsers?.data)
 
   const paginationData = userSuccess && allUsers;
 
