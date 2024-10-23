@@ -8,5 +8,5 @@ export const userSchema = z.object({
         .min(1, " Please Enter Mobile No")
         .regex(/^([+]\d{2}[ ])?\d{10}$/, " Invalid mobile number"),
     role_id: z.number().int().min(1, " Please Select Role"),
-    cluters_id: z.number().int().min(1, " Please Select Cluster"),
+    cluters_id: z.number().nullable(),
 });
