@@ -17,19 +17,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import { useGetFilteredProjectsQuery } from '../../../../globalState/projects/projectsApis';
 import { setProjectListPageNo } from '../../../../globalState/projects/projectsSlices';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Alertbar from '../../../component/Alertbar';
 
 
 function ProjectView() {
 
-  const location = useLocation();
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
     severity: 'success'
   });
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.state && location.state.message) {
@@ -38,8 +40,9 @@ function ProjectView() {
         message: location.state.message,
         severity: location.state.severity
       });
+      navigate(location.pathname, { replace: true, state: {} });
     }
-  }, [location.state]);
+  }, [location.state, navigate]);
 
 
   const dispatch = useDispatch()

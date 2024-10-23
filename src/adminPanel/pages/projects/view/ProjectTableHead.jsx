@@ -19,10 +19,10 @@ function ProjectTableHead({ allProjectsData }) {
                 }
                 {headLabel.map((headCell) => (
                     <StyledTableCell
-                        sx={{ width: headCell.width, minWidth: headCell.minWidth }}
+                        sx={{ width: headCell?.width, minWidth: headCell?.minWidth }}
                     >
                         <TableSortLabel hideSortIcon>
-                            {headCell.label}
+                            {headCell?.label}
                         </TableSortLabel>
                     </StyledTableCell>
                 ))}

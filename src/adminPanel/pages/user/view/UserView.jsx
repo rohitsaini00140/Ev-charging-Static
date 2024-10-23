@@ -17,7 +17,7 @@ import { useGetUsersQuery } from '../../../../globalState/user/userApis';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserListPageNo } from '../../../../globalState/user/userSlice';
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Alertbar from '../../../component/Alertbar';
 
@@ -25,12 +25,14 @@ import Alertbar from '../../../component/Alertbar';
 
 function UserView() {
 
-  const location = useLocation();
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
     severity: 'success'
   });
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.state && location.state.message) {
@@ -39,8 +41,9 @@ function UserView() {
         message: location.state.message,
         severity: location.state.severity
       });
+      navigate(location.pathname, { replace: true, state: {} });
     }
-  }, [location.state]);
+  }, [location.state, navigate]);
 
 
   const dispatch = useDispatch()

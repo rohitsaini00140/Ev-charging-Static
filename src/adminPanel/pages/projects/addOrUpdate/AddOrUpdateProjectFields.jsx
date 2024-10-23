@@ -16,6 +16,13 @@ import { useGetAllUserQuery } from '../../../../globalState/user/userApis';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 
+
+
+const role = JSON.parse(sessionStorage.getItem("role"))
+
+
+
+
 function AddOrUpdateProjectFields() {
 
     const [loading, setLoading] = useState(false);
@@ -115,11 +122,11 @@ function AddOrUpdateProjectFields() {
     return (
         <>
             <form fullWidth onSubmit={handleSubmit(onSubmit)}>
-            <Stack spacing={{ xs: 4, sm: 4, md: 4 }}>
-                       <Stack
+                <Stack spacing={{ xs: 4, sm: 4, md: 4 }}>
+                    {role?.user?.role?.name === "Superadmin" && <Stack
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 4, sm: 4, md: 6 }}
-                        >
+                    >
                         <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allcluters.length > 0 ? allcluters : []}
@@ -142,7 +149,7 @@ function AddOrUpdateProjectFields() {
                             />
                             {errors.user_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.user_id.message}</Typography>}
                         </Stack> */}
-                    </Stack>
+                    </Stack>}
                     <Stack
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 4, sm: 4, md: 6 }}
@@ -175,8 +182,8 @@ function AddOrUpdateProjectFields() {
                             sx={{
                                 bgcolor: '#0ab39c',
                                 color: 'white',
-                                borderColor:'#0ab39c',
-                                padding:"10px 15px",
+                                borderColor: '#0ab39c',
+                                padding: "10px 15px",
                                 '& .MuiLoadingButton-loadingIndicator': {
                                     color: 'white'
                                 },
