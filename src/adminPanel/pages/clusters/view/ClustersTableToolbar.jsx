@@ -155,7 +155,7 @@ function ClustersTableToolbar({ allClusterData }) {
         // (
         <>
           {/* // ) */}
-            <Grid container spacing={2} width={"100%"}>
+            <Grid container spacing={{ xs: 3, sm: 2, md: 2, lg: 2 }} width={"100%"}>
               <Grid item size = {{xs:12,md:6}}>
               <SearchInput
                 sx={{ color: "white", background: "rgb(29, 40, 44)" }}

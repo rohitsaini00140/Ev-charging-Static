@@ -19,7 +19,7 @@ function AdminHeader({ onOpenNav }) {
         <>
             {!lgUp && (
                 <IconButton onClick={onOpenNav} sx={{ mr: 1 }}>
-                    <Iconify icon="eva:menu-2-fill" />
+                    <Iconify sx={{color:'#20c997',fontSize:'30px'}} icon="eva:menu-2-fill" />
                 </IconButton>
             )}
             {/* <Searchbar /> */}

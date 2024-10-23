@@ -83,9 +83,7 @@ function AddOrUpdateProjectFields() {
                 navigate("/admin/project/view", { state: { message: 'Project successfully updated!', severity: 'success' } });
 
             } else {
-
                 await addProjects(data).unwrap();
-
                 reset(defaultValues)
 
                 navigate("/admin/project/view", { state: { message: 'Project successfully added!', severity: 'success' } });
@@ -117,15 +115,14 @@ function AddOrUpdateProjectFields() {
             open: false
         }));
     };
-
     return (
         <>
             <form fullWidth onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing={{ xs: 4, sm: 4, md: 4 }}>
-                    <Stack
+            <Stack spacing={{ xs: 4, sm: 4, md: 4 }}>
+                       <Stack
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 4, sm: 4, md: 6 }}
-                    >
+                        >
                         <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allcluters.length > 0 ? allcluters : []}
@@ -181,6 +178,8 @@ function AddOrUpdateProjectFields() {
                             sx={{
                                 bgcolor: '#0ab39c',
                                 color: 'white',
+                                borderColor:'#0ab39c',
+                                padding:"10px 15px",
                                 '& .MuiLoadingButton-loadingIndicator': {
                                     color: 'white'
                                 },

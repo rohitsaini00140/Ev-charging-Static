@@ -33,7 +33,7 @@ function Login() {
     const [loginUser] = useLoginUserMutation()
 
     const defaultValues = useMemo(() => ({
-        email: "",
+        username: "",
         password: ""
     }), []);
 
@@ -124,13 +124,13 @@ function Login() {
                         <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
                             <Box sx={{ position: "relative" }}>
                                 <TextField
-                                    {...register("email", { required: true })}
+                                    {...register("username", { required: true })}
                                     margin="normal"
                                     fullWidth
-                                    label="Email"
+                                    label="UserName"
                                     sx={inputStyles}
                                 />
-                                {errors.email && <Typography sx={error_position}>*{errors.email.message}</Typography>}
+                          {errors.username && <Typography sx={error_position}>*{errors.username.message}</Typography>}
                             </Box>
                             <Box sx={{ position: "relative" }}>
                                 <TextField
@@ -167,19 +167,6 @@ function Login() {
                             <Link to={""} style={{ textDecoration: "none", fontSize: '15px', fontWeight: '600', color: "#253745" }}>
                                 Forgot Password?
                             </Link>
-                            <Typography variant="body2" color="black" align="center" sx={{ mt: 2 }}>
-                                {'New on Our Platform ? '}
-                                <Link to={"/register"} style={{ textDecoration: "none", color: "#ff6600", fontWeight: '500' }}>
-                                    Create an Account
-                                </Link>
-                            </Typography>
-                            <Stack direction="row" alignItems="center" sx={{ mt: 2 }}>
-                                <Box sx={{ flex: 1, height: '1px', bgcolor: 'grey.400' }} />
-                                <Typography variant="body2" color="black" align="center" sx={{ px: 2 }}>
-                                    or
-                                </Typography>
-                                <Box sx={{ flex: 1, height: '1px', bgcolor: 'grey.400' }} />
-                            </Stack>
                             <Stack
                                 sx={{
                                     mt: "1.2rem",
@@ -188,8 +175,8 @@ function Login() {
                                     gap: "1.2rem"
                                 }}
                             >
-                                <FcGoogle sx={{ cursor: 'pointer' }} size={"1.5rem"} />
-                                <FacebookIcon sx={{ color: "#1877F2", fontSize: "1.5rem", cursor: 'pointer' }} />
+                                {/* <FcGoogle sx={{ cursor: 'pointer' }} size={"1.5rem"} />
+                                <FacebookIcon sx={{ color: "#1877F2", fontSize: "1.5rem", cursor: 'pointer' }} /> */}
                             </Stack>
                         </Box>
                     </Box>

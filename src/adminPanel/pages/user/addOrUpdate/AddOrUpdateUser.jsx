@@ -8,9 +8,7 @@ import { useParams } from 'react-router-dom';
 // ----------------------------------------------------------------------
 
 function AddOrUpdateUser() {
-
     const { id } = useParams()
-
     return (
         <Box
             sx={{
@@ -20,7 +18,7 @@ function AddOrUpdateUser() {
             <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
                 <Card
                     sx={{
-                        p: 5,
+                        p: { xs: 2, sm: 3, md: 5 },
                         width: 1,
                         maxWidth: "100%",
                         height: "auto",

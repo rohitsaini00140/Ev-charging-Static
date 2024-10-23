@@ -4,12 +4,9 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import AddOrUpdateClustersFields from "./AddOrUpdateClustersFields";
 import { useParams } from "react-router-dom";
-
 // ----------------------------------------------------------------------
-
 function AddOrUpdateClusters() {
   let { id } = useParams();
-
   return (
     <Box
       sx={{
@@ -35,5 +32,4 @@ function AddOrUpdateClusters() {
     </Box>
   );
 }
-
 export default AddOrUpdateClusters;

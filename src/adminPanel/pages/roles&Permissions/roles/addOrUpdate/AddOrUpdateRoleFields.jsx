@@ -116,6 +116,8 @@ function AddOrUpdateRoleFields() {
                                 borderRadius: "5px",
                                 bgcolor: "#0ab39c",
                                 width: "5rem",
+                                borderColor:'#0ab39c',
+                                padding:"10px 15px",
                                 height: "2.5rem",
                                 BoxShadow: "none",
                                 '&:hover': {

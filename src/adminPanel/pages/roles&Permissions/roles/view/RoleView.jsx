@@ -20,7 +20,6 @@ import { useState, useEffect } from 'react';
 import Alertbar from '../../../../component/Alertbar';
 
 function RoleView() {
-
   const location = useLocation();
   const [snackbar, setSnackbar] = useState({
     open: false,
@@ -39,9 +38,7 @@ function RoleView() {
   }, [location.state]);
 
   const { roleStatus } = useSelector(state => state.role)
-
   const { data: roleData, isSuccess: roleSuccess, isLoading } = useGetAllRolesQuery({ status: roleStatus })
-
   const allRoleData = roleSuccess && roleData?.roles;
 
 

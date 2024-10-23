@@ -16,7 +16,7 @@ function TablePagination({ count, page, onPageChange }) {
         }
     }
     return (
-        <Stack spacing={2} justifyContent={"center"} alignItems={"center"} p={2} bgcolor="#181837">
+        <Stack spacing={2} justifyContent={"center"} alignItems={"center"} p={2} bgcolor="#3e403d0f">
             <Pagination
                 count={count}
                 variant="outlined"
