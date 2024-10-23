@@ -41,13 +41,11 @@ function Login() {
         resolver: zodResolver(loginSchema),
         defaultValues: defaultValues
     });
+
     const onSubmit = async (data) => {
         try {
-            // await loginUser(data).unwrap();
             const result = await loginUser(data).unwrap();
-            const token = result;
-            console.log('Token:', token);
-            console.log(document.cookie); // Outputs the cookies that are accessible via JavaScript
+
             setSnackbar({
                 open: true,
                 message: 'Login successfully!',
@@ -72,6 +70,7 @@ function Login() {
             console.error("Error during submission:", error);
         }
     };
+
     const handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -81,6 +80,7 @@ function Login() {
             open: false
         }));
     };
+
     return (
         <Grid container sx={{ minHeight: '100vh' }}>
             <Grid item xs={false} size={{ lg: 6 }}
@@ -202,10 +202,8 @@ function Login() {
                 message={snackbar.message}
                 position={{ vertical: 'top', horizontal: 'right' }}
                 sx={{
-                    position: 'fixed',
-                    bottom: '30rem',
-                    right: '17rem !important',
-                    zIndex: 1400,
+                    mt: '4rem',
+                    mr: "15.5rem"
                 }}
             />
         </Grid>

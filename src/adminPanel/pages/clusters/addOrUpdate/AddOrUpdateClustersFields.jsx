@@ -55,6 +55,7 @@ function AddOrUpdateClustersFields() {
 
     const defaultValues = useMemo(() => ({
         name: "",
+        email: "",
         country_id: 0,
         state_id: 0,
         city_id: 0,
@@ -105,15 +106,8 @@ function AddOrUpdateClustersFields() {
             if (id) {
 
                 await updateCluster({ id, updatedClusterData: data }).unwrap();
-                setSnackbar({
-                    open: true,
-                    message: 'Cluster successfully updated!',
-                    severity: 'success'
-                });
 
-                setTimeout(() => {
-                    navigate("/admin/cluster/view");
-                }, 3000);
+                navigate("/admin/cluster/view", { state: { message: 'Cluster successfully updated!', severity: 'success' } });
 
             } else {
 
@@ -121,11 +115,7 @@ function AddOrUpdateClustersFields() {
 
                 reset(defaultValues)
 
-                setSnackbar({
-                    open: true,
-                    message: 'Cluster successfully added!',
-                    severity: 'success'
-                });
+                navigate("/admin/device/view", { state: { message: 'Cluster successfully added!', severity: 'success' } });
             }
         } catch (error) {
             setSnackbar({
@@ -175,6 +165,21 @@ function AddOrUpdateClustersFields() {
                             {errors.name && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.name.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
+                            <TextField
+                                label="Cluster email"
+                                {...register("email", { required: true })}
+                                value={watch("email") || ""}
+                                sx={inputStyle}
+                                fullWidth
+                            />
+                            {errors.email && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.email.message}</Typography>}
+                        </Stack>
+                    </Stack>
+                    <Stack
+                        direction={{ xs: 'column', sm: 'row' }}
+                        spacing={{ xs: 4, sm: 4, md: 6 }}
+                    >
+                        <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={country.length > 0 ? country : []}
                                 placeholder="Select Country"
@@ -192,11 +197,6 @@ function AddOrUpdateClustersFields() {
                             />
                             {errors.country_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.country_id.message}</Typography>}
                         </Stack>
-                    </Stack>
-                    <Stack
-                        direction={{ xs: 'column', sm: 'row' }}
-                        spacing={{ xs: 4, sm: 4, md: 6 }}
-                    >
                         <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={states.length > 0 ? states : []}
@@ -262,7 +262,8 @@ function AddOrUpdateClustersFields() {
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
-                position={{ vertical: 'bottom', horizontal: 'center' }}
+                position={{ vertical: 'top', horizontal: 'right' }}
+                sx={{ mt: "4rem" }}
             />
         </>
     )

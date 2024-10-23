@@ -70,15 +70,8 @@ function AddOrUpdateUserFields() {
             if (id) {
 
                 await updateUser({ id, updatedUserData: data }).unwrap();
-                setSnackbar({
-                    open: true,
-                    message: 'User successfully updated!',
-                    severity: 'success'
-                });
 
-                setTimeout(() => {
-                    navigate("/admin/user/view");
-                }, 3000);
+                navigate("/admin/user/view", { state: { message: 'User successfully updated!', severity: 'success' } });
 
             } else {
 
@@ -86,11 +79,7 @@ function AddOrUpdateUserFields() {
 
                 reset(defaultValues)
 
-                setSnackbar({
-                    open: true,
-                    message: 'User successfully created!',
-                    severity: 'success'
-                })
+                navigate("/admin/user/view", { state: { message: 'User successfully added!', severity: 'success' } });
             }
 
         } catch (error) {

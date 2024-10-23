@@ -17,10 +17,31 @@ import { useGetUsersQuery } from '../../../../globalState/user/userApis';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserListPageNo } from '../../../../globalState/user/userSlice';
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import Alertbar from '../../../component/Alertbar';
 
 // ----------------------------------------------------------------------
 
 function UserView() {
+
+  const location = useLocation();
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: 'success'
+  });
+
+  useEffect(() => {
+    if (location.state && location.state.message) {
+      setSnackbar({
+        open: true,
+        message: location.state.message,
+        severity: location.state.severity
+      });
+    }
+  }, [location.state]);
+
 
   const dispatch = useDispatch()
 
@@ -41,67 +62,88 @@ function UserView() {
   };
 
 
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbar((prevState) => ({
+      ...prevState,
+      open: false
+    }));
+  };
+
 
   return (
-    <Container>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        m={3}
-      >
-        <Typography variant="h4" color="white">Users</Typography>
-        <Link to={"/admin/user/add"}>
-          <Button
-            variant="contained"
-            sx={{
-              bgcolor: "#20c997",
-              boxShadow: 'none',
-              padding:'10px 10px',
-              "&:hover": { bgcolor: "#20c997" }
-            }}
-            startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button>
-        </Link>
-      </Stack>
-      <Card sx={{ bgcolor: "rgb(29, 40, 44)",boxShadow:'0px 4px 12px rgba(87, 179, 62, 0.2)' }}>
-        <UserTableToolbar />
-        {isLoading ? (
-          <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>
-            <Typography color="white" sx={{ mt: 2 }}>Loading...</Typography>
-          </Stack>
-        ) : (
-          <Scrollbar>
-            <TableContainer sx={{ overflow: 'unset' }}>
-              <Table sx={{ minWidth: 800 }}>
-                <UserTableHead allUserData={allUserData} />
-                <TableBody>
-                  {allUserData.length > 0 ?
-                    <UserTableRow
-                      currentpage={pageNo}
-                      allUserData={allUserData}
-                    />
-                    :
-                    (
-                      <StyledTableRow>
-                        <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
-                          <Typography color="white">No Data Found</Typography>
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    )}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Scrollbar>
-        )}
-        {(allUserData.length > 0) && <TablePagination
-          count={last_page}
-          onPageChange={handlePageChange}
-          page={pageNo}
-        />}
-      </Card>
-    </Container>
+    <>
+      <Container>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          m={3}
+          mt={"7rem"}
+        >
+          <Typography variant="h4" color="white">Users</Typography>
+          <Link to={"/admin/user/add"}>
+            <Button
+              variant="contained"
+              sx={{
+                bgcolor: "#20c997",
+                boxShadow: 'none',
+                padding: '10px 10px',
+                "&:hover": { bgcolor: "#20c997" }
+              }}
+              startIcon={<Iconify icon="eva:plus-fill" />}>
+              New User
+            </Button>
+          </Link>
+        </Stack>
+        <Card sx={{ bgcolor: "rgb(29, 40, 44)", boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)' }}>
+          <UserTableToolbar />
+          {isLoading ? (
+            <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>
+              <Typography color="white" sx={{ mt: 2 }}>Loading...</Typography>
+            </Stack>
+          ) : (
+            <Scrollbar>
+              <TableContainer sx={{ overflow: 'unset' }}>
+                <Table sx={{ minWidth: 800 }}>
+                  <UserTableHead allUserData={allUserData} />
+                  <TableBody>
+                    {allUserData.length > 0 ?
+                      <UserTableRow
+                        currentpage={pageNo}
+                        allUserData={allUserData}
+                      />
+                      :
+                      (
+                        <StyledTableRow>
+                          <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
+                            <Typography color="white">No Data Found</Typography>
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Scrollbar>
+          )}
+          {(allUserData.length > 0) && <TablePagination
+            count={last_page}
+            onPageChange={handlePageChange}
+            page={pageNo}
+          />}
+        </Card>
+      </Container>
+      <Alertbar
+        open={snackbar.open}
+        onClose={handleCloseSnackbar}
+        severity={snackbar.severity}
+        message={snackbar.message}
+        position={{ vertical: 'top', horizontal: 'right' }}
+        sx={{ mt: "6rem" }}
+      />
+    </>
   );
 }
 
