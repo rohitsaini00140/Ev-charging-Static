@@ -134,7 +134,7 @@ function ProjectTableToolbar() {
                                 type={"name"}
                             />
                         </Stack>
-                        <Stack width={"100%"} >
+                        {/* <Stack width={"100%"} >
                             <SearchableDropdown
                                 options={allUser.length > 0 ? allUser : []}
                                 placeholder="Select User"
@@ -142,7 +142,7 @@ function ProjectTableToolbar() {
                                 onChange={(value) => handleSelect(value, "user")}
                                 type={"name"}
                             />
-                        </Stack>
+                        </Stack> */}
                         <Stack width={"100%"}>
                             <Selector
                                 value={projectStatus}

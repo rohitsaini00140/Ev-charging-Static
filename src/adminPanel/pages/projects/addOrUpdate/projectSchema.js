@@ -3,6 +3,6 @@ import * as z from 'zod';
 export const projectSchema = z.object({
     name: z.string().trim().min(1, "Please Enter Project Name"),
     cluster_id: z.number().int().min(1, "Please Select Cluster"),
-    user_id: z.number().int().min(1, "Please Select User"),
+    // user_id: z.number().int().min(1, "Please Select User"),
     location: z.string().trim().min(1, "Please Enter Location")
 });
