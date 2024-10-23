@@ -23,6 +23,9 @@ import {
 }
   from "./AdminRouteImports.jsx"
 
+
+const role = JSON.parse(sessionStorage.getItem("role"))
+
 function Router() {
   return (
     <BrowserRouter>
@@ -51,7 +54,7 @@ function Router() {
           {/* <Route path="/register" element={<Registration />} /> */}
         </Route>
         <Route
-          path="/admin/*"
+          path={`/${role?.user?.role?.name === "Superadmin" ? "admin" : "clusterAdmin"}/*`}
           element={
             <ThemeProviderAdmin>
               <Drawer>

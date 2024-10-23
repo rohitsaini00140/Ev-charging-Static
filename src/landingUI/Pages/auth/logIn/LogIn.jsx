@@ -33,7 +33,7 @@ function Login() {
     const [loginUser] = useLoginUserMutation()
 
     const defaultValues = useMemo(() => ({
-        username: "",
+        email: "",
         password: ""
     }), []);
 
@@ -45,6 +45,9 @@ function Login() {
     const onSubmit = async (data) => {
         try {
             const result = await loginUser(data).unwrap();
+            sessionStorage.setItem("role", JSON.stringify(result))
+
+            const role = JSON.parse(sessionStorage.getItem("role"))
 
             setSnackbar({
                 open: true,
@@ -53,7 +56,7 @@ function Login() {
             });
 
             setTimeout(() => {
-                navigate("/admin");
+                navigate(`/${role?.user?.role?.name === "Superadmin" ? "admin" : "clusterAdmin"}`);
             }, 2000);
 
         } catch (error) {
@@ -124,13 +127,13 @@ function Login() {
                         <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
                             <Box sx={{ position: "relative" }}>
                                 <TextField
-                                    {...register("username", { required: true })}
+                                    {...register("email", { required: true })}
                                     margin="normal"
                                     fullWidth
-                                    label="UserName"
+                                    label="Email address"
                                     sx={inputStyles}
                                 />
-                          {errors.username && <Typography sx={error_position}>*{errors.username.message}</Typography>}
+                                {errors.email && <Typography sx={error_position}>*{errors.email.message}</Typography>}
                             </Box>
                             <Box sx={{ position: "relative" }}>
                                 <TextField

@@ -17,19 +17,21 @@ import DeviceTableToolbar from './DeviceTableToolbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetDeviceQuery } from '../../../../globalState/devices/deviceApis';
 import { setDeviceListPageNo } from '../../../../globalState/devices/deviceSlices';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Alertbar from '../../../component/Alertbar';
 
 
 function DeviceView() {
 
-  const location = useLocation();
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
     severity: 'success'
   });
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.state && location.state.message) {
@@ -38,8 +40,9 @@ function DeviceView() {
         message: location.state.message,
         severity: location.state.severity
       });
+      navigate(location.pathname, { replace: true, state: {} });
     }
-  }, [location.state]);
+  }, [location.state, navigate]);
 
   const dispatch = useDispatch()
 
@@ -87,7 +90,7 @@ function DeviceView() {
                 // border:'1px solid #20c997',
                 // color:'#20c997',
                 padding: '10px 10px',
-                bgcolor: "#20c997", 
+                bgcolor: "#20c997",
                 color: 'white',
               }}
               startIcon={<Iconify icon="eva:plus-fill" />}>

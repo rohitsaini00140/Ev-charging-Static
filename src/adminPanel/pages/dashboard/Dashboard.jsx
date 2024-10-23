@@ -8,25 +8,31 @@ import { dashboardCardData, dashboardCardData2, dashboardCardData3, dashboardCar
 import TargetProgressBar from '../../component/targetProgressBar/TargetProgressBar';
 import BarChart from '../../component/charts/BarChart';
 
+
+
+const role = JSON.parse(sessionStorage.getItem("role"))
+
+
+
 function Dashboard() {
 
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ m: 2 }} color="white">
-        Hi, Welcome back 👋
+        {`Welcome ${role?.user?.name} 👋`}
       </Typography>
       <Grid container spacing={1}>
         {/* <Grid container > */}
-        <Grid size={{ xs: 12, md: 3 }}>
+        <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
           <DashboardCard data={dashboardCardData} />
         </Grid>
-        <Grid size={{ xs: 12, md: 3 }}>
+        <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
           <DashboardCard data={dashboardCardData2} />
         </Grid>
-        <Grid size={{ xs: 12, md: 3 }}>
+        {role?.user?.role?.name === "Superadmin" && <Grid size={{ xs: 12, md: 3 }}>
           <DashboardCard data={dashboardCardData3} />
-        </Grid>
-        <Grid size={{ xs: 12, md: 3 }}>
+        </Grid>}
+        <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
           <DashboardCard data={dashboardCardData4} />
         </Grid>
         {/* </Grid> */}

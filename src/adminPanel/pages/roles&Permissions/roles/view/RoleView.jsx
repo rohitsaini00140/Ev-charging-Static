@@ -15,17 +15,20 @@ import RoleTableRow from './RoleTableRow';
 import { StyledTableCell, StyledTableRow } from '../../../../component/tableStyle';
 import { useGetAllRolesQuery } from '../../../../../globalState/roles/rolesApi';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Alertbar from '../../../../component/Alertbar';
 
 function RoleView() {
-  const location = useLocation();
+
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
     severity: 'success'
   });
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.state && location.state.message) {
@@ -34,8 +37,9 @@ function RoleView() {
         message: location.state.message,
         severity: location.state.severity
       });
+      navigate(location.pathname, { replace: true, state: {} });
     }
-  }, [location.state]);
+  }, [location.state, navigate]);
 
   const { roleStatus } = useSelector(state => state.role)
   const { data: roleData, isSuccess: roleSuccess, isLoading } = useGetAllRolesQuery({ status: roleStatus })

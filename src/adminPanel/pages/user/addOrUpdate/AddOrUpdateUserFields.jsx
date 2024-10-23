@@ -15,6 +15,14 @@ import Alertbar from '../../../component/Alertbar';
 import { useGetRolesQuery } from '../../../../globalState/roles/rolesApi';
 import { useParams, useNavigate } from 'react-router-dom';
 
+
+
+const role = JSON.parse(sessionStorage.getItem("role"))
+
+
+
+
+
 function AddOrUpdateUserFields() {
 
     const [loading, setLoading] = useState(false);
@@ -37,8 +45,6 @@ function AddOrUpdateUserFields() {
 
     const allRoleData = roleSuccess && roleData?.roles
     const allcluters = clustersSuccess && clusters?.clusters
-
-    console.log(allcluters)
 
     const [createUser] = useCreateUserMutation()
     const [updateUser] = useUpdateUserMutation()
@@ -70,7 +76,6 @@ function AddOrUpdateUserFields() {
     }, [id, userForUpdate, reset, defaultValues]);
 
     const onSubmit = async (data) => {
-        console.log(data)
         setLoading(true);
         try {
 
@@ -124,7 +129,7 @@ function AddOrUpdateUserFields() {
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 1, sm: 2, md: 6 }}
                     >
-                        <Stack width={"100%"}>
+                        {role?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allcluters.length > 0 ? allcluters : []}
                                 placeholder="Select Cluster"
@@ -134,7 +139,7 @@ function AddOrUpdateUserFields() {
                                 )}
                             />
                             {errors.cluster_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
-                        </Stack>
+                        </Stack>}
                         <Stack width={"100%"}>
                             <TextField
                                 label="Name"
