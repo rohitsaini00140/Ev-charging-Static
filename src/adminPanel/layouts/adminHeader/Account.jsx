@@ -73,7 +73,7 @@ function Account() {
                         border: (theme) => `solid 2px ${theme.palette.background.default}`,
                     }}
                 >
-                    {account.displayName.charAt(0).toUpperCase()}
+                    {account.displayName?.charAt(0).toUpperCase()}
                 </Avatar>
             </IconButton>
 
