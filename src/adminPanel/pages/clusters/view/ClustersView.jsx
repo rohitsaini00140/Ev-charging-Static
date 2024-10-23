@@ -80,7 +80,6 @@ function ClustersView() {
                     alignItems="center"
                     justifyContent="space-between"
                     m={3}
-                    mt={"7rem"}
                 >
                     <Typography variant="h4" color="white">Clusters</Typography>
                     <Link to={"/admin/cluster/add"}>
@@ -144,8 +143,8 @@ function ClustersView() {
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
-                position={{ vertical: 'top', horizontal: 'right' }}
-                sx={{ mt: "6rem" }}
+                position={{ vertical: 'top', horizontal: 'center' }}
+                sx={{ mt: "5rem" }}
             />
         </>
     );

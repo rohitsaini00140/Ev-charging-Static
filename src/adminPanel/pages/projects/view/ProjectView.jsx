@@ -140,8 +140,8 @@ function ProjectView() {
         onClose={handleCloseSnackbar}
         severity={snackbar.severity}
         message={snackbar.message}
-        position={{ vertical: 'top', horizontal: 'right' }}
-        sx={{ mt: "6rem" }}
+        position={{ vertical: 'top', horizontal: 'center' }}
+        sx={{ mt: "5rem" }}
       />
     </>
   );

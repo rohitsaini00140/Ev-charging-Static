@@ -36,7 +36,9 @@ function AddOrUpdateUserFields() {
     const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
 
     const allRoleData = roleSuccess && roleData?.roles
-    const allcluters = clustersSuccess && clusters.clusters
+    const allcluters = clustersSuccess && clusters?.clusters
+
+    console.log(allcluters)
 
     const [createUser] = useCreateUserMutation()
     const [updateUser] = useUpdateUserMutation()
@@ -45,8 +47,8 @@ function AddOrUpdateUserFields() {
         name: "",
         email: "",
         phone: "",
-        role_id: 0,
-        cluster_id: 0
+        role_id: null,
+        cluster_id: null
     }), []);
 
     const { register, handleSubmit, watch, setValue, setError, reset, formState: { errors } } = useForm({
@@ -68,6 +70,7 @@ function AddOrUpdateUserFields() {
     }, [id, userForUpdate, reset, defaultValues]);
 
     const onSubmit = async (data) => {
+        console.log(data)
         setLoading(true);
         try {
 
@@ -121,14 +124,13 @@ function AddOrUpdateUserFields() {
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 1, sm: 2, md: 6 }}
                     >
-
-                       <Stack width={"100%"}>
+                        <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allcluters.length > 0 ? allcluters : []}
-                                placeholder="Select Cluters "
-                                value={watch("cluster_id") || ""}
+                                placeholder="Select Cluster"
+                                value={watch("cluster_id")}
                                 onChange={(newValue) => setValue("cluster_id", newValue,
-                                    { shouldValidate: true },
+                                    { shouldValidate: true }
                                 )}
                             />
                             {errors.cluster_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
@@ -171,10 +173,10 @@ function AddOrUpdateUserFields() {
                         <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allRoleData.length > 0 ? allRoleData : []}
-                                placeholder="Select roles"
-                                value={watch("role_id") || 0}
+                                placeholder="Select Role"
+                                value={watch("role_id") || null}
                                 onChange={(newValue) => setValue("role_id", newValue,
-                                    { shouldValidate: true },
+                                    { shouldValidate: true }
                                 )}
                             />
                             {errors.role_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.role_id.message}</Typography>}
@@ -209,7 +211,7 @@ function AddOrUpdateUserFields() {
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
-                position={{ vertical: 'bottom', horizontal: 'center' }}
+                position={{ vertical: 'top', horizontal: 'right' }}
             />
         </>
     )

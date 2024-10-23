@@ -60,7 +60,7 @@ function RoleView() {
           direction="row"
           alignItems="center"
           justifyContent="space-between"
-          m={5}
+          m={3}
         >
           <Typography variant="h4" color="white">Roles</Typography>
           <Link to={"/admin/role/add"}>
@@ -113,8 +113,8 @@ function RoleView() {
         onClose={handleCloseSnackbar}
         severity={snackbar.severity}
         message={snackbar.message}
-        position={{ vertical: 'top', horizontal: 'right' }}
-        sx={{ mt: "6rem" }}
+        position={{ vertical: 'top', horizontal: 'center' }}
+        sx={{ mt: "5rem" }}
       />
     </>
   );
