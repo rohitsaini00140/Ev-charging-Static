@@ -48,7 +48,7 @@ function AddOrUpdateProjectFields() {
     const defaultValues = useMemo(() => ({
         name: "",
         cluster_id: 0,
-        user_id: 0,
+        // user_id: 0,
         location: ""
     }), []);
 
@@ -56,14 +56,12 @@ function AddOrUpdateProjectFields() {
         resolver: zodResolver(projectSchema),
         defaultValues: defaultValues
     });
-
-
     useEffect(() => {
         if (id && projectForUpdate) {
             reset({
                 name: projectForUpdate.name || "",
                 cluster_id: projectForUpdate.cluster_id || 0,
-                user_id: projectForUpdate.user_id || 0,
+                // user_id: projectForUpdate.user_id || 0,
                 location: projectForUpdate.location || ""
             });
         } else {
@@ -85,7 +83,6 @@ function AddOrUpdateProjectFields() {
             } else {
                 await addProjects(data).unwrap();
                 reset(defaultValues)
-
                 navigate("/admin/project/view", { state: { message: 'Project successfully added!', severity: 'success' } });
             }
 
@@ -134,7 +131,7 @@ function AddOrUpdateProjectFields() {
                             />
                             {errors.cluster_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
                         </Stack>
-                        <Stack width={"100%"}>
+                        {/* <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allUsersData.length > 0 ? allUsersData : []}
                                 placeholder="Select User "
@@ -144,7 +141,7 @@ function AddOrUpdateProjectFields() {
                                 )}
                             />
                             {errors.user_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.user_id.message}</Typography>}
-                        </Stack>
+                        </Stack> */}
                     </Stack>
                     <Stack
                         direction={{ xs: 'column', sm: 'row' }}

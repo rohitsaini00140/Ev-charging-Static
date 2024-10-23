@@ -45,9 +45,9 @@ function ProjectTableRow({ allProjectsData, currentpage }) {
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster_name}
                         </StyledTableCell>
-                        <StyledTableCell color={"#222245"}>
+                        {/* <StyledTableCell color={"#222245"}>
                             {loading ? (<Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" />) : (data.user_name ? data.user_name : '-')}
-                        </StyledTableCell>
+                        </StyledTableCell> */}
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.project_name}
                         </StyledTableCell>

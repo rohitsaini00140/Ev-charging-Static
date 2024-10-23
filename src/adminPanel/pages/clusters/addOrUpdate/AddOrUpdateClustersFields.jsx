@@ -114,8 +114,7 @@ function AddOrUpdateClustersFields() {
                 await addCluster(data).unwrap();
 
                 reset(defaultValues)
-
-                navigate("/admin/device/view", { state: { message: 'Cluster successfully added!', severity: 'success' } });
+                navigate("/admin/cluster/view", { state: { message: 'Cluster successfully added!', severity: 'success' } });
             }
         } catch (error) {
             setSnackbar({
