@@ -2,8 +2,7 @@ import { Card, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useState, useEffect } from 'react';
 
-function DashboardCard({ data,counterData }) {
-  console.log(counterData);
+function DashboardCard({ data,counter }) {
   
   const [count, setCount] = useState(0); // Initial state is 0
   const totalCount = Number(data.totalCount); // Ensure totalCount is a valid number
@@ -36,13 +35,10 @@ function DashboardCard({ data,counterData }) {
 
       return interval; // Return interval ID for potential clearing outside
     };
-
     const interval = increment();
-
     // Clean up the interval when the component unmounts or totalCount changes
     return () => clearInterval(interval);
   }, [totalCount]); // Re-run effect if totalCount changes
-
   return (
     <Card
       sx={{
@@ -76,7 +72,7 @@ function DashboardCard({ data,counterData }) {
           marginTop="10px"
           textAlign="center"
         >
-          {isNaN(counterData) ? "0" : counterData} {/* Show 0 if count is NaN */}
+          {isNaN(counter) ? "0" : counter} {/* Show 0 if count is NaN */}
         </Typography>
         <Typography mb="1rem" color="#ffffffd1" textAlign="center">
           {data.type}

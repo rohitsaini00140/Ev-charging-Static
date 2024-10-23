@@ -23,9 +23,7 @@ import {
 }
   from "./AdminRouteImports.jsx"
 
-
 const role = JSON.parse(sessionStorage.getItem("role"))
-
 function Router() {
   return (
     <BrowserRouter>

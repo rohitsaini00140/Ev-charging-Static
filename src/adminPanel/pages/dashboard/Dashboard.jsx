@@ -15,6 +15,7 @@ function Dashboard() {
   // User Data Dyamic
   const { data: usersData, isSuccess: usersSuccess } = useGetAllUserQuery()
   const allUsersData = usersSuccess && usersData?.users
+
   // const { data: projectsData, isSuccess: projectsSuccess } = useGetAllProjectsQuery()
   // const allprojectsData = projectsSuccess && projectsData?.projects
   // console.log(allprojectsData);
@@ -26,16 +27,16 @@ function Dashboard() {
       <Grid container spacing={1}>
         {/* <Grid container > */}
         <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
-          <DashboardCard counterData = {allUsersData.length} data={dashboardCardData} />
+          <DashboardCard counter = {allUsersData.length}  data={dashboardCardData} />
         </Grid>
         <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
-          <DashboardCard counterData = {allUsersData.length} data={dashboardCardData2} />
+          <DashboardCard counter = {allUsersData.length}  data={dashboardCardData2} />
         </Grid>
         {role?.user?.role?.name === "Superadmin" && <Grid size={{ xs: 12, md: 3 }}>
-          <DashboardCard counterData = {allUsersData.length} data={dashboardCardData3} />
+          <DashboardCard counter = {allUsersData.length}  data={dashboardCardData3} />
         </Grid>}
         <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
-          <DashboardCard counterData = {allUsersData.length} data={dashboardCardData4} />
+          <DashboardCard counter = {allUsersData.length}  data={dashboardCardData4} />
         </Grid>
         {/* </Grid> */}
         {/* <Grid size={{ xs: 12, md: 8 }} sx={{ bgcolor: "#3e403d0f", borderRadius: "1rem", boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)', }}>
