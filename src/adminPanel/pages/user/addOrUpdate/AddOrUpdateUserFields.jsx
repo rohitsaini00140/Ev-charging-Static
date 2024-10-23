@@ -9,6 +9,7 @@ import { userSchema } from './userSchema';
 import { Typography } from '@mui/material';
 import { inputStyle } from '../../../component/inputStyle';
 import { useMemo, useState, useEffect } from 'react';
+import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
 import { useCreateUserMutation, useGetUserByIdQuery, useUpdateUserMutation } from '../../../../globalState/user/userApis';
 import Alertbar from '../../../component/Alertbar';
 import { useGetRolesQuery } from '../../../../globalState/roles/rolesApi';
@@ -32,8 +33,10 @@ function AddOrUpdateUserFields() {
     const userForUpdate = (isSuccess && data)
 
     const { data: roleData, isSuccess: roleSuccess } = useGetRolesQuery()
+    const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
 
     const allRoleData = roleSuccess && roleData?.roles
+    const allcluters = clustersSuccess && clusters.clusters
 
     const [createUser] = useCreateUserMutation()
     const [updateUser] = useUpdateUserMutation()
@@ -43,6 +46,7 @@ function AddOrUpdateUserFields() {
         email: "",
         phone: "",
         role_id: 0,
+        cluster_id: 0
     }), []);
 
     const { register, handleSubmit, watch, setValue, setError, reset, formState: { errors } } = useForm({
@@ -117,6 +121,18 @@ function AddOrUpdateUserFields() {
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 1, sm: 2, md: 6 }}
                     >
+
+                       <Stack width={"100%"}>
+                            <SearchableDropdown
+                                options={allcluters.length > 0 ? allcluters : []}
+                                placeholder="Select Cluters "
+                                value={watch("cluster_id") || ""}
+                                onChange={(newValue) => setValue("cluster_id", newValue,
+                                    { shouldValidate: true },
+                                )}
+                            />
+                            {errors.cluster_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
+                        </Stack>
                         <Stack width={"100%"}>
                             <TextField
                                 label="Name"
