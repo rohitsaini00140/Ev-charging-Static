@@ -1,4 +1,5 @@
 export const headLabel = [
+    { id: 'name', label: 'Cluster Name' },
     { id: 'name', label: 'Name' },
     { id: 'email_Id', label: 'EmailID' },
     { id: 'mobileNo', label: 'Mobile No.' },

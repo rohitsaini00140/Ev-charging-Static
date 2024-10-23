@@ -123,7 +123,7 @@ function AddOrUpdateProjectFields() {
                         <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allcluters.length > 0 ? allcluters : []}
-                                placeholder="Select Cluters "
+                                placeholder="Select Cluster"
                                 value={watch("cluster_id") || ""}
                                 onChange={(newValue) => setValue("cluster_id", newValue,
                                     { shouldValidate: true },
@@ -146,10 +146,10 @@ function AddOrUpdateProjectFields() {
                     <Stack
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 4, sm: 4, md: 6 }}
-                    >
+                        >
                         <Stack width={"100%"}>
                             <TextField
-                                label="Project name"
+                                label="Project Name"
                                 {...register("name", { required: true })}
                                 value={watch("name") || ""}
                                 sx={inputStyle}

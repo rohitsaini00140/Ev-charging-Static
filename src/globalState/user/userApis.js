@@ -27,8 +27,8 @@ export const userApi = createApi({
 
         getUserById: builder.query({
             query: (id) => `/users/show/${id}`,
+            providesTags: ['users']
         }),
-
         createUser: builder.mutation({
             query: (userData) => ({
                 url: `/users/create`,
@@ -37,7 +37,6 @@ export const userApi = createApi({
             }),
             invalidatesTags: ['users']
         }),
-
         updateUser: builder.mutation({
             query: ({ id, updatedUserData }) => ({
                 url: `/users/update/${id}`,
@@ -46,7 +45,6 @@ export const userApi = createApi({
             }),
             invalidatesTags: ['users']
         }),
-
         softDeleteUser: builder.mutation({
             query: ({ id, softDeletedUserData }) => ({
                 url: `/users/soft-delete/${id}`,

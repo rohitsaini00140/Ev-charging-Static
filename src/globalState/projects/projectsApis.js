@@ -44,6 +44,7 @@ export const projectApi = createApi({
 
         getProjectById: builder.query({
             query: (id) => `/projects/show/${id}`,
+            providesTags: ['Projects']
         }),
 
         updateProjects: builder.mutation({

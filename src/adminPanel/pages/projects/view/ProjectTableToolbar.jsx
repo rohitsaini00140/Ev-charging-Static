@@ -119,7 +119,7 @@ function ProjectTableToolbar() {
                         <Stack width={"100%"}>
                             <SearchInput
                                 sx={{ color: "white",background:'#3e403d0f'}}
-                                placeholder="Search projects..."
+                                placeholder="Search Projects"
                                 width={"100%"}
                                 onChange={(e) => handleSelect(e.target.value, "project")}
                                 value={searchProjectKeywords}
@@ -147,7 +147,7 @@ function ProjectTableToolbar() {
                             <Selector
                                 value={projectStatus}
                                 onChange={(e) => handleSelect(e.target.value, "status")}
-                                placeholder='Select status'
+                                placeholder='Select Status'
                                 selectType="single"
                                 options={["Active", "Inactive"]}
                             />

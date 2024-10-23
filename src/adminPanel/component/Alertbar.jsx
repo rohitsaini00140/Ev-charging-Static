@@ -6,7 +6,7 @@ function Alertbar({ open, onClose, severity, message, position, sx }) {
     return (
         <Snackbar
             open={open}
-            // autoHideDuration={2000}
+            autoHideDuration={2000}
             onClose={onClose}
             anchorOrigin={position}
             sx={{

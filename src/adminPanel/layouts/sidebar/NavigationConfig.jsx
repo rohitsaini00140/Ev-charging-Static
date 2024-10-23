@@ -26,7 +26,7 @@ const navConfig = [
     ],
   },
   {
-    title: 'Roles & Permissions',
+    title: 'Roles',
     icon: icon('ic_roleAndPermission'),
     children: [
       {
@@ -45,11 +45,11 @@ const navConfig = [
           },
         ],
       },
-      {
-        title: 'Assign Permissions',
-        path: '/admin/roles&Permissions/permissionsToRole',
-        icon: icon('ic_circle'),
-      },
+      // {
+      //   title: 'Assign Permissions',
+      //   path: '/admin/roles&Permissions/permissionsToRole',
+      //   icon: icon('ic_circle'),
+      // },
       // {
       //   title: 'Permissions',
       //   icon: icon('ic_circle'),

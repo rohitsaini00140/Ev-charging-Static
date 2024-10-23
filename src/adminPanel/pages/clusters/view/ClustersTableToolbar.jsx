@@ -159,17 +159,16 @@ function ClustersTableToolbar({ allClusterData }) {
               <Grid item size = {{xs:12,md:6}}>
               <SearchInput
                 sx={{ color: "white", background: "rgb(29, 40, 44)" }}
-                placeholder="Search clusters..."
+                placeholder="Search Cluster"
                 onChange={(e) => handleSelect(e.target.value, "cluster")}
                 value={searchClusterKeywords}
-                
               />
               </Grid>
               <Grid item size = {{xs:12,md:6}}>
               <Selector
                 value={clusterStatus}
                 onChange={(e) => handleSelect(e.target.value, "status")}
-                placeholder="Select status"
+                placeholder="Select Status"
                 selectType="single"
                 options={["Active", "Inactive"]}
               />

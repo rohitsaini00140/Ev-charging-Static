@@ -2,13 +2,12 @@ import { Card, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useState, useEffect } from 'react';
 
-function DashboardCard({ data }) {
-  console.log(data.totalCount);
+function DashboardCard({ data,counterData }) {
+  console.log(counterData);
+  
   const [count, setCount] = useState(0); // Initial state is 0
   const totalCount = Number(data.totalCount); // Ensure totalCount is a valid number
-  // Use effect to run the animation when totalCount changes
   useEffect(() => {
-    // If totalCount is not valid (NaN or negative), do nothing
     if (isNaN(totalCount) || totalCount < 0) {
       return;
     }
@@ -17,8 +16,7 @@ function DashboardCard({ data }) {
     const end = totalCount;
     const duration = 2000; // Animation duration in ms
     const stepTime = 50; // Time interval between updates (ms)
-
-    // Increment function to animate the count value
+    
     const increment = () => {
       const range = end - start;
       const steps = duration / stepTime;
@@ -78,12 +76,12 @@ function DashboardCard({ data }) {
           marginTop="10px"
           textAlign="center"
         >
-          {isNaN(count) ? "0" : count} {/* Show 0 if count is NaN */}
+          {isNaN(counterData) ? "0" : counterData} {/* Show 0 if count is NaN */}
         </Typography>
         <Typography mb="1rem" color="#ffffffd1" textAlign="center">
           {data.type}
         </Typography>
-        <Typography sx={{ fontSize: ".8rem", color: "white",textAlign:'center' }}>
+        {/* <Typography sx={{ fontSize: ".8rem", color: "white",textAlign:'center' }}>
           <Typography
             sx={{
               fontSize: ".8rem",
@@ -95,7 +93,7 @@ function DashboardCard({ data }) {
             {data.arrowIcon} {data.Percentage}
           </Typography>
           {data.duration}
-        </Typography>
+        </Typography> */}
       </Stack>
     </Card>
   );
