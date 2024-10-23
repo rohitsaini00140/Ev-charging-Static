@@ -79,28 +79,14 @@ function AddOrUpdateProjectFields() {
             if (id) {
 
                 await updateProjects({ id, updatedProjectData: data }).unwrap();
-                setSnackbar({
-                    open: true,
-                    message: 'Project successfully updated!',
-                    severity: 'success'
-                });
 
-                setTimeout(() => {
-                    navigate("/admin/project/view");
-                }, 1000);
+                navigate("/admin/project/view", { state: { message: 'Project successfully updated!', severity: 'success' } });
 
             } else {
                 await addProjects(data).unwrap();
                 reset(defaultValues)
-                setSnackbar({
-                    open: true,
-                    message: 'Cluster successfully added!',
-                    severity: 'success'
-                });
 
-                setTimeout(() => {
-                    navigate("/admin/project/view");
-                }, 1000);
+                navigate("/admin/project/view", { state: { message: 'Project successfully added!', severity: 'success' } });
             }
 
         } catch (error) {
@@ -216,7 +202,8 @@ function AddOrUpdateProjectFields() {
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
-                position={{ vertical: 'bottom', horizontal: 'center' }}
+                position={{ vertical: 'top', horizontal: 'right' }}
+                sx={{ mt: "6rem" }}
             />
         </>
     )

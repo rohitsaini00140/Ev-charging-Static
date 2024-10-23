@@ -78,30 +78,17 @@ function AddOrUpdateDeviceFields() {
         try {
             if (id) {
                 await updateDevice({ id, updatedDeviceData: data }).unwrap();
-                setSnackbar({
-                    open: true,
-                    message: 'Device successfully updated!',
-                    severity: 'success'
-                });
-
-                setTimeout(() => {
-                    navigate("/admin/device/view");
-                }, 1000);
+                navigate("/admin/device/view", { state: { message: 'Device successfully updated!', severity: 'success' } });
 
             } else {
                 await addDevice(data).unwrap();
                 reset(defaultValues)
-                setSnackbar({
-                    open: true,
-                    message: 'Device successfully added!',
-                    severity: 'success'
-                });
-                setTimeout(() => {
-                    navigate("/admin/device/view");
-                }, 1000);
+
+                navigate("/admin/device/view", { state: { message: 'Device successfully added!', severity: 'success' } });
+            }
 
             }
-        } catch (error) {
+            catch (error) {
             setSnackbar({
                 open: true,
                 message: 'Error while submitting.',
@@ -253,10 +240,7 @@ function AddOrUpdateDeviceFields() {
                 severity={snackbar.severity}
                 message={snackbar.message}
                 position={{ vertical: 'top', horizontal: 'right' }}
-                sx={{
-                    position:'absolute',
-                   marginTop:"4rem"
-                }}
+                sx={{ mt: "6rem" }}
             />
          
         </>

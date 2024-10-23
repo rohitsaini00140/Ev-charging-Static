@@ -55,6 +55,7 @@ function AddOrUpdateClustersFields() {
 
     const defaultValues = useMemo(() => ({
         name: "",
+        email: "",
         country_id: 0,
         state_id: 0,
         city_id: 0,
@@ -103,27 +104,18 @@ function AddOrUpdateClustersFields() {
             }
 
             if (id) {
-                await updateCluster({ id, updatedClusterData: data }).unwrap();
-                setSnackbar({
-                    open: true,
-                    message: 'Cluster successfully updated!',
-                    severity: 'success'
-                });
 
-                setTimeout(() => {
-                    navigate("/admin/cluster/view");
-                }, 1000);
+                await updateCluster({ id, updatedClusterData: data }).unwrap();
+
+                navigate("/admin/cluster/view", { state: { message: 'Cluster successfully updated!', severity: 'success' } });
+
             } else {
+
                 await addCluster(data).unwrap();
+
                 reset(defaultValues)
-                setSnackbar({
-                    open: true,
-                    message: 'Cluster successfully added!',
-                    severity: 'success'
-                });
-                setTimeout(() => {
-                    navigate("/admin/cluster/view");
-                }, 1000);
+
+                navigate("/admin/device/view", { state: { message: 'Cluster successfully added!', severity: 'success' } });
             }
         } catch (error) {
             setSnackbar({
@@ -173,6 +165,21 @@ function AddOrUpdateClustersFields() {
                             {errors.name && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.name.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
+                            <TextField
+                                label="Cluster email"
+                                {...register("email", { required: true })}
+                                value={watch("email") || ""}
+                                sx={inputStyle}
+                                fullWidth
+                            />
+                            {errors.email && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.email.message}</Typography>}
+                        </Stack>
+                    </Stack>
+                    <Stack
+                        direction={{ xs: 'column', sm: 'row' }}
+                        spacing={{ xs: 4, sm: 4, md: 6 }}
+                    >
+                        <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={country.length > 0 ? country : []}
                                 placeholder="Select Country"
@@ -190,16 +197,10 @@ function AddOrUpdateClustersFields() {
                             />
                             {errors.country_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.country_id.message}</Typography>}
                         </Stack>
-                    </Stack>
-                    <Stack
-                        direction={{ xs: 'column', sm: 'row' }}
-                        spacing={{ xs: 4, sm: 4, md: 6 }}
-                    >
                         <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={states.length > 0 ? states : []}
                                 placeholder="Select State"
-                                noOptionText={"Select Country First"}
                                 value={watch("state_id") || 0}
                                 onChange={(newValue) => {
                                     setValue("state_id", newValue, { shouldValidate: true });
@@ -216,7 +217,6 @@ function AddOrUpdateClustersFields() {
                             <SearchableDropdown
                                 options={city.length > 0 ? city : []}
                                 placeholder="Select City"
-                                noOptionText={"Select State First"}
                                 value={watch("city_id") || 0}
                                 onChange={(newValue) => setValue("city_id", newValue, { shouldValidate: true })}
                             />
@@ -240,8 +240,6 @@ function AddOrUpdateClustersFields() {
                             sx={{
                                 bgcolor: '#0ab39c',
                                 color: 'white',
-                                borderColor:'#0ab39c',
-                                padding:"10px 15px",
                                 '& .MuiLoadingButton-loadingIndicator': {
                                     color: 'white'
                                 },
@@ -265,6 +263,7 @@ function AddOrUpdateClustersFields() {
                 severity={snackbar.severity}
                 message={snackbar.message}
                 position={{ vertical: 'top', horizontal: 'right' }}
+                sx={{ mt: "4rem" }}
             />
         </>
     )

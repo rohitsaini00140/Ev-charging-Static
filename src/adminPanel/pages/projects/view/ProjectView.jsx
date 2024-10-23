@@ -17,8 +17,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import { useGetFilteredProjectsQuery } from '../../../../globalState/projects/projectsApis';
 import { setProjectListPageNo } from '../../../../globalState/projects/projectsSlices';
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import Alertbar from '../../../component/Alertbar';
+
 
 function ProjectView() {
+
+  const location = useLocation();
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: 'success'
+  });
+
+  useEffect(() => {
+    if (location.state && location.state.message) {
+      setSnackbar({
+        open: true,
+        message: location.state.message,
+        severity: location.state.severity
+      });
+    }
+  }, [location.state]);
+
 
   const dispatch = useDispatch()
 
@@ -40,66 +62,88 @@ function ProjectView() {
     dispatch(setProjectListPageNo(value));
   };
 
+
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbar((prevState) => ({
+      ...prevState,
+      open: false
+    }));
+  };
+
+
+
   return (
-    <Container>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{
-          m: { xs: 2, sm: 3, md: 5, lg: 5 }  // Responsive margin
-        }}
-      >
-        <Typography variant="h4" color="white">Projects</Typography>
-        <Link to={"/admin/project/add"}>
-          <Button
-            variant="contained"
-            sx={{
-              bgcolor: "#20c997",
-              boxShadow: 'none',
-              padding:'10px 10px',
-              // "&:hover": { bgcolor: "#34345a" }
-            }}
-            startIcon={<Iconify sx={{color:'white'}} icon="eva:plus-fill" />}>
-            New Project
-          </Button>
-        </Link>
-      </Stack>
-      <Card sx={{ bgcolor: "#3e403d0f",boxShadow:'0px 4px 12px rgba(87, 179, 62, 0.2)' }}>
-        <ProjectTableToolbar />
-        {isLoading ? (
-          <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>
-            <Typography color="white" sx={{ mt: 2 }}>Loading...</Typography>
-          </Stack>
-        ) : (<Scrollbar>
-          <TableContainer sx={{ overflow: 'unset' }}>
-            <Table sx={{ minWidth: 800 }}>
-              <ProjectTableHead allProjectsData={allProjectsData} />
-              <TableBody>
-                {allProjectsData.length > 0 ?
-                  <ProjectTableRow
-                    currentpage={pageNo}
-                    allProjectsData={allProjectsData}
-                  />
-                  : (
-                    <StyledTableRow>
-                      <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
-                        <Typography color="white">No Data Found</Typography>
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Scrollbar>
-        )}
-        {(allProjectsData.length > 0) && <TablePagination
-          count={last_page}
-          onPageChange={handlePageChange}
-          page={pageNo}
-        />}
-      </Card>
-    </Container>
+    <>
+      <Container>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          m={3}
+        >
+          <Typography variant="h4" color="white">Projects</Typography>
+          <Link to={"/admin/project/add"}>
+            <Button
+              variant="contained"
+              sx={{
+                bgcolor: "#20c997",
+                boxShadow: 'none',
+                padding: '10px 10px',
+                // "&:hover": { bgcolor: "#34345a" }
+              }}
+              startIcon={<Iconify icon="eva:plus-fill" />}>
+              New Project
+            </Button>
+          </Link>
+        </Stack>
+        <Card sx={{ bgcolor: "#3e403d0f", boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)' }}>
+          <ProjectTableToolbar />
+          {isLoading ? (
+            <Stack alignItems="center" justifyContent="center" sx={{ minHeight: 300, padding: 4 }}>
+              <Typography color="white" sx={{ mt: 2 }}>Loading...</Typography>
+            </Stack>
+          ) : (<Scrollbar>
+            <TableContainer sx={{ overflow: 'unset' }}>
+              <Table sx={{ minWidth: 800 }}>
+                <ProjectTableHead allProjectsData={allProjectsData} />
+                <TableBody>
+                  {allProjectsData.length > 0 ?
+                    <ProjectTableRow
+                      currentpage={pageNo}
+                      allProjectsData={allProjectsData}
+                    />
+                    : (
+                      <StyledTableRow>
+                        <StyledTableCell colSpan={10} align="center" sx={{ border: "1px solid red", padding: "2rem" }}>
+                          <Typography color="white">No Data Found</Typography>
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Scrollbar>
+          )}
+          {(allProjectsData.length > 0) && <TablePagination
+            count={last_page}
+            onPageChange={handlePageChange}
+            page={pageNo}
+          />}
+        </Card>
+      </Container>
+      <Alertbar
+        open={snackbar.open}
+        onClose={handleCloseSnackbar}
+        severity={snackbar.severity}
+        message={snackbar.message}
+        position={{ vertical: 'top', horizontal: 'right' }}
+        sx={{ mt: "6rem" }}
+      />
+    </>
   );
 }
 

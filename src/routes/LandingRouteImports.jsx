@@ -12,4 +12,15 @@ import PublicLayout from "./PublicLayout";
 import ThemeProvider from "../landingUI/layout/theme/ThemeProvider";
 
 // export all the components here
-export { Home, Login, Registration,About,ContactUs,BlogPage,Services, AuthLayout, PublicLayout, ThemeProvider };
+export {
+    Home,
+    Login,
+    Registration,
+    About,
+    ContactUs,
+    BlogPage,
+    Services,
+    AuthLayout,
+    PublicLayout,
+    ThemeProvider
+};

@@ -56,15 +56,8 @@ function AddOrUpdateRoleFields() {
             if (id) {
 
                 await updateRole({ id, updatedRoleData: data }).unwrap();
-                setSnackbar({
-                    open: true,
-                    message: 'Role successfully updated!',
-                    severity: 'success'
-                });
 
-                setTimeout(() => {
-                    navigate("/admin/role/view");
-                }, 3000);
+                navigate("/admin/role/view", { state: { message: 'Role successfully updated!', severity: 'success' } });
 
             } else {
 
@@ -72,11 +65,7 @@ function AddOrUpdateRoleFields() {
 
                 reset(defaultValues)
 
-                setSnackbar({
-                    open: true,
-                    message: 'Role successfully created!',
-                    severity: 'success'
-                })
+                navigate("/admin/role/view", { state: { message: 'Role successfully added!', severity: 'success' } });
             }
 
         } catch (error) {
