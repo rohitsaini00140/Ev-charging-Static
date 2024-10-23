@@ -83,7 +83,7 @@ function DashboardCard({ data }) {
         <Typography mb="1rem" color="#ffffffd1" textAlign="center">
           {data.type}
         </Typography>
-        <Typography sx={{ fontSize: ".8rem", color: "white" }}>
+        <Typography sx={{ fontSize: ".8rem", color: "white",textAlign:'center' }}>
           <Typography
             sx={{
               fontSize: ".8rem",

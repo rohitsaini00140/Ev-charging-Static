@@ -17,20 +17,18 @@ import { useGetAllRolesQuery } from '../../../../../globalState/roles/rolesApi';
 import { useSelector } from 'react-redux';
 
 function RoleView() {
-
   const { roleStatus } = useSelector(state => state.role)
-
   const { data: roleData, isSuccess: roleSuccess, isLoading } = useGetAllRolesQuery({ status: roleStatus })
-
   const allRoleData = roleSuccess && roleData?.roles;
-
   return (
     <Container>
       <Stack
         direction="row"
         alignItems="center"
         justifyContent="space-between"
-        m={5}
+        sx={{
+          m: { xs: 2, sm: 3, md: 4, lg: 5 }  // Responsive margin
+        }}
       >
         <Typography variant="h4" color="white">Roles</Typography>
         <Link to={"/admin/role/add"}>
@@ -43,7 +41,7 @@ function RoleView() {
               "&:hover": { bgcolor: "#20c997" }
             }}
             color="inherit"
-            startIcon={<Iconify icon="eva:plus-fill" />}>
+            startIcon={<Iconify sx={{color:'white'}} icon="eva:plus-fill" />}>
             New Role
           </Button>
         </Link>

@@ -48,7 +48,9 @@ function UserView() {
         direction="row"
         alignItems="center"
         justifyContent="space-between"
-        m={3}
+        sx={{
+          m: { xs: 2, sm: 3, md: 5, lg: 5 }  // Responsive margin
+        }}
       >
         <Typography variant="h4" color="white">Users</Typography>
         <Link to={"/admin/user/add"}>
@@ -60,7 +62,7 @@ function UserView() {
               padding:'10px 10px',
               "&:hover": { bgcolor: "#20c997" }
             }}
-            startIcon={<Iconify icon="eva:plus-fill" />}>
+            startIcon={<Iconify sx={{color:'white'}} icon="eva:plus-fill" />}>
             New User
           </Button>
         </Link>

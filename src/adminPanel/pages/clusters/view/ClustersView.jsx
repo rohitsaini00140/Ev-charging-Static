@@ -44,7 +44,9 @@ function ClustersView() {
                 direction="row"
                 alignItems="center"
                 justifyContent="space-between"
-                m={3}
+                sx={{
+                    m: { xs: 2, sm: 3, md: 5, lg: 5 }  // Responsive margin
+                  }}
             >
                 <Typography variant="h4" color="white">Clusters</Typography>
                 <Link to={"/admin/cluster/add"}>
@@ -52,15 +54,15 @@ function ClustersView() {
                         variant="contained"
                         sx={{
                             bgcolor: "#20c997",
+                            padding:'10px 10px',
                             boxShadow: 'none',
-                            padding: '12px 18px',
                             '&:hover': {
                               bgcolor: "#20c997", // Maintain the same color on hover
                             },
                           }}
                           
                         color="inherit"
-                        startIcon={<Iconify icon="eva:plus-fill" />}>
+                        startIcon={<Iconify sx={{color:'white'}} icon="eva:plus-fill" />}>
                         New Cluster
                     </Button>
                 </Link>

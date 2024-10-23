@@ -44,7 +44,9 @@ function DeviceView() {
         direction="row"
         alignItems="center"
         justifyContent="space-between"
-        m={3}
+        sx={{
+          m: { xs: 2, sm: 3, md: 5, lg: 5 }  // Responsive margin
+        }}
       >
         <Typography variant="h4" color="white">Devices</Typography>
         <Link to={"/admin/device/add"}>
@@ -58,7 +60,7 @@ function DeviceView() {
               padding:'10px 10px',
               bgcolor: "#20c997",color:'white',
             }}
-            startIcon={<Iconify icon="eva:plus-fill" />}>
+            startIcon={<Iconify sx={{color:'white'}} icon="eva:plus-fill" />}>
             New Device
           </Button>
         </Link>

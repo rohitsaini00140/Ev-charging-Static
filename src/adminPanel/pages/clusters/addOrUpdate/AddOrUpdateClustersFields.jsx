@@ -103,7 +103,6 @@ function AddOrUpdateClustersFields() {
             }
 
             if (id) {
-
                 await updateCluster({ id, updatedClusterData: data }).unwrap();
                 setSnackbar({
                     open: true,
@@ -113,19 +112,18 @@ function AddOrUpdateClustersFields() {
 
                 setTimeout(() => {
                     navigate("/admin/cluster/view");
-                }, 3000);
-
+                }, 1000);
             } else {
-
                 await addCluster(data).unwrap();
-
                 reset(defaultValues)
-
                 setSnackbar({
                     open: true,
                     message: 'Cluster successfully added!',
                     severity: 'success'
                 });
+                setTimeout(() => {
+                    navigate("/admin/cluster/view");
+                }, 1000);
             }
         } catch (error) {
             setSnackbar({
@@ -201,6 +199,7 @@ function AddOrUpdateClustersFields() {
                             <SearchableDropdown
                                 options={states.length > 0 ? states : []}
                                 placeholder="Select State"
+                                noOptionText={"Select Country First"}
                                 value={watch("state_id") || 0}
                                 onChange={(newValue) => {
                                     setValue("state_id", newValue, { shouldValidate: true });
@@ -217,6 +216,7 @@ function AddOrUpdateClustersFields() {
                             <SearchableDropdown
                                 options={city.length > 0 ? city : []}
                                 placeholder="Select City"
+                                noOptionText={"Select State First"}
                                 value={watch("city_id") || 0}
                                 onChange={(newValue) => setValue("city_id", newValue, { shouldValidate: true })}
                             />
@@ -240,6 +240,8 @@ function AddOrUpdateClustersFields() {
                             sx={{
                                 bgcolor: '#0ab39c',
                                 color: 'white',
+                                borderColor:'#0ab39c',
+                                padding:"10px 15px",
                                 '& .MuiLoadingButton-loadingIndicator': {
                                     color: 'white'
                                 },
@@ -262,7 +264,7 @@ function AddOrUpdateClustersFields() {
                 onClose={handleCloseSnackbar}
                 severity={snackbar.severity}
                 message={snackbar.message}
-                position={{ vertical: 'bottom', horizontal: 'center' }}
+                position={{ vertical: 'top', horizontal: 'right' }}
             />
         </>
     )

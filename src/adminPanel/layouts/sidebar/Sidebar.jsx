@@ -28,5 +28,4 @@ function Sidebar({ children, sx, ...other }) {
         </Box>
     );
 }
-
 export default Sidebar;

@@ -87,19 +87,20 @@ function AddOrUpdateProjectFields() {
 
                 setTimeout(() => {
                     navigate("/admin/project/view");
-                }, 3000);
+                }, 1000);
 
             } else {
-
                 await addProjects(data).unwrap();
-
                 reset(defaultValues)
-
                 setSnackbar({
                     open: true,
                     message: 'Cluster successfully added!',
                     severity: 'success'
                 });
+
+                setTimeout(() => {
+                    navigate("/admin/project/view");
+                }, 1000);
             }
 
         } catch (error) {
@@ -128,15 +129,14 @@ function AddOrUpdateProjectFields() {
             open: false
         }));
     };
-
     return (
         <>
             <form fullWidth onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing={{ xs: 4, sm: 4, md: 4 }}>
-                    <Stack
+            <Stack spacing={{ xs: 4, sm: 4, md: 4 }}>
+                       <Stack
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 4, sm: 4, md: 6 }}
-                    >
+                        >
                         <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allcluters.length > 0 ? allcluters : []}
@@ -192,6 +192,8 @@ function AddOrUpdateProjectFields() {
                             sx={{
                                 bgcolor: '#0ab39c',
                                 color: 'white',
+                                borderColor:'#0ab39c',
+                                padding:"10px 15px",
                                 '& .MuiLoadingButton-loadingIndicator': {
                                     color: 'white'
                                 },

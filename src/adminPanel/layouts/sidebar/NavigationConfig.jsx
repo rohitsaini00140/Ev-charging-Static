@@ -1,16 +1,29 @@
 import SvgColor from '../../component/svgColor';
-
 // ----------------------------------------------------------------------
-
 const icon = (name) => (
   <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />
 );
-
 const navConfig = [
   {
     title: 'dashboard',
     path: '/admin',
     icon: icon('ic_dashboard'),
+  },
+  {
+    title: 'Clusters',
+    icon: icon('ic_cluster'),
+    children: [
+      {
+        title: 'Add',
+        path: '/admin/cluster/add',
+        icon: icon('ic_circle'),
+      },
+      {
+        title: 'View',
+        path: '/admin/cluster/view',
+        icon: icon('ic_circle'),
+      },
+    ],
   },
   {
     title: 'Roles & Permissions',
@@ -71,23 +84,8 @@ const navConfig = [
       },
     ],
   },
-  {
-    title: 'Clusters',
-    icon: icon('ic_cluster'),
-    children: [
-      {
-        title: 'Add',
-        path: '/admin/cluster/add',
-        icon: icon('ic_circle'),
-      },
-      {
-        title: 'View',
-        path: '/admin/cluster/view',
-        icon: icon('ic_circle'),
-      },
-    ],
-  },
-  {
+  
+{
     title: 'Projects',
     icon: icon('ic_project'),
     children: [

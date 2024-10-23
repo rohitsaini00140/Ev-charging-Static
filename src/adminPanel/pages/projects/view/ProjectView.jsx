@@ -46,7 +46,9 @@ function ProjectView() {
         direction="row"
         alignItems="center"
         justifyContent="space-between"
-        m={3}
+        sx={{
+          m: { xs: 2, sm: 3, md: 5, lg: 5 }  // Responsive margin
+        }}
       >
         <Typography variant="h4" color="white">Projects</Typography>
         <Link to={"/admin/project/add"}>
@@ -58,7 +60,7 @@ function ProjectView() {
               padding:'10px 10px',
               // "&:hover": { bgcolor: "#34345a" }
             }}
-            startIcon={<Iconify icon="eva:plus-fill" />}>
+            startIcon={<Iconify sx={{color:'white'}} icon="eva:plus-fill" />}>
             New Project
           </Button>
         </Link>

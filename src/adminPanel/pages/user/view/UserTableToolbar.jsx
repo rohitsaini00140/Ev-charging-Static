@@ -87,7 +87,7 @@ function UserTableToolbar() {
                     {/* // ) */}
                     <Stack
                         direction={{ xs: 'column', sm: 'row' }}
-                        spacing={{ xs: 1, sm: 2, md: 4 }}
+                        spacing={{ xs: 3, sm: 2, md: 4 }}
                         width={"100%"}
                     >
                         <Stack width={"100%"}>

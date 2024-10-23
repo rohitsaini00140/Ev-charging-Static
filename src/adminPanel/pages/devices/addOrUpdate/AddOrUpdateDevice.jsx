@@ -12,7 +12,7 @@ function AddOrUpdateDevice() {
             <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
                 <Stack
                     sx={{
-                        p: 5,
+                        p: { xs: 2, sm: 3, md: 5 },  // responsive padding
                         width: 1,
                         maxWidth: "100%",
                         borderRadius:'16px'

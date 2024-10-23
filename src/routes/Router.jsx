@@ -48,7 +48,7 @@ function Router() {
           }
         >
           <Route path="/logIn" element={<Login />} />
-          <Route path="/register" element={<Registration />} />
+          {/* <Route path="/register" element={<Registration />} /> */}
         </Route>
         <Route
           path="/admin/*"

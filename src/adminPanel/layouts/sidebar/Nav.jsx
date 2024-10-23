@@ -15,16 +15,13 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Collapse } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-
 // ----------------------------------------------------------------------
-
 const account = {
     displayName: 'VNT Admin',
     // email: 'vnt@gmail.com',
     photoURL: '/assets/images/avatar.svg',
 };
 // ----------------------------------------------------------------------
-
 function Nav({ openNav, onCloseNav }) {
     const pathname = usePathname();
     const upLg = useResponsive('up', 'lg');

@@ -5,11 +5,8 @@ import Label from "../../../component/lable/Lable"
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import { useRestoreDeletedClusterMutation, useSoftDeleteClusterMutation } from '../../../../globalState/cluster/clusterApis';
 import { Skeleton } from '@mui/material';
-
 // ----------------------------------------------------------------------
-
 function ClustersTableRow({ allClusterData, currentPageNo }) {
-
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const timer = setTimeout(() => setLoading(false), 1000);
@@ -26,7 +23,6 @@ function ClustersTableRow({ allClusterData, currentPageNo }) {
     function onRestoreData(id) {
         restoreDeletedCluster(id)
     }
-
     return (
         <>
             {allClusterData.length > 0
