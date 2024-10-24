@@ -16,11 +16,7 @@ import { useGetAllUserQuery } from '../../../../globalState/user/userApis';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 
-
-
 const role = JSON.parse(sessionStorage.getItem("role"))
-
-
 
 
 function AddOrUpdateProjectFields() {
@@ -54,7 +50,7 @@ function AddOrUpdateProjectFields() {
 
     const defaultValues = useMemo(() => ({
         name: "",
-        cluster_id: 0,
+        cluster_id: null,
         // user_id: 0,
         location: ""
     }), []);
@@ -67,7 +63,7 @@ function AddOrUpdateProjectFields() {
         if (id && projectForUpdate) {
             reset({
                 name: projectForUpdate.name || "",
-                cluster_id: projectForUpdate.cluster_id || 0,
+                cluster_id: projectForUpdate.cluster_id || null,
                 // user_id: projectForUpdate.user_id || 0,
                 location: projectForUpdate.location || ""
             });
@@ -75,7 +71,6 @@ function AddOrUpdateProjectFields() {
             reset(defaultValues);
         }
     }, [id, projectForUpdate, reset, defaultValues]);
-
 
     const onSubmit = async (data) => {
         setLoading(true);
@@ -109,7 +104,6 @@ function AddOrUpdateProjectFields() {
             setLoading(false);
         }
     };
-
     const handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -131,7 +125,7 @@ function AddOrUpdateProjectFields() {
                             <SearchableDropdown
                                 options={allcluters.length > 0 ? allcluters : []}
                                 placeholder="Select Cluster"
-                                value={watch("cluster_id") || ""}
+                                value={watch("cluster_id")}
                                 onChange={(newValue) => setValue("cluster_id", newValue,
                                     { shouldValidate: true },
                                 )}
@@ -166,7 +160,7 @@ function AddOrUpdateProjectFields() {
                         </Stack>
                         <Stack width={"100%"}>
                             <TextField
-                                label="Project location"
+                                label="Project Location"
                                 {...register("location", { required: true })}
                                 value={watch("location") || ""}
                                 sx={inputStyle}

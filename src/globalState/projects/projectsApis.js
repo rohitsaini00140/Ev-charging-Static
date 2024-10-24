@@ -26,8 +26,8 @@ export const projectApi = createApi({
             query: ({ page }) => `/projects/list?page=${page}`,
             providesTags: ['Projects']
         }),
-
-        getFilteredProjects: builder.query({
+        
+         getFilteredProjects: builder.query({
             query: ({ page, clusterName, projectName, userName, status }) => {
                 const params = new URLSearchParams();
 
@@ -41,12 +41,14 @@ export const projectApi = createApi({
             },
             providesTags: ['Projects']
         }),
-
+        getProjectsByClusterId: builder.query({
+            query: (id) => `projects/cluster/${id}`,
+            providesTags: ['Projects']
+        }),
         getProjectById: builder.query({
             query: (id) => `/projects/show/${id}`,
             providesTags: ['Projects']
         }),
-
         updateProjects: builder.mutation({
             query: ({ id, updatedProjectData }) => ({
                 url: `/projects/update/${id}`,
@@ -55,7 +57,6 @@ export const projectApi = createApi({
             }),
             invalidatesTags: ['Projects']
         }),
-
         softDeleteProjects: builder.mutation({
             query: ({ id, softDeletedProjectsData }) => ({
                 url: `/projects/soft-delete/${id}`,
@@ -64,7 +65,6 @@ export const projectApi = createApi({
             }),
             invalidatesTags: ['Projects'],
         }),
-
         softRestoreProjects: builder.mutation({
             query: (id) => ({
                 url: `/projects/restore/${id}`,
@@ -72,11 +72,11 @@ export const projectApi = createApi({
             }),
             invalidatesTags: ['Projects'],
         }),
-
     }),
 });
 export const {
     useAddProjectsMutation,
+    useGetProjectsByClusterIdQuery,
     useGetAllProjectsQuery,
     useGetProjectsQuery,
     useGetFilteredProjectsQuery,

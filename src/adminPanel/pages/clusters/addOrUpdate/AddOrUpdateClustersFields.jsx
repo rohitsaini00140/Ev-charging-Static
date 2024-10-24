@@ -35,7 +35,9 @@ function AddOrUpdateClustersFields() {
 
     const { data, isSuccess } = useGetClusterByIdQuery(id, { skip: !id })
     const { address } = useSelector(state => state.googleMap)
+
     const { countryId, stateId } = useSelector(state => state.address)
+    
     const { data: geoData, isSuccess: geoIsSuccess } = useGetGeocodeQuery({ address }, { skip: !address })
     const { data: allCountry, isSuccess: countrySuccess } = useGetCountryQuery()
     const { data: allState, isSuccess: stateSuccess } = useGetStateQuery(countryId, { skip: !countryId })
@@ -48,7 +50,7 @@ function AddOrUpdateClustersFields() {
     const states = stateSuccess && allState?.states
 
     const city = citySuccess && allCity?.cities
-
+    
     const [addCluster] = useAddClusterMutation()
 
     const [updateCluster] = useUpdateClusterMutation()
@@ -61,16 +63,15 @@ function AddOrUpdateClustersFields() {
         city_id: null,
         location: ""
     }), []);
-
     const { register, handleSubmit, setError, setValue, reset, watch, formState: { errors } } = useForm({
         resolver: zodResolver(clusterSchema),
         defaultValues: defaultValues
     });
-
     useEffect(() => {
         if (id && clusterForUpdate) {
             reset({
                 name: clusterForUpdate.name || "",
+                email:clusterForUpdate.email || "",
                 country_id: clusterForUpdate.country_id || null,
                 state_id: clusterForUpdate.state_id || null,
                 city_id: clusterForUpdate.city_id || null,
@@ -186,7 +187,6 @@ function AddOrUpdateClustersFields() {
                                 onChange={(newValue) => {
                                     setValue("country_id", newValue, { shouldValidate: true });
                                     dispatch(setCountryId(newValue));
-
                                     if (!newValue) {
                                         setValue("state_id", null, { shouldValidate: true });
                                         dispatch(setStateId(null));

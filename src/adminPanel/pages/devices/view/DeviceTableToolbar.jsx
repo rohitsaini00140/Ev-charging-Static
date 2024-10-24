@@ -92,26 +92,27 @@ function DeviceTableToolbar() {
                     >
                         <Stack width={"100%"}>
                             <SearchInput
-                                placeholder="Search devices..."
+                                placeholder="Search Devices"
                                 width={"100%"}
                                 sx={{ color: "white",background:'#3e403d0f' }}
                                 onChange={(e) => handleSelect(e.target.value, "device")}
                                 value={deviceName}
                             />
                         </Stack>
-                        <Stack width={"100%"}>
-                            <SearchInput
-                                placeholder="Search serial number..."
-                                width={"100%"}
+                        <Stack width={"100%"} >
+                            <SearchableDropdown
+                                options={data.length > 0 ? data : []}
+                                placeholder="Select Cluster"
+                                value={deviceType}
                                 sx={{ color: "white",background:'#3e403d0f' }}
-                                onChange={(e) => handleSelect(e.target.value, "serialNumber")}
-                                value={deviceSerialNumber}
+                                onChange={(value) => handleSelect(value, "type")}
+                                type={"name"}
                             />
                         </Stack>
                         <Stack width={"100%"} >
                             <SearchableDropdown
                                 options={data.length > 0 ? data : []}
-                                placeholder="Select type"
+                                placeholder="Select Project"
                                 value={deviceType}
                                 sx={{ color: "white",background:'#3e403d0f' }}
                                 onChange={(value) => handleSelect(value, "type")}
@@ -122,7 +123,7 @@ function DeviceTableToolbar() {
                             <Selector
                                 value={deviceStatus}
                                 onChange={(e) => handleSelect(e.target.value, "status")}
-                                placeholder='Select status'
+                                placeholder='Select Status'
                                 selectType="single"
                                 options={["Active", "Inactive"]}
                             />

@@ -9,51 +9,52 @@ import { deviceSchema } from './deviceSchema';
 import { Typography } from '@mui/material';
 import { inputStyle } from '../../../component/inputStyle';
 import { useMemo } from 'react';
-import { useGetAllProjectsQuery } from '../../../../globalState/projects/projectsApis';
+import { useGetProjectsByClusterIdQuery } from '../../../../globalState/projects/projectsApis';
 import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 import Alertbar from '../../../component/Alertbar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
 import { useAddDeviceMutation, useGetDeviceByIDQuery, useUpdateDeviceMutation } from '../../../../globalState/devices/deviceApis';
-
-
+import { setClutersid } from '../../../../globalState/devices/deviceSlices';
 
 const role = JSON.parse(sessionStorage.getItem("role"))
-
-
-
 
 function AddOrUpdateDeviceFields() {
 
     const [loading, setLoading] = useState(false);
-
+  
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
         severity: 'success'
     });
 
+    let dispatch = useDispatch()
+
     const { id } = useParams()
     const navigate = useNavigate()
 
-    const { data: projectData, isSuccess: successProject } = useGetAllProjectsQuery()
+    const {cluters_id} = useSelector(state => state.device)
+
+    const { data: projectData, isSuccess: successProject } = useGetProjectsByClusterIdQuery(cluters_id)
     const { data: clustersData, isSuccess: successclusters } = useGetAllClustersQuery()
-
+    
     const { data, isSuccess } = useGetDeviceByIDQuery(id)
-
     const deviceForUpdate = isSuccess && data
 
     const allProjects = successProject && projectData?.projects
     const allclusters = successclusters && clustersData?.clusters
+
 
     const [addDevice] = useAddDeviceMutation()
     const [updateDevice] = useUpdateDeviceMutation()
 
     const defaultValues = useMemo(() => ({
         name: "",
-        project_id: 0,
-        cluster_id: 0,
+        project_id: null,
+        cluster_id: null,
         type: "",
         location: "",
         serial_number: "",
@@ -68,12 +69,14 @@ function AddOrUpdateDeviceFields() {
         if (id && deviceForUpdate) {
             reset({
                 name: deviceForUpdate.name || "",
-                project_id: deviceForUpdate.project_id || 0,
+                cluster_id: deviceForUpdate.cluster_id || null,
+                project_id: deviceForUpdate.project_id || null,
                 type: deviceForUpdate.type || "",
                 location: deviceForUpdate.location || "",
                 serial_number: deviceForUpdate.serial_number || "",
                 // status: deviceForUpdate.status || ""
             });
+            dispatch(setClutersid(deviceForUpdate.cluster_id))
         } else {
             reset(defaultValues);
         }
@@ -132,25 +135,25 @@ function AddOrUpdateDeviceFields() {
                             <SearchableDropdown
                                 options={allclusters.length > 0 ? allclusters : []}
                                 placeholder="Select Cluster"
-                                value={watch("cluster_id") || 0}
-                                onChange={(newValue) => setValue("cluster_id", newValue,
-                                    { shouldValidate: true },
-                                )}
+                                value={watch("cluster_id")}
+                                onChange={(newValue) => {
+                                    setValue("cluster_id", newValue, { shouldValidate: true });
+                                    dispatch(setClutersid(newValue));
+                                }}
                             />
                             {errors.cluster_id && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
                         </Stack>}
                         <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allProjects.length > 0 ? allProjects : []}
-                                placeholder="Select project"
-                                value={watch("project_id") || 0}
+                                placeholder="Select Project"
+                                value={watch("project_id")}
                                 onChange={(newValue) => setValue("project_id", newValue,
                                     { shouldValidate: true },
                                 )}
                             />
                             {errors.project_id && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.project_id.message}</Typography>}
                         </Stack>
-
 
                         <Stack width={"100%"}>
                             <TextField
@@ -172,7 +175,7 @@ function AddOrUpdateDeviceFields() {
                             <Selector
                                 value={watch("type")}
                                 onChange={(e) => setValue("type", e.target.value, { shouldValidate: true })}
-                                placeholder='Select device type'
+                                placeholder='Select Device Type'
                                 selectType="single"
                                 options={["Type-A", "Type-B", "Type-C"]}
                             />
@@ -180,7 +183,7 @@ function AddOrUpdateDeviceFields() {
                         </Stack>
                         <Stack width={"100%"}>
                             <TextField
-                                label="Device location"
+                                label="Device Location"
                                 {...register("location", { required: true })}
                                 value={watch("location") || ""}
                                 sx={inputStyle}
@@ -190,7 +193,7 @@ function AddOrUpdateDeviceFields() {
                         </Stack>
                         <Stack width={"100%"}>
                             <TextField
-                                label="Device serial No."
+                                label="Device Serial No."
                                 {...register("serial_number", { required: true })}
                                 value={watch("serial_number") || ""}
                                 sx={inputStyle}
