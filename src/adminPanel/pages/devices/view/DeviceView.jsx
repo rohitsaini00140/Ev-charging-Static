@@ -24,6 +24,10 @@ import Alertbar from '../../../component/Alertbar';
 
 function DeviceView() {
 
+
+  const { logInRole } = useSelector(state => state.role)
+
+
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
@@ -52,7 +56,12 @@ function DeviceView() {
 
   const { data: deviceData, isSuccess: deviceSuccess, isLoading } = useGetDeviceQuery({ page: pageNo, device_name: deviceName, cluster_name: clusterName, project_name: projectName, status: deviceStatus });
 
-  const allDeviceData = deviceSuccess && deviceData?.data
+  // const allDeviceData = deviceSuccess && deviceData?.data
+
+
+  const allDeviceData = logInRole?.user?.role?.name === "Superadmin" ? (deviceSuccess && (deviceData?.data)) : (deviceSuccess && deviceData?.data.filter(ele => ele?.cluster?.cluster_name === logInRole?.user?.name))
+
+
   const paginationData = deviceSuccess && deviceData;
   const { last_page } = paginationData;
    

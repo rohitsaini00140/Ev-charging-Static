@@ -7,9 +7,14 @@ import Action from '../../../component/Action';
 import { useSoftDeleteProjectsMutation, useSoftRestoreProjectsMutation } from '../../../../globalState/projects/projectsApis';
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import { Skeleton } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 const role = JSON.parse(sessionStorage.getItem("role"))
 function ProjectTableRow({ allProjectsData, currentpage }) {
+
+
+    const { logInRole } = useSelector(state => state.role)
+
 
     const [loading, setLoading] = useState(true);
 
@@ -43,7 +48,7 @@ function ProjectTableRow({ allProjectsData, currentpage }) {
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : ((currentpage - 1) * 10 + (i + 1))}
                         </StyledTableCell>
-                         {role?.user?.role?.name === "Superadmin" && <StyledTableCell color={"#222245"}>
+                         {logInRole?.user?.role?.name === "Superadmin" && <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data?.cluster?.cluster_name}
                         </StyledTableCell>}
                         {/* <StyledTableCell color={"#222245"}>

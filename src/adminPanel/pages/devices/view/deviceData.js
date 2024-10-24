@@ -1,3 +1,5 @@
+const role = JSON.parse(sessionStorage.getItem("role"))
+
 export const headLabel = [
     { id: "slno.", label: "SLNO." },
     { id: 'name', label: 'Cluster Name' },
@@ -8,4 +10,4 @@ export const headLabel = [
     { id: 'location', label: 'Location' },
     { id: "status", label: "Status" },
     { id: 'action', label: 'Action', align: "center" }
-]
+].filter(Boolean)

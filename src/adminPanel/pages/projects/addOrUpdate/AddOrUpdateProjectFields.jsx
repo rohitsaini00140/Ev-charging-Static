@@ -15,11 +15,18 @@ import { useAddProjectsMutation, useGetProjectByIdQuery, useUpdateProjectsMutati
 import { useGetAllUserQuery } from '../../../../globalState/user/userApis';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 const role = JSON.parse(sessionStorage.getItem("role"))
 
 
 function AddOrUpdateProjectFields() {
+
+
+    const { logInRole } = useSelector(state => state.role)
+
+
+
 
     const [loading, setLoading] = useState(false);
 
@@ -117,7 +124,7 @@ function AddOrUpdateProjectFields() {
         <>
             <form fullWidth onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing={{ xs: 4, sm: 4, md: 4 }}>
-                    {role?.user?.role?.name === "Superadmin" && <Stack
+                    {logInRole?.user?.role?.name === "Superadmin" && <Stack
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 4, sm: 4, md: 6 }}
                     >
@@ -147,7 +154,7 @@ function AddOrUpdateProjectFields() {
                     <Stack
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 4, sm: 4, md: 6 }}
-                        >
+                    >
                         <Stack width={"100%"}>
                             <TextField
                                 label="Project Name"

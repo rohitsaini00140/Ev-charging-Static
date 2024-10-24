@@ -4,10 +4,13 @@ import TableHead from '@mui/material/TableHead';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { headLabel } from './deviceData';
 import { StyledTableCell } from '../../../component/tableStyle';
+import { useSelector } from 'react-redux';
 
 // ----------------------------------------------------------------------
 
 function DeviceTableHead({ allDeviceData }) {
+
+    const { logInRole } = useSelector(state => state.role)
 
     return (
         <TableHead>
@@ -21,15 +24,25 @@ function DeviceTableHead({ allDeviceData }) {
                     </StyledTableCell>
                 }
 
-                {headLabel.map((headCell) => (
+                {logInRole?.user?.role?.name === "Superadmin" ? headLabel.map((headCell) => (
                     <StyledTableCell
-                        sx={{ width: headCell.width, minWidth: headCell.minWidth }}
+                        sx={{ width: headCell?.width, minWidth: headCell?.minWidth }}
                     >
                         <TableSortLabel hideSortIcon>
-                            {headCell.label}
+                            {headCell?.label}
                         </TableSortLabel>
                     </StyledTableCell>
                 ))
+                    :
+                    headLabel.filter(ele => ele.label !== "Cluster Name").map((headCell) => (
+                        <StyledTableCell
+                            sx={{ width: headCell?.width, minWidth: headCell?.minWidth }}
+                        >
+                            <TableSortLabel hideSortIcon>
+                                {headCell?.label}
+                            </TableSortLabel>
+                        </StyledTableCell>
+                    ))
                     // :
                     // headLabel.slice(0, -1).map((headCell) => (
                     //     <TableCell

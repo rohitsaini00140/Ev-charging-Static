@@ -9,9 +9,15 @@ import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import { useEffect, useState } from "react"
 import { Skeleton } from '@mui/material';
 import { useRestoreDeletedUserMutation, useSoftDeleteUserMutation } from '../../../../globalState/user/userApis';
+import { useSelector } from 'react-redux';
 
 
 function UserTableRow({ allUserData, currentpage }) {
+
+
+    const { logInRole } = useSelector(state => state.role)
+
+
 
     const [loading, setLoading] = useState(true);
 
@@ -44,7 +50,7 @@ function UserTableRow({ allUserData, currentpage }) {
                             // checked={selectedCategoryId.includes(data["ID"])}
                             />
                         </StyledTableCell>
-                        <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster?.cluster_name}</StyledTableCell>
+                     {logInRole?.user?.role?.name === "Superadmin" && <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster?.cluster_name}</StyledTableCell>}
                         <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.name}</StyledTableCell>
                         <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.email}</StyledTableCell>
                         <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.phone}</StyledTableCell>

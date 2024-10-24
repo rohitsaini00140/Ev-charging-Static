@@ -26,6 +26,11 @@ const role = JSON.parse(sessionStorage.getItem("role"))
 
 function ProjectTableToolbar() {
 
+
+    const { logInRole } = useSelector(state => state.role)
+
+
+
     const dispatch = useDispatch()
     const location = useLocation()
 
@@ -127,7 +132,7 @@ function ProjectTableToolbar() {
                                 value={searchProjectKeywords}
                             />
                         </Stack>
-                        {role?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
+                        {logInRole?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allCluster.length > 0 ? allCluster : []}
                                 placeholder="Select Cluster"
