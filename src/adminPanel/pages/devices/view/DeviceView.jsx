@@ -45,21 +45,20 @@ function DeviceView() {
   }, [location.state, navigate]);
 
   const dispatch = useDispatch()
+   
+  const { pageNo, deviceName, deviceStatus } = useSelector(state => state.device);
+  const { projectName } = useSelector(state => state.project);
+  const { clusterName } = useSelector(state => state.cluster);
 
-  const { pageNo, deviceName, deviceSerialNumber, deviceType, deviceStatus } = useSelector(state => state.device);
-
-  const { data: deviceData, isSuccess: deviceSuccess, isLoading } = useGetDeviceQuery({ page: pageNo, name: deviceName, serial_number: deviceSerialNumber, type: deviceType, status: deviceStatus });
+  const { data: deviceData, isSuccess: deviceSuccess, isLoading } = useGetDeviceQuery({ page: pageNo, device_name: deviceName, cluster_name: clusterName, project_name: projectName, status: deviceStatus });
 
   const allDeviceData = deviceSuccess && deviceData?.data
-
   const paginationData = deviceSuccess && deviceData;
-
   const { last_page } = paginationData;
-
+   
   const handlePageChange = (event, value) => {
     dispatch(setDeviceListPageNo(value));
   };
-
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === 'clickaway') {
@@ -87,8 +86,6 @@ function DeviceView() {
               variant="contained"
               sx={{
                 boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)',
-                // border:'1px solid #20c997',
-                // color:'#20c997',
                 padding: '10px 10px',
                 bgcolor: "#20c997",
                 color: 'white',

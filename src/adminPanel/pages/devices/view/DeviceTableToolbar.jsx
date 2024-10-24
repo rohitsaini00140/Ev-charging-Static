@@ -12,24 +12,30 @@ import { Stack } from '@mui/material';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import Selector from "../../../component/selector/Selector"
-import { setDeviceListPageNo, setDeviceName, setDeviceSerialNumber, setDeviceStatus, setDeviceType } from '../../../../globalState/devices/deviceSlices';
+import { setDeviceListPageNo, setDeviceName,setDeviceStatus } from '../../../../globalState/devices/deviceSlices';
+import { setProjectName } from '../../../../globalState/projects/projectsSlices';
 import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
+import { setClusterName } from '../../../../globalState/cluster/clusterSlices';
+
 import { useGetAllProjectsQuery } from '../../../../globalState/projects/projectsApis';
 // ----------------------------------------------------------------------
 
 const data = [{ id: 1, name: "Type-A" }, { id: 2, name: "Type-B" }, { id: 3, name: "Type-C" }]
- 
 
 function DeviceTableToolbar() {
-
     const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
     const { data: project, isSuccess: projectSuccess } = useGetAllProjectsQuery()
     
     const allClusters =  clustersSuccess && clusters.clusters
     const allProjects =  projectSuccess && project.projects
 
+
     const dispatch = useDispatch()
-    const { deviceName, deviceSerialNumber, deviceType, deviceStatus } = useSelector(state => state.device)
+    const { deviceName, deviceStatus } = useSelector(state => state.device)
+
+    const { projectName } = useSelector(state => state.project)
+    const { clusterName } = useSelector(state => state.cluster)
+    
     // pagination page filter start here
     function handleSelect(option, type) {
         switch (type) {
@@ -40,18 +46,18 @@ function DeviceTableToolbar() {
                     dispatch(setDeviceName(''));
                 }
                 break;
-            case 'serialNumber':
+            case 'cluster_name':
                 if (option) {
-                    dispatch(setDeviceSerialNumber(option));
+                    dispatch(setClusterName(option));
                 } else {
-                    dispatch(setDeviceSerialNumber(''));
+                    dispatch(setClusterName(''));
                 }
                 break;
-            case 'type':
+            case 'project_name':
                 if (option) {
-                    dispatch(setDeviceType(option));
+                    dispatch(setProjectName(option));
                 } else {
-                    dispatch(setDeviceType(''));
+                    dispatch(setProjectName(''));
                 }
                 break;
             case 'status':
@@ -66,7 +72,6 @@ function DeviceTableToolbar() {
         }
         dispatch(setDeviceListPageNo(1));
     }
-
     return (
         <Toolbar
             sx={{
@@ -110,20 +115,19 @@ function DeviceTableToolbar() {
                             <SearchableDropdown
                                 options={allClusters.length > 0 ? allClusters : []}
                                 placeholder="Select Cluster"
-                                value={deviceType}
+                                value={clusterName}
                                 sx={{ color: "white",background:'#3e403d0f' }}
-                                onChange={(value) => handleSelect(value, "type")}
+                                onChange={(value) => handleSelect(value, "cluster_name")}
                                 type={"name"}
                             />
                         </Stack>
-                        
                         <Stack width={"100%"} >
                             <SearchableDropdown
                                 options={allProjects.length > 0 ? allProjects : []}
                                 placeholder="Select Project"
-                                value={deviceType}
+                                value={projectName}
                                 sx={{ color: "white",background:'#3e403d0f' }}
-                                onChange={(value) => handleSelect(value, "type")}
+                                onChange={(value) => handleSelect(value, "project_name")}
                                 type={"name"}
                             />
                         </Stack>

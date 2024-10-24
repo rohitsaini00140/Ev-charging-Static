@@ -49,10 +49,10 @@ function DeviceTableRow({ allDeviceData, currentPageNo }) {
                         </StyledTableCell>
                        
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster.cluster_name}
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster?.cluster_name}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
-                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.project.project_name}
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.project?.project_name}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.name}

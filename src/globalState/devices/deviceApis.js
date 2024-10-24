@@ -18,12 +18,12 @@ export const deviceApi = createApi({
         }),
 
         getDevice: builder.query({
-            query: ({ page, name, serial_number, type, status }) => {
+            query: ({ page, cluster_name, project_name, device_name, status }) => {
                 const params = new URLSearchParams();
                 if (page) params.append('page', page);
-                if (name) params.append('name', name);
-                if (serial_number) params.append('serial_number', serial_number);
-                if (type) params.append('type', type);
+                if (cluster_name) params.append('cluster_name', cluster_name);
+                if (project_name) params.append('project_name', project_name);
+                if (device_name) params.append('device_name', device_name);
                 if (status) params.append('status', status)
 
                 return `/devices/list?${params.toString()}`;
