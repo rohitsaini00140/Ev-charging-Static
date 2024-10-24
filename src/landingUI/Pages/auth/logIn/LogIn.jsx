@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Button, TextField, Typography, Container, Box, Stack } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { FcGoogle } from "react-icons/fc";
@@ -15,6 +15,9 @@ import { useForm } from 'react-hook-form';
 import { useLoginUserMutation } from '../../../../globalState/user/userApis';
 import Alertbar from '../../../../adminPanel/component/Alertbar';
 import { error_position } from './loginStyle';
+import { useSelector, useDispatch } from 'react-redux';
+import { setLogIn } from '../../../../globalState/roles/rolesSlices';
+import { useLocation } from 'react-router-dom';
 
 const companyLogo = require('../../../img/logo.png');
 
@@ -25,6 +28,14 @@ function Login() {
         message: '',
         severity: 'success'
     });
+
+
+    const dispatch = useDispatch()
+    const { logInRole } = useSelector(state => state.role)
+
+    console.log(logInRole?.user?.role?.name)
+
+    const location = useLocation()
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -42,12 +53,26 @@ function Login() {
         defaultValues: defaultValues
     });
 
+
+
+    useEffect(() => {
+        if (location.pathname === "/login") {
+            sessionStorage.removeItem("role");   // Clear sessionStorage
+            dispatch(setLogIn(""));              // Clear logInRole state
+        }
+    }, [location.pathname, dispatch]);
+
+
+
     const onSubmit = async (data) => {
         try {
+            dispatch(setLogIn(""))
             const result = await loginUser(data).unwrap();
             sessionStorage.setItem("role", JSON.stringify(result))
+            const getLoginRole = JSON.parse(sessionStorage.getItem("role"))
+            dispatch(setLogIn(getLoginRole))
 
-            const role = JSON.parse(sessionStorage.getItem("role"))
+            console.log("roleName", logInRole?.user?.role?.name)
 
             setSnackbar({
                 open: true,
@@ -55,9 +80,10 @@ function Login() {
                 severity: 'success'
             });
 
-            setTimeout(() => {
-                navigate(`/${role?.user?.role?.name === "Superadmin" ? "admin" : "clusterAdmin"}`);
-            }, 2000);
+            // setTimeout(() => {
+            //     const roleName = result?.user?.role?.name;
+            //     navigate(`/${roleName === "Superadmin" ? "admin" : "clusterAdmin"}`);
+            // }, 2000);
 
         } catch (error) {
             setSnackbar({
@@ -73,6 +99,21 @@ function Login() {
             console.error("Error during submission:", error);
         }
     };
+
+
+
+    useEffect(() => {
+        if (logInRole?.user?.role?.name) {
+            const roleName = logInRole.user.role.name;
+            const timer = setTimeout(() => {
+                navigate(`/${roleName === "Superadmin" ? "admin" : "clusterAdmin"}`);
+            }, 2000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [logInRole, navigate]);
+
+
 
     const handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') {

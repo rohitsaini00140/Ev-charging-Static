@@ -61,9 +61,8 @@ function UserView() {
 
   // const allUserData = userSuccess && (allUsers?.data).map(ele => ele?.name === role?.user?.name);
 
-  const allUserData = role?.user?.role?.name === "Superadmin" ? userSuccess && (allUsers?.data) : userSuccess && allUsers?.data?.filter(ele => ele?.name === role?.user?.name);
+  const allUserData = role?.user?.role?.name === "Superadmin" ? (userSuccess && (allUsers?.data)) : (userSuccess && allUsers?.data?.filter(ele => ele?.name === role?.user?.name))
 
-  console.log(allUsers?.data)
 
   const paginationData = userSuccess && allUsers;
 
