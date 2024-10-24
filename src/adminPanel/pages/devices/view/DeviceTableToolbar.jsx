@@ -13,17 +13,24 @@ import SearchableDropdown from '../../../component/searchableDropdown/Searchable
 import { useDispatch, useSelector } from 'react-redux';
 import Selector from "../../../component/selector/Selector"
 import { setDeviceListPageNo, setDeviceName, setDeviceSerialNumber, setDeviceStatus, setDeviceType } from '../../../../globalState/devices/deviceSlices';
-
+import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
+import { useGetAllProjectsQuery } from '../../../../globalState/projects/projectsApis';
 // ----------------------------------------------------------------------
 
 const data = [{ id: 1, name: "Type-A" }, { id: 2, name: "Type-B" }, { id: 3, name: "Type-C" }]
+ 
 
 function DeviceTableToolbar() {
 
+    const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
+    const { data: project, isSuccess: projectSuccess } = useGetAllProjectsQuery()
+    
+    const allClusters =  clustersSuccess && clusters.clusters
+    const allProjects =  projectSuccess && project.projects
+
     const dispatch = useDispatch()
-
     const { deviceName, deviceSerialNumber, deviceType, deviceStatus } = useSelector(state => state.device)
-
+    // pagination page filter start here
     function handleSelect(option, type) {
         switch (type) {
             case 'device':
@@ -101,7 +108,7 @@ function DeviceTableToolbar() {
                         </Stack>
                         <Stack width={"100%"} >
                             <SearchableDropdown
-                                options={data.length > 0 ? data : []}
+                                options={allClusters.length > 0 ? allClusters : []}
                                 placeholder="Select Cluster"
                                 value={deviceType}
                                 sx={{ color: "white",background:'#3e403d0f' }}
@@ -109,9 +116,10 @@ function DeviceTableToolbar() {
                                 type={"name"}
                             />
                         </Stack>
+                        
                         <Stack width={"100%"} >
                             <SearchableDropdown
-                                options={data.length > 0 ? data : []}
+                                options={allProjects.length > 0 ? allProjects : []}
                                 placeholder="Select Project"
                                 value={deviceType}
                                 sx={{ color: "white",background:'#3e403d0f' }}
