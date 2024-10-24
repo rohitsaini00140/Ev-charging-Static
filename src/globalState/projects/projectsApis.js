@@ -28,13 +28,12 @@ export const projectApi = createApi({
         }),
         
          getFilteredProjects: builder.query({
-            query: ({ page, clusterName, projectName, userName, status }) => {
+            query: ({ page, clusterName, projectName, status }) => {
                 const params = new URLSearchParams();
 
                 if (page) params.append('page', page);
                 if (clusterName) params.append('cluster_name', clusterName);
                 if (projectName) params.append('project_name', projectName);
-                if (userName) params.append('user_name', userName);
                 if (status) params.append('status', status);
 
                 return `/projects/list?${params.toString()}`;

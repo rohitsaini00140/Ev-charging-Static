@@ -24,6 +24,13 @@ import Alertbar from '../../../component/Alertbar';
 
 function ProjectView() {
 
+
+
+  const { logInRole } = useSelector(state => state.role)
+
+
+
+
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
@@ -51,11 +58,17 @@ function ProjectView() {
 
   const { clusterName } = useSelector(state => state.cluster)
 
+  console.log(clusterName)
+
   const { userName } = useSelector(state => state.user)
 
-  const { data: filteredData, isSuccess: filteredDataSuccess, isLoading } = useGetFilteredProjectsQuery({ page: pageNo, projectName: searchProjectKeywords, clusterName, userName, status: projectStatus });
+  const { data: filteredData, isSuccess: filteredDataSuccess, isLoading } = useGetFilteredProjectsQuery({ page: pageNo, projectName: searchProjectKeywords, clusterName, status: projectStatus });
 
-  const allProjectsData = filteredDataSuccess && filteredData?.data;
+  // const allProjectsData = filteredDataSuccess && filteredData?.data;
+
+  const allProjectsData = logInRole?.user?.role?.name === "Superadmin" ? (filteredDataSuccess && (filteredData?.data)) : (filteredDataSuccess && filteredData?.data.filter(ele => ele?.cluster?.cluster_name === logInRole?.user?.name))
+
+  console.log(allProjectsData)
 
   const paginationData = filteredDataSuccess && filteredData;
 
