@@ -12,17 +12,10 @@ import { useGetAllUserQuery } from '../../../globalState/user/userApis';
 import { useGetAllClustersQuery } from '../../../globalState/cluster/clusterApis';
 import { useGetAllDeviceQuery } from '../../../globalState/devices/deviceApis';
 import { useSelector } from 'react-redux';
-
 // const role = JSON.parse(sessionStorage.getItem("role"))
-
 function Dashboard() {
-
-
+  
   const { logInRole } = useSelector(state => state.role)
-
-
-
-
   const { data: usersData, isSuccess: usersSuccess } = useGetAllUserQuery();
   const { data: projectsData, isSuccess: projectsSuccess } = useGetAllProjectsQuery();
   const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery();
