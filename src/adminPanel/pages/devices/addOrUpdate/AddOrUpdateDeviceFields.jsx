@@ -23,6 +23,11 @@ const role = JSON.parse(sessionStorage.getItem("role"))
 
 function AddOrUpdateDeviceFields() {
 
+
+    const { logInRole } = useSelector(state => state.role)
+
+
+
     const [loading, setLoading] = useState(false);
 
     const [snackbar, setSnackbar] = useState({
@@ -38,15 +43,14 @@ function AddOrUpdateDeviceFields() {
 
     const { cluters_id } = useSelector(state => state.device)
 
-    console.log(cluters_id)
-
-    const { data: projectData, isSuccess: successProject } = useGetProjectsByClusterIdQuery(cluters_id, { skip: cluters_id === null || cluters_id === undefined })
+    const { data: projectData, isSuccess: successProject } = useGetProjectsByClusterIdQuery(cluters_id, { skip: cluters_id === null || cluters_id === undefined || cluters_id === "" })
     const { data: clustersData, isSuccess: successclusters } = useGetAllClustersQuery()
 
-    const { data, isSuccess } = useGetDeviceByIDQuery(id)
+    const { data, isSuccess } = useGetDeviceByIDQuery(id, { skip: !id })
     const deviceForUpdate = isSuccess && data
 
     const allProjects = successProject && projectData?.projects
+
     const allclusters = successclusters && clustersData?.clusters
 
 
@@ -133,18 +137,16 @@ function AddOrUpdateDeviceFields() {
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 3, sm: 2, md: 6 }}
                     >
-                        {role?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
+                        {logInRole?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allclusters.length > 0 ? allclusters : []}
                                 placeholder="Select Cluster"
                                 value={watch("cluster_id")}
                                 onChange={(newValue) => {
                                     setValue("cluster_id", newValue, { shouldValidate: true });
-                                    // dispatch(setClutersid(newValue));
-                                    if (newValue !== null && newValue !== undefined) {
-                                        dispatch(setClutersid(newValue));
-                                    } else {
-                                        dispatch(setClutersid(newValue));
+                                    dispatch(setClutersid(newValue));
+                                    if (newValue === null || newValue === undefined) {
+                                        setValue("project_id", null, { shouldValidate: true });
                                     }
                                 }}
                             />
@@ -154,7 +156,7 @@ function AddOrUpdateDeviceFields() {
                             <SearchableDropdown
                                 options={allProjects.length > 0 ? allProjects : []}
                                 placeholder="Select Project"
-                                value={watch("project_id")}
+                                value={watch("project_id") || null}
                                 onChange={(newValue) => setValue("project_id", newValue,
                                     { shouldValidate: true },
                                 )}
