@@ -16,22 +16,18 @@ export const rolesApi = createApi({
             }),
             invalidatesTags: ['Roles']
         }),
-
         getRoles: builder.query({
             query: () => `/roles`,
             providesTags: ['Roles']
         }),
-
         getAllRoles: builder.query({
-            query: ({ status }) => `/roles/list?status=${status}`,
+            query: ({ status,roleName }) => `/roles/list?status=${status}&role_name=${roleName}`,
             providesTags: ['Roles']
         }),
-
         getRoleById: builder.query({
             query: (id) => `/roles/show/${id}`,
             providesTags: ['Roles']
         }),
-
         updateRole: builder.mutation({
             query: ({ updatedRoleData, id }) => ({
                 url: `/roles/update/${id}`,
@@ -40,7 +36,6 @@ export const rolesApi = createApi({
             }),
             invalidatesTags: ['Roles']
         }),
-
         softDeleteRole: builder.mutation({
             query: ({ id, softDeletedRoleData }) => ({
                 url: `/roles/soft-delete/${id}`,
@@ -49,7 +44,6 @@ export const rolesApi = createApi({
             }),
             invalidatesTags: ['Roles'],
         }),
-
         restoreDeletedRole: builder.mutation({
             query: (id) => ({
                 url: `/roles/restore/${id}`,
