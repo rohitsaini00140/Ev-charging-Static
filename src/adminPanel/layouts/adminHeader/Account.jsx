@@ -8,6 +8,8 @@ import { alpha } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // import { account } from 'src/_mock/account';
 
@@ -31,6 +33,14 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 function Account() {
+
+
+
+
+    const navigate = useNavigate()
+
+
+
     const [open, setOpen] = useState(null);
 
     const handleOpen = (event) => {
@@ -41,11 +51,17 @@ function Account() {
         setOpen(null);
     };
 
-    const role = JSON.parse(sessionStorage.getItem("role"))
+    const handleLogout = () => {
+        setOpen(null)
+        sessionStorage.removeItem("role")
+        navigate("/login")
+    }
+
+    const { logInRole } = useSelector(state => state.role)
 
     const account = {
-        displayName: role?.user?.name,
-        email: role?.user?.email,
+        displayName: logInRole?.user?.name,
+        email: logInRole?.user?.email,
         photoURL: '/assets/images/avatars/avatar_25.jpg',
     };
 
@@ -89,8 +105,8 @@ function Account() {
                         mt: 1,
                         ml: 0.75,
                         width: 200,
-                        background:'#141d20',
-                        color:'white'
+                        background: '#141d20',
+                        color: 'white'
                     },
                 }}
             >
@@ -103,7 +119,7 @@ function Account() {
                     </Typography>
                 </Box>
 
-                <Divider sx={{ borderStyle: 'dashed',borderColor:'#637381' }} />
+                <Divider sx={{ borderStyle: 'dashed', borderColor: '#637381' }} />
 
                 {MENU_OPTIONS.map((option) => (
                     <MenuItem key={option.label} onClick={handleClose}>
@@ -111,13 +127,13 @@ function Account() {
                     </MenuItem>
                 ))}
 
-                <Divider sx={{ borderStyle: 'dashed', borderColor:'#637381', m: 0 }} />
+                <Divider sx={{ borderStyle: 'dashed', borderColor: '#637381', m: 0 }} />
 
                 <MenuItem
                     disableRipple
                     disableTouchRipple
-                    onClick={handleClose}
-                    sx={{ typography: 'body2', fontWeight:'600', color: 'error.main', py: 1.5 }}
+                    onClick={handleLogout}
+                    sx={{ typography: 'body2', fontWeight: '600', color: 'error.main', py: 1.5 }}
                 >
                     Logout
                 </MenuItem>

@@ -10,10 +10,11 @@ import { usePathname } from '../../customHooks/usePathname';
 import { useResponsive } from '../../customHooks/useResponsive';
 import Scrollbar from '../../component/scrollbar/Scrollbar';
 import { NAV } from './configLayout';
-import navConfig from './NavigationConfig';
+import { navConfig, navConfig2 } from './NavigationConfig';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Collapse } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 // ----------------------------------------------------------------------
 // const account = {
@@ -22,16 +23,22 @@ import { Link } from 'react-router-dom';
 //     photoURL: '/assets/images/avatar.svg',
 // };
 
-const role = JSON.parse(sessionStorage.getItem("role"))
 
-const account = {
-    // displayName: role?.user?.name,
-    designation: role?.user?.role?.name,
-    photoURL: '/assets/images/avatar.svg',
-};
 
 // ----------------------------------------------------------------------
 function Nav({ openNav, onCloseNav }) {
+
+
+    const { logInRole } = useSelector(state => state.role)
+
+    const account = {
+        // displayName: role?.user?.name,
+        designation: logInRole?.user?.role?.name,
+        photoURL: '/assets/images/avatar.svg',
+    };
+
+
+
     const pathname = usePathname();
     const upLg = useResponsive('up', 'lg');
     useEffect(() => {
@@ -73,7 +80,7 @@ function Nav({ openNav, onCloseNav }) {
 
     const renderMenu = (
         <Stack component="nav" spacing={0.5} sx={{ px: 2 }}>
-            {navConfig.map((item) => (
+            {(logInRole?.user?.role?.name === "Superadmin" ? navConfig : navConfig2).map((item) => (
                 <NavItem key={item.title} item={item} />
             ))}
         </Stack>
