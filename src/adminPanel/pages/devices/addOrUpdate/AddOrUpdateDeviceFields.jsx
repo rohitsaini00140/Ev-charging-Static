@@ -15,7 +15,7 @@ import SearchableDropdown from '../../../component/searchableDropdown/Searchable
 import Alertbar from '../../../component/Alertbar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAddDeviceMutation, useGetDeviceByIDQuery, useUpdateDeviceMutation } from '../../../../globalState/devices/deviceApis';
 import { setClutersid } from '../../../../globalState/devices/deviceSlices';
 
@@ -24,7 +24,7 @@ const role = JSON.parse(sessionStorage.getItem("role"))
 function AddOrUpdateDeviceFields() {
 
     const [loading, setLoading] = useState(false);
-  
+
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
@@ -36,11 +36,13 @@ function AddOrUpdateDeviceFields() {
     const { id } = useParams()
     const navigate = useNavigate()
 
-    const {cluters_id} = useSelector(state => state.device)
+    const { cluters_id } = useSelector(state => state.device)
 
-    const { data: projectData, isSuccess: successProject } = useGetProjectsByClusterIdQuery(cluters_id)
+    console.log(cluters_id)
+
+    const { data: projectData, isSuccess: successProject } = useGetProjectsByClusterIdQuery(cluters_id, { skip: cluters_id === null || cluters_id === undefined })
     const { data: clustersData, isSuccess: successclusters } = useGetAllClustersQuery()
-    
+
     const { data, isSuccess } = useGetDeviceByIDQuery(id)
     const deviceForUpdate = isSuccess && data
 
@@ -138,7 +140,12 @@ function AddOrUpdateDeviceFields() {
                                 value={watch("cluster_id")}
                                 onChange={(newValue) => {
                                     setValue("cluster_id", newValue, { shouldValidate: true });
-                                    dispatch(setClutersid(newValue));
+                                    // dispatch(setClutersid(newValue));
+                                    if (newValue !== null && newValue !== undefined) {
+                                        dispatch(setClutersid(newValue));
+                                    } else {
+                                        dispatch(setClutersid(newValue));
+                                    }
                                 }}
                             />
                             {errors.cluster_id && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
