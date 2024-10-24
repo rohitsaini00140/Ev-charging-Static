@@ -12,7 +12,7 @@ import { Stack } from '@mui/material';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import Selector from "../../../component/selector/Selector"
-import { setDeviceListPageNo, setDeviceName,setDeviceStatus } from '../../../../globalState/devices/deviceSlices';
+import { setDeviceListPageNo, setDeviceName, setDeviceStatus } from '../../../../globalState/devices/deviceSlices';
 import { setProjectName } from '../../../../globalState/projects/projectsSlices';
 import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
 import { setClusterName } from '../../../../globalState/cluster/clusterSlices';
@@ -23,11 +23,17 @@ import { useGetAllProjectsQuery } from '../../../../globalState/projects/project
 const data = [{ id: 1, name: "Type-A" }, { id: 2, name: "Type-B" }, { id: 3, name: "Type-C" }]
 
 function DeviceTableToolbar() {
+
+
+
+    const { logInRole } = useSelector(state => state.role)
+
+
     const { data: clusters, isSuccess: clustersSuccess } = useGetAllClustersQuery()
     const { data: project, isSuccess: projectSuccess } = useGetAllProjectsQuery()
-    
-    const allClusters =  clustersSuccess && clusters.clusters
-    const allProjects =  projectSuccess && project.projects
+
+    const allClusters = clustersSuccess && clusters.clusters
+    const allProjects = projectSuccess && project.projects
 
 
     const dispatch = useDispatch()
@@ -35,7 +41,7 @@ function DeviceTableToolbar() {
 
     const { projectName } = useSelector(state => state.project)
     const { clusterName } = useSelector(state => state.cluster)
-    
+
     // pagination page filter start here
     function handleSelect(option, type) {
         switch (type) {
@@ -106,27 +112,27 @@ function DeviceTableToolbar() {
                             <SearchInput
                                 placeholder="Search Devices"
                                 width={"100%"}
-                                sx={{ color: "white",background:'#3e403d0f' }}
+                                sx={{ color: "white", background: '#3e403d0f' }}
                                 onChange={(e) => handleSelect(e.target.value, "device")}
                                 value={deviceName}
                             />
                         </Stack>
-                        <Stack width={"100%"} >
+                        {logInRole?.user?.role?.name === "Superadmin" && <Stack width={"100%"} >
                             <SearchableDropdown
                                 options={allClusters.length > 0 ? allClusters : []}
                                 placeholder="Select Cluster"
                                 value={clusterName}
-                                sx={{ color: "white",background:'#3e403d0f' }}
+                                sx={{ color: "white", background: '#3e403d0f' }}
                                 onChange={(value) => handleSelect(value, "cluster_name")}
                                 type={"name"}
                             />
-                        </Stack>
+                        </Stack>}
                         <Stack width={"100%"} >
                             <SearchableDropdown
                                 options={allProjects.length > 0 ? allProjects : []}
                                 placeholder="Select Project"
                                 value={projectName}
-                                sx={{ color: "white",background:'#3e403d0f' }}
+                                sx={{ color: "white", background: '#3e403d0f' }}
                                 onChange={(value) => handleSelect(value, "project_name")}
                                 type={"name"}
                             />

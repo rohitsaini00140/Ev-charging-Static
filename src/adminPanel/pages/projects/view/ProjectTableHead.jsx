@@ -4,8 +4,14 @@ import TableHead from '@mui/material/TableHead';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { headLabel } from './projectData';
 import { StyledTableCell } from '../../../component/tableStyle';
+import { useSelector } from 'react-redux';
 // ----------------------------------------------------------------------
 function ProjectTableHead({ allProjectsData }) {
+
+
+    const { logInRole } = useSelector(state => state.role)
+
+
     return (
         <TableHead>
             <TableRow>
@@ -17,7 +23,7 @@ function ProjectTableHead({ allProjectsData }) {
                         />
                     </StyledTableCell>
                 }
-                {headLabel.map((headCell) => (
+                {logInRole?.user?.role?.name === "Superadmin" ? headLabel.map((headCell) => (
                     <StyledTableCell
                         sx={{ width: headCell?.width, minWidth: headCell?.minWidth }}
                     >
@@ -25,7 +31,18 @@ function ProjectTableHead({ allProjectsData }) {
                             {headCell?.label}
                         </TableSortLabel>
                     </StyledTableCell>
-                ))}
+                ))
+                    :
+                    headLabel.filter(ele => ele.label !== "Cluster Name").map((headCell) => (
+                        <StyledTableCell
+                            sx={{ width: headCell?.width, minWidth: headCell?.minWidth }}
+                        >
+                            <TableSortLabel hideSortIcon>
+                                {headCell?.label}
+                            </TableSortLabel>
+                        </StyledTableCell>
+                    ))
+                }
             </TableRow>
         </TableHead>
     );

@@ -30,6 +30,12 @@ const role = JSON.parse(sessionStorage.getItem("role"))
 
 function UserView() {
 
+
+
+  const { logInRole } = useSelector(state => state.role)
+
+
+
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
@@ -61,7 +67,7 @@ function UserView() {
 
   // const allUserData = userSuccess && (allUsers?.data).map(ele => ele?.name === role?.user?.name);
 
-  const allUserData = role?.user?.role?.name === "Superadmin" ? (userSuccess && (allUsers?.data)) : (userSuccess && allUsers?.data?.filter(ele => ele?.name === role?.user?.name))
+  const allUserData = logInRole?.user?.role?.name === "Superadmin" ? (userSuccess && (allUsers?.data)) : (userSuccess && allUsers?.data?.filter(ele => ele?.name === logInRole?.user?.name))
 
 
   const paginationData = userSuccess && allUsers;

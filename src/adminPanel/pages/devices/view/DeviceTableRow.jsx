@@ -9,11 +9,19 @@ import { deviceData } from './deviceData';
 import { StyledTableCell, StyledTableRow } from '../../../component/tableStyle';
 import { useState, useEffect } from 'react';
 import { Skeleton } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { useRestoreDeviceMutation, useSoftDeleteDeviceMutation } from '../../../../globalState/devices/deviceApis';
 
 // ----------------------------------------------------------------------
 
 function DeviceTableRow({ allDeviceData, currentPageNo }) {
+
+
+
+    const { logInRole } = useSelector(state => state.role)
+
+
+
 
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -48,9 +56,9 @@ function DeviceTableRow({ allDeviceData, currentPageNo }) {
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : ((currentPageNo - 1) * 10 + (i + 1))}
                         </StyledTableCell>
                        
-                        <StyledTableCell color={"#222245"}>
+                        {logInRole?.user?.role?.name === "Superadmin" && <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster?.cluster_name}
-                        </StyledTableCell>
+                        </StyledTableCell>}
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.project?.project_name}
                         </StyledTableCell>
@@ -60,7 +68,6 @@ function DeviceTableRow({ allDeviceData, currentPageNo }) {
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.serial_number}
                         </StyledTableCell>
-                       
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.type}
                         </StyledTableCell>

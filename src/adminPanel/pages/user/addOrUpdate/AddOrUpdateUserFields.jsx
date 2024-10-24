@@ -14,6 +14,7 @@ import { useCreateUserMutation, useGetUserByIdQuery, useUpdateUserMutation } fro
 import Alertbar from '../../../component/Alertbar';
 import { useGetRolesQuery } from '../../../../globalState/roles/rolesApi';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 
@@ -24,6 +25,11 @@ const role = JSON.parse(sessionStorage.getItem("role"))
 
 
 function AddOrUpdateUserFields() {
+
+
+    const { logInRole } = useSelector(state => state.role)
+
+
 
     const [loading, setLoading] = useState(false);
 
@@ -131,7 +137,7 @@ function AddOrUpdateUserFields() {
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 1, sm: 2, md: 6 }}
                     >
-                        {role?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
+                        {logInRole?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allcluters.length > 0 ? allcluters : []}
                                 placeholder="Select Cluster"
