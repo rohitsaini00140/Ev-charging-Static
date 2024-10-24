@@ -13,7 +13,7 @@ import Selector from '../../../component/selector/Selector';
 import SearchableDropdown from "../../../component/searchableDropdown/SearchableDropdown"
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserListPageNo, setUserName, setUserStatus } from '../../../../globalState/user/userSlice';
-import { useGetAllRolesQuery } from '../../../../globalState/roles/rolesApi';
+import { useGetAllRolesQuery, useGetRolesQuery } from '../../../../globalState/roles/rolesApi';
 import { setRole } from '../../../../globalState/roles/rolesSlices';
 
 // ----------------------------------------------------------------------
@@ -26,7 +26,7 @@ function UserTableToolbar() {
 
     const { role } = useSelector(state => state.role)
 
-    const { data: rolesData, isSuccess: rolesSuccess } = useGetAllRolesQuery()
+    const { data: rolesData, isSuccess: rolesSuccess } = useGetRolesQuery()
 
     const allRoleData = rolesSuccess && rolesData?.roles
 
