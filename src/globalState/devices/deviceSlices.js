@@ -19,6 +19,9 @@ const deviceSlice = createSlice({
         setClutersid: (state, action) => {
             state.cluters_id = action.payload
         },
+        setclusterName: (state, action) => {
+            state.setclusterName = action.payload
+        },
         setDeviceName: (state, action) => {
             state.deviceName = action.payload
         },
