@@ -75,7 +75,8 @@ function AddOrUpdateDeviceFields() {
         if (id && deviceForUpdate) {
             reset({
                 name: deviceForUpdate.name || "",
-                cluster_id: deviceForUpdate.cluster_id || null,
+                // cluster_id: deviceForUpdate.cluster_id !== undefined && deviceForUpdate.cluster_id !== null ? deviceForUpdate.cluster_id : null,
+                cluster_id: (deviceForUpdate.cluster_id !== undefined && deviceForUpdate.cluster_id !== null) && deviceForUpdate.cluster_id,
                 project_id: deviceForUpdate.project_id || null,
                 type: deviceForUpdate.type || "",
                 location: deviceForUpdate.location || "",
