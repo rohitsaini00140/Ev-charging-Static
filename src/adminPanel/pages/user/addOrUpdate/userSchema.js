@@ -7,7 +7,9 @@ export const userSchema = z.object({
         .trim()
         .min(1, " Please Enter Mobile No")
         .regex(/^([+]\d{2}[ ])?\d{10}$/, " Invalid Mobile Number"),
-    role_id: z.number().int().min(1, " Please Select Role"),
+    role_id: z.number().int().nullable().refine((val) => val !== null, {
+        message: " Please Select Role",
+    }),
     cluster_id: z.number().int().nullable().refine((val) => val !== null, {
         message: " Please Select Cluster",
     }),

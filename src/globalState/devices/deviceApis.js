@@ -20,7 +20,6 @@ export const deviceApi = createApi({
         getDevice: builder.query({
             query: ({ page, name, serial_number, type, status }) => {
                 const params = new URLSearchParams();
-
                 if (page) params.append('page', page);
                 if (name) params.append('name', name);
                 if (serial_number) params.append('serial_number', serial_number);

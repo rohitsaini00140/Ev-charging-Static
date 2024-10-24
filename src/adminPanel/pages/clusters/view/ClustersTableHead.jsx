@@ -20,7 +20,7 @@ function ClustersTableHead({ allClusterData }) {
 
                 {headLabel.map((headCell) => (
                     <StyledTableCell
-                        sx={{ width: headCell.width, minWidth: headCell.minWidth }}
+                        sx={{ width: headCell.width, minWidth: headCell.minWidth,whiteSpace:'nowrap' }}
                     >
                         <TableSortLabel hideSortIcon>
                             {headCell.label}

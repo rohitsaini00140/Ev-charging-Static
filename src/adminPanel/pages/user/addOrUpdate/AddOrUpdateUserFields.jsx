@@ -68,8 +68,8 @@ function AddOrUpdateUserFields() {
                 name: userForUpdate.name || "",
                 email: userForUpdate.email || "",
                 phone: userForUpdate.phone || "",
-                role_id: userForUpdate.role_id || 0,
-                cluster_id: userForUpdate.cluster_id || 0,
+                role_id: userForUpdate.role_id || null,
+                cluster_id: userForUpdate.cluster_id || null,
                 
             });
         } else {
@@ -181,7 +181,7 @@ function AddOrUpdateUserFields() {
                             <SearchableDropdown
                                 options={allRoleData.length > 0 ? allRoleData : []}
                                 placeholder="Select Role"
-                                value={watch("role_id") || null}
+                                value={watch("role_id")}
                                 onChange={(newValue) => setValue("role_id", newValue,
                                     { shouldValidate: true }
                                 )}

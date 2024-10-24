@@ -33,7 +33,7 @@ const allDevices = devicesSuccess ? devices?.devices : [];
       <Grid container spacing={1}>
         {/* <Grid container > */}
         {role?.user?.role?.name === "Superadmin" && <Grid size={{ xs: 12, md: 3 }}>
-          <DashboardCard counter = {allClusters.length}  data={dashboardCardData3} />
+          <DashboardCard counter = {allClusters.length-1}  data={dashboardCardData3} />
         </Grid>}
         <Grid size={{ xs: 12, md: role?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
           <DashboardCard counter = {allUsersData.length}  data={dashboardCardData} />

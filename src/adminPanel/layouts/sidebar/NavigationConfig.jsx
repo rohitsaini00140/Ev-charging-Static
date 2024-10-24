@@ -27,7 +27,6 @@ const navConfig = role?.user?.role?.name !== "Superadmin" ?
         },
       ],
     },
-
     {
       title: 'Projects',
       icon: icon('ic_project'),
@@ -106,11 +105,11 @@ const navConfig = role?.user?.role?.name !== "Superadmin" ?
             },
           ],
         },
-        {
-          title: 'Assign Permissions',
-          path: '/admin/roles&Permissions/permissionsToRole',
-          icon: icon('ic_circle'),
-        },
+        // {
+        //   title: 'Assign Permissions',
+        //   path: '/admin/roles&Permissions/permissionsToRole',
+        //   icon: icon('ic_circle'),
+        // },
         // {
         //   title: 'Permissions',
         //   icon: icon('ic_circle'),

@@ -4,6 +4,7 @@ const deviceSlice = createSlice({
     name: 'device',
     initialState: {
         pageNo: 1,
+        cluters_id: "",
         deviceName: "",
         deviceSerialNumber: "",
         deviceType: "",
@@ -14,6 +15,9 @@ const deviceSlice = createSlice({
     reducers: {
         setDeviceListPageNo: (state, action) => {
             state.pageNo = action.payload
+        },
+        setClutersid: (state, action) => {
+            state.cluters_id = action.payload
         },
         setDeviceName: (state, action) => {
             state.deviceName = action.payload
@@ -33,6 +37,7 @@ const deviceSlice = createSlice({
 export const {
     setDeviceListPageNo,
     setDeviceName,
+    setClutersid,
     setDeviceSerialNumber,
     setDeviceType,
     setDeviceStatus
