@@ -22,9 +22,22 @@ import {
   DeviceView
 }
   from "./AdminRouteImports.jsx"
+import { useSelector } from "react-redux";
 
 const role = JSON.parse(sessionStorage.getItem("role"))
+
 function Router() {
+
+
+
+
+  const { logInRole } = useSelector(state => state.role)
+
+  console.log(logInRole?.user?.role?.name)
+
+
+
+
   return (
     <BrowserRouter>
       <Routes>
@@ -52,7 +65,7 @@ function Router() {
           {/* <Route path="/register" element={<Registration />} /> */}
         </Route>
         <Route
-          path={`/${role?.user?.role?.name === "Superadmin" ? "admin" : "clusterAdmin"}/*`}
+          path={`/${logInRole?.user?.role?.name === "Superadmin" ? "admin" : "clusterAdmin"}/*`}
           element={
             <ThemeProviderAdmin>
               <Drawer>
