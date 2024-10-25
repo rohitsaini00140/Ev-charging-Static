@@ -49,8 +49,11 @@ export const input_style = {
     fontSize: "0.9rem",
   },
   "& .MuiInputBase-input": {
-    height: '1em'
+    height: '1em',
     },
+    ".css-1o0kqxp-MuiInputBase-root-MuiOutlinedInput-root":{
+      borderRadius: "8px"
+    }
 };
 
 
