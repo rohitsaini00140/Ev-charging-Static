@@ -5,8 +5,6 @@ import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { Box } from '@mui/material';
 import { inputStyle } from './selectorStyle';
-
-
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -17,7 +15,6 @@ const MenuProps = {
         },
     },
 };
-
 function getStyles(option, value, theme) {
     return {
         fontWeight:
@@ -38,6 +35,7 @@ function Selector({ placeholder, selectType, value, onChange, options }) {
                     sx={{
                         backgroundColor: "#1d282c",
                         borderRadius: "8px",
+                        fontfamily: 'sans-serif',
                         ...inputStyle
                     }}
                     fullWidth
@@ -53,7 +51,7 @@ function Selector({ placeholder, selectType, value, onChange, options }) {
                     }} />}
                     renderValue={(selected) => {
                         if (selected.length === 0) {
-                            return <em style={{ color: 'white' }}>{placeholder}</em>;
+                            return <p style={{ color: 'white' }}>{placeholder}</p>;
                         }
                         return Array.isArray(selected) ? selected.join(', ') : selected;
                     }}
@@ -61,7 +59,7 @@ function Selector({ placeholder, selectType, value, onChange, options }) {
                     inputProps={{ 'aria-label': 'Without label' }}
                 >
                     <MenuItem disabled value="">
-                        <em style={{ color: 'white' }}>{placeholder}</em>
+                        <p style={{ color: 'white' }}>{placeholder}</p>
                     </MenuItem>
                     {Array.isArray(options) && options.map((option) => (
                         <MenuItem
@@ -77,5 +75,4 @@ function Selector({ placeholder, selectType, value, onChange, options }) {
         </Box>
     );
 }
-
 export default Selector;
