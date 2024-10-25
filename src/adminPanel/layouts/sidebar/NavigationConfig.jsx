@@ -27,47 +27,63 @@ export const navConfig = [
       },
     ],
   },
+  // {
+  //   title: 'Roles',
+  //   icon: icon('ic_roleAndPermission'),
+  //   children: [
+  //     {
+  //       title: 'Roles',
+  //       icon: icon('ic_circle'),
+  //       children: [
+  //         {
+  //           title: 'Add',
+  //           path: '/admin/role/add',
+  //           icon: icon('ic_circle'),
+  //         },
+  //         {
+  //           title: 'View',
+  //           path: '/admin/role/view',
+  //           icon: icon('ic_circle'),
+  //         },
+  //       ],
+  //     },
+  //     // {
+  //     //   title: 'Assign Permissions',
+  //     //   path: '/admin/roles&Permissions/permissionsToRole',
+  //     //   icon: icon('ic_circle'),
+  //     // },
+  //     // {
+  //     //   title: 'Permissions',
+  //     //   icon: icon('ic_circle'),
+  //     //   children: [
+  //     //     {
+  //     //       title: 'Add',
+  //     //       path: '/admin/permission/add',
+  //     //       icon: icon('ic_circle'),
+  //     //     },
+  //     //     {
+  //     //       title: 'View',
+  //     //       path: '/admin/permission/view',
+  //     //       icon: icon('ic_circle'),
+  //     //     },
+  //     //   ],
+  //     // },
+  //   ],
+  // },
   {
     title: 'Roles',
     icon: icon('ic_roleAndPermission'),
     children: [
       {
-        title: 'Roles',
+        title: 'Add',
+        path: '/admin/role/add',
         icon: icon('ic_circle'),
-        children: [
-          {
-            title: 'Add',
-            path: '/admin/role/add',
-            icon: icon('ic_circle'),
-          },
-          {
-            title: 'View',
-            path: '/admin/role/view',
-            icon: icon('ic_circle'),
-          },
-        ],
       },
-      // {
-      //   title: 'Assign Permissions',
-      //   path: '/admin/roles&Permissions/permissionsToRole',
-      //   icon: icon('ic_circle'),
-      // },
-      // {
-      //   title: 'Permissions',
-      //   icon: icon('ic_circle'),
-      //   children: [
-      //     {
-      //       title: 'Add',
-      //       path: '/admin/permission/add',
-      //       icon: icon('ic_circle'),
-      //     },
-      //     {
-      //       title: 'View',
-      //       path: '/admin/permission/view',
-      //       icon: icon('ic_circle'),
-      //     },
-      //   ],
-      // },
+      {
+        title: 'View',
+        path: '/admin/role/view',
+        icon: icon('ic_circle'),
+      },
     ],
   },
   {

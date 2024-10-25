@@ -4,11 +4,18 @@ import { Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const logo = require("../../img/logo.png");
 
 function Header() {
-  
+
+
+
+  const { logInRole } = useSelector(state => state.role)
+
+
+
   const [isBgcolor, setIsBgcolor] = useState(false);
   const location = useLocation();
 
@@ -27,9 +34,9 @@ function Header() {
   return (
     <Stack
       sx={{
-        bgcolor: location.pathname === '/' 
-        ? (isBgcolor ? "#02121e" : "transparent") 
-        : "#02121e",
+        bgcolor: location.pathname === '/'
+          ? (isBgcolor ? "#02121e" : "transparent")
+          : "#02121e",
         height: "5.5rem",
         width: "100%",
         position: "fixed",
@@ -89,16 +96,17 @@ function Header() {
           padding: 1,
         }}
       >
-        <Link to={"/logIn"}>
+        <Link to={!(logInRole?.token) ? "/login" : `/${logInRole?.user?.role?.name === "Superadmin" ? "admin" : "clusterAdmin"}`}>
           <Button
             variant="outlined"
             sx={{
               borderColor: "#61e93d",
               color: "#61e93d",
-              width: "5%",
+              width: "auto",
+              textTransform: "capitalize"
             }}
           >
-            LogIn
+            {!(logInRole?.token) ? "LogIn" : `${logInRole?.user?.role?.name === "Superadmin" ? "admin" : "clusterAdmin"}`}
           </Button>
         </Link>
       </Stack>

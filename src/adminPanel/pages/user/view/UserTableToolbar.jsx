@@ -15,10 +15,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setUserListPageNo, setUserName, setUserStatus } from '../../../../globalState/user/userSlice';
 import { useGetAllRolesQuery, useGetRolesQuery } from '../../../../globalState/roles/rolesApi';
 import { setRole } from '../../../../globalState/roles/rolesSlices';
+import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
+import { setClusterName } from '../../../../globalState/cluster/clusterSlices';
 
 // ----------------------------------------------------------------------
 
 function UserTableToolbar() {
+
+
+    const { logInRole } = useSelector(state => state.role)
+
+
+
 
     const dispatch = useDispatch()
 
@@ -26,7 +34,13 @@ function UserTableToolbar() {
 
     const { role } = useSelector(state => state.role)
 
+    const { clusterName } = useSelector(state => state.cluster)
+
     const { data: rolesData, isSuccess: rolesSuccess } = useGetRolesQuery()
+
+    const { data: clusterData, isSuccess: clusterSuccess } = useGetAllClustersQuery()
+
+    const allCluster = clusterSuccess && clusterData?.clusters
 
     const allRoleData = rolesSuccess && rolesData?.roles
 
@@ -44,6 +58,13 @@ function UserTableToolbar() {
                     dispatch(setRole(option));
                 } else {
                     dispatch(setRole(''));
+                }
+                break;
+            case 'cluster':
+                if (option) {
+                    dispatch(setClusterName(option));
+                } else {
+                    dispatch(setClusterName(''));
                 }
                 break;
             case 'status':
@@ -94,11 +115,20 @@ function UserTableToolbar() {
                             <SearchInput
                                 placeholder="Search User"
                                 width={"100%"}
-                                sx={{ color: "white",background:'rgb(29, 40, 44)' }}
+                                sx={{ color: "white", background: 'rgb(29, 40, 44)' }}
                                 onChange={(e) => handleSelect(e.target.value, "user")}
                                 value={userName}
                             />
                         </Stack>
+                        {logInRole?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
+                            <SearchableDropdown
+                                options={allCluster.length > 0 ? allCluster : []}
+                                placeholder="Select Cluster"
+                                value={clusterName || ""}
+                                onChange={(value) => handleSelect(value, "cluster")}
+                                type={"name"}
+                            />
+                        </Stack>}
                         <Stack width={"100%"} >
                             <SearchableDropdown
                                 options={allRoleData.length > 0 ? allRoleData : []}

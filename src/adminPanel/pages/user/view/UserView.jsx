@@ -63,9 +63,9 @@ function UserView() {
 
   const { role } = useSelector(state => state.role)
 
-  console.log(role)
+  const { clusterName } = useSelector(state => state.cluster)
 
-  const { data: allUsers, isSuccess: userSuccess, isLoading } = useGetUsersQuery({ page: pageNo, name: userName, status, role_id: role });
+  const { data: allUsers, isSuccess: userSuccess, isLoading } = useGetUsersQuery({ page: pageNo, name: userName, status, clusterName, role_id: role });
 
   // const allUserData = userSuccess && (allUsers?.data).map(ele => ele?.name === role?.user?.name);
 

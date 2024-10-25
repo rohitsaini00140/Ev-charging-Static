@@ -98,10 +98,10 @@ function Nav({ openNav, onCloseNav }) {
             }}
         >
             {/* <Logo sx={{ mt: 3, ml: 4 }} /> */}
-            <img src={`${process.env.PUBLIC_URL}/assets/images/logo.png`} alt="Logo" style={{
+            <Link to={"/"}><img src={`${process.env.PUBLIC_URL}/assets/images/logo.png`} alt="Logo" style={{
                 margin: "1.5rem 0 0 6rem",
                 width: "5rem"
-            }} />
+            }} /></Link>
             {renderAccount}
             {renderMenu}
             <Box sx={{ flexGrow: 1 }} />
