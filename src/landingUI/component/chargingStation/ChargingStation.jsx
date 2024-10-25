@@ -4,6 +4,8 @@ import React from "react";
 import { FaCar } from "react-icons/fa";
 import { TbBulbFilled } from "react-icons/tb";
 import { Grid } from "@mui/system";
+import { Link } from "react-router-dom";
+
 function ChargingStation() {
 const imageSrc = require("../../img/car_new.png");
   return (
@@ -123,9 +125,11 @@ const imageSrc = require("../../img/car_new.png");
         </Typography>
       </Stack>
     </Stack>
+   <Link to ="/about">
     <Button variant="contained" sx={{background:'rgb(87, 179, 62)',color:'white'}}>
      More About Us
     </Button>
+    </Link>
   </Grid>
   <Grid item size = {{xs:12,sm:6}}>
     <img

@@ -79,7 +79,7 @@ const dealfult_value ={
               <Typography sx={blogpara} variant="p">
               {stateData && stateData.content}
               </Typography>
-              <Typography sx={{fontWeight:'700',marginTop: '15px',fontSize:'24px',color:'#253745'}} variant="h6">Comments -:</Typography>
+              <Typography sx={{fontWeight:'700',marginTop: '15px',fontSize:'24px',color:'#253745'}} variant="h6">Comments : </Typography>
                <CommentsSection comments = {stateData && stateData.comments}/>
               <Box component="form" onSubmit ={handleSubmit(onSubmit)} sx={{margin:"15px 0px"}}>
              <Typography sx={{fontWeight:'700',fontSize:'24px',color:'#253745'}} variant="h6">Leave Your Comment</Typography>

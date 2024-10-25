@@ -4,13 +4,11 @@ import { Grid } from "@mui/system";
 
 function WhoareWe() {
   const mapImg = require('../../img/map.png');
-
   const targetValues = {
-    fastCharging: 91,
-    energyManagement: 30,
-    energyStorage: 70,
+    fastCharging: 95,
+    energyManagement: 60,
+    energyStorage: 85,
   };
-
   const [fastCharging, setFastCharging] = useState(0);
   const [energyManagement, setEnergyManagement] = useState(0);
   const [energyStorage, setEnergyStorage] = useState(0);
@@ -18,7 +16,7 @@ function WhoareWe() {
   // Increment values to target with animation
   useEffect(() => {
     const increment = 1; // Change this to control speed of progress
-    const interval = 100; // ms between increments
+    const interval = 70; // ms between increments
 
     const incrementValue = (setter, target) => {
       const timer = setInterval(() => {
@@ -34,7 +32,6 @@ function WhoareWe() {
     const fastChargingTimer = incrementValue(setFastCharging, targetValues.fastCharging);
     const energyManagementTimer = incrementValue(setEnergyManagement, targetValues.energyManagement);
     const energyStorageTimer = incrementValue(setEnergyStorage, targetValues.energyStorage);
-
     return () => {
       clearInterval(fastChargingTimer);
       clearInterval(energyManagementTimer);
@@ -45,8 +42,8 @@ function WhoareWe() {
   return (
     <Stack sx={{ background: '#fafafa', padding: '10px 0', marginTop: '50px' }}>
       <Container>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
+        <Grid container spacing={2}>
+          <Grid item size ={{xs:12,md:6}}>
             <img
               src={mapImg}
               alt="VNT EV Maps"
@@ -57,7 +54,7 @@ function WhoareWe() {
               }}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item   size ={{xs:12,md:6}}>
             <Box
               sx={{
                 padding: { xs: '20px 10px', sm: '20px 40px', lg: '20px 40px', xl: '20px 40px' },
