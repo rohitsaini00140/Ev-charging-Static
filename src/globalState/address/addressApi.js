@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const addressApi = createApi({
     reducerPath: "addressApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://139.59.66.21/ev-charging-backend/api"
+        baseUrl: "http://143.110.178.49/ev-charging-backend/api"
     }),
     tagTypes: ["country", "state", "city"],
     endpoints: (builder) => ({

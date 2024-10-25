@@ -101,7 +101,7 @@ const onSubmit = async (data) => {
               <Grid container>
                 <Grid container spacing={2} size={12}>
                   <Grid item size={{ xs:12, sm:12, md: 6,lg:6 }}>
-                  <Box sx={{ position: "relative",margin:'3px 0px' }}>
+                  <Box sx={{ position: "relative",margin:'3px 0px',borderRadius:'10px' }}>
                     <TextField margin="normal" sx={input_style} {...register("name")} fullWidth label="Your Name" />
                     {errors.name && <Typography sx={error_position}>*{errors.name.message}</Typography>}
                     </Box>
@@ -139,6 +139,7 @@ const onSubmit = async (data) => {
                       margin="normal"
                       label="Message"
                       sx={{
+                        borderRadius: "10px",
                         "&. MuiFormLabel-root-MuiInputLabel-root":{
                           fontSize: '0.8rem'
                         }

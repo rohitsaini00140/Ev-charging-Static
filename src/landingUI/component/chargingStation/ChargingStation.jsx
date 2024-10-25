@@ -42,7 +42,7 @@ const imageSrc = require("../../img/car_new.png");
         }}> <TbBulbFilled style={{ fontSize: '25px', color: 'white' }} />   </Box >
       <Stack sx={{ paddingLeft:'18px'}}>
         <Typography
-          variant="h6"
+          variant="h5"
           sx={{ 
             fontWeight: '700', 
             color: '#253745',
