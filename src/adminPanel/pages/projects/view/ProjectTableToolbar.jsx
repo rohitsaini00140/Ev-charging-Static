@@ -126,7 +126,7 @@ function ProjectTableToolbar() {
                         <Stack width={"100%"}>
                             <SearchInput
                                 sx={{ color: "white",background:'#3e403d0f'}}
-                                placeholder="Search Projects"
+                                placeholder="Search Project"
                                 width={"100%"}
                                 onChange={(e) => handleSelect(e.target.value, "project")}
                                 value={searchProjectKeywords}

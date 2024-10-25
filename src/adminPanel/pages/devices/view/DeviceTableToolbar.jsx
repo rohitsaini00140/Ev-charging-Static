@@ -110,7 +110,7 @@ function DeviceTableToolbar() {
                     >
                         <Stack width={"100%"}>
                             <SearchInput
-                                placeholder="Search Devices"
+                                placeholder="Search Device"
                                 width={"100%"}
                                 sx={{ color: "white", background: '#3e403d0f' }}
                                 onChange={(e) => handleSelect(e.target.value, "device")}
