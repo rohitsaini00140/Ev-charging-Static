@@ -58,8 +58,6 @@ function ProjectView() {
 
   const { clusterName } = useSelector(state => state.cluster)
 
-  console.log(clusterName)
-
   const { userName } = useSelector(state => state.user)
 
   const { data: filteredData, isSuccess: filteredDataSuccess, isLoading } = useGetFilteredProjectsQuery({ page: pageNo, projectName: searchProjectKeywords, clusterName, status: projectStatus });

@@ -35,7 +35,7 @@ export const clusterApi = createApi({
         getFilteredCluster: builder.query({
             query: ({ clusterName, page, countryName, stateName, cityName, status }) => {
                 const params = new URLSearchParams();
-
+                console.log(clusterName)
                 if (page) params.append('page', page);
                 if (clusterName) params.append('cluster_name', clusterName);
                 if (countryName) params.append('country_name', countryName);
