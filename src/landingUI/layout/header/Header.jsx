@@ -10,11 +10,7 @@ const logo = require("../../img/logo.png");
 
 function Header() {
 
-
-
   const { logInRole } = useSelector(state => state.role)
-
-
 
   const [isBgcolor, setIsBgcolor] = useState(false);
   const location = useLocation();

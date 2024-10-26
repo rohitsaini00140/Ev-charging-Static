@@ -12,8 +12,13 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
 import { menuList } from './data';
 import { Stack } from '@mui/system';
+import { Button } from "@mui/material";
+import { useSelector } from "react-redux";
+
+
 
 function DrawerNavbar() {
+    const { logInRole } = useSelector(state => state.role)
     const [isBgcolor, setIsBgcolor] = useState(false);
     useEffect(() => {
         const handleScroll = () => {
@@ -129,7 +134,7 @@ function DrawerNavbar() {
             </Stack>
             <Stack>
                 {['right'].map((anchor) => (
-                    <Stack key={anchor}>
+                    <Stack key={anchor} >
                         <MenuIcon onClick={toggleDrawer(anchor, true)} sx={{ fontSize: "2rem", color: "#fff" }} />
                         <Drawer
                             anchor={anchor}
@@ -137,6 +142,22 @@ function DrawerNavbar() {
                             onClose={toggleDrawer(anchor, false)}
                         >
                             {list(anchor)}
+        <Link sx={{textDecoration:'none'}} to={!(logInRole?.token) ? "/login" : `/${logInRole?.user?.role?.name === "Superadmin" ? "admin" : "clusterAdmin"}`}>
+          <Button
+            variant="outlined"
+            sx={{
+              borderColor: "#61e93d",
+              background:'#61e93d',
+              color: "white",
+              width: "auto",
+              display:'block',margin:'10px auto',
+              padding:'10px 20px',
+              textTransform: "capitalize"
+            }}
+          >
+            {!(logInRole?.token) ? "LogIn" : `${logInRole?.user?.role?.name === "Superadmin" ? "admin" : "clusterAdmin"}`}
+          </Button>
+        </Link>
                         </Drawer>
                     </Stack>
                 ))}
