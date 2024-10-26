@@ -37,5 +37,6 @@ export const menuList = [
         name: "Contact",
         // icon: <LogoutIcon />,
         path: "/contactUs",
-    }
+    },
+
 ]
