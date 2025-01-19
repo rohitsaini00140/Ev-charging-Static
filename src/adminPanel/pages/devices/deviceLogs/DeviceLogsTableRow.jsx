@@ -84,7 +84,7 @@ const renderNestedData = (data) => {
                   ? renderNestedData(value)
                   : typeof value === "string" && !isNaN(Date.parse(value))
                   ? new Date(value).toLocaleString()
-                  : value}
+                  : value} 
               </ListItem>
             ))}
       </List>
