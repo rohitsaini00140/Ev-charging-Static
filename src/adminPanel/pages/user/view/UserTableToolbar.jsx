@@ -120,7 +120,7 @@ function UserTableToolbar() {
                                 value={userName}
                             />
                         </Stack>
-                        {logInRole?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
+                        {/* {logInRole?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allCluster.length > 0 ? allCluster : []}
                                 placeholder="Select Cluster"
@@ -128,7 +128,7 @@ function UserTableToolbar() {
                                 onChange={(value) => handleSelect(value, "cluster")}
                                 type={"name"}
                             />
-                        </Stack>}
+                        </Stack>} */}
                         <Stack width={"100%"} >
                             <SearchableDropdown
                                 options={allRoleData.length > 0 ? allRoleData : []}

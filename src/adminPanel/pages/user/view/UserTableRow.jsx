@@ -50,7 +50,7 @@ function UserTableRow({ allUserData, currentpage }) {
                             // checked={selectedCategoryId.includes(data["ID"])}
                             />
                         </StyledTableCell>
-                      <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster?.cluster_name}</StyledTableCell>
+                      {/* <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster?.cluster_name}</StyledTableCell> */}
                         <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.name}</StyledTableCell>
                         <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.email}</StyledTableCell>
                         <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.phone}</StyledTableCell>

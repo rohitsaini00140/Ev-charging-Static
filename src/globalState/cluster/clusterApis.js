@@ -47,7 +47,6 @@ export const clusterApi = createApi({
             },
             providesTags: ['cluster']
         }),
-
         updateCluster: builder.mutation({
             query: ({ id, updatedClusterData }) => ({
                 url: `/clusters/update/${id}`,

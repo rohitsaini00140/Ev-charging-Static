@@ -9,14 +9,14 @@ import ExcelExport from '../../../component/ExcelExport';
 import PdfExport from '../../../component/PdfExport';
 // import { fieldsToDownload, fieldMapping, filter } from './headLabel';
 import { Stack } from '@mui/material';
+import { Grid } from '@mui/system';
 import SearchableDropdown from '../../../component/searchableDropdown/SearchableDropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import Selector from "../../../component/selector/Selector"
-import { setDeviceListPageNo, setDeviceName, setDeviceStatus } from '../../../../globalState/devices/deviceSlices';
+import { setDeviceListPageNo, setDeviceName, setDeviceStatus, setDeviceID } from '../../../../globalState/devices/deviceSlices';
 import { setProjectName } from '../../../../globalState/projects/projectsSlices';
 import { useGetAllClustersQuery } from '../../../../globalState/cluster/clusterApis';
 import { setClusterName } from '../../../../globalState/cluster/clusterSlices';
-
 import { useGetAllProjectsQuery } from '../../../../globalState/projects/projectsApis';
 // ----------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ function DeviceTableToolbar() {
 
 
     const dispatch = useDispatch()
-    const { deviceName, deviceStatus } = useSelector(state => state.device)
+    const { deviceName, deviceStatus, deviceID } = useSelector(state => state.device)
 
     const { projectName } = useSelector(state => state.project)
     const { clusterName } = useSelector(state => state.cluster)
@@ -64,6 +64,13 @@ function DeviceTableToolbar() {
                     dispatch(setProjectName(option));
                 } else {
                     dispatch(setProjectName(''));
+                }
+                break;
+            case 'deviceID':
+                if (option) {
+                    dispatch(setDeviceID(option));
+                } else {
+                    dispatch(setDeviceID(''));
                 }
                 break;
             case 'status':
@@ -103,7 +110,7 @@ function DeviceTableToolbar() {
                 <>
 
                     {/* // ) */}
-                    <Stack
+                    {/* <Stack
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 3, sm: 2, md: 4 }}
                         width={"100%"}
@@ -127,7 +134,16 @@ function DeviceTableToolbar() {
                                 type={"name"}
                             />
                         </Stack>}
-                        <Stack width={"100%"} >
+                        <Stack width={"100%"}>
+                            <SearchInput
+                                placeholder="Search Device ID"
+                                width={"100%"}
+                                sx={{ color: "white", background: '#3e403d0f' }}
+                                onChange={(e) => handleSelect(e.target.value, "deviceID")}
+                                value={deviceID}
+                            />
+                        </Stack>
+                        <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allProjects.length > 0 ? allProjects : []}
                                 placeholder="Select Project"
@@ -146,7 +162,56 @@ function DeviceTableToolbar() {
                                 options={["Active", "Inactive"]}
                             />
                         </Stack>
-                    </Stack>
+                    </Stack> */}
+                    <Grid container spacing={{ xs: 3, sm: 2, md: 2, lg: 2 }} width={"100%"}>
+                        <Grid item size={{ xs: 12, md: 6 }}>
+                            <SearchInput
+                                placeholder="Search Device"
+                                width={"100%"}
+                                sx={{ color: "white", background: '#3e403d0f' }}
+                                onChange={(e) => handleSelect(e.target.value, "device")}
+                                value={deviceName}
+                            />
+                        </Grid>
+                        <Grid item size={{ xs: 12, md: 6 }}>
+                            <SearchInput
+                                placeholder="Search Device ID"
+                                width={"100%"}
+                                sx={{ color: "white", background: '#3e403d0f' }}
+                                onChange={(e) => handleSelect(e.target.value, "deviceID")}
+                                value={deviceID}
+                            />
+                        </Grid>
+                        <Grid item size={{ xs: 12, md: 4 }}>
+                            <SearchableDropdown
+                                options={allProjects.length > 0 ? allProjects : []}
+                                placeholder="Select Project"
+                                value={projectName}
+                                sx={{ color: "white", background: '#3e403d0f' }}
+                                onChange={(value) => handleSelect(value, "project_name")}
+                                type={"name"}
+                            />
+                        </Grid>
+                        {logInRole?.user?.role?.name === "Superadmin" && <Grid item size={{ xs: 12, md: 4 }}>
+                            <SearchableDropdown
+                                options={allClusters.length > 0 ? allClusters : []}
+                                placeholder="Select Cluster"
+                                value={clusterName}
+                                sx={{ color: "white", background: '#3e403d0f' }}
+                                onChange={(value) => handleSelect(value, "cluster_name")}
+                                type={"name"}
+                            />
+                        </Grid>}
+                        <Grid item size={{ xs: 12, md: 4 }}>
+                            <Selector
+                                value={deviceStatus}
+                                onChange={(e) => handleSelect(e.target.value, "status")}
+                                placeholder='Select Status'
+                                selectType="single"
+                                options={["Active", "Inactive"]}
+                            />
+                        </Grid>
+                    </Grid>
                 </>
             }
             {

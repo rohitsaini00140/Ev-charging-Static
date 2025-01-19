@@ -1,4 +1,6 @@
 import SvgColor from '../../component/svgColor';
+
+
 // ----------------------------------------------------------------------
 const icon = (name) => (
   <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />
@@ -11,65 +13,7 @@ export const navConfig = [
     path: '/admin',
     icon: icon('ic_dashboard'),
   },
-  {
-    title: 'Clusters',
-    icon: icon('ic_cluster'),
-    children: [
-      {
-        title: 'Add',
-        path: '/admin/cluster/add',
-        icon: icon('ic_circle'),
-      },
-      {
-        title: 'View',
-        path: '/admin/cluster/view',
-        icon: icon('ic_circle'),
-      },
-    ],
-  },
-  // {
-  //   title: 'Roles',
-  //   icon: icon('ic_roleAndPermission'),
-  //   children: [
-  //     {
-  //       title: 'Roles',
-  //       icon: icon('ic_circle'),
-  //       children: [
-  //         {
-  //           title: 'Add',
-  //           path: '/admin/role/add',
-  //           icon: icon('ic_circle'),
-  //         },
-  //         {
-  //           title: 'View',
-  //           path: '/admin/role/view',
-  //           icon: icon('ic_circle'),
-  //         },
-  //       ],
-  //     },
-  //     // {
-  //     //   title: 'Assign Permissions',
-  //     //   path: '/admin/roles&Permissions/permissionsToRole',
-  //     //   icon: icon('ic_circle'),
-  //     // },
-  //     // {
-  //     //   title: 'Permissions',
-  //     //   icon: icon('ic_circle'),
-  //     //   children: [
-  //     //     {
-  //     //       title: 'Add',
-  //     //       path: '/admin/permission/add',
-  //     //       icon: icon('ic_circle'),
-  //     //     },
-  //     //     {
-  //     //       title: 'View',
-  //     //       path: '/admin/permission/view',
-  //     //       icon: icon('ic_circle'),
-  //     //     },
-  //     //   ],
-  //     // },
-  //   ],
-  // },
+ 
   {
     title: 'Roles',
     icon: icon('ic_roleAndPermission'),
@@ -86,6 +30,7 @@ export const navConfig = [
       },
     ],
   },
+
   {
     title: 'Users',
     icon: icon('ic_user'),
@@ -102,6 +47,25 @@ export const navConfig = [
       },
     ],
   },
+
+
+  {
+    title: 'Clusters',
+    icon: icon('ic_cluster'),
+    children: [
+      {
+        title: 'Add',
+        path: '/admin/cluster/add',
+        icon: icon('ic_circle'),
+      },
+      {
+        title: 'View',
+        path: '/admin/cluster/view',
+        icon: icon('ic_circle'),
+      },
+    ],
+  },
+ 
 
   {
     title: 'Projects',
@@ -133,17 +97,21 @@ export const navConfig = [
         path: '/admin/device/view',
         icon: icon('ic_circle'),
       },
+      // {
+      //   title: 'Charger Activity Logs',
+      //   path: '/admin/device/deviceLog',
+      //   icon: icon('ic_circle'),
+      // },
     ],
   },
+
+  {
+    title: 'Charger Activity Logs',
+    path: '/admin/deviceLog',
+    icon: icon('books'),
+
+  }
 ];
-
-
-
-
-
-
-
-
 
 export const navConfig2 = [
   {
@@ -198,6 +166,19 @@ export const navConfig2 = [
         path: '/clusterAdmin/device/view',
         icon: icon('ic_circle'),
       },
+      // {
+      //   title: 'Device logs',
+      //   path: '/admin/device/deviceLog',
+      //   icon: icon('ic_circle'),
+      // },
     ],
   },
+
+  {
+      title: 'Device logs',
+      path: '/admin/deviceLog',
+      icon: icon('books'),
+    
+  },
+
 ]

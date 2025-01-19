@@ -7,6 +7,7 @@ export const headLabel = [
     { id: 'name', label: 'Device name' },
     { id: 'serialNo', label: 'Serial No' },
     { id: 'type', label: 'Device type' },
+    { id: 'deviceID', label: 'Device ID' },
     { id: 'location', label: 'Location' },
     { id: "status", label: "Status" },
     { id: 'action', label: 'Action', align: "center" }

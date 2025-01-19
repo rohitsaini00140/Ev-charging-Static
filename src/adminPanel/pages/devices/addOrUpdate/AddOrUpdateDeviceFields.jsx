@@ -18,6 +18,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAddDeviceMutation, useGetDeviceByIDQuery, useUpdateDeviceMutation } from '../../../../globalState/devices/deviceApis';
 import { setClutersid } from '../../../../globalState/devices/deviceSlices';
+import LocationDropdown from '../../../component/locationDropdown/LocationDropdown';
 
 const role = JSON.parse(sessionStorage.getItem("role"))
 
@@ -192,12 +193,20 @@ function AddOrUpdateDeviceFields() {
                             {errors.type && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.type.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
-                            <TextField
+                            {/* <TextField
                                 label="Device Location"
                                 {...register("location", { required: true })}
                                 value={watch("location") || ""}
                                 sx={inputStyle}
                                 fullWidth
+                            /> */}
+
+                            <LocationDropdown
+                                label="Device location"
+                                value={watch("location")}
+                                onChange={(newValue) => setValue("location", newValue,
+                                    { shouldValidate: true },
+                                )}
                             />
                             {errors.location && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.location.message}</Typography>}
                         </Stack>

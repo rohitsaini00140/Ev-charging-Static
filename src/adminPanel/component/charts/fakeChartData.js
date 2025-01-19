@@ -84,7 +84,7 @@ export const optionsForBarChart = {
         },
         title: {
             display: true,
-            text: 'Monthly Sales Growth',
+            text: 'Monthly Revenue Growth',
             color: "white"
         },
     },

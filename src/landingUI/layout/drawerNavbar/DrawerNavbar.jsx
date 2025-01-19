@@ -12,7 +12,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
 import { menuList } from './data';
 import { Stack } from '@mui/system';
-import { Button } from "@mui/material";
+import { Button, ListItemIcon } from "@mui/material";
 import { useSelector } from "react-redux";
 
 
@@ -52,7 +52,7 @@ function DrawerNavbar() {
         <Box
             role="presentation"
             onKeyDown={toggleDrawer(anchor, false)}
-            sx={{ bgcolor: "#232a2b", height: "full" }}
+            sx={{ bgcolor: "#232a2b", height: "100%" }}
         >
             <List>
                 {menuList.map((ele, index) => (
@@ -70,12 +70,17 @@ function DrawerNavbar() {
                                         ele.arr
                                             ?
                                             <>
+
+                                                <ListItemIcon sx={{ color: "#56a745", minWidth: "35px" }}  >{ele.icon}</ListItemIcon>
                                                 <ListItemText primary={ele.name}
                                                     sx={{ font: "#fff" }} />
                                                 {drop[index] ? <ExpandMore sx={{ font: "#fff" }} /> : <ExpandLess sx={{ font: "#fff" }} />}
                                             </>
                                             :
-                                            <ListItemText primary={ele.name} sx={{ font: "#fff" }} />
+                                            <>
+                                                <ListItemIcon sx={{ color: "#56a745", minWidth: "35px" }} >{ele.icon}</ListItemIcon>
+                                                <ListItemText primary={ele.name} sx={{ font: "#fff" }} />
+                                            </>
                                     }
                                 </ListItemButton>
                             </ListItem>
@@ -90,6 +95,8 @@ function DrawerNavbar() {
                                                 onClick={toggleDrawer(anchor, false)}
                                             >
                                                 <ListItemButton key={i}>
+                                                    <ListItemIcon sx={{ color: "#56a745", minWidth: "35px" }} >{ele.icon}</ListItemIcon>
+
                                                     <ListItemText
                                                         primary={ele.name}
                                                         sx={{ paddingLeft: "2rem", color: "#fff" }}
@@ -142,7 +149,7 @@ function DrawerNavbar() {
                             onClose={toggleDrawer(anchor, false)}
                         >
                             {list(anchor)}
-        <Link sx={{textDecoration:'none'}} to={!(logInRole?.token) ? "/login" : `/${logInRole?.user?.role?.name === "Superadmin" ? "admin" : "clusterAdmin"}`}>
+                            {/* <Link sx={{textDecoration:'none'}} to={!(logInRole?.token) ? "/login" : `/${logInRole?.user?.role?.name === "Superadmin" ? "admin" : "clusterAdmin"}`}>
           <Button
             variant="outlined"
             sx={{
@@ -157,7 +164,7 @@ function DrawerNavbar() {
           >
             {!(logInRole?.token) ? "LogIn" : `${logInRole?.user?.role?.name === "Superadmin" ? "admin" : "clusterAdmin"}`}
           </Button>
-        </Link>
+        </Link> */}
                         </Drawer>
                     </Stack>
                 ))}

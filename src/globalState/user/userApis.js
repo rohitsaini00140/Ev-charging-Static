@@ -7,7 +7,7 @@ export const userApi = createApi({
     }),
     tagTypes: ["users"],
     endpoints: (builder) => ({
-
+        
         getAllUser: builder.query({
             query: () => `/users`,
         }),
@@ -15,7 +15,7 @@ export const userApi = createApi({
         getUsers: builder.query({
             query: ({ page, role_id, name, status, clusterName }) => {
                 const params = new URLSearchParams();
-                if (page) params.append('page', page);
+                if (page) params.append('page', page);  
                 if (role_id) params.append('role_id', role_id);
                 if (clusterName) params.append('cluster_name', clusterName);
                 if (name) params.append('name', name);

@@ -19,7 +19,8 @@ import {
   AddOrUpdateProject,
   ProjectView,
   AddOrUpdateDevice,
-  DeviceView
+  DeviceView,
+  DeviceLogs
 }
   from "./AdminRouteImports.jsx"
 import { useSelector } from "react-redux";
@@ -96,6 +97,7 @@ function Router() {
                   <Route path="/device/add" element={<AddOrUpdateDevice />} />
                   <Route path="/device/view" element={<DeviceView />} />
                   <Route path="/device/update/:id" element={<AddOrUpdateDevice />} />
+                  <Route path="/deviceLog" element={<DeviceLogs />} />
                 </Routes>
               </Drawer>
             </ThemeProviderAdmin>

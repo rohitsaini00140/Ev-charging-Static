@@ -16,6 +16,7 @@ import { useGetAllUserQuery } from '../../../../globalState/user/userApis';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import LocationDropdown from '../../../component/locationDropdown/LocationDropdown';
 
 const role = JSON.parse(sessionStorage.getItem("role"))
 
@@ -166,12 +167,19 @@ function AddOrUpdateProjectFields() {
                             {errors.name && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.name.message}</Typography>}
                         </Stack>
                         <Stack width={"100%"}>
-                            <TextField
+                            {/* <TextField
                                 label="Project Location"
                                 {...register("location", { required: true })}
                                 value={watch("location") || ""}
                                 sx={inputStyle}
                                 fullWidth
+                            /> */}
+                            <LocationDropdown
+                                label="Project location"
+                                value={watch("location")}
+                                onChange={(newValue) => setValue("location", newValue,
+                                    { shouldValidate: true },
+                                )}
                             />
                             {errors.location && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.location.message}</Typography>}
                         </Stack>

@@ -38,7 +38,7 @@ function TargetProgressBar() {
             }}
         >
             <Typography variant="h5" color="white" gutterBottom>
-                Monthly Sales Target
+                EV Monthly Target
             </Typography>
             <Box
                 position="relative"

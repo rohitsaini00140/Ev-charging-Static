@@ -1,42 +1,45 @@
+import HomeIcon from '@mui/icons-material/Home';
+import InfoIcon from '@mui/icons-material/Info';
+import BookIcon from '@mui/icons-material/Book';
+import AddIcCallIcon from '@mui/icons-material/AddIcCall';
+import LoginIcon from '@mui/icons-material/Login';
+import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
+
 export const menuList = [
     {
         name: "Home",
-        // icon: <DashboardIcon />,
+        icon: <HomeIcon />,
         path: "/"
     },
     {
         name: "About",
-        // icon: <ViewCarouselIcon />,
+        icon: <InfoIcon />,
         path: "/about"
     },
     {
         name: "Services",
-        // icon: <LocalOfferIcon />,
-        // arr: [
-        //     {
-        //         name: "Ayurveda",
-        //         path: "/ourBusiness/ayurveda",
-        //     },
-        //     {
-        //         name: "Nutraceutical",
-        //         path: "/ourBusiness/Nutraceutical",
-        //     }
-        // ]
+        icon: <MiscellaneousServicesIcon />,
+        path: "/services",
+
+
     },
-    // {
-    //     name: "Servies",
-    //     // icon: <ViewCarouselIcon />,
-    //     path: "/Servies"
-    // },
+
     {
         name: "Blog",
-        // icon: <NoteIcon />,
-        path: "/Blog",
+        icon: <BookIcon />,
+        path: "/blogs",
     },
     {
         name: "Contact",
-        // icon: <LogoutIcon />,
+        icon: <AddIcCallIcon />,
         path: "/contactUs",
     },
+
+    {
+        name: "Login",
+        path: "/login",
+        icon: <LoginIcon />
+
+    }
 
 ]

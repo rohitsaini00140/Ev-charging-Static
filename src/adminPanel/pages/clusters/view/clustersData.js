@@ -1,7 +1,8 @@
 export const headLabel = [
     { id: "slNo.", label: "SL No.", align: "center" },
     { id: 'name', label: 'Name' },
-    { id: 'name', label: 'Email' },
+    { id: 'email', label: 'Email' },
+    { id: 'phone', label: 'Phone' },
     { id: 'country_name', label: 'Country Name' },
     { id: 'state_name', label: 'State Name' },
     { id: "city_name", label: "City Name"},

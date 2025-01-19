@@ -49,12 +49,12 @@ function DeviceView() {
   }, [location.state, navigate]);
 
   const dispatch = useDispatch()
-   
-  const { pageNo, deviceName, deviceStatus } = useSelector(state => state.device);
+
+  const { pageNo, deviceName, deviceStatus, deviceID } = useSelector(state => state.device);
   const { projectName } = useSelector(state => state.project);
   const { clusterName } = useSelector(state => state.cluster);
 
-  const { data: deviceData, isSuccess: deviceSuccess, isLoading } = useGetDeviceQuery({ page: pageNo, device_name: deviceName, cluster_name: clusterName, project_name: projectName, status: deviceStatus });
+  const { data: deviceData, isSuccess: deviceSuccess, isLoading } = useGetDeviceQuery({ page: pageNo, device_name: deviceName, cluster_name: clusterName, deviceID, project_name: projectName, status: deviceStatus });
 
   // const allDeviceData = deviceSuccess && deviceData?.data
 
@@ -64,7 +64,7 @@ function DeviceView() {
 
   const paginationData = deviceSuccess && deviceData;
   const { last_page } = paginationData;
-   
+
   const handlePageChange = (event, value) => {
     dispatch(setDeviceListPageNo(value));
   };

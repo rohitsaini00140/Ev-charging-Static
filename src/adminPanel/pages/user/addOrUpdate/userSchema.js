@@ -10,7 +10,7 @@ export const userSchema = z.object({
     role_id: z.number().int().nullable().refine((val) => val !== null, {
         message: " Please Select Role",
     }),
-    cluster_id: z.number().int().nullable().refine((val) => val !== null, {
-        message: " Please Select Cluster",
-    }),
+    // cluster_id: z.number().int().nullable().refine((val) => val !== null, {
+    //     message: " Please Select Cluster",
+    // }),
 });

@@ -1,0 +1,15 @@
+.pac-container {
+    background-color: #1d282c;
+    border-radius: 5px;
+    border: 1px solid #1d282c;
+    font-family: 'Roboto', sans-serif;
+}
+
+.pac-item,
+.pac-item-query {
+    color: white;
+}
+
+.pac-item:hover {
+    background-color: #1d282c;
+}

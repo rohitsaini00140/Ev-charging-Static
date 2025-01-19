@@ -60,11 +60,11 @@ function AddOrUpdateUserFields() {
         email: "",
         phone: "",
         role_id: null,
-        cluster_id: null
+        // cluster_id: null
     }), []);
 
     const { register, handleSubmit, watch, setValue, setError, reset, formState: { errors } } = useForm({
-        resolver: zodResolver(userSchema),
+        // resolver: zodResolver(userSchema),
         defaultValues: defaultValues
     });
 
@@ -75,7 +75,7 @@ function AddOrUpdateUserFields() {
                 email: userForUpdate.email || "",
                 phone: userForUpdate.phone || "",
                 role_id: userForUpdate.role_id || null,
-                cluster_id: userForUpdate.cluster_id || null,
+                // cluster_id: userForUpdate.cluster_id || null,
                 
             });
         } else {
@@ -84,6 +84,7 @@ function AddOrUpdateUserFields() {
     }, [id, userForUpdate, reset, defaultValues]);
 
     const onSubmit = async (data) => {
+        console.log(data)
         setLoading(true);
         try {
 
@@ -137,7 +138,7 @@ function AddOrUpdateUserFields() {
                         direction={{ xs: 'column', sm: 'row' }}
                         spacing={{ xs: 1, sm: 2, md: 6 }}
                     >
-                        {logInRole?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
+                        {/* {logInRole?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
                             <SearchableDropdown
                                 options={allcluters.length > 0 ? allcluters : []}
                                 placeholder="Select Cluster"
@@ -147,7 +148,7 @@ function AddOrUpdateUserFields() {
                                 )}
                             />
                             {errors.cluster_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.cluster_id.message}</Typography>}
-                        </Stack>}
+                        </Stack>} */}
                         <Stack width={"100%"}>
                             <TextField
                                 label="Name"

@@ -26,7 +26,7 @@ function DeviceTableHead({ allDeviceData }) {
 
                 {logInRole?.user?.role?.name === "Superadmin" ? headLabel.map((headCell) => (
                     <StyledTableCell
-                        sx={{ width: headCell?.width, minWidth: headCell?.minWidth }}
+                        sx={{ width: headCell?.width, minWidth: headCell?.minWidth, whiteSpace: 'nowrap' }}
                     >
                         <TableSortLabel hideSortIcon>
                             {headCell?.label}
@@ -36,7 +36,7 @@ function DeviceTableHead({ allDeviceData }) {
                     :
                     headLabel.filter(ele => ele.label !== "Cluster Name").map((headCell) => (
                         <StyledTableCell
-                            sx={{ width: headCell?.width, minWidth: headCell?.minWidth }}
+                            sx={{ width: headCell?.width, minWidth: headCell?.minWidth, whiteSpace: 'nowrap' }}
                         >
                             <TableSortLabel hideSortIcon>
                                 {headCell?.label}

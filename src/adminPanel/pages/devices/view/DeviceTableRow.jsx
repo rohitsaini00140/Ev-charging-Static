@@ -55,7 +55,7 @@ function DeviceTableRow({ allDeviceData, currentPageNo }) {
                         <StyledTableCell color={"white"} >
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : ((currentPageNo - 1) * 10 + (i + 1))}
                         </StyledTableCell>
-                       
+
                         {logInRole?.user?.role?.name === "Superadmin" && <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster?.cluster_name}
                         </StyledTableCell>}
@@ -72,10 +72,13 @@ function DeviceTableRow({ allDeviceData, currentPageNo }) {
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.type}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.deviceID}
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.location}
                         </StyledTableCell>
                         <StyledTableCell>
-                        <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
+                            <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
                         </StyledTableCell>
                         <StyledTableCell>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : <Action

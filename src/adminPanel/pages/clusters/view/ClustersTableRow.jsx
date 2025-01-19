@@ -45,6 +45,9 @@ function ClustersTableRow({ allClusterData, currentPageNo }) {
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.email}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.phone}
+                        </StyledTableCell>
+                        <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.country_name}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>

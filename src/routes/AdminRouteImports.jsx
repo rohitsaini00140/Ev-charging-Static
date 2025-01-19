@@ -15,7 +15,7 @@ import ProjectView from "../adminPanel/pages/projects/view/ProjectView.jsx";
 import AddOrUpdateDevice from "../adminPanel/pages/devices/addOrUpdate/AddOrUpdateDevice.jsx";
 import DeviceView from "../adminPanel/pages/devices/view/DeviceView.jsx";
 import AddOrUpdatePermissionsToRole from "../adminPanel/pages/roles&Permissions/permissionsToRole/addOrUpdate/AddOrUpdatePermissionsToRole.jsx";
-
+import DeviceLogs from "../adminPanel/pages/devices/deviceLogs/DeviceLogs.jsx";
 
 export {
     ThemeProviderAdmin,
@@ -34,5 +34,6 @@ export {
     AddOrUpdateProject,
     ProjectView,
     AddOrUpdateDevice,
-    DeviceView
+    DeviceView,
+    DeviceLogs
 }
