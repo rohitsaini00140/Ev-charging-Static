@@ -42,7 +42,7 @@ function UserTableRow({ allUserData, currentpage }) {
         <>
             {allUserData.length > 0
                 &&
-                allUserData.map((data) => (
+                allUserData.map((data,i) => (
                     <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.id}>
                         <StyledTableCell padding="checkbox">
                             <Checkbox disableFocusRipple
@@ -51,6 +51,7 @@ function UserTableRow({ allUserData, currentpage }) {
                             />
                         </StyledTableCell>
                       {/* <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.cluster?.cluster_name}</StyledTableCell> */}
+                        <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : ((currentpage - 1)  + (i + 1))}</StyledTableCell>
                         <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.name}</StyledTableCell>
                         <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.email}</StyledTableCell>
                         <StyledTableCell color={"#222245"}> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.phone}</StyledTableCell>

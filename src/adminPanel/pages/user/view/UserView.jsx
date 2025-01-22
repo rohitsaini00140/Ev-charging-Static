@@ -107,7 +107,7 @@ function UserView() {
           m={3}
         >
           <Typography variant="h4" color="white">
-            Users
+          Internal Users
           </Typography>
           <Link to={"/admin/user/add"}>
             <Button

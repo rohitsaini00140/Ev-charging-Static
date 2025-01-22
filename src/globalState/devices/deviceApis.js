@@ -99,17 +99,19 @@ export const deviceApi = createApi({
       providesTags: ["device"],
     }),
 
-    // New endpoint for fetching posts
-    getPosts: builder.query({
-      query: (page = 1) => ({
-        url: `http://143.110.178.49/ev-charging-backend/api/charger-logs?page=${page}`,
-        method: "GET",
-      }),
+    filterChargerLogs: builder.query({
+      query: ({page,from_date, to_date,charger_display_id}) => {
+        const params = new URLSearchParams();
+        if (page) params.append('page', page);
+        if (from_date) params.append("from_date", from_date);
+        if (to_date) params.append("to_date", to_date);
+        if (charger_display_id) params.append("charger_display_id",charger_display_id);
+        return `/charger-logs?${params.toString()}`;
+      },
     }),
-
-    
   }),
 });
+
 export const {
   useAddDeviceMutation,
   useGetDeviceQuery,
@@ -119,5 +121,5 @@ export const {
   useSoftDeleteDeviceMutation,
   useRestoreDeviceMutation,
   useGetDeviceLogsQuery,
-  useGetPostsQuery,
+  useFilterChargerLogsQuery, // New hook for filtering charger logs
 } = deviceApi;

@@ -16,7 +16,7 @@ import DeviceTableRow from './DeviceTableRow';
 import DeviceTableToolbar from './DeviceTableToolbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetDeviceQuery } from '../../../../globalState/devices/deviceApis';
-import { setDeviceListPageNo } from '../../../../globalState/devices/deviceSlices';
+import { setDeviceListPageNo, setDeviceListPageNo1 } from '../../../../globalState/devices/deviceSlices';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Alertbar from '../../../component/Alertbar';
@@ -66,7 +66,7 @@ function DeviceView() {
   const { last_page } = paginationData;
 
   const handlePageChange = (event, value) => {
-    dispatch(setDeviceListPageNo(value));
+    dispatch(setDeviceListPageNo1(value));
   };
 
   const handleCloseSnackbar = (event, reason) => {

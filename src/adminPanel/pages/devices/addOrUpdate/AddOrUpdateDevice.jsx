@@ -2,8 +2,10 @@ import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import AddOrUpdateDeviceFields from './AddOrUpdateDeviceFields';
+import { useParams } from 'react-router-dom';
 // ----------------------------------------------------------------------
 function AddOrUpdateDevice() {
+      let { id } = useParams();
     return (
         <Box
         sx={{
@@ -18,7 +20,7 @@ function AddOrUpdateDevice() {
                         borderRadius:'16px'
                     }}
                 >
-                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>Add Devices</Typography>
+                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>{id ?  "Update Device" : "Add Device"}</Typography>
                     <AddOrUpdateDeviceFields />
                 </Stack>
             </Stack>

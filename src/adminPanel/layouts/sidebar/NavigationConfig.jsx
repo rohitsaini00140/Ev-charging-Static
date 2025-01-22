@@ -32,7 +32,7 @@ export const navConfig = [
   },
 
   {
-    title: 'Users',
+    title: 'Internal Users',
     icon: icon('ic_user'),
     children: [
       {
@@ -108,7 +108,7 @@ export const navConfig = [
   {
     title: 'Charger Activity Logs',
     path: '/admin/deviceLog',
-    icon: icon('books'),
+    icon: icon('ActivityLogs'),
 
   }
 ];
@@ -177,7 +177,7 @@ export const navConfig2 = [
   {
       title: 'Device logs',
       path: '/admin/deviceLog',
-      icon: icon('books'),
+      icon: icon('ActivityLogs'),
     
   },
 

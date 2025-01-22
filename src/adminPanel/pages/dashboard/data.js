@@ -11,7 +11,7 @@ export const dashboardCardData = {
     bgColor: "#f9f3e7"
 }
 export const dashboardCardData2 = {
-    type: "Toal Projects",
+    type: "Total Projects",
     totalCount: "900",
     Percentage: "25%",
     incOrDec: "dec",
@@ -32,7 +32,7 @@ export const dashboardCardData3 = {
     bgColor: "#557710"
 }
 export const dashboardCardData4 = {
-    type: "Total Device",
+    type: "Total Devices",
     totalCount: "500",
     Percentage: "25%",
     incOrDec: "inc",

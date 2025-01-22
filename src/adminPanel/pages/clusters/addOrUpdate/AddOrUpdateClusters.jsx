@@ -24,7 +24,7 @@ function AddOrUpdateClusters() {
           }}
         >
           <Typography variant="h4" sx={{ mb: 3, color: "white" }}>
-            {id ? "Update Cluster" : "Add Clusters"}
+            {id ? "Update Cluster" : "Add Cluster"}
           </Typography>
           <AddOrUpdateClustersFields />
         </Card>

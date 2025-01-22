@@ -2,10 +2,13 @@ import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import AddOrUpdateRoleFields from './AddOrUpdateRoleFields';
+import { useParams } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
 function AddOrUpdateRoles() {
+
+    const {id} = useParams()
 
     return (
         <Box
@@ -25,7 +28,7 @@ function AddOrUpdateRoles() {
                         borderRadius: "16px"
                     }}
                 >
-                    <Typography variant="h4" sx={{ mb: 3 }} color="white">Add Roles</Typography>
+                    <Typography variant="h4" sx={{ mb: 3 }} color="white">{id ? "Update Role":"Add Role"}</Typography>
                     <AddOrUpdateRoleFields />
                 </Stack>
             </Stack>

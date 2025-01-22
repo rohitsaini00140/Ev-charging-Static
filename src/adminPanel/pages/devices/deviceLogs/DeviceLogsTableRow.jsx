@@ -11,14 +11,92 @@ function DeviceLogsTableRow({ postData }) {
     return () => clearTimeout(timer);
   }, []);
 
-const renderNestedData = (data) => {
-  // Parse if the data is a JSON string
-  if (typeof data === "string") {
+  const renderNestedData = (data) => {
     try {
-      const data1 = JSON.parse(data);
-      data = JSON.parse(data1);
-    } catch (e) {
-      // If parsing fails, return the raw string
+      // Step 1: Check if data is null, undefined, or empty
+      if (!data || (typeof data === "object" && Object.keys(data).length === 0)) {
+        return (
+          <ListItem
+          sx={{ whiteSpace: "nowrap", fontStyle: "italic", color: "gray" }}
+        >
+          No Data Available
+        </ListItem>
+  
+        );
+      }
+  
+      // Step 2: Parse the JSON string if it's a string
+      if (typeof data === "string") {
+        const parsedData = JSON.parse(data);
+        data = typeof parsedData === "string" ? JSON.parse(parsedData) : parsedData;
+      }
+  
+      // Step 3: Handle arrays
+      if (Array.isArray(data)) {
+        if (data.length === 0) {
+          return (
+            <ListItem
+            sx={{ whiteSpace: "nowrap", fontStyle: "italic", color: "gray" }}
+          >
+            No Data Available
+          </ListItem>
+    
+          );
+        }
+        return (
+          <List>
+            {data.map((item, index) => (
+              <ListItem
+                key={index}
+                sx={{
+                  p: ".3rem",
+                  gap: ".4rem",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {typeof item === "object" ? (
+                  renderNestedData(item)
+                ) : typeof item === "string" && !isNaN(Date.parse(fixDateString(item))) ? (
+                  formatToIST(fixDateString(item))
+                ) : (
+                  item
+                )}
+              </ListItem>
+            ))}
+          </List>
+        );
+      }
+  
+      // Step 4: Handle objects
+      if (typeof data === "object" && data !== null) {
+        return (
+          <List>
+            {Object.entries(data).map(([key, value], index) => (
+              <ListItem
+                key={index}
+                sx={{
+                  p: ".3rem",
+                  gap: ".4rem",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                <strong>{key}:</strong>{" "}
+                {typeof value === "object"
+                  ? renderNestedData(value)
+                  : typeof value === "string" && !isNaN(Date.parse(fixDateString(value)))
+                  ? formatToIST(fixDateString(value))
+                  : value}
+              </ListItem>
+            ))}
+          </List>
+        );
+      }
+  
+      // Step 5: Render primitive data types
       return (
         <ListItem
           sx={{
@@ -30,89 +108,63 @@ const renderNestedData = (data) => {
           {data}
         </ListItem>
       );
+    } catch (e) {
+      console.error("Error rendering data:", e);
+      return (
+        <ListItem
+          sx={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          Invalid data
+        </ListItem>
+      );
     }
-  }
+  };
+  
+  // Utility function to fix date string by removing leading "00" and ensuring "Z" at the end
+  const fixDateString = (dateString) => {
+    // Remove leading "00" if present
+    // let fixedDate = dateString.replace(/^00/, "");
+    let fixedDate = dateString.replace(/^0(0|1|2)/, "");
 
-  // Handle empty or invalid data
-  if (!data || (typeof data === "object" && Object.keys(data).length === 0)) {
-    return (
-      <ListItem
-        sx={{ whiteSpace: "nowrap", fontStyle: "italic", color: "gray" }}
-      >
-        No Data Available
-      </ListItem>
-    );
-  }
-
-  // Render object or array data
-  if (typeof data === "object" && data !== null) {
-    return (
-      <List>
-        {Array.isArray(data)
-          ? data.map((value, index) => (
-              <ListItem
-                key={index}
-                sx={{
-                  p: ".3rem",
-                  gap: ".4rem",
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {typeof value === "object"
-                  ? renderNestedData(value)
-                  : typeof value === "string" && !isNaN(Date.parse(value))
-                  ? new Date(value).toLocaleString()
-                  : value}
-              </ListItem>
-            ))
-          : Object.entries(data).map(([key, value], index) => (
-              <ListItem
-                key={index}
-                sx={{
-                  p: ".3rem",
-                  gap: ".4rem",
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                <strong>{key}:</strong>
-                
-                {typeof value === "object"
-                  ? renderNestedData(value)
-                  : typeof value === "string" && !isNaN(Date.parse(value))
-                  ? new Date(value).toLocaleString()
-                  : value} 
-              </ListItem>
-            ))}
-      </List>
-    );
-  }
-
-  // Render primitive data types
-  return (
-    <ListItem
-      sx={{
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-      }}
-    >
-      {data}
-    </ListItem>
-  );
-};
+    // Ensure the string ends with "Z" for UTC
+    if (!fixedDate.endsWith("Z")) {
+      fixedDate += "Z";
+    }
+    return fixedDate;
+  };
+  
+  // Utility function to format a date string to IST
+  const formatToIST = (dateString) => {
+    const date = new Date(dateString);
+    const options = {
+      timeZone: "Asia/Kolkata",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+    return new Intl.DateTimeFormat("en-IN", options).format(date);
+  };
+  
+  
   
 
+
+
+
+  
 
   const renderNestedData1 = (data) => {
     // Parse if the data is a JSON string
     if (typeof data === "string") {
       try {
-       
-        data = JSON.parse(data)
+        data = JSON.parse(data);
       } catch (e) {
         // If parsing fails, return the raw string
         return (
@@ -128,7 +180,7 @@ const renderNestedData = (data) => {
         );
       }
     }
-  
+
     // Handle empty or invalid data
     if (!data || (typeof data === "object" && Object.keys(data).length === 0)) {
       return (
@@ -139,7 +191,7 @@ const renderNestedData = (data) => {
         </ListItem>
       );
     }
-  
+
     // Render object or array data
     if (typeof data === "object" && data !== null) {
       return (
@@ -156,7 +208,6 @@ const renderNestedData = (data) => {
               }}
             >
               <strong>{key}:</strong>
-           
               {typeof value === "object"
                 ? renderNestedData(value)
                 : typeof value === "string" && !isNaN(Date.parse(value))
@@ -167,7 +218,7 @@ const renderNestedData = (data) => {
         </List>
       );
     }
-  
+
     // Render primitive data types
     return (
       <ListItem
@@ -184,8 +235,8 @@ const renderNestedData = (data) => {
 
   return (
     <>
-      {postData?.data.length > 0 &&
-        postData?.data.map((data) => (
+      {postData?.data?.length > 0 &&
+        postData?.data?.map((data) => (
           <StyledTableRow key={data.id}>
             <StyledTableCell color={"#222245"} sx={{ border: "1px solid" }}>
               {loading ? (
@@ -194,7 +245,6 @@ const renderNestedData = (data) => {
                 data?.action
               )}
             </StyledTableCell>
-
 
             <StyledTableCell color={"#222245"} sx={{ border: "1px solid" }}>
               {loading ? (

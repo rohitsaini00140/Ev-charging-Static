@@ -37,7 +37,7 @@ function Nav({ openNav, onCloseNav }) {
         photoURL: '/assets/images/avatar.svg',
     };
 
-
+    console.log(logInRole?.user?.role?.name,"ddddddddd")
 
     const pathname = usePathname();
     const upLg = useResponsive('up', 'lg');
@@ -45,7 +45,6 @@ function Nav({ openNav, onCloseNav }) {
         if (openNav) {
             onCloseNav();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname]);
 
     const renderAccount = (
