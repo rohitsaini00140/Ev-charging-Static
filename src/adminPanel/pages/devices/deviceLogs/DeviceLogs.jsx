@@ -13,7 +13,11 @@ import {
   useFilterChargerLogsQuery,
   useGetDeviceLogsQuery,
 } from "../../../../globalState/devices/deviceApis";
-import { setcharger_display_id, setDeviceListPageNo,} from "../../../../globalState/devices/deviceSlices";
+import {
+  setaction,
+  setcharger_display_id,
+  setDeviceListPageNo,
+} from "../../../../globalState/devices/deviceSlices";
 import DeviceLogsTableHead from "./DeviceLogsTableHead";
 import DeviceLogsTableRow from "./DeviceLogsTableRow";
 import DeviceLogsTableToolbar from "./DeviceLogsTableToolbar";
@@ -35,6 +39,7 @@ function DeviceLogs() {
   const [from_date, setfrom_date] = useState(null);
   const [to_date, setto_date] = useState(null);
   const [searchValue, setSearchValue] = useState("");
+  const [searchaction, setsearchAction] = useState("");
 
   const dispatch = useDispatch();
 
@@ -46,6 +51,7 @@ function DeviceLogs() {
     pageNo,
     charger_status,
     charger_display_id,
+    action,
   } = useSelector((state) => state.device);
 
   const { data: deviceLogData, isSuccess: deviceLogSuccess } =
@@ -68,18 +74,23 @@ function DeviceLogs() {
     from_date: from_date ? dayjs(from_date).format("YYYY-MM-DD") : undefined,
     to_date: to_date ? dayjs(to_date).format("YYYY-MM-DD") : undefined,
     charger_display_id,
+    action,
   });
 
   const handlePageChange = (event, value) => {
     dispatch(setDeviceListPageNo(value));
   };
 
-
-
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchValue(value);
     dispatch(setcharger_display_id(value));
+  };
+
+  const handleAction = (event) => {
+    const value = event.target.value;
+    setsearchAction(value);
+    dispatch(setaction(value));
   };
 
   const downloadExcel = async () => {
@@ -100,8 +111,8 @@ function DeviceLogs() {
       try {
         parsedRequest =
           data?.chargerrequest && typeof data.chargerrequest === "string"
-            ? JSON.parse(data.chargerrequest)
-            : "No Data Found";
+            ? data.chargerrequest
+            : data.chargerrequest;
       } catch (err) {
         console.error("Error parsing chargerrequest:", err);
       }
@@ -147,7 +158,7 @@ function DeviceLogs() {
       return {
         Action: data?.action || "No Data Available",
         "Charger Display ID": data?.charger_id || "No Data Available",
-        Request: formatNestedData(parsedRequest) || "No Data Available", // Formatting Request data
+        Request: formatNestedData(parsedRequest),
         "Request Time":
           new Date(data?.reponse_date).toLocaleString() || "No Data Available",
         Response: formattedResponse, // Nested Response data formatted
@@ -192,17 +203,38 @@ function DeviceLogs() {
   return (
     <>
       <Container>
-        <Stack
-          sx={{
-            // padding: "1.2rem 0rem",
-            // display:"flex",
-            // justifyContent:'space-between'
-            marginBottom: "15px",
-          }}
-        >
+        <Stack>
           <Grid
             container
-            sx={{ display: "flex", justifyContent: "space-between" }}
+            sx={{
+              margin: "20px 0px",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Grid item xs={12} sm={12} md={12} lg={12}>
+              <Typography variant="h4" color="white">
+                Charger Activity Logs
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={12} md={12} lg={12}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={downloadExcel}
+                sx={{ background: "#20c997", width: "100%", height: "100%" }}
+              >
+                Download Excel
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "15px",
+            }}
             spacing={2.3}
           >
             <Grid
@@ -313,7 +345,7 @@ function DeviceLogs() {
               lg={3}
               sx={{
                 width: {
-                  xs: "50%",
+                  xs: "48%",
                   sm: "200px",
                   md: "200px",
                 },
@@ -328,15 +360,27 @@ function DeviceLogs() {
               />
             </Grid>
 
-            <Grid item xs={6} sm={6} md={6} lg={6}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={downloadExcel}
-                sx={{ background: "#20c997", width: "100%", height: "100%" }}
-              >
-                Download Excel
-              </Button>
+            <Grid
+              item
+              xs={6}
+              sm={6}
+              md={3}
+              lg={3}
+              sx={{
+                width: {
+                  xs: "48%",
+                  sm: "200px",
+                  md: "200px",
+                },
+                maxWidth: "100%",
+              }}
+            >
+              <SearchInput
+                placeholder="Charger Action"
+                sx={{ color: "white", background: "#3e403d0f" }}
+                value={searchaction}
+                onChange={handleAction}
+              />
             </Grid>
           </Grid>
         </Stack>

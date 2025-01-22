@@ -1,26 +1,28 @@
-import SimpleBar from 'simplebar-react';
+import SimpleBar from "simplebar-react";
 
-import { alpha, styled } from '@mui/material/styles';
+import { alpha, styled } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
-export const StyledRootScrollbar = styled('Box')(() => ({
-    flexGrow: 1,
-    height: '100%',
-    overflow: 'hidden',
+export const StyledRootScrollbar = styled("Box")(() => ({
+  flexGrow: 1,
+  height: "100%",
+  overflow: "hidden",
 }));
 
 export const StyledScrollbar = styled(SimpleBar)(({ theme }) => ({
-    maxHeight: '100%',
-    '& .simplebar-scrollbar': {
-        '&:before': {
-            backgroundColor: alpha(theme.palette.grey[600], 0.48),
-        },
-        '&.simplebar-visible:before': {
-            opacity: 1,
-        },
+  maxHeight: "100%",
+  "& .simplebar-scrollbar": {
+    "&:before": {
+      backgroundColor: "white",
+      opacity: 1,
     },
-    '& .simplebar-mask': {
-        zIndex: 'inherit',
+
+    "&.simplebar-visible:before": {
+      opacity: 1,
     },
+  },
+  "& .simplebar-mask": {
+    zIndex: "inherit",
+  },
 }));

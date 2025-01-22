@@ -100,12 +100,14 @@ export const deviceApi = createApi({
     }),
 
     filterChargerLogs: builder.query({
-      query: ({page,from_date, to_date,charger_display_id}) => {
+      query: ({ page, from_date, to_date, charger_display_id, action }) => {
         const params = new URLSearchParams();
-        if (page) params.append('page', page);
+        if (page) params.append("page", page);
         if (from_date) params.append("from_date", from_date);
         if (to_date) params.append("to_date", to_date);
-        if (charger_display_id) params.append("charger_display_id",charger_display_id);
+        if (charger_display_id)
+          params.append("charger_display_id", charger_display_id);
+        if (action) params.append("action", action);
         return `/charger-logs?${params.toString()}`;
       },
     }),

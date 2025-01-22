@@ -3,18 +3,19 @@ import { Stack } from '@mui/system';
 import { Typography } from '@mui/material';
 
 function TablePagination({ count, page, onPageChange }) {
+
     const paginationStyle = {
         "& .MuiPaginationItem-root": {
-            color: 'white',
-            borderColor: '#3e403d0f'
+            color: 'white !important', // Ensure this gets applied
+            borderColor: '#3e403d0f !important', // Add importance for specificity
         },
         "& .MuiPaginationItem-previousNext": {
-            color: 'white',
+            color: 'white !important',
         },
-        ".css-ax0zxn-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected": {
-            background: '#20c997',
+        "& .Mui-selected": {
+            backgroundColor: '#20c997 !important', // Properly scoped and marked important
         }
-    }
+    };
     return (
         <Stack spacing={2} justifyContent={"center"} alignItems={"center"} p={2} bgcolor="#3e403d0f">
             <Pagination

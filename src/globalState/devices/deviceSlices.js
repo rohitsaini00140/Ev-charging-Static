@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const deviceSlice = createSlice({
   name: "device",
   initialState: {
-    page:1,
+    page: 1,
     pageNo: 1,
     cluters_id: "",
     deviceName: "",
@@ -19,6 +19,7 @@ const deviceSlice = createSlice({
     to_date: null,
     charger_status: "",
     charger_display_id: "",
+    action: "",
   },
   reducers: {
     setDeviceListPageNo: (state, action) => {
@@ -68,6 +69,10 @@ const deviceSlice = createSlice({
     setcharger_display_id: (state, action) => {
       state.charger_display_id = action.payload;
     },
+
+    setaction: (state, action) => {
+      state.action = action.payload;
+    },
   },
 });
 
@@ -86,6 +91,7 @@ export const {
   setto_date,
   setCharger_status,
   setcharger_display_id,
+  setaction,
 } = deviceSlice.actions;
 
 export default deviceSlice.reducer;

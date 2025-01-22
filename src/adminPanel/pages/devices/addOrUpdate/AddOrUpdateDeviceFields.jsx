@@ -231,7 +231,7 @@ function AddOrUpdateDeviceFields() {
                 }
                 placeholder="Select Device Type"
                 selectType="single"
-                options={["Type-A", "Type-B", "Type-C"]}
+                options={["EV charger", "PQ meter", "Sensor"]}
               />
               {errors.type && (
                 <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
@@ -247,7 +247,11 @@ function AddOrUpdateDeviceFields() {
                 sx={inputStyle}
                 fullWidth
               />
-              {errors.device_manufacturer && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"} >*{errors.device_manufacturer.message}</Typography>}
+              {errors.device_manufacturer && (
+                <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
+                  *{errors.device_manufacturer.message}
+                </Typography>
+              )}
             </Stack>
             <Stack width={"100%"}>
               <TextField
@@ -288,9 +292,9 @@ function AddOrUpdateDeviceFields() {
                 setValue("location", newValue, { shouldValidate: true })
               }
             />
-            {errors.serial_number && (
+            {errors.location && (
               <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
-                *{errors.serial_number.message}
+                *{errors.location.message}
               </Typography>
             )}
           </Stack>
