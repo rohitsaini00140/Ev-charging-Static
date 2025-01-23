@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import { useTheme } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import { useResponsive } from '../../customHooks/useResponsive';
 // import { bgBlur } from "../theme/css"
@@ -35,7 +35,7 @@ function AdminHeader({ onOpenNav }) {
         <AppBar
             sx={{
                 boxShadow: 'none',
-                bgcolor: "#1d282c",
+                bgcolor: "white",
                 height: HEADER.H_MOBILE,
                 zIndex: theme.zIndex.appBar + 1,
                 // ...bgBlur({
@@ -54,8 +54,8 @@ function AdminHeader({ onOpenNav }) {
                 sx={{
                     height: 1,
                     px: { lg: 5 },
-                    bgcolor: "#1d282c",
-                    boxShadow:'0px 4px 12px rgba(87, 179, 62, 0.2)'
+                      bgcolor: alpha("rgba(87, 179, 62)", 0.1),
+                 boxShadow: "0px 6px 18px rgba(180, 250, 160, 0.3)",
                 }}
             >
                 {renderContent}

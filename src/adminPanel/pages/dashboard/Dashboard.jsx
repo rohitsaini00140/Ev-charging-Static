@@ -28,12 +28,12 @@ function Dashboard() {
 
   return (
     <Container maxWidth="xl">
-      <Typography variant="h4" sx={{ m: 2 }} color="white">
+      <Typography variant="h4" sx={{ m: 2 }}>
         {`Welcome ${logInRole?.user?.name} 👋`}
       </Typography>
       <Grid container spacing={1}>
         {/* <Grid container > */}
-        <Grid size={{ xs: 12, md: logInRole?.user?.role?.name === "Superadmin" ? 3 : 4 }}>
+        <Grid size={{ xs: 12, md: logInRole?.user?.role?.name === "Superadmin" ? 3 : 4,color:"black" }}>
           <DashboardCard counter={allUsersData.length} data={dashboardCardData} />
         </Grid>
         {logInRole?.user?.role?.name === "Superadmin" && <Grid size={{ xs: 12, md: 3 }}>
@@ -51,8 +51,8 @@ function Dashboard() {
         <Grid size={{ md: 4, xs: 12 }}>
           <TargetProgressBar />
         </Grid>
-        <Grid size={{ xs: 12, md: 8 }} sx={{ bgcolor: "#3e403d0f", borderRadius: "1rem", boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)', }}>
-          <Card sx={{ p: '2rem', bgcolor: "#3e403d0f" }}>
+        <Grid size={{ xs: 12, md: 8 }} sx={{  borderRadius: "1rem", }}>
+          <Card sx={{ p: '2rem',bgcolor: "#daf5ef", }}>
             <BarChart />
           </Card>
         </Grid>

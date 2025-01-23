@@ -45,7 +45,7 @@ function DashboardCard({ data,counter }) {
         padding: "1.2rem 2rem",
         borderRadius: "1rem",
         boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",
-        bgcolor: "#3e403d0f",
+        bgcolor: "#daf5ef",
       }}
     >
       <Stack sx={{ display: "grid", placeItems: "center" }}>
@@ -68,13 +68,13 @@ function DashboardCard({ data,counter }) {
         <Typography
           variant="h4"
           mb=".4rem"
-          color="white"
+          color="black"
           marginTop="10px"
           textAlign="center"
         >
           {isNaN(counter) ? "0" : counter} {/* Show 0 if count is NaN */}
         </Typography>
-        <Typography mb="1rem" color="#ffffffd1" textAlign="center">
+        <Typography mb="1rem"  textAlign="center" color="black">
           {data.type}
         </Typography>
         {/* <Typography sx={{ fontSize: ".8rem", color: "white",textAlign:'center' }}>

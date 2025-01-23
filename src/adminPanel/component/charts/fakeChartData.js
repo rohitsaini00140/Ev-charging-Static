@@ -79,30 +79,30 @@ export const optionsForBarChart = {
         legend: {
             position: 'top',
             labels: {
-                color: 'white',
+                color: 'black',
             },
         },
         title: {
             display: true,
             text: 'Monthly Revenue Growth',
-            color: "white"
+            color: "black"
         },
     },
     scales: {
         x: {
             ticks: {
-                color: 'white'
+                color: 'black'
             },
             grid: {
-                color: '#637381',
+                color: '#daf5ef',
             }
         },
         y: {
             ticks: {
-                color: 'white'
+                color: 'black'
             },
             grid: {
-                color: '#637381',
+                color: '#daf5ef',
             }
         },
     },

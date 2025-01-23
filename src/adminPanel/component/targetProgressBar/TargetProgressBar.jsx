@@ -34,10 +34,10 @@ function TargetProgressBar() {
                 justifyContent: "center",
                 alignItems: 'center',
                 boxShadow: '0px 4px 12px rgba(87, 179, 62, 0.2)',
-                bgcolor: "#3e403d0f",
+                bgcolor: "#daf5ef",
             }}
         >
-            <Typography variant="h5" color="white" gutterBottom>
+            <Typography variant="h5" color="black" gutterBottom>
                 EV Monthly Target
             </Typography>
             <Box
@@ -65,7 +65,7 @@ function TargetProgressBar() {
                     alignItems="center"
                     justifyContent="center"
                 >
-                    <Typography variant="h6" component="div" color="white">
+                    <Typography variant="h6" component="div" color="black">
                         {`${Math.round(progress)}%`}
                     </Typography>
                 </Box>
@@ -77,11 +77,11 @@ function TargetProgressBar() {
                 mt: "10px"
             }}>
                 <Box>
-                    <Typography variant='h4' color="white">₹5,870</Typography>
+                    <Typography variant='h4' color="black">₹5,870</Typography>
                     <Typography color={"rgb(32, 201, 151)"}>Revenue</Typography>
                 </Box>
                 <Box>
-                    <Typography variant='h4' color="white">₹7,870</Typography>
+                    <Typography variant='h4' color="black">₹7,870</Typography>
                     <Typography color={"rgb(32, 201, 151)"}>Target</Typography>
                 </Box>
             </Box>
