@@ -72,7 +72,7 @@ function RoleView() {
           justifyContent="space-between"
           m={3}
         >
-          <Typography variant="h4" color="white">
+          <Typography variant="h4" color="black">
             Roles
           </Typography>
           <Link to={"/admin/role/add"}>
@@ -93,7 +93,7 @@ function RoleView() {
         </Stack>
         <Card
           sx={{
-            bgcolor: "#3e403d0f",
+            // bgcolor: "#3e403d0f",
             boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",
           }}
         >
@@ -104,7 +104,7 @@ function RoleView() {
               justifyContent="center"
               sx={{ minHeight: 300, padding: 4 }}
             >
-              <Typography color="white" sx={{ mt: 2 }}>
+              <Typography color="Black" sx={{ mt: 2 }}>
                 Loading...
               </Typography>
             </Stack>
@@ -123,7 +123,7 @@ function RoleView() {
                           align="center"
                           sx={{ border: "1px solid red", padding: "2rem" }}
                         >
-                          <Typography color="white">No Data Found</Typography>
+                          <Typography color="Black">No Data Found</Typography>
                         </StyledTableCell>
                       </StyledTableRow>
                     )}

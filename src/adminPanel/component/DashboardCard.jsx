@@ -44,8 +44,9 @@ function DashboardCard({ data,counter }) {
       sx={{
         padding: "1.2rem 2rem",
         borderRadius: "1rem",
-        boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",
-        bgcolor: "#daf5ef",
+        // boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",
+        // bgcolor: "#daf5ef",
+        bgcolor:"white",
       }}
     >
       <Stack sx={{ display: "grid", placeItems: "center" }}>

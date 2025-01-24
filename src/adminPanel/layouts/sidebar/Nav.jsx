@@ -130,7 +130,8 @@ function Nav({ openNav, onCloseNav }) {
               height: 1,
               position: "fixed",
               width: NAV.WIDTH,
-              bgcolor: alpha("rgba(87, 179, 62)", 0.1),
+              // bgcolor: alpha("rgba(87, 179, 62)", 0.1),
+              bgcolor:"#ffff",
               boxShadow: "white",
               // borderRight: (theme) => `dashed 1px ${theme.palette.Boxider}`,
             }}

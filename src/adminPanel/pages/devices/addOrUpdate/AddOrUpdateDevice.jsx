@@ -20,7 +20,7 @@ function AddOrUpdateDevice() {
                         borderRadius:'16px'
                     }}
                 >
-                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>{id ?  "Update Device" : "Add Device"}</Typography>
+                    <Typography variant="h4" color="black" sx={{ mb: 3 }}>{id ?  "Update Device" : "Add Device"}</Typography>
                     <AddOrUpdateDeviceFields />
                 </Stack>
             </Stack>

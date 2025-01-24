@@ -14,8 +14,8 @@ function AdminFooter() {
         py: 2,
         marginLeft: lgUp && "17.5rem",
         textAlign: "center",
-        bgcolor: alpha("rgba(87, 179, 62)", 0.1),
-        boxShadow: "white",
+        // bgcolor: alpha("rgba(87, 179, 62)", 0.1),
+        // boxShadow: "white",
         mt: "auto",
       }}
     >

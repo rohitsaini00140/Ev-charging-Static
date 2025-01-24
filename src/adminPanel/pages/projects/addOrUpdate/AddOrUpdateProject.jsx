@@ -19,11 +19,11 @@ function AddOrUpdateProject() {
                         width: 1,
                         maxWidth: "100%",
                         height: "auto",
-                        backgroundColor: "rgb(29, 40, 44)",
+                        backgroundColor: "#ffff",
                         borderRadius: "16px"
                     }}
                 >
-                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>{id ? "Update Project" : "Add Project"}</Typography>
+                    <Typography variant="h4" color="black" sx={{ mb: 3 }}>{id ? "Update Project" : "Add Project"}</Typography>
                     <AddOrUpdateProjectFields />
                 </Stack>
             </Stack>

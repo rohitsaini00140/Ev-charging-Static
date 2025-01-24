@@ -168,7 +168,7 @@ function DeviceTableToolbar() {
                             <SearchInput
                                 placeholder="Search Device"
                                 width={"100%"}
-                                sx={{ color: "white", background: '#3e403d0f' }}
+                                sx={{ color: "white", background: '#ffff' }}
                                 onChange={(e) => handleSelect(e.target.value, "device")}
                                 value={deviceName}
                             />
@@ -177,7 +177,7 @@ function DeviceTableToolbar() {
                             <SearchInput
                                 placeholder="Search Device ID"
                                 width={"100%"}
-                                sx={{ color: "white", background: '#3e403d0f' }}
+                                sx={{ color: "white", background: '#ffff' }}
                                 onChange={(e) => handleSelect(e.target.value, "deviceID")}
                                 value={deviceID}
                             />

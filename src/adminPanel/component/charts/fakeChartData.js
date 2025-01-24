@@ -94,7 +94,7 @@ export const optionsForBarChart = {
                 color: 'black'
             },
             grid: {
-                color: '#daf5ef',
+                color: '#ffff',
             }
         },
         y: {
@@ -102,7 +102,7 @@ export const optionsForBarChart = {
                 color: 'black'
             },
             grid: {
-                color: '#daf5ef',
+                color: '#ffff',
             }
         },
     },
