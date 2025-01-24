@@ -106,7 +106,7 @@ function UserView() {
           justifyContent="space-between"
           m={3}
         >
-          <Typography variant="h4" color="white">
+          <Typography variant="h4" color="black">
           Internal Users
           </Typography>
           <Link to={"/admin/user/add"}>
@@ -126,7 +126,7 @@ function UserView() {
         </Stack>
         <Card
           sx={{
-            bgcolor: "rgb(29, 40, 44)",
+            bgcolor: "#ffff",
             boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",
           }}
         >
@@ -159,7 +159,7 @@ function UserView() {
                           align="center"
                           sx={{ border: "1px solid red", padding: "2rem" }}
                         >
-                          <Typography color="white">No Data Found</Typography>
+                          <Typography color="black">No Data Found</Typography>
                         </StyledTableCell>
                       </StyledTableRow>
                     )}

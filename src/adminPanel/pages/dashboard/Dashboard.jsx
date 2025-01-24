@@ -52,7 +52,7 @@ function Dashboard() {
           <TargetProgressBar />
         </Grid>
         <Grid size={{ xs: 12, md: 8 }} sx={{  borderRadius: "1rem", }}>
-          <Card sx={{ p: '2rem',bgcolor: "#daf5ef", }}>
+          <Card sx={{ p: '2rem',bgcolor: "#ffff", }}>
             <BarChart />
           </Card>
         </Grid>

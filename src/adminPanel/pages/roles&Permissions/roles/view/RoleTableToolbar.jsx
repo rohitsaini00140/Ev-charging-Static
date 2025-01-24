@@ -72,7 +72,7 @@ function RoleTableToolbar() {
               <SearchInput
                 placeholder="Search Role"
                 width={"100%"}
-                sx={{ background: "#3e403d0f", color: "white" }}
+                sx={{ background: "white", color: "black" }}
                 onChange={(e) => handleSelectRoleName(e.target.value)}
                 value={role}
               />

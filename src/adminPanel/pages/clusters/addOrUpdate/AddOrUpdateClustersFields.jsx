@@ -5,13 +5,13 @@ import SaveIcon from "@mui/icons-material/Save";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { clusterSchema } from "./clusterSchema";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import {
   useAddClusterMutation,
   useGetClusterByIdQuery,
   useUpdateClusterMutation,
 } from "../../../../globalState/cluster/clusterApis";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, useMemo } from "react";
 import Alertbar from "../../../component/Alertbar";
@@ -30,6 +30,8 @@ import {
 } from "../../../../globalState/address/addressSlices";
 // import { error_style } from '../../../component/error_style';
 import LocationDropdown from "../../../component/locationDropdown/LocationDropdown";
+import FastRewindIcon from '@mui/icons-material/FastRewind';
+
 
 function AddOrUpdateClustersFields() {
   const [loading, setLoading] = useState(false);
@@ -285,23 +287,43 @@ function AddOrUpdateClustersFields() {
               )}
             </Stack>
           </Stack>
-        
-            <Stack width={"100%"} sx={{ position: "relative" }}>
-              <LocationDropdown
-                label="Cluster location"
-                value={watch("location")}
-                onChange={(newValue) =>
-                  setValue("location", newValue, { shouldValidate: true })
-                }
-              />
-              {errors.location && (
-                <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>
-                  *{errors.location.message}
-                </Typography>
-              )}
-            </Stack>   
-          
-          <Stack direction={"row"} justifyContent={"end"}>
+
+          <Stack width={"100%"} sx={{ position: "relative" }}>
+            <LocationDropdown
+              label="Cluster location"
+              value={watch("location")}
+              onChange={(newValue) =>
+                setValue("location", newValue, { shouldValidate: true })
+              }
+            />
+            {errors.location && (
+              <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>
+                *{errors.location.message}
+              </Typography>
+            )}
+          </Stack>
+
+          <Stack direction={"row"} sx={{display:'flex',justifyContent:'space-between'}}>
+            <Link to={"/admin/cluster/view"}>
+              <Button
+                sx={{
+                  color: "white",
+                  borderRadius: "5px",
+                  bgcolor: "#0ab39c",
+                  width: "5rem",
+                  borderColor: "#0ab39c",
+                  padding: "10px 15px",
+                  height: "2.5rem",
+                  BoxShadow: "none",
+                  "&:hover": {
+                    bgcolor: "#0ab39c",
+                  },
+                }}
+              >
+                <FastRewindIcon />
+                Back
+              </Button>
+            </Link>
             <LoadingButton
               loading={loading}
               type="submit"

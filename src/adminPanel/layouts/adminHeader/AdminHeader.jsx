@@ -54,7 +54,8 @@ function AdminHeader({ onOpenNav }) {
                 sx={{
                     height: 1,
                     px: { lg: 5 },
-                      bgcolor: alpha("rgba(87, 179, 62)", 0.1),
+                //       bgcolor: alpha("rgba(87, 179, 62)", 0.1),
+                bgcolor:"#ffff",
                  boxShadow: "0px 6px 18px rgba(180, 250, 160, 0.3)",
                 }}
             >

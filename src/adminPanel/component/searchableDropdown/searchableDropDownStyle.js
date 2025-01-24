@@ -1,27 +1,27 @@
 import { Paper, styled } from '@mui/material';
 
 export const inputStyle = {
-    backgroundColor: "#3e403d0f",
+    backgroundColor: "#ffff",
     borderRadius: "8px",
     "& .MuiInputBase-input": {
-        color: "white",
+        color: "black",
     },
     "& .MuiInputLabel-root": {
-        color: "white",
+        color: "black",
     },
     "& .MuiOutlinedInput-root": {
         "& fieldset": {
-            borderColor: "white",
+            borderColor: "black",
         },
         "&:hover fieldset": {
-            borderColor: "white",
+            borderColor: "black",
         },
         "&.Mui-focused fieldset": {
-            borderColor: "white",
+            borderColor: "black",
         },
     },
     '& .MuiInputLabel-root.Mui-focused': {
-        color: 'white',
+        color: 'black',
     },
 
     // Autofill styles
@@ -45,7 +45,7 @@ export const inputStyle = {
 };
 
 export const StyledPopper = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#1d282c',
+    backgroundColor: '#fffff',
     color: 'white',
     borderRadius: '8px',
     boxShadow: `
@@ -55,13 +55,13 @@ export const StyledPopper = styled(Paper)(({ theme }) => ({
         0px 3px 14px 2px rgba(145, 158, 171, 0.12)
     `,
     "& .MuiAutocomplete-option": {
-        backgroundColor: '#1d282c',
-        color: 'white',
+        backgroundColor: '#ffff',
+        color: 'black',
         '&[data-focus="true"]': {
-            backgroundColor: '#1d282c',
+            backgroundColor: '#ffff',
         },
         '&[aria-selected="true"]': {
-            backgroundColor: '#1d282c',
+            backgroundColor: '#ffff',
         },
     },
 }));

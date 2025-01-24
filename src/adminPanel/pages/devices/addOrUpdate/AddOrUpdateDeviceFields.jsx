@@ -6,14 +6,14 @@ import SaveIcon from "@mui/icons-material/Save";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { deviceSchema } from "./deviceSchema";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { inputStyle } from "../../../component/inputStyle";
 import { useMemo } from "react";
 import { useGetProjectsByClusterIdQuery } from "../../../../globalState/projects/projectsApis";
 import { useGetAllClustersQuery } from "../../../../globalState/cluster/clusterApis";
 import SearchableDropdown from "../../../component/searchableDropdown/SearchableDropdown";
 import Alertbar from "../../../component/Alertbar";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -23,6 +23,7 @@ import {
 } from "../../../../globalState/devices/deviceApis";
 import { setClutersid } from "../../../../globalState/devices/deviceSlices";
 import LocationDropdown from "../../../component/locationDropdown/LocationDropdown";
+import FastRewindIcon from '@mui/icons-material/FastRewind';
 
 const role = JSON.parse(sessionStorage.getItem("role"));
 
@@ -299,7 +300,30 @@ function AddOrUpdateDeviceFields() {
             )}
           </Stack>
 
-          <Stack direction={"row"} justifyContent={"end"}>
+          <Stack direction={"row"} sx={{display:'flex',justifyContent:'space-between'}}>
+
+          <Link to={"/admin/device/view"}>
+              <Button
+                sx={{
+                  color: "white",
+                  borderRadius: "5px",
+                  bgcolor: "#0ab39c",
+                  width: "5rem",
+                  borderColor: "#0ab39c",
+                  padding: "10px 15px",
+                  height: "2.5rem",
+                  BoxShadow: "none",
+                  "&:hover": {
+                    bgcolor: "#0ab39c",
+                  },
+                }}
+              >
+                <FastRewindIcon />
+                Back
+              </Button>
+            </Link>
+
+
             <LoadingButton
               loading={loading}
               type="submit"

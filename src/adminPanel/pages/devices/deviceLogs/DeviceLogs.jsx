@@ -213,7 +213,7 @@ function DeviceLogs() {
             }}
           >
             <Grid item xs={12} sm={12} md={12} lg={12}>
-              <Typography variant="h4" color="white">
+              <Typography variant="h4" color="black">
                 Charger Activity Logs
               </Typography>
             </Grid>
@@ -260,27 +260,34 @@ function DeviceLogs() {
                   format="YYYY-MM-DD"
                   sx={{
                     "& .MuiInputBase-root": {
-                      color: "white",
+                      color: "black",
                     },
                     "& .MuiInputBase-input": {
-                      color: "white",
+                      color: "black",
+                      background: "white",
                     },
                     "& .MuiFormLabel-root": {
-                      color: "white",
+                      color: "black",
                     },
                     "& .MuiInputBase-input::placeholder": {
-                      color: "white",
+                      color: "black",
                     },
                     "& .MuiOutlinedInput-root": {
+                      background: "white",
                       "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "white",
+                        borderColor: "black",
                       },
                       "&:hover .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "white",
+                        borderColor: "black",
                       },
                       "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "white",
+                        borderColor: "black",
                       },
+                    },
+                    "& .MuiSvgIcon-root": {
+                      color: "black",
+                      backgroundColor: "white",
+                      borderRadius: "50%",
                     },
                   }}
                 />
@@ -310,27 +317,34 @@ function DeviceLogs() {
                   format="YYYY-MM-DD"
                   sx={{
                     "& .MuiInputBase-root": {
-                      color: "white",
+                      color: "black",
                     },
                     "& .MuiInputBase-input": {
-                      color: "white",
+                      color: "black",
                     },
                     "& .MuiFormLabel-root": {
-                      color: "white",
+                      color: "black",
                     },
                     "& .MuiInputBase-input::placeholder": {
-                      color: "white",
+                      color: "black",
                     },
                     "& .MuiOutlinedInput-root": {
+                      background: "white",
                       "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "white",
+                        borderColor: "black",
                       },
                       "&:hover .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "white",
+                        borderColor: "black",
                       },
                       "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "white",
+                        borderColor: "black",
                       },
+                    },
+
+                    "& .MuiSvgIcon-root": {
+                      color: "black",
+                      backgroundColor: "white",
+                      borderRadius: "50%",
                     },
                   }}
                 />
@@ -354,7 +368,7 @@ function DeviceLogs() {
             >
               <SearchInput
                 placeholder="Charger Display ID"
-                sx={{ color: "white", background: "#3e403d0f" }}
+                sx={{ color: "white", background: "#ffff" }}
                 value={searchValue}
                 onChange={handleSearchChange}
               />
@@ -377,7 +391,7 @@ function DeviceLogs() {
             >
               <SearchInput
                 placeholder="Charger Action"
-                sx={{ color: "white", background: "#3e403d0f" }}
+                sx={{ color: "white", background: "#ffff" }}
                 value={searchaction}
                 onChange={handleAction}
               />
@@ -387,7 +401,7 @@ function DeviceLogs() {
 
         <Card
           sx={{
-            bgcolor: "#3e403d0f",
+            bgcolor: "#ffff",
             // boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",
             borderRadius: "2px",
           }}
@@ -418,7 +432,7 @@ function DeviceLogs() {
                           align="center"
                           sx={{ border: "1px solid red", padding: "2rem" }}
                         >
-                          <Typography color="white">No Data Found</Typography>
+                          <Typography color="Black">No Data Found</Typography>
                         </StyledTableCell>
                       </StyledTableRow>
                     )}

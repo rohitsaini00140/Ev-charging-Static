@@ -20,10 +20,10 @@ function AddOrUpdateClusters() {
             width: 1,
             maxWidth: "100%",
             height: "auto",
-            backgroundColor: "rgb(29, 40, 44)",
+            backgroundColor: "#ffff",
           }}
         >
-          <Typography variant="h4" sx={{ mb: 3, color: "white" }}>
+          <Typography variant="h4" sx={{ mb: 3, color: "black" }}>
             {id ? "Update Cluster" : "Add Cluster"}
           </Typography>
           <AddOrUpdateClustersFields />

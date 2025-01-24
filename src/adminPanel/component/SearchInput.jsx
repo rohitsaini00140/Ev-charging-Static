@@ -5,19 +5,21 @@ import { InputAdornment } from "@mui/material";
 function SearchInput({ placeholder, onChange, value, sx }) {
   const inputStyle = {
     borderRadius: "8px",
-    backgroundColor: "#34345a",
+    backgroundColor: "#ffff",
     "& .MuiOutlinedInput-notchedOutline": {
-      borderColor: "white",
+      borderColor: "black",
     },
     "&:hover .MuiOutlinedInput-notchedOutline": {
-      borderColor: "white",
+      borderColor: "black",
     },
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: "white",
+      borderColor: "black",
     },
     "& .MuiInputBase-input": {
+
+      color:"black",
       "&::placeholder": {
-        color: "white",
+        color: "Black",
         opacity: 1,
       },
     },
@@ -34,7 +36,7 @@ function SearchInput({ placeholder, onChange, value, sx }) {
         <InputAdornment position="start">
           <Iconify
             icon="eva:search-fill"
-            sx={{ color: "white", width: 20, height: 20 }}
+            sx={{ color: "Black", width: 20, height: 20 }}
           />
         </InputAdornment>
       }

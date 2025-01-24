@@ -138,7 +138,7 @@ function ClustersTableToolbar({ allClusterData }) {
       sx={{
         // height: 96,
         padding: "1.2rem 0rem",
-        bgcolor: "rgb(29, 40, 44)",
+        bgcolor: "#ffff",
         // p: (theme) => theme.spacing(0, 1, 0, 3),
         // ...(selectedCategoryId.length > 0 && {
         //     color: 'primary.main',
@@ -158,7 +158,7 @@ function ClustersTableToolbar({ allClusterData }) {
             <Grid container spacing={{ xs: 3, sm: 2, md: 2, lg: 2 }} width={"100%"}>
               <Grid item size = {{xs:12,md:6}}>
               <SearchInput
-                sx={{ color: "white", background: "rgb(29, 40, 44)" }}
+                sx={{ color: "white", background: "#ffff" }}
                 placeholder="Search Cluster"
                 onChange={(e) => handleSelect(e.target.value, "cluster")}
                 value={searchClusterKeywords}

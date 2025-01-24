@@ -1,17 +1,17 @@
 import { fontFamily } from "@mui/system";
 
 export const inputStyle = {
-    backgroundColor: "#1d282c",
-    color: "white",
+    backgroundColor: "#ffff",
+    color: "black",
     fontfamily: 'sans-serif',
     borderRadius: "8px",
     "& .MuiOutlinedInput-notchedOutline": {
-        borderColor: "white",
+        borderColor: "black",
     },
     "&:hover .MuiOutlinedInput-notchedOutline": {
-        borderColor: "white",
+        borderColor: "black",
     },
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-        borderColor: "white",
+        borderColor: "black",
     }
 }

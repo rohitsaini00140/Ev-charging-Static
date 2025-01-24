@@ -4,21 +4,21 @@ import { styled } from '@mui/material/styles';
 
 export const StyledTableCell = styled(TableCell)(() => ({
     [`&.${tableCellClasses.body}`]: {
-        backgroundColor: "#3e403d0f",
-        color: "white",
+        backgroundColor: "#ffff",
+        color: "black",
         fontSize: 14,
     },
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: "#3e403d0f",
-        color: "#COCOEE",
-        borderColor: "white",
+        backgroundColor: "#ffff",
+        color: "black",
+        borderColor: "black",
     }
 }));
 
 export const StyledTableRow = styled(TableRow)(() => ({
-    backgroundColor: "#3e403d0f",
-    borderColor: "#9cb9b05e",
+    backgroundColor: "#ffff",
+    borderColor: "black",
     '&:last-child td, &:last-child th': {
-        borderColor: "white",
+        borderColor: "black",
     },
 }));

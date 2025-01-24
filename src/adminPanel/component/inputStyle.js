@@ -1,50 +1,50 @@
 export const inputStyle = {
-    backgroundColor: "#1d282c",
+    backgroundColor: "#ffff",
     borderRadius: "8px",
     "& .MuiInputBase-input": {
-        color: "white",
+        color: "black",
         caretColor: "white", 
     },
     "& .MuiInputLabel-root": {
-        color: "white",
+        color: "black",
     },
     "& .MuiOutlinedInput-root": {
         "& fieldset": {
-            borderColor: "white",
+            borderColor: "black",
         },
         "&:hover fieldset": {
-            borderColor: "white",
+            borderColor: "black",
         },
         "&.Mui-focused fieldset": {
-            borderColor: "white",
+            borderColor: "black",
         },
     },
     '& .MuiInputLabel-root.Mui-focused': {
-        color: 'white',
+        color: 'black',
     },
 
 
     // autofill
 
     "& input:-webkit-autofill": {
-        WebkitBoxShadow: "0 0 0 1000px rgb(29, 40, 44) inset",
-        WebkitTextFillColor: "white",
+        WebkitBoxShadow: "0 0 0 1000px rgb(254 255 255) inset",
+        WebkitTextFillColor: "#010101",
         transition: "background-color 5000s ease-in-out 0s",
         caretColor: "white", 
     },
     "& input:-webkit-autofill:hover": {
-        WebkitBoxShadow: "0 0 0 1000px rgb(29, 40, 44) inset",
-        WebkitTextFillColor: "white",
-        caretColor: "white", 
+        WebkitBoxShadow: "0 0 0 1000px rgb(254 255 255) inset",
+        WebkitTextFillColor: "black",
+        caretColor: "black", 
     },
     "& input:-webkit-autofill:focus": {
-        WebkitBoxShadow: "0 0 0 1000px rgb(29, 40, 44) inset",
-        WebkitTextFillColor: "white",
-        caretColor: "white", 
+        WebkitBoxShadow: "0 0 0 1000px rgb(254 255 255) inset",
+        WebkitTextFillColor: "black",
+        caretColor: "black", 
     },
     "& input:-webkit-autofill:active": {
-        WebkitBoxShadow: "0 0 0 1000px rgb(29, 40, 44) inset",
-        WebkitTextFillColor: "white",
-        caretColor: "white", 
+        WebkitBoxShadow: "0 0 0 1000px rgb(254 255 255) inset",
+        WebkitTextFillColor: "black",
+        caretColor: "black", 
     },
 }
