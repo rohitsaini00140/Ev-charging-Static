@@ -5,7 +5,7 @@ import { alpha } from "@mui/system";
 // ----------------------------------------------------------------------
 const SPACING = 8;
 function Sidebar({ children, sx, ...other }) {
-  const lgUp = useResponsive("up", "lg");
+  const lgUp = useResponsive("up", "lg","md");
   return (
     <Box
       component="main"
@@ -16,7 +16,7 @@ function Sidebar({ children, sx, ...other }) {
         flexDirection: "column",
         // bgcolor: alpha("rgba(87, 179, 62)", 0.1),
         boxShadow: "0px 6px 18px rgba(87, 179, 62, 0.3)",
-        // bgcolor: "#1d282c",
+        // bgcolor: "#ffff",
         py: `${HEADER.H_MOBILE + SPACING}px`,
         ...(lgUp && {
           px: 2,
