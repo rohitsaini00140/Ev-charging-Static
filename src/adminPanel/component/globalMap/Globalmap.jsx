@@ -1,28 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
-import GoogleMapReact from "google-map-react";
+const containerStyle = {
+  width: "100%",
+  height: "80vh",
+};
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const center = {
+  lat: 28.459497,
+  lng: 77.026634,
+};
 
 function Globalmap() {
-  const defaultProps = {
-    center: {
-      lat: 28.459497,
-      lng: 77.026634,
-    },
-    zoom: 11,
-  };
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // This ensures Google Maps API script is loaded and ready
+    const script = document.createElement("script");
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCyMrVtiLgr0ywJWHQClgUgtgunWZMlopQ&libraries=places`;
+    script.async = true;
+    script.onload = () => setIsLoaded(true);
+    script.onerror = () => console.error("Failed to load Google Maps API");
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
+  if (!isLoaded) {
+    return <div>Loading Map...</div>; // Loading text or spinner until the map is ready
+  }
 
   return (
-    <div style={{ height: "80vh", width: "100%" }}>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: "" }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-      >
-        <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
-      </GoogleMapReact>
-    </div>
+    <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={11}>
+      {/* Example Marker */}
+      <Marker position={{ lat: 59.955413, lng: 30.337844 }} />
+    </GoogleMap>
   );
 }
 

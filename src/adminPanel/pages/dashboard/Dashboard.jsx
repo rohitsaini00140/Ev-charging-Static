@@ -98,7 +98,7 @@ function Dashboard() {
         </Grid>
 
         <Grid size={{ xs: 12, md: 12 }} sx={{ borderRadius: "1rem" }}>
-          <Card sx={{ p: "2rem", bgcolor: "#ffff" }}>
+          <Card sx={{ p: "2rem", bgcolor: "#ffff",  boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",}}>
             <BarChart />
           </Card>
         </Grid>

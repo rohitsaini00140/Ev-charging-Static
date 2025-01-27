@@ -10,7 +10,7 @@ const data = [
 ];
 
 const options = {
-  title: "Charging Point Status",
+  title: "Charger Status",
 
   slices: {
     0: { color: "#28a745" }, // Green for "Available"
