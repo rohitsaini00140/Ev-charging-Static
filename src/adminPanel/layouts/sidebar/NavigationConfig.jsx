@@ -17,6 +17,12 @@ export const navConfig = [
   },
 
   {
+    title: "Charger Dashboard",
+    path: "/admin/charger-dashboard",
+    icon: icon("laptop"),
+  },
+
+  {
     title: "Roles",
     icon: icon("ic_roleAndPermission"),
     path: "/admin/role/view",
@@ -117,6 +123,12 @@ export const navConfig2 = [
     title: "dashboard",
     path: "/admin",
     icon: icon("ic_dashboard"),
+  },
+
+  {
+    title: "Charger Dashboard",
+    path: "/admin/charger-dashboard",
+    icon: icon("laptop"),
   },
 
   {
