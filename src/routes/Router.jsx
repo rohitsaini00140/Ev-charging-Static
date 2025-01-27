@@ -24,6 +24,7 @@ import {
 }
   from "./AdminRouteImports.jsx"
 import { useSelector } from "react-redux";
+import Charger_Dashboard from "../adminPanel/pages/chargerDashboard/Charger_Dashboard.jsx";
 
 const role = JSON.parse(sessionStorage.getItem("role"))
 
@@ -72,6 +73,7 @@ function Router() {
               <Drawer>
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
+                  <Route path="/charger-dashboard" element={<Charger_Dashboard />} />
 
                   <Route path="/user/add" element={<AddOrUpdateUser />} />
                   <Route path="/user/view" element={<UserView />} />
