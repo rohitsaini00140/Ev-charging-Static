@@ -71,7 +71,7 @@ function AddOrUpdateUserFields() {
     reset,
     formState: { errors },
   } = useForm({
-    // resolver: zodResolver(userSchema),
+    resolver: zodResolver(userSchema),
     defaultValues: defaultValues,
   });
 
