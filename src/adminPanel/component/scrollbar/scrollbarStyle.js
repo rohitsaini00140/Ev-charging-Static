@@ -14,7 +14,7 @@ export const StyledScrollbar = styled(SimpleBar)(({ theme }) => ({
   maxHeight: "100%",
   "& .simplebar-scrollbar": {
     "&:before": {
-      backgroundColor: "white",
+      backgroundColor: "grey",
       opacity: 1,
     },
 
