@@ -1,7 +1,6 @@
 import { StyledTableCell, StyledTableRow } from "../../../component/tableStyle";
 import { useState, useEffect } from "react";
 import { List, ListItem, Skeleton } from "@mui/material";
-import Label from "../../../component/lable/Lable";
 
 function DeviceLogsTableRow({ postData }) {
   const [loading, setLoading] = useState(true);
@@ -10,6 +9,7 @@ function DeviceLogsTableRow({ postData }) {
     const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
+  
   const renderNestedData = (data) => {
     // Parse if the data is a JSON string
     if (typeof data === "string") {
@@ -30,7 +30,7 @@ function DeviceLogsTableRow({ postData }) {
         );
       }
     }
-  
+
     // Handle empty or invalid data
     if (!data || (typeof data === "object" && Object.keys(data).length === 0)) {
       return (
@@ -41,7 +41,7 @@ function DeviceLogsTableRow({ postData }) {
         </ListItem>
       );
     }
-  
+
     // Render object or array data
     if (typeof data === "object" && data !== null) {
       return (
@@ -91,7 +91,7 @@ function DeviceLogsTableRow({ postData }) {
         </List>
       );
     }
-  
+
     // Render primitive data types
     return (
       <ListItem
@@ -105,8 +105,6 @@ function DeviceLogsTableRow({ postData }) {
       </ListItem>
     );
   };
-  
-
 
   const renderNestedData1 = (data) => {
     // Parse if the data is a JSON string
@@ -218,14 +216,6 @@ function DeviceLogsTableRow({ postData }) {
               )}
             </StyledTableCell>
 
-            <StyledTableCell color={"#222245"} sx={{ border: "1px solid" }}>
-              {loading ? (
-                <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
-              ) : (
-                new Date(data?.request_date).toLocaleString()
-              )}
-            </StyledTableCell>
-
             <StyledTableCell
               color={"#222245"}
               sx={{
@@ -239,6 +229,14 @@ function DeviceLogsTableRow({ postData }) {
                 <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
               ) : (
                 renderNestedData(data?.chargerresponse)
+              )}
+            </StyledTableCell>
+
+            <StyledTableCell color={"#222245"} sx={{ border: "1px solid" }}>
+              {loading ? (
+                <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
+              ) : (
+                new Date(data?.request_date).toLocaleString()
               )}
             </StyledTableCell>
 

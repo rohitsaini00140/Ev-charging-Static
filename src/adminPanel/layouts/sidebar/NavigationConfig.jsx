@@ -17,12 +17,6 @@ export const navConfig = [
   },
 
   {
-    title: "Charger Dashboard",
-    path: "/admin/charger-dashboard",
-    icon: icon("laptop"),
-  },
-
-  {
     title: "Roles",
     icon: icon("ic_roleAndPermission"),
     path: "/admin/role/view",
@@ -115,6 +109,12 @@ export const navConfig = [
     title: "Charger Activity Logs",
     path: "/admin/deviceLog",
     icon: icon("ActivityLogs"),
+  },
+
+  {
+    title: "OCPP Communication",
+    path: "/admin/charger-dashboard",
+    icon: icon("laptop"),
   },
 ];
 
@@ -126,12 +126,6 @@ export const navConfig2 = [
   },
 
   {
-    title: "Charger Dashboard",
-    path: "/admin/charger-dashboard",
-    icon: icon("laptop"),
-  },
-
-  {
     title: "Roles",
     icon: icon("ic_roleAndPermission"),
     path: "/admin/role/view",
@@ -224,5 +218,11 @@ export const navConfig2 = [
     title: "Charger Activity Logs",
     path: "/admin/deviceLog",
     icon: icon("ActivityLogs"),
+  },
+
+  {
+    title: "OCPP Communication",
+    path: "/admin/charger-dashboard",
+    icon: icon("laptop"),
   },
 ];
