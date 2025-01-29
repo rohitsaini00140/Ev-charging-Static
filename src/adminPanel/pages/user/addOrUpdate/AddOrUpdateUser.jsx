@@ -25,7 +25,7 @@ function AddOrUpdateUser() {
                         backgroundColor: "#ffff",
                     }}
                 >
-                    <Typography variant="h4" color="white" sx={{ mb: 3 }}>{id ? "Update Internal User" : "Add Internal User"}</Typography>
+                    <Typography variant="h4" color="black" sx={{ mb: 3 }}>{id ? "Update Internal User" : "Add Internal User"}</Typography>
                     <AddOrUpdateUserFields />
                 </Card>
             </Stack>

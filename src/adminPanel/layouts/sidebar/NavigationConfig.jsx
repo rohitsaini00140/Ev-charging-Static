@@ -17,40 +17,63 @@ export const navConfig = [
   },
 
   {
-    title: "Roles",
+    title: "Access Controll",
     icon: icon("ic_roleAndPermission"),
-    path: "/admin/role/view",
-    // children: [
-    //   {
-    //     title: 'Add',
-    //     path: '/admin/role/add',
-    //     icon: icon('ic_circle'),
-    //   },
-    //   {
-    //     title: 'View',
-    //     path: '/admin/role/view',
-    //     icon: icon('ic_circle'),
-    //   },
-    // ],
+    children: [
+      {
+        title: "Roles",
+        icon: icon("ic_circle"),
+        path: "/admin/role/view",
+      },
+      {
+        title: "Internal Users",
+        icon: icon("ic_circle"),
+        path: "/admin/user/view",
+      },
+    ],
   },
 
-  {
-    title: "Internal Users",
-    icon: icon("ic_user"),
-    path: "/admin/user/view",
-    // children: [
-    //   {
-    //     title: 'Add',
-    //     path: '/admin/user/add',
-    //     icon: icon('ic_circle'),
-    //   },
-    //   {
-    //     title: 'View',
-    //     path: '/admin/user/view',
-    //     icon: icon('ic_circle'),
-    //   },
-    // ],
-  },
+  // {
+  //   title: "Roles",
+  //   icon: icon("ic_roleAndPermission"),
+  //   path: "/admin/role/view",
+  //   children: [
+  //     {
+  //       title: 'Add',
+  //       path: '/admin/role/add',
+  //       icon: icon('ic_circle'),
+  //     },
+  //     {
+  //       title: 'View',
+  //       path: '/admin/role/view',
+  //       icon: icon('ic_circle'),
+  //     },
+  //   ],
+  // },
+
+  // {
+  //   title: "Internal Users",
+  //   icon: icon("ic_user"),
+  //   path: "/admin/user/view",
+  //   children: [
+  //     {
+  //       title: 'Add',
+  //       path: '/admin/user/add',
+  //       icon: icon('ic_circle'),
+  //     },
+  //     {
+  //       title: 'View',
+  //       path: '/admin/user/view',
+  //       icon: icon('ic_circle'),
+  //     },
+  //   ],
+  // },
+
+  // {
+  //   title: "CPOs",
+  //   icon: icon("ic_user"),
+  //   path: "/admin/cpos",
+  // },
 
   {
     title: "Clusters",
@@ -159,6 +182,12 @@ export const navConfig2 = [
     //     icon: icon('ic_circle'),
     //   },
     // ],
+  },
+
+  {
+    title: "CPOs",
+    icon: icon("ic_user"),
+    path: "/admin/user/view",
   },
 
   {

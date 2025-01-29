@@ -14,6 +14,9 @@ import { Box, Grid } from "@mui/system";
 import React, { useState } from "react";
 import DeviceLogs from "../devices/deviceLogs/DeviceLogs";
 import Scrollbar from "../../component/scrollbar/Scrollbar";
+import DeviceLogsTableHead from "../devices/deviceLogs/DeviceLogsTableHead";
+
+import { chargerApi } from "../../../globalState/charger/chargerApi";
 
 function Charger_Dashboard() {
   const [selectedChargerId, setSelectedChargerId] = useState(null);
@@ -28,8 +31,15 @@ function Charger_Dashboard() {
     setShowRadio(true); // Show the radio button on Reset click
   };
 
+  console.log(chargerApi, "what is data here  ");
+
   const handleRadioChange = (event) => {
-    setResetType(event.target.value); // Update the reset type
+    // setResetType(event.target.value); // Update the reset type
+    const selectedValue = event.target.value;
+
+    if (window.confirm("Are you sure you want to select this option?")) {
+      setResetType(selectedValue);
+    }
   };
 
   const chargerData = {
@@ -153,12 +163,26 @@ function Charger_Dashboard() {
                           >
                             <FormControlLabel
                               value="soft-reset"
-                              control={<Radio />}
+                              control={
+                                <Radio
+                                  sx={{
+                                    color: "green",
+                                    "&.Mui-checked": { color: "green" },
+                                  }}
+                                />
+                              }
                               label="Soft Reset"
                             />
                             <FormControlLabel
                               value="hard-reset"
-                              control={<Radio />}
+                              control={
+                                <Radio
+                                  sx={{
+                                    color: "green",
+                                    "&.Mui-checked": { color: "green" },
+                                  }}
+                                />
+                              }
                               label="Hard Reset"
                             />
                           </RadioGroup>
@@ -198,64 +222,92 @@ function Charger_Dashboard() {
             )}
 
             {selectedChargerId && (
-     
-                <Card sx={{ mt: 4, boxShadow: 5, borderRadius: 1, p: 4,overflow:"scroll" ,maxHeight:"400px"}}>
-                  <CardContent>
-                    {actions.map((action) => (
-                      <Grid
-                        container
-                        alignItems="center"
-                        key={action}
-                        sx={{ mt: 1 }}
-                      >
-                        <Grid item size={{ xs: 12, md: 6 }}>
-                          {action === "Change Availability" &&
-                          actionVisibility[action] ? (
-                            <FormControl fullWidth>
-                              <InputLabel>Choose Configuration</InputLabel>
-                              <Select
-                                label="Change Availability"
-                                value={selectedConfiguration}
-                                onChange={(e) =>
-                                  setSelectedConfiguration(e.target.value)
-                                }
-                              >
-                                {/* Example dropdown options */}
-                                <MenuItem value="Config1">Operative</MenuItem>
-                                <MenuItem value="Config2">Inoperative</MenuItem>
-                              </Select>
-                            </FormControl>
-                          ) : (
-                            actionVisibility[action] && (
-                              <TextField
-                                label={`Modify ${action}`}
-                                variant="outlined"
-                                fullWidth
-                              />
-                            )
-                          )}
-                        </Grid>
-
-                        <Grid item size={{ xs: 12, md: 6 }}>
-                          <Typography
-                            variant="body1"
-                            sx={{
-                              fontFamily: "monospace",
-                              cursor: "pointer",
-                              fontWeight: "bold",
-                              display: "flex",
-                              justifyContent: "end",
-                            }}
-                            onClick={() => handleActionClick(action)}
-                          >
-                            {action}
-                          </Typography>
-                        </Grid>
+              <Card
+                sx={{
+                  mt: 4,
+                  boxShadow: 5,
+                  borderRadius: 1,
+                  p: 4,
+                  overflow: "scroll",
+                  maxHeight: "400px",
+                  scrollBehavior: "smooth",
+                }}
+              >
+                <CardContent>
+                  {actions.map((action) => (
+                    <Grid
+                      container
+                      alignItems="center"
+                      key={action}
+                      sx={{ mt: 1 }}
+                    >
+                      <Grid item size={{ xs: 12, md: 6 }}>
+                        {action === "Change Availability" &&
+                        actionVisibility[action] ? (
+                          <FormControl fullWidth>
+                            <InputLabel>Choose Configuration</InputLabel>
+                            <Select
+                              label="Change Availability"
+                              value={selectedConfiguration}
+                              onChange={(e) =>
+                                setSelectedConfiguration(e.target.value)
+                              }
+                            >
+                              {/* Example dropdown options */}
+                              <MenuItem value="Config1">Operative</MenuItem>
+                              <MenuItem value="Config2">Inoperative</MenuItem>
+                            </Select>
+                          </FormControl>
+                        ) : (
+                          actionVisibility[action] && (
+                            <TextField
+                              label={`${action}`}
+                              variant="outlined"
+                              fullWidth
+                            />
+                          )
+                        )}
                       </Grid>
-                    ))}
-                  </CardContent>
-                  {selectedChargerId && <DeviceLogs />}
-                </Card>
+
+                      <Grid item size={{ xs: 12, md: 6 }}>
+                        <Typography
+                          variant="body1"
+                          sx={{
+                            fontFamily: "monospace",
+                            cursor: "pointer",
+                            fontWeight: "bold",
+                            display: "flex",
+                            justifyContent: "end",
+                          }}
+                          onClick={() => handleActionClick(action)}
+                        >
+                          {action}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  ))}
+                </CardContent>
+              </Card>
+            )}
+
+            {selectedChargerId && (
+              <Card
+                sx={{
+                  mt: 4,
+                  boxShadow: 5,
+                  borderRadius: 1,
+                  p: 4,
+                  overflow: "scroll",
+                  maxHeight: "400px",
+                  scrollBehavior: "smooth",
+                }}
+              >
+                <Typography variant="h4" color="black">
+                  Charger Activity Logs
+                </Typography>
+
+                {selectedChargerId && <DeviceLogsTableHead />}
+              </Card>
             )}
           </Card>
         </Grid>
