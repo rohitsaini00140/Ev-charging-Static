@@ -3,7 +3,7 @@ export const inputStyle = {
     borderRadius: "8px",
     "& .MuiInputBase-input": {
         color: "black",
-        caretColor: "white", 
+        caretColor: "black", 
     },
     "& .MuiInputLabel-root": {
         color: "black",

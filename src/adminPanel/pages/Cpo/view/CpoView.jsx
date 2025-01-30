@@ -8,38 +8,33 @@ import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
 import Iconify from "../../../component/Iconify";
 import Scrollbar from "../../../component/scrollbar/Scrollbar";
-import UserTableHead from "./UserTableHead";
-import UserTableToolbar from "./UserTableToolbar";
 import { Link } from "react-router-dom";
-import UserTableRow from "./UserTableRow";
 import TablePagination from "../../../component/TablePagination";
-import { useGetUsersQuery } from "../../../../globalState/user/userApis";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserListPageNo } from "../../../../globalState/user/userSlice";
 import { StyledTableCell, StyledTableRow } from "../../../component/tableStyle";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Alertbar from "../../../component/Alertbar";
-import CpoTableToolbar from "../../Cpo/view/CpoTableToolbar";
+import CpoTableHead from "./CpoTableHead";
+import CpoTableRow from "./CpoTableRow";
+import { useGetCpoQuery } from "../../../../globalState/Cpos/cpoApi";
+import { setCpoListPageNo } from "../../../../globalState/Cpos/cpoSlice";
+import CpoTableToolbar from "./CpoTableToolbar";
 
-// ----------------------------------------------------------------------
-
-const role = JSON.parse(sessionStorage.getItem("role"));
-
-function UserView() {
-  const { logInRole } = useSelector((state) => state.role);
-
+function CpoView() {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { pageNo, userName, status } = useSelector((state) => state.user);
+  const { clusterName } = useSelector((state) => state.cluster);
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
     severity: "success",
   });
 
-  const location = useLocation();
-  const navigate = useNavigate();
-
   useEffect(() => {
-    if (location.state && location.state.message) {
+    if (location.state?.message) {
       setSnackbar({
         open: true,
         message: location.state.message,
@@ -49,53 +44,27 @@ function UserView() {
     }
   }, [location.state, navigate]);
 
-  const dispatch = useDispatch();
-
-  const { pageNo, userName, status } = useSelector((state) => state.user);
-
-  const { role } = useSelector((state) => state.role);
-
-  const { clusterName } = useSelector((state) => state.cluster);
-
   const {
     data: allUsers,
-    isSuccess: userSuccess,
+    isSuccess,
     isLoading,
-  } = useGetUsersQuery({
+  } = useGetCpoQuery({
     page: pageNo,
     name: userName,
     status,
     clusterName,
-    role_id: role,
   });
 
-  const allUserData =
-    logInRole?.user?.role?.name === "Superadmin"
-      ? userSuccess && allUsers?.data
-      : [];
-
-  // const allUserData =
-  //   logInRole?.user?.role?.name === "Superadmin"
-  //     ? userSuccess && allUsers?.data
-  //     : userSuccess &&
-  //       allUsers?.data?.filter((ele) => ele?.name === logInRole?.user?.name);
-
-  const paginationData = userSuccess && allUsers;
-
-  const { last_page } = paginationData;
+  const allUserData = allUsers?.data || [];
+  const last_page = allUsers?.last_page || 1;
 
   const handlePageChange = (event, value) => {
-    dispatch(setUserListPageNo(value));
+    dispatch(setCpoListPageNo(value));
   };
 
   const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setSnackbar((prevState) => ({
-      ...prevState,
-      open: false,
-    }));
+    if (reason === "clickaway") return;
+    setSnackbar((prevState) => ({ ...prevState, open: false }));
   };
 
   return (
@@ -108,9 +77,9 @@ function UserView() {
           m={3}
         >
           <Typography variant="h4" color="black">
-          Internal Users
+            CPOs
           </Typography>
-          <Link to={"/admin/user/add"}>
+          <Link to="/admin/cpos">
             <Button
               variant="contained"
               sx={{
@@ -121,7 +90,7 @@ function UserView() {
               }}
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New User
+              New CPOs
             </Button>
           </Link>
         </Stack>
@@ -138,18 +107,16 @@ function UserView() {
               justifyContent="center"
               sx={{ minHeight: 300, padding: 4 }}
             >
-              <Typography color="white" sx={{ mt: 2 }}>
-                Loading...
-              </Typography>
+              <Typography color="black">Loading...</Typography>
             </Stack>
           ) : (
             <Scrollbar>
               <TableContainer sx={{ overflow: "unset" }}>
                 <Table sx={{ minWidth: 800 }}>
-                  <UserTableHead allUserData={allUserData} />
+                  <CpoTableHead allUserData={allUserData} />
                   <TableBody>
                     {allUserData.length > 0 ? (
-                      <UserTableRow
+                      <CpoTableRow
                         currentpage={pageNo}
                         allUserData={allUserData}
                       />
@@ -190,4 +157,4 @@ function UserView() {
   );
 }
 
-export default UserView;
+export default CpoView;

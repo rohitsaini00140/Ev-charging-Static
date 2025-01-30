@@ -12,11 +12,10 @@ import {
 import { Container, Card, CardContent, Button } from "@mui/material";
 import { Box, Grid } from "@mui/system";
 import React, { useState } from "react";
-import DeviceLogs from "../devices/deviceLogs/DeviceLogs";
-import Scrollbar from "../../component/scrollbar/Scrollbar";
-import DeviceLogsTableHead from "../devices/deviceLogs/DeviceLogsTableHead";
 
 import { chargerApi } from "../../../globalState/charger/chargerApi";
+import ChargerdashboardTableHead from "./view/ChargerdashboardTableHead";
+import ChargerLogs from "./view/ChargerLogs";
 
 function Charger_Dashboard() {
   const [selectedChargerId, setSelectedChargerId] = useState(null);
@@ -302,11 +301,8 @@ function Charger_Dashboard() {
                   scrollBehavior: "smooth",
                 }}
               >
-                <Typography variant="h4" color="black">
-                  Charger Activity Logs
-                </Typography>
 
-                {selectedChargerId && <DeviceLogsTableHead />}
+                {selectedChargerId && <ChargerLogs />}
               </Card>
             )}
           </Card>

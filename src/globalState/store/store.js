@@ -16,7 +16,9 @@ import deviceSlice from "../devices/deviceSlices";
 import rolesSlice from "../roles/rolesSlices";
 import permissionSlice from "../permission/permissionSlices";
 import { chargerApi } from "../charger/chargerApi";
-import chargerSlice  from "../charger/chargerSlice";
+import chargerSlice from '../charger/ChargerSlice'
+import { cpoApi } from "../Cpos/cpoApi";
+import cpoSlice from "../Cpos/cpoSlice"
 
 export const store = configureStore({
   reducer: {
@@ -29,6 +31,7 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [permissionsApi.reducerPath]: permissionsApi.reducer,
     [chargerApi.reducerPath]: chargerApi.reducer,
+    [cpoApi.reducerPath]:cpoApi.reducer,
     cluster: clusterSlices,
     googleMap: googleMapSlices,
     address: addressSlices,
@@ -38,6 +41,7 @@ export const store = configureStore({
     role: rolesSlice,
     permission: permissionSlice,
     charger: chargerSlice,
+    cpo: cpoSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -49,6 +53,7 @@ export const store = configureStore({
       deviceApi.middleware,
       rolesApi.middleware,
       permissionsApi.middleware,
-      chargerApi.middleware
+      chargerApi.middleware,
+      cpoApi.middleware,
     ),
 });

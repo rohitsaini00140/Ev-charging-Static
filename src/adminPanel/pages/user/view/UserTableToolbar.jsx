@@ -92,20 +92,11 @@ function UserTableToolbar() {
         display: "flex",
         flexDirection: "column",
         gap: "1rem",
-        // p: (theme) => theme.spacing(0, 1, 0, 3),
-        // ...(selectedCategoryId.length > 0 && {
-        //     color: 'primary.main',
-        //     bgcolor: 'primary.lighter',
-        // }),
+       
       }}
     >
       {
-        // selectedCategoryId.length > 0 ? (
-        //     <Typography component="div" variant="subtitle1">
-        //         {selectedCategoryId.length} selected
-        //     </Typography>
-        // ) :
-        // (
+      
         <>
           {/* // ) */}
           <Stack
@@ -122,15 +113,7 @@ function UserTableToolbar() {
                 value={userName}
               />
             </Stack>
-            {/* {logInRole?.user?.role?.name === "Superadmin" && <Stack width={"100%"}>
-                            <SearchableDropdown
-                                options={allCluster.length > 0 ? allCluster : []}
-                                placeholder="Select Cluster"
-                                value={clusterName || ""}
-                                onChange={(value) => handleSelect(value, "cluster")}
-                                type={"name"}
-                            />
-                        </Stack>} */}
+          
             <Stack width={"100%"}>
               <SearchableDropdown
                 options={allRoleData.length > 0 ? allRoleData : []}
