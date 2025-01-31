@@ -1,4 +1,3 @@
-
 import Checkbox from "@mui/material/Checkbox";
 import Label from "../../../component/lable/Lable";
 
@@ -95,7 +94,7 @@ function CpoTableRow({ allUserData, currentpage }) {
                 <Action
                   data={data}
                   activeOrInactive={data.deleted_at}
-                  pathToNavigate={"/admin/Cpo/update"}
+                  pathToNavigate={"/admin/Cpos/update"}
                   onSoftDelete={onSoftDelete}
                   onRestoreData={onRestoreData}
                 />

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const cpoSlice = createSlice({
   name: "cpo",
   initialState: {
-    pageNo: 1,
+    page: 1,
     Name: "", 
     status: "",
     loading: false,
@@ -11,7 +11,7 @@ const cpoSlice = createSlice({
   },
   reducers: {
     setCpoListPageNo: (state, action) => {
-      state.pageNo = action.payload;
+      state.page = action.payload;
     },
     setCpoName: (state, action) => {
       state.Name = action.payload; 

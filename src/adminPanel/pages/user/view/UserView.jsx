@@ -20,7 +20,6 @@ import { StyledTableCell, StyledTableRow } from "../../../component/tableStyle";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Alertbar from "../../../component/Alertbar";
-import CpoTableToolbar from "../../Cpo/view/CpoTableToolbar";
 
 // ----------------------------------------------------------------------
 
@@ -131,7 +130,7 @@ function UserView() {
             boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",
           }}
         >
-          <CpoTableToolbar />
+          <UserTableToolbar />
           {isLoading ? (
             <Stack
               alignItems="center"

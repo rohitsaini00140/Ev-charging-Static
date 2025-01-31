@@ -80,7 +80,7 @@ function AddOrUpdateCpoFields() {
       if (id) {
         await updateCpo({ id, updatedCpoData: data }).unwrap();
 
-        navigate("/admin/cpo/view", {
+        navigate("/admin/cpos/view", {
           state: { message: "User successfully updated!", severity: "success" },
         });
       } else {
@@ -88,7 +88,7 @@ function AddOrUpdateCpoFields() {
 
         reset(defaultValues);
 
-        navigate("/admin/cpo/view", {
+        navigate("/admin/cpos/view", {
           state: { message: "User successfully added!", severity: "success" },
         });
       }
@@ -177,7 +177,7 @@ function AddOrUpdateCpoFields() {
             </Stack>
           </Stack>
           <Stack direction={"row"} sx={{display:"flex",justifyContent:'space-between'}}>
-            <Link to={"/admin/cpo/view"}>
+            <Link to={"/admin/cpos/view"}>
               <Button
                 sx={{
                   color: "white",

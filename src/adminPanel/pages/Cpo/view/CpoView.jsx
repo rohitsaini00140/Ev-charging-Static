@@ -25,8 +25,8 @@ function CpoView() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const { pageNo, userName, status } = useSelector((state) => state.user);
-  const { clusterName } = useSelector((state) => state.cluster);
+  const { page, userName, status } = useSelector((state) => state.cpo);
+
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
@@ -46,17 +46,18 @@ function CpoView() {
 
   const {
     data: allUsers,
-    isSuccess,
+    isSuccess: CpoSuccess,
     isLoading,
   } = useGetCpoQuery({
-    page: pageNo,
+    page: page,
     name: userName,
     status,
-    clusterName,
   });
 
-  const allUserData = allUsers?.data || [];
-  const last_page = allUsers?.last_page || 1;
+  const allUserData = (CpoSuccess && allUsers?.data) || [];
+  const paginationData = CpoSuccess && allUsers;
+
+  const { last_page } = paginationData;
 
   const handlePageChange = (event, value) => {
     dispatch(setCpoListPageNo(value));
@@ -79,7 +80,7 @@ function CpoView() {
           <Typography variant="h4" color="black">
             CPOs
           </Typography>
-          <Link to="/admin/cpos">
+          <Link to="/admin/cpos/view">
             <Button
               variant="contained"
               sx={{
@@ -117,7 +118,7 @@ function CpoView() {
                   <TableBody>
                     {allUserData.length > 0 ? (
                       <CpoTableRow
-                        currentpage={pageNo}
+                        currentpage={page}
                         allUserData={allUserData}
                       />
                     ) : (
@@ -140,7 +141,7 @@ function CpoView() {
             <TablePagination
               count={last_page}
               onPageChange={handlePageChange}
-              page={pageNo}
+              page={page}
             />
           )}
         </Card>

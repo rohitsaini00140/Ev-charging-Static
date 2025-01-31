@@ -17,16 +17,17 @@ export const cpoApi = createApi({
       invalidatesTags: ["cpo"],
     }),
 
-    getCpo: builder.query({
-      query: ({ page, name, status }) => {
-        const params = new URLSearchParams();
-        if (page) params.append("page", page);
-        if (name) params.append("name", name);
-        if (status) params.append("status", status);
-        return `/cpos/list?${params.toString()}`;
-      },
-      providesTags: ["cpo"],
-    }),
+      getCpo: builder.query({
+        query: ({ page, name, status }) => {
+          const params = new URLSearchParams();
+          if (page) params.append("page", page);
+          if (name) params.append("name", name);
+          if (status) params.append("status", status);
+          return `/cpos/list?${params.toString()}`;
+        },
+        providesTags: ["cpo"],
+      }),
+
 
     getCpoById: builder.query({
       query: (id) => `/cpos/show/${id}`,

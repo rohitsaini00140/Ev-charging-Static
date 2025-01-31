@@ -2,26 +2,26 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import { alpha, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import { useResponsive } from '../../customHooks/useResponsive';
 // import { bgBlur } from "../theme/css"
 import Iconify from '../../component/Iconify';
 // import Searchbar from './Searchbar';
-import { NAV, HEADER } from '../sidebar/configLayout';
+import { HEADER } from '../sidebar/configLayout';
 import Account from './Account';
 import Notification from './Notification';
 // ----------------------------------------------------------------------
 function AdminHeader({ onOpenNav }) {
     const theme = useTheme();
-    const lgUp = useResponsive('up', 'lg');
+    // const lgUp = useResponsive('down', 'lg');
     const renderContent = (
         <>
-            {!lgUp && (
+         
                 <IconButton onClick={onOpenNav} sx={{ mr: 1 }}>
                     <Iconify sx={{color:'#20c997',fontSize:'30px'}} icon="eva:menu-2-fill" />
                 </IconButton>
-            )}
+    
             {/* <Searchbar /> */}
             <Box sx={{ flexGrow: 1 }} />
             <Stack direction="row" alignItems="center" spacing={1}>
@@ -44,10 +44,10 @@ function AdminHeader({ onOpenNav }) {
                 transition: theme.transitions.create(['height'], {
                     duration: theme.transitions.duration.shorter,
                 }),
-                ...(lgUp && {
-                    width: `calc(100% - ${NAV.WIDTH + .4}px)`,
-                    height: HEADER.H_DESKTOP,
-                }),
+                // ...(lgUp && {
+                //     width: `calc(100% - ${NAV.WIDTH + .4}px)`,
+                //     height: HEADER.H_DESKTOP,
+                // }),
             }}
         >
             <Toolbar

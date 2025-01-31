@@ -7,7 +7,7 @@ import { alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import ListItemButton from "@mui/material/ListItemButton";
 import { usePathname } from "../../customHooks/usePathname";
-import { useResponsive } from "../../customHooks/useResponsive";
+// import { useResponsive } from "../../customHooks/useResponsive";
 import Scrollbar from "../../component/scrollbar/Scrollbar";
 import { NAV } from "./configLayout";
 import { navConfig, navConfig2 } from "./NavigationConfig";
@@ -36,7 +36,7 @@ function Nav({ openNav, onCloseNav }) {
   console.log(logInRole?.user?.role?.name, "ddddddddd");
 
   const pathname = usePathname();
-  const upLg = useResponsive("up", "lg");
+  // const upLg = useResponsive("up", "lg");
   useEffect(() => {
     if (openNav) {
       onCloseNav();
@@ -123,21 +123,20 @@ function Nav({ openNav, onCloseNav }) {
         width: { lg: NAV.WIDTH },
       }}
     >
-      {upLg ? (
-        // <Box sx={{ bgcolor: "#155e3d" }}>
+      {/* {upLg ? (
+    
           <Box
             sx={{
               height: 1,
               position: "fixed",
               width: NAV.WIDTH,
-              // bgcolor: alpha("rgba(87, 179, 62)", 0.1),
+              bgcolor: alpha("rgba(87, 179, 62)", 0.1),
               bgcolor:"#ffff",
               boxShadow: "white",
-              // borderRight: (theme) => `dashed 1px ${theme.palette.Boxider}`,
+              borderRight: (theme) => `dashed 1px ${theme.palette.Boxider}`,
             }}
           >
             {renderContent}
-          {/* </Box> */}
         </Box>
       ) : (
         <Drawer
@@ -146,14 +145,27 @@ function Nav({ openNav, onCloseNav }) {
           PaperProps={{
             sx: {
               width: NAV.WIDTH,
-              //   backgroundColor: "#141d20",
+                backgroundColor: "#141d20",
               
             },
           }}
         >
           {renderContent}
         </Drawer>
-      )}
+      )} */}
+
+      <Drawer
+        open={openNav}
+        onClose={onCloseNav}
+        PaperProps={{
+          sx: {
+            width: NAV.WIDTH,
+            // backgroundColor: "#141d20",
+          },
+        }}
+      >
+        {renderContent}
+      </Drawer>
     </Box>
   );
 }
