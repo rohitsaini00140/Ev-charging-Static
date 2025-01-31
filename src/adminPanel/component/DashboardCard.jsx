@@ -1,9 +1,11 @@
 import { Card, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-function DashboardCard({ data,counter }) {
-  
+function DashboardCard({ data, counter }) {
+  console.log(data, "ffffffffffffff");
+
   const [count, setCount] = useState(0); // Initial state is 0
   const totalCount = Number(data.totalCount); // Ensure totalCount is a valid number
   useEffect(() => {
@@ -15,7 +17,7 @@ function DashboardCard({ data,counter }) {
     const end = totalCount;
     const duration = 2000; // Animation duration in ms
     const stepTime = 50; // Time interval between updates (ms)
-    
+
     const increment = () => {
       const range = end - start;
       const steps = duration / stepTime;
@@ -40,45 +42,46 @@ function DashboardCard({ data,counter }) {
     return () => clearInterval(interval);
   }, [totalCount]); // Re-run effect if totalCount changes
   return (
-    <Card
-      sx={{
-        padding: "1.2rem 2rem",
-        borderRadius: "1rem",
-        boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",
-        // bgcolor: "#daf5ef",
-        bgcolor:"white",
-      }}
-    >
-      <Stack sx={{ display: "grid", placeItems: "center" }}>
-        <Stack
-          sx={{
-            width: "45px",
-            height: "45px",
-            borderRadius: "10px",
-            p: ".5rem",
-            display: "grid",
-            placeItems: "center",
-            bgcolor: data.bgColor,
-            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
-          }}
-        >
-          {data.typeIcon}
+    <Link to={data.path}>
+      <Card
+        sx={{
+          padding: "1.2rem 2rem",
+          borderRadius: "1rem",
+          boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",
+          // bgcolor: "#daf5ef",
+          bgcolor: "white",
+        }}
+      >
+        <Stack sx={{ display: "grid", placeItems: "center" }}>
+          <Stack
+            sx={{
+              width: "45px",
+              height: "45px",
+              borderRadius: "10px",
+              p: ".5rem",
+              display: "grid",
+              placeItems: "center",
+              bgcolor: data.bgColor,
+              boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            {data.typeIcon}
+          </Stack>
         </Stack>
-      </Stack>
-      <Stack color={"text.secondary"}>
-        <Typography
-          variant="h4"
-          mb=".4rem"
-          color="black"
-          marginTop="10px"
-          textAlign="center"
-        >
-          {isNaN(counter) ? "0" : counter} {/* Show 0 if count is NaN */}
-        </Typography>
-        <Typography mb="1rem"  textAlign="center" color="black">
-          {data.type}
-        </Typography>
-        {/* <Typography sx={{ fontSize: ".8rem", color: "white",textAlign:'center' }}>
+        <Stack color={"text.secondary"}>
+          <Typography
+            variant="h4"
+            mb=".4rem"
+            color="black"
+            marginTop="10px"
+            textAlign="center"
+          >
+            {isNaN(counter) ? "0" : counter} {/* Show 0 if count is NaN */}
+          </Typography>
+          <Typography mb="1rem" textAlign="center" color="black">
+            {data.type}
+          </Typography>
+          {/* <Typography sx={{ fontSize: ".8rem", color: "white",textAlign:'center' }}>
           <Typography
             sx={{
               fontSize: ".8rem",
@@ -91,8 +94,9 @@ function DashboardCard({ data,counter }) {
           </Typography>
           {data.duration}
         </Typography> */}
-      </Stack>
-    </Card>
+        </Stack>
+      </Card>
+    </Link>
   );
 }
 
