@@ -79,14 +79,14 @@ function ChargerLogs() {
               </TableContainer>
             </Scrollbar>
         {/* ) } */}
-          {/* {postData?.data?.length > 0 && (
+          {postData?.data?.length > 0 && (
             <TablePagination
               count={Math.floor(postData?.total / 10)}
-              page={page}
-              onPageChange={handlePageChange}
+              // page={page}
+              // onPageChange={handlePageChange}
               rowsPerPage={10}
             />
-          )} */}
+          )}
         </Card>
       </Container>
     </>

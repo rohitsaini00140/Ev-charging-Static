@@ -11,7 +11,7 @@ const icon = (name) => (
 
 export const navConfig = [
   {
-    title: "dashboard",
+    title: "Dashboard",
     path: "/admin",
     icon: icon("ic_dashboard"),
   },
