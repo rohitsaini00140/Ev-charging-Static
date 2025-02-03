@@ -118,10 +118,10 @@ function Nav({ openNav, onCloseNav }) {
 
   return (
     <Box
-      // sx={{
-      //   flexShrink: { lg: 0 },
-      //   width: { lg: NAV.WIDTH },
-      // }}
+    // sx={{
+    //   flexShrink: { lg: 0 },
+    //   width: { lg: NAV.WIDTH },
+    // }}
     >
       {/* {upLg ? (
     
@@ -161,6 +161,11 @@ function Nav({ openNav, onCloseNav }) {
           sx: {
             width: NAV.WIDTH,
             // backgroundColor: "#141d20",
+          },
+        }}
+        ModalProps={{
+          BackdropProps: {
+            sx: { backgroundColor: "transparent" }, 
           },
         }}
       >
@@ -226,37 +231,42 @@ function NavItem({ item, level = 0 }) {
           }}
         >
           <Tooltip
-        title={item.title}
-        arrow
-        componentsProps={{
-          tooltip: {
-            sx: {
-              backgroundColor: "#ffff", 
-              color: "black", // Tooltip text color
-              fontSize: "0.875rem", // Tooltip font size
-              fontWeight: "bold", // Tooltip font weight
-              borderRadius: "8px", // Tooltip border radius
-              padding: "8px 12px", // Tooltip padding
-              // boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)", 
-              margin:'0px 50px',
-              opacity: 0,
-            },
-          },
-          arrow: {
-            sx: {
-              // color: "#20c997", Arrow color same as background
-              color: "#ffff", // Arrow color same as background
-            },
-          },
-        }}
-      >
-        <Box
-          component="span"
-          sx={{ width: iconSize, height: iconSize, mr: 2, color: "#20c997" }}
-        >
-          {item.icon}
-        </Box>
-      </Tooltip>
+            title={item.title}
+            arrow
+            componentsProps={{
+              tooltip: {
+                sx: {
+                  backgroundColor: "#ffff",
+                  color: "black", // Tooltip text color
+                  fontSize: "0.875rem", // Tooltip font size
+                  fontWeight: "bold", // Tooltip font weight
+                  borderRadius: "8px", // Tooltip border radius
+                  padding: "8px 12px", // Tooltip padding
+                  // boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
+                  margin: "0px 50px",
+                  opacity: 0,
+                },
+              },
+              arrow: {
+                sx: {
+                  // color: "#20c997", Arrow color same as background
+                  color: "#ffff", // Arrow color same as background
+                },
+              },
+            }}
+          >
+            <Box
+              component="span"
+              sx={{
+                width: iconSize,
+                height: iconSize,
+                mr: 2,
+                color: "#20c997",
+              }}
+            >
+              {item.icon}
+            </Box>
+          </Tooltip>
           <Box component="span" color={"black"}>
             {item.title}
           </Box>
