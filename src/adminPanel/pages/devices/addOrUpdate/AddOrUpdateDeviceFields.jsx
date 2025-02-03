@@ -23,7 +23,7 @@ import {
 } from "../../../../globalState/devices/deviceApis";
 import { setClutersid } from "../../../../globalState/devices/deviceSlices";
 import LocationDropdown from "../../../component/locationDropdown/LocationDropdown";
-import FastRewindIcon from '@mui/icons-material/FastRewind';
+import FastRewindIcon from "@mui/icons-material/FastRewind";
 
 const role = JSON.parse(sessionStorage.getItem("role"));
 
@@ -72,6 +72,7 @@ function AddOrUpdateDeviceFields() {
       location: "",
       serial_number: "",
       device_manufacturer: "",
+      interval: "60",
       // status: ""
     }),
     []
@@ -93,7 +94,6 @@ function AddOrUpdateDeviceFields() {
     if (id && deviceForUpdate) {
       reset({
         name: deviceForUpdate.name || "",
-        // cluster_id: deviceForUpdate.cluster_id !== undefined && deviceForUpdate.cluster_id !== null ? deviceForUpdate.cluster_id : null,
         cluster_id:
           deviceForUpdate.cluster_id !== undefined &&
           deviceForUpdate.cluster_id !== null &&
@@ -103,7 +103,7 @@ function AddOrUpdateDeviceFields() {
         location: deviceForUpdate.location || "",
         serial_number: deviceForUpdate.serial_number || "",
         device_manufacturer: deviceForUpdate.device_manufacturer || "",
-        // status: deviceForUpdate.status || ""
+        interval: String(deviceForUpdate.interval) || "", // Convert to string
       });
       dispatch(setClutersid(deviceForUpdate.cluster_id));
     } else {
@@ -114,8 +114,13 @@ function AddOrUpdateDeviceFields() {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
+      const formattedData = {
+        ...data,
+        interval: String(data.interval), // Ensure it's a string
+      };
+
       if (id) {
-        await updateDevice({ id, updatedDeviceData: data }).unwrap();
+        await updateDevice({ id, updatedDeviceData: formattedData }).unwrap();
         navigate("/admin/device/view", {
           state: {
             message: "Device successfully updated!",
@@ -123,9 +128,8 @@ function AddOrUpdateDeviceFields() {
           },
         });
       } else {
-        await addDevice(data).unwrap();
+        await addDevice(formattedData).unwrap();
         reset(defaultValues);
-
         navigate("/admin/device/view", {
           state: { message: "Device successfully added!", severity: "success" },
         });
@@ -261,6 +265,9 @@ function AddOrUpdateDeviceFields() {
                 value={watch("serial_number") || ""}
                 sx={inputStyle}
                 fullWidth
+                InputProps={{
+                  readOnly: !!id,
+                }}
               />
               {errors.serial_number && (
                 <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
@@ -269,40 +276,53 @@ function AddOrUpdateDeviceFields() {
               )}
             </Stack>
           </Stack>
-          {/* <Stack
+
+          <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={{ xs: 3, sm: 2, md: 6 }}
           >
-            <Stack width={"100%"}>
-                            <Selector
-                                value={watch("status")}
-                                onChange={(e) => setValue("status", e.target.value, { shouldValidate: true })}
-                                placeholder='Select status'
-                                selectType="single"
-                                options={["Active", "Inactive"]}
-                            />
-                            {errors.status && <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>*{errors.status.message}</Typography>}
-                        </Stack>
-          </Stack> */}
+            <Stack sx={{ position: "relative" }} width={"100%"}>
+              <LocationDropdown
+                label="Device location"
+                value={watch("location")}
+                onChange={(newValue) =>
+                  setValue("location", newValue, { shouldValidate: true })
+                }
+              />
+              {errors.location && (
+                <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
+                  *{errors.location.message}
+                </Typography>
+              )}
+            </Stack>
 
-          <Stack sx={{ position: "relative" }} width={"100%"}>
-            <LocationDropdown
-              label="Device location"
-              value={watch("location")}
-              onChange={(newValue) =>
-                setValue("location", newValue, { shouldValidate: true })
-              }
-            />
-            {errors.location && (
-              <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
-                *{errors.location.message}
-              </Typography>
-            )}
+            <Stack width={"100%"}>
+              <TextField
+                label="Interval"
+                {...register("interval", { required: true })}
+                value={watch("interval") || ""}
+                onChange={(e) =>
+                  setValue("interval", String(e.target.value), {
+                    shouldValidate: true,
+                  })
+                }
+                sx={inputStyle}
+                fullWidth
+              />
+
+              {errors.interval && (
+                <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
+                  *{errors.interval.message}
+                </Typography>
+              )}
+            </Stack>
           </Stack>
 
-          <Stack direction={"row"} sx={{display:'flex',justifyContent:'space-between'}}>
-
-          <Link to={"/admin/device/view"}>
+          <Stack
+            direction={"row"}
+            sx={{ display: "flex", justifyContent: "space-between" }}
+          >
+            <Link to={"/admin/device/view"}>
               <Button
                 sx={{
                   color: "white",
@@ -322,7 +342,6 @@ function AddOrUpdateDeviceFields() {
                 Back
               </Button>
             </Link>
-
 
             <LoadingButton
               loading={loading}

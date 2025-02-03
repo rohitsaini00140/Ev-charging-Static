@@ -40,6 +40,9 @@ function DeviceTableRow({ allDeviceData, currentPageNo }) {
         restoreDevice(id)
     }
 
+
+    console.log(allDeviceData,"dddddddddddddddddddddd")
+
     return (
         <>
             {allDeviceData.length > 0
@@ -76,6 +79,10 @@ function DeviceTableRow({ allDeviceData, currentPageNo }) {
                         </StyledTableCell>  
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.deviceID}
+                        </StyledTableCell>
+
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.interval}
                         </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.location}
