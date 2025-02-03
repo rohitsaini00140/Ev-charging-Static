@@ -7,7 +7,7 @@ import { alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import ListItemButton from "@mui/material/ListItemButton";
 import { usePathname } from "../../customHooks/usePathname";
-// import { useResponsive } from "../../customHooks/useResponsive";
+import { useResponsive } from "../../customHooks/useResponsive";
 import Scrollbar from "../../component/scrollbar/Scrollbar";
 import { NAV } from "./configLayout";
 import { navConfig, navConfig2 } from "./NavigationConfig";
@@ -36,7 +36,7 @@ function Nav({ openNav, onCloseNav }) {
   console.log(logInRole?.user?.role?.name, "ddddddddd");
 
   const pathname = usePathname();
-  // const upLg = useResponsive("up", "lg");
+  const upLg = useResponsive("up", "lg");
   useEffect(() => {
     if (openNav) {
       onCloseNav();
@@ -118,60 +118,29 @@ function Nav({ openNav, onCloseNav }) {
 
   return (
     <Box
-    // sx={{
-    //   flexShrink: { lg: 0 },
-    //   width: { lg: NAV.WIDTH },
-    // }}
-    >
-      {/* {upLg ? (
-    
-          <Box
-            sx={{
-              height: 1,
-              position: "fixed",
-              width: NAV.WIDTH,
-              bgcolor: alpha("rgba(87, 179, 62)", 0.1),
-              bgcolor:"#ffff",
-              boxShadow: "white",
-              borderRight: (theme) => `dashed 1px ${theme.palette.Boxider}`,
-            }}
-          >
-            {renderContent}
-        </Box>
-      ) : (
-        <Drawer
-          open={openNav}
-          onClose={onCloseNav}
-          PaperProps={{
-            sx: {
-              width: NAV.WIDTH,
-                backgroundColor: "#141d20",
-              
-            },
-          }}
-        >
-          {renderContent}
-        </Drawer>
-      )} */}
+    sx={openNav ? { flexShrink: { lg: 0 }, width: { lg: NAV.WIDTH } } : {}}
+  >
+   <Drawer
+  open={openNav}
+  onClose={onCloseNav}
+  PaperProps={{
+    sx: {
+      width: NAV.WIDTH,
+    },
+  }}
+  ModalProps={{
+    keepMounted: true, // Drawer ko mount rakhta hai, taake animation smooth ho
+    disableScrollLock: true, // Yeh scroll ko disable hone se rokta hai
+    BackdropProps: {
+      sx: { backgroundColor: "transparent" }, // Transparent backdrop rakhta hai
+    },
+  }}
+>
+  {renderContent}
+</Drawer>
 
-      <Drawer
-        open={openNav}
-        onClose={onCloseNav}
-        PaperProps={{
-          sx: {
-            width: NAV.WIDTH,
-            // backgroundColor: "#141d20",
-          },
-        }}
-        ModalProps={{
-          BackdropProps: {
-            sx: { backgroundColor: "transparent" }, 
-          },
-        }}
-      >
-        {renderContent}
-      </Drawer>
-    </Box>
+  </Box>
+  
   );
 }
 

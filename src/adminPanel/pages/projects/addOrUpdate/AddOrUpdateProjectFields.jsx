@@ -22,6 +22,7 @@ import { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import LocationDropdown from "../../../component/locationDropdown/LocationDropdown";
 import FastRewindIcon from "@mui/icons-material/FastRewind";
+import Selector from "../../../component/selector/Selector";
 
 const role = JSON.parse(sessionStorage.getItem("role"));
 
@@ -62,6 +63,7 @@ function AddOrUpdateProjectFields() {
       cluster_id: null,
       // user_id: 0,
       location: "",
+      network_type:"",
     }),
     []
   );
@@ -85,6 +87,7 @@ function AddOrUpdateProjectFields() {
         cluster_id: projectForUpdate.cluster_id || null,
         // user_id: projectForUpdate.user_id || 0,
         location: projectForUpdate.location || "",
+        network_type: projectForUpdate.network_type || "",
       });
     } else {
       reset(defaultValues);
@@ -173,13 +176,10 @@ function AddOrUpdateProjectFields() {
                             />
                             {errors.user_id && <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>*{errors.user_id.message}</Typography>}
                         </Stack> */}
-            </Stack>
-          )}
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 4, sm: 4, md: 6 }}
-          >
-            <Stack width={"100%"}>
+
+              <Stack width={"100%"}>
+
+
               <TextField
                 label="Project Name"
                 {...register("name", { required: true })}
@@ -192,6 +192,30 @@ function AddOrUpdateProjectFields() {
                   *{errors.name.message}
                 </Typography>
               )}
+
+              </Stack>
+            </Stack>
+          )}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 4, sm: 4, md: 6 }}
+          >
+            <Stack width={"100%"}>
+            
+            <Selector
+                  value={watch("network_type")}
+                  onChange={(e) =>
+                    setValue("network_type", e.target.value, { shouldValidate: true })
+                  }
+                  placeholder="Network Type"
+                  selectType="single"
+                  options={["OCPP", "MQTT"]}
+                />
+                {errors.network_type && (
+                  <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
+                    *{errors.network_type.message}
+                  </Typography>
+                )}
             </Stack>
             <Stack width={"100%"}>
               {/* <TextField
