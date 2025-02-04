@@ -11,7 +11,7 @@ export const deviceSchema = z.object({
     cluster_id: z.number().int().nullable().refine((val) => val !== null, {
         message: " Please Select Cluster"
     }),
-    interval: z.string().trim().min(1, "Please Enter Interval").refine(val => !isNaN(Number(val)), {
+    interval: z.string().trim().min(1, "Please Enter Heartbeat Interval").refine(val => !isNaN(Number(val)), {
         message: "Please enter a valid number",
       }).transform(val => Number(val)),
 });

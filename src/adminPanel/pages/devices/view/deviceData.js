@@ -9,7 +9,7 @@ export const headLabel = [
     { id: 'type', label: 'Device type' },
     { id: 'type', label: 'Device manufacturer' },
     { id: 'deviceID', label: 'Device ID' },
-    { id: 'interval', label: 'Interval (In Second)' },
+    { id: 'interval', label: 'Heartbeat Interval (In-Seconds)' },
     { id: 'location', label: 'Location' },
     { id: "status", label: "Status" },
     { id: 'action', label: 'Action', align: "center" }

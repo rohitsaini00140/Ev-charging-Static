@@ -17,17 +17,17 @@ export const navConfig = [
   },
 
   {
-    title: "Access Controll",
+    title: "Access Control",
     icon: icon("ic_roleAndPermission"),
     children: [
       {
         title: "Roles",
-        icon: icon("ic_circle"),
+        icon: icon("role"),
         path: "/admin/role/view",
       },
       {
         title: "Internal Users",
-        icon: icon("ic_circle"),
+        icon: icon("ic_user"),
         path: "/admin/user/view",
       },
     ],
@@ -143,52 +143,69 @@ export const navConfig = [
 
 export const navConfig2 = [
   {
-    title: "dashboard",
+    title: "Dashboard",
     path: "/admin",
     icon: icon("ic_dashboard"),
   },
 
   {
-    title: "Roles",
+    title: "Access Control",
     icon: icon("ic_roleAndPermission"),
-    path: "/admin/role/view",
-    // children: [
-    //   {
-    //     title: 'Add',
-    //     path: '/admin/role/add',
-    //     icon: icon('ic_circle'),
-    //   },
-    //   {
-    //     title: 'View',
-    //     path: '/admin/role/view',
-    //     icon: icon('ic_circle'),
-    //   },
-    // ],
+    children: [
+      {
+        title: "Roles",
+        icon: icon("role"),
+        path: "/admin/role/view",
+      },
+      {
+        title: "Internal Users",
+        icon: icon("ic_user"),
+        path: "/admin/user/view",
+      },
+    ],
   },
 
-  {
-    title: "Internal Users",
-    icon: icon("ic_user"),
-    path: "/admin/user/view",
-    // children: [
-    //   {
-    //     title: 'Add',
-    //     path: '/admin/user/add',
-    //     icon: icon('ic_circle'),
-    //   },
-    //   {
-    //     title: 'View',
-    //     path: '/admin/user/view',
-    //     icon: icon('ic_circle'),
-    //   },
-    // ],
-  },
+  // {
+  //   title: "Roles",
+  //   icon: icon("ic_roleAndPermission"),
+  //   path: "/admin/role/view",
+  //   children: [
+  //     {
+  //       title: 'Add',
+  //       path: '/admin/role/add',
+  //       icon: icon('ic_circle'),
+  //     },
+  //     {
+  //       title: 'View',
+  //       path: '/admin/role/view',
+  //       icon: icon('ic_circle'),
+  //     },
+  //   ],
+  // },
 
-  {
-    title: "CPOs",
-    icon: icon("ic_user"),
-    path: "/admin/user/view",
-  },
+  // {
+  //   title: "Internal Users",
+  //   icon: icon("ic_user"),
+  //   path: "/admin/user/view",
+  //   children: [
+  //     {
+  //       title: 'Add',
+  //       path: '/admin/user/add',
+  //       icon: icon('ic_circle'),
+  //     },
+  //     {
+  //       title: 'View',
+  //       path: '/admin/user/view',
+  //       icon: icon('ic_circle'),
+  //     },
+  //   ],
+  // },
+
+  // {
+  //   title: "CPOs",
+  //   icon: icon("ic_user"),
+  //   path: "/admin/cpos",
+  // },
 
   {
     title: "Clusters",

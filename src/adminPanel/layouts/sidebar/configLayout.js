@@ -9,3 +9,8 @@ export const HEADER = {
 export const NAV = {
     WIDTH: 280,
 };  
+
+
+export const NAV1 = {
+    WIDTH: 100,
+};  
