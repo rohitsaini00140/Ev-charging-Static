@@ -298,7 +298,7 @@ function AddOrUpdateDeviceFields() {
 
             <Stack width={"100%"}>
               <TextField
-                label="Interval"
+                label="Heartbeat Interval (In-Seconds) "
                 {...register("interval", { required: true })}
                 value={watch("interval") || ""}
                 onChange={(e) =>
