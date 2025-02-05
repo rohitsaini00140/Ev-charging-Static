@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function DashboardCard({ data, counter }) {
-  console.log(data, "ffffffffffffff");
 
   const [count, setCount] = useState(0); // Initial state is 0
   const totalCount = Number(data.totalCount); // Ensure totalCount is a valid number

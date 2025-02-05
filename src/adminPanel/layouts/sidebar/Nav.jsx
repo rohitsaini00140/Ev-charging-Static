@@ -12,7 +12,7 @@ import Scrollbar from "../../component/scrollbar/Scrollbar";
 import { NAV, NAV1 } from "./configLayout";
 import { navConfig, navConfig2 } from "./NavigationConfig";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Collapse, Tooltip } from "@mui/material";
+import { Button, Collapse, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -71,6 +71,11 @@ function Nav({ openNav, onCloseNav }) {
     </Stack>
   );
 
+
+  const Removeicon = (
+
+    <Button  sx={{display:"flex",justifyContent:'right',color:"#f56b6b",fontSize:'17px',marginRight:'15px'}} onClick={onCloseNav}>X</Button>
+  )
   const renderContent = (
     <Scrollbar
       sx={{
@@ -82,6 +87,7 @@ function Nav({ openNav, onCloseNav }) {
         },
       }}
     >
+      
       <Link to={"/"}>
         <img
           src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
@@ -122,11 +128,13 @@ function Nav({ openNav, onCloseNav }) {
         ModalProps={{
           keepMounted: true,
           disableScrollLock: true,
+          disableEscapeKeyDown: true,
           BackdropProps: {
             sx: { backgroundColor: "transparent" },
           },
         }}
       >
+        {Removeicon}
         {renderContent}
       </Drawer>
       {upLg && (  <Typography  sx={{marginTop:'100px'}}>{renderMenu1} </Typography>) }
