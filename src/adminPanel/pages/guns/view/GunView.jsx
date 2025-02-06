@@ -84,7 +84,7 @@ function GunView() {
               color="inherit"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Gun Types
+              New Gun Type
             </Button>
           </Link>
         </Stack>

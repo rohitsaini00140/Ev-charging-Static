@@ -60,7 +60,7 @@ function AddOrUpdateDeviceFields() {
 
   const allclusters = successclusters && clustersData?.clusters;
 
-  console.log(allclusters, "kya aa raha ha");
+  console.log(allProjects , "kya aa raha ha");
 
   const [addDevice] = useAddDeviceMutation();
   const [updateDevice] = useUpdateDeviceMutation();

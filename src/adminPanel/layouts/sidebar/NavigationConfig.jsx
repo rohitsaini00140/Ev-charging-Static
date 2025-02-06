@@ -137,7 +137,7 @@ export const navConfig = [
 
   {
     title: "Device Guns",
-    icon: icon("ic_device"),
+    icon: icon("charger-power"),
     path: "/admin/devicegun/add",
   },
 

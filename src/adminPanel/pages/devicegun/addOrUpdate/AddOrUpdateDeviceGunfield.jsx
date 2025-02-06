@@ -9,16 +9,22 @@ import { inputStyle } from "../../../component/inputStyle";
 import { useMemo, useState, useEffect } from "react";
 import Alertbar from "../../../component/Alertbar";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 import FastRewindIcon from "@mui/icons-material/FastRewind";
-import { useCreateCpoMutation, useGetCpoByIdQuery, useUpdateCpoMutation } from "../../../../globalState/Cpos/cpoApi";
+import {
+  useCreateCpoMutation,
+  useGetCpoByIdQuery,
+  useUpdateCpoMutation,
+} from "../../../../globalState/Cpos/cpoApi";
 import { devicegunSchema } from "./devicegunSchema";
 import SearchableDropdown from "../../../component/searchableDropdown/SearchableDropdown";
 import Selector from "../../../component/selector/Selector";
-
+import { useGetAllDeviceQuery } from "../../../../globalState/devices/deviceApis";
+import { setDeviceID } from "../../../../globalState/devices/deviceSlices";
+import { useDispatch } from "react-redux";
+import { useGetGunByIdQuery } from "../../../../globalState/gunType/gunApi";
 
 function AddOrUpdateDeviceGunFields() {
-
   const [loading, setLoading] = useState(false);
 
   const [snackbar, setSnackbar] = useState({
@@ -30,21 +36,21 @@ function AddOrUpdateDeviceGunFields() {
   const { id } = useParams();
   let navigate = useNavigate();
 
+
+  let dispatch = useDispatch();
+
   const { data, isSuccess } = useGetCpoByIdQuery(id, { skip: !id });
 
   const cpoForUpdate = isSuccess && data;
-
-
 
   const [createCpo] = useCreateCpoMutation();
   const [updateCpo] = useUpdateCpoMutation();
 
   const defaultValues = useMemo(
     () => ({
-      name: "",
+    device_id:null,
       email: "",
       phone: "",
-  
     }),
     []
   );
@@ -65,7 +71,7 @@ function AddOrUpdateDeviceGunFields() {
   useEffect(() => {
     if (id && cpoForUpdate) {
       reset({
-        name: cpoForUpdate.name || "",
+        device_id: cpoForUpdate.device_id || "",
         email: cpoForUpdate.email || "",
         phone: cpoForUpdate.phone || "",
       });
@@ -74,8 +80,17 @@ function AddOrUpdateDeviceGunFields() {
     }
   }, [id, cpoForUpdate, reset, defaultValues]);
 
+  const { data: DevicesData, isSuccess: successdevice } =
+    useGetAllDeviceQuery();
 
-  const allclusters = ""
+
+  const allclusters = successdevice && DevicesData.devices;
+
+
+  console.log(allclusters,"ddddddddddddddd")
+
+  const allclusters1 = ""
+
   const onSubmit = async (data) => {
     console.log(data);
     setLoading(true);
@@ -130,20 +145,17 @@ function AddOrUpdateDeviceGunFields() {
             direction={{ xs: "column", sm: "row" }}
             spacing={{ xs: 1, sm: 2, md: 6 }}
           >
-        
             <Stack width={"100%"}>
-            <SearchableDropdown
-                  options={allclusters.length > 0 ? allclusters : []}
-                  placeholder="Select Cluster"
-                  value={watch("cluster_id")}
-                //   onChange={(newValue) => {
-                //     setValue("cluster_id", newValue, { shouldValidate: true });
-                //     dispatch(setClutersid(newValue));
-                //     if (newValue === null || newValue === undefined) {
-                //       setValue("project_id", null, { shouldValidate: true });
-                //     }
-                //   }}
-                />
+              <SearchableDropdown
+                options={allclusters.length > 0 ? allclusters : []}
+                placeholder="Select Device"
+                value={watch("device_id")}
+                  onChange={(newValue) => {
+                    setValue("device_id", newValue, { shouldValidate: true });
+                    dispatch(setDeviceID(newValue));
+                
+                  }}
+              />
               {errors.name && (
                 <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>
                   *{errors.name.message}
@@ -151,18 +163,14 @@ function AddOrUpdateDeviceGunFields() {
               )}
             </Stack>
             <Stack width={"100%"}>
-            <SearchableDropdown
-                  options={allclusters.length > 0 ? allclusters : []}
-                  placeholder="Select Cluster"
-                  value={watch("cluster_id")}
-                //   onChange={(newValue) => {
-                //     setValue("cluster_id", newValue, { shouldValidate: true });
-                //     dispatch(setClutersid(newValue));
-                //     if (newValue === null || newValue === undefined) {
-                //       setValue("project_id", null, { shouldValidate: true });
-                //     }
-                //   }}
-                />
+              <SearchableDropdown
+                options={allclusters1.length > 0 ? allclusters1 : []}
+                placeholder="Select Gun Type"
+                value={watch("name") || null}
+                onChange={(newValue) =>
+                  setValue("project_id", newValue, { shouldValidate: true })
+                }
+              />
               {errors.email && (
                 <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>
                   *{errors.email.message}
@@ -175,10 +183,10 @@ function AddOrUpdateDeviceGunFields() {
             spacing={{ xs: 1, sm: 2, md: 6 }}
           >
             <Stack width={"100%"}>
-            <SearchableDropdown
-                  options={allclusters.length > 0 ? allclusters : []}
-                  placeholder="Select Cluster"
-                  value={watch("cluster_id")}
+              <SearchableDropdown
+                options={allclusters1.length > 0 ? allclusters1 : []}
+                placeholder="Select Gun Number"
+                value={watch("cluster_id")}
                 //   onChange={(newValue) => {
                 //     setValue("cluster_id", newValue, { shouldValidate: true });
                 //     dispatch(setClutersid(newValue));
@@ -186,7 +194,7 @@ function AddOrUpdateDeviceGunFields() {
                 //       setValue("project_id", null, { shouldValidate: true });
                 //     }
                 //   }}
-                />
+              />
               {errors.phone && (
                 <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>
                   *{errors.phone.message}
@@ -194,8 +202,7 @@ function AddOrUpdateDeviceGunFields() {
               )}
             </Stack>
 
-
-            <Stack width={"100%"}>
+            {/* <Stack width={"100%"}>
               <Selector
                 value={watch("type")}
                 onChange={(e) =>
@@ -203,16 +210,28 @@ function AddOrUpdateDeviceGunFields() {
                 }
                 placeholder="Gun Status"
                 selectType="single"
-                options={['Available', 'Charging', 'Faulty', 'Reserved', 'Disconnected', 'OutOfService', 'Preparing', 'Finishing']}
+                options={[
+                  "Available",
+                  "Charging",
+                  "Faulty",
+                  "Reserved",
+                  "Disconnected",
+                  "OutOfService",
+                  "Preparing",
+                  "Finishing",
+                ]}
               />
               {errors.type && (
                 <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
                   *{errors.type.message}
                 </Typography>
               )}
-            </Stack>
+            </Stack> */}
           </Stack>
-          <Stack direction={"row"} sx={{display:"flex",justifyContent:'space-between'}}>
+          <Stack
+            direction={"row"}
+            sx={{ display: "flex", justifyContent: "space-between" }}
+          >
             <Link to={"/admin/cpos/view"}>
               <Button
                 sx={{
