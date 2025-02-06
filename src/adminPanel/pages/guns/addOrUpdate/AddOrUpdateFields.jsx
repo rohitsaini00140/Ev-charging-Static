@@ -147,7 +147,7 @@ function AddOrUpdateGunFields() {
             </Stack>
             <Stack sx={{ position: "relative" }} width={"100%"}>
               <TextField
-                label="Max Power"
+                label="Max. Power (In-Kilowatts)"
                 {...register("max_power", { required: true })}
                 value={watch("max_power") || ""}
                 sx={inputStyle}
