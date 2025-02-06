@@ -42,12 +42,13 @@ function GunView() {
     }
   }, [location.state, navigate]);
 
-  const { data: gunData, isSuccess, isLoading } = useGetGunsListQuery();
+  const { data: gunData, isSuccess: deviceSuccess, isLoading } = useGetGunsListQuery();
 
   // Ensure data exists
   const allGunData = gunData?.data || [];
+  const paginationData = deviceSuccess && gunData;
 
-  console.log(allGunData, "dddddddddddd");
+  const { last_page } = paginationData;
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
@@ -131,7 +132,7 @@ function GunView() {
 
 {allGunData.length > 0 && (
             <TablePagination
-            //   count={last_page}
+              count={last_page}
             //   onPageChange={handlePageChange}
             //   page={page}
             />

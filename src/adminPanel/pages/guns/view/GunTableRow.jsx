@@ -45,7 +45,7 @@ function GunTableRow({ allRoleData }) {
                         <StyledTableCell> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.max_power}</StyledTableCell>
                         <StyledTableCell> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.voltage}</StyledTableCell>
                         <StyledTableCell> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.current_type}</StyledTableCell>
-                        <StyledTableCell> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.decription ? data.decription : "No data available"  }</StyledTableCell>
+                        <StyledTableCell> {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.description ? data.description : "No data available"  }</StyledTableCell>
                         <StyledTableCell>
                             <Label color={data.deleted_at === null ? 'success' : 'error'} >{loading ? <Skeleton sx={{ bgcolor: data.deleted_at === null ? 'success' : 'error' }} animation="pulse" /> : (data.deleted_at === null ? 'Active' : 'Inactive')}</Label>
                         </StyledTableCell>

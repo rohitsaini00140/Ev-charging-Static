@@ -81,6 +81,8 @@ function DeviceView() {
   const paginationData = deviceSuccess && deviceData;
   const { last_page } = paginationData;
 
+
+  console.log(allDeviceData,"fffffffff")
   const handlePageChange = (event, value) => {
     dispatch(setDeviceListPageNo1(value));
   };

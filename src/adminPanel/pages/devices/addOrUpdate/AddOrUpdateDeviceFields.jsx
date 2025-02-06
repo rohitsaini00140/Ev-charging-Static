@@ -76,8 +76,7 @@ function AddOrUpdateDeviceFields() {
       device_manufacturer: "",
       interval: "60",
       status: "",
-      gunnumber: "",
-      guntype: "",
+      max_guns:""
     }),
     []
   );
@@ -110,7 +109,7 @@ function AddOrUpdateDeviceFields() {
         interval: String(deviceForUpdate.interval) || "", // Convert to string
         gunnumber: deviceForUpdate.gunnumber || "",
         status: deviceForUpdate.status || "",
-        guntype: deviceForUpdate.guntype || "",
+        max_guns: String(deviceForUpdate.max_guns) || "",
       });
       dispatch(setClutersid(deviceForUpdate.cluster_id));
     } else {
@@ -237,17 +236,17 @@ function AddOrUpdateDeviceFields() {
           >
             <Stack width={"100%"}>
               <Selector
-                value={watch("maxguns")}
+                value={watch("max_guns")}
                 onChange={(e) =>
-                  setValue("maxguns", e.target.value, { shouldValidate: true })
+                  setValue("max_guns", String(e.target.value), { shouldValidate: true })
                 }
                 placeholder="Max Gun"
                 selectType="single"
                 options={["1", "2", "3"]}
               />
-              {errors.maxguns && (
+              {errors.max_guns && (
                 <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
-                  *{errors.maxguns.message}
+                  *{errors.max_guns.message}
                 </Typography>
               )}
             </Stack>

@@ -14,4 +14,5 @@ export const deviceSchema = z.object({
     interval: z.string().trim().min(1, "Please Enter Heartbeat Interval").refine(val => !isNaN(Number(val)), {
         message: "Please enter a valid number",
       }).transform(val => Number(val)),
+      max_guns:z.string().trim().min(1, "Please Select Max Guns"),
 });

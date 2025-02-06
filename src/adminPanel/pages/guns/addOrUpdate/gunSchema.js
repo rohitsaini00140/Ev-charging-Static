@@ -1,13 +1,13 @@
 import * as z from "zod";
 
 export const gunsSchema = z.object({
-  name: z.string().trim().min(1, "Please Enter Gun Type"),
+  name: z.string().trim().min(1, "Please Enter Gun Name"),
   max_power: z
     .string()
     .trim()
-    .min(1, "Please Enter Gun number")
+    .min(1, "Please Enter Max Power")
     .refine((val) => !isNaN(Number(val)), {
-      message: "Please enter a valid Gun number",
+      message: "Please enter a valid Max Power",
     })
     .transform((val) => Number(val)), // Convert to number
 
