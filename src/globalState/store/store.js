@@ -19,6 +19,8 @@ import { chargerApi } from "../charger/chargerApi";
 import chargerSlice from '../charger/ChargerSlice'
 import { cpoApi } from "../Cpos/cpoApi";
 import cpoSlice from "../Cpos/cpoSlice"
+import { gunsApi } from "../gunType/gunApi";
+import gunsSlice from '../gunType/gunSlice'
 
 export const store = configureStore({
   reducer: {
@@ -32,6 +34,7 @@ export const store = configureStore({
     [permissionsApi.reducerPath]: permissionsApi.reducer,
     [chargerApi.reducerPath]: chargerApi.reducer,
     [cpoApi.reducerPath]:cpoApi.reducer,
+    [gunsApi.reducerPath]:gunsApi.reducer,
     cluster: clusterSlices,
     googleMap: googleMapSlices,
     address: addressSlices,
@@ -42,6 +45,7 @@ export const store = configureStore({
     permission: permissionSlice,
     charger: chargerSlice,
     cpo: cpoSlice,
+    gun:gunsSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -55,5 +59,6 @@ export const store = configureStore({
       permissionsApi.middleware,
       chargerApi.middleware,
       cpoApi.middleware,
+      gunsApi.middleware,
     ),
 });

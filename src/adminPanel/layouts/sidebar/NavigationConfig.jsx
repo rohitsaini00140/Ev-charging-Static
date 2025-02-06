@@ -110,6 +110,28 @@ export const navConfig = [
     //   },
     // ],
   },
+
+
+  {
+    title: "Gun Types",
+    icon: icon("chargerGun"),
+    path: "/admin/guns/add",
+    // children: [
+    //   {
+    //     title: 'Add',
+    //     path: '/admin/device/add',
+    //     icon: icon('ic_circle'),
+    //   },
+    //   {
+    //     title: 'View',
+    //     path: '/admin/device/view',
+    //     icon: icon('ic_circle'),
+    //   },
+    // ],
+  },
+
+
+
   {
     title: "Devices",
     icon: icon("ic_device"),
