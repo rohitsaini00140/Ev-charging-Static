@@ -13,7 +13,7 @@ import { Container, Card, CardContent, Button } from "@mui/material";
 import { Box, Grid } from "@mui/system";
 import React, { useState } from "react";
 
-import { chargerApi } from "../../../globalState/charger/chargerApi";
+import { useGetChargersQuery } from "../../../globalState/charger/chargerApi";
 import ChargerdashboardTableHead from "./view/ChargerdashboardTableHead";
 import ChargerLogs from "./view/ChargerLogs";
 
@@ -25,12 +25,19 @@ function Charger_Dashboard() {
   const [showRadio, setShowRadio] = useState(false); // State to toggle radio button visibility
   const [resetType, setResetType] = useState("");
   const [selectedConfiguration, setSelectedConfiguration] = useState("");
+  const [showHeartbeatInput, setShowHeartbeatInput] = useState(false);
 
   const handleResetClick = () => {
     setShowRadio(true); // Show the radio button on Reset click
   };
 
-  console.log(chargerApi, "what is data here  ");
+  const handleHeartbeatClick = () => {
+    setShowHeartbeatInput((prev) => !prev); // Toggle input field visibility
+  };
+
+  const { data, error, isLoading } = useGetChargersQuery();
+
+  console.log("API Response: ", data);
 
   const handleRadioChange = (event) => {
     // setResetType(event.target.value); // Update the reset type
@@ -140,6 +147,7 @@ function Charger_Dashboard() {
                         <Button
                           variant="contained"
                           sx={{ mt: 0, bgcolor: "#20c997" }}
+                          onClick={handleHeartbeatClick}
                         >
                           Heartbeat
                         </Button>
@@ -153,6 +161,25 @@ function Charger_Dashboard() {
                         </Button>
                       </Box>
 
+                      {showHeartbeatInput && (
+                        <Box sx={{ mt: 2 }}>
+                          <TextField
+                            label="Enter Heartbeat Interval"
+                            variant="outlined"
+                            fullWidth
+                          />
+                        </Box>
+                      )}
+
+                      {showHeartbeatInput && (
+                        <Box sx={{ mt: 2 }}>
+                          <TextField
+                            label="Enter Heartbeat Devces"
+                            variant="outlined"
+                            fullWidth
+                          />
+                        </Box>
+                      )}
                       {showRadio && (
                         <Box sx={{ mt: 2 }}>
                           <RadioGroup

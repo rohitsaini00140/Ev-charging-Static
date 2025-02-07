@@ -3,10 +3,17 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const chargerApi = createApi({
   reducerPath: "chargerApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://143.110.178.49/ev-charging-backend/api",
+    baseUrl: "http://143.110.178.49/ev-charging-backend/api/ocpp/",
   }),
-  tagTypes: ["charger"],
-  endpoints: (builder) => ({}),
+  tagTypes: ["Charger"],
+  endpoints: (builder) => ({
+    getChargers: builder.query({
+      query: () => "devices", // GET request to /devices
+      providesTags: ["Charger"],
+    }),
+  }),
 });
 
-export const {} = chargerApi;
+// Export the hook
+export const { useGetChargersQuery } = chargerApi;
+
