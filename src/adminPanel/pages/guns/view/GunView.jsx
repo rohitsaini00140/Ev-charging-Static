@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
 
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import GunTableHead from "./GunTableHead";
 import Scrollbar from "../../../component/scrollbar/Scrollbar";
@@ -20,6 +20,7 @@ import GunTableRow from "./GunTableRow";
 import { useEffect, useState } from "react";
 import { useGetGunsListQuery } from "../../../../globalState/gunType/gunApi";
 import TablePagination from "../../../component/TablePagination";
+import { setGunsListPageNo } from "../../../../globalState/gunType/gunSlice";
 
 function GunView() {
   const [snackbar, setSnackbar] = useState({
@@ -29,7 +30,12 @@ function GunView() {
   });
 
   const location = useLocation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const {page} = useSelector((state) => state.guns);
+
+  console.log(page,"dddddddddddd")
 
   useEffect(() => {
     if (location.state && location.state.message) {
@@ -42,7 +48,11 @@ function GunView() {
     }
   }, [location.state, navigate]);
 
-  const { data: gunData, isSuccess: deviceSuccess, isLoading } = useGetGunsListQuery();
+  const {
+    data: gunData,
+    isSuccess: deviceSuccess,
+    isLoading,
+  } = useGetGunsListQuery();
 
   // Ensure data exists
   const allGunData = gunData?.data || [];
@@ -58,6 +68,10 @@ function GunView() {
       ...prevState,
       open: false,
     }));
+  };
+
+  const handlePageChange = (event, value) => {
+    dispatch(setGunsListPageNo(value));
   };
 
   return (
@@ -112,7 +126,7 @@ function GunView() {
                   <GunTableHead allRoleData={allGunData} />
                   <TableBody>
                     {allGunData.length > 0 ? (
-                      <GunTableRow allRoleData={allGunData} />
+                      <GunTableRow allRoleData={allGunData}/>
                     ) : (
                       <StyledTableRow>
                         <StyledTableCell
@@ -130,11 +144,11 @@ function GunView() {
             </Scrollbar>
           )}
 
-{allGunData.length > 0 && (
+          {allGunData.length > 0 && (
             <TablePagination
               count={last_page}
-            //   onPageChange={handlePageChange}
-            //   page={page}
+              onPageChange={handlePageChange}
+              page={page}
             />
           )}
         </Card>

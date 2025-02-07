@@ -22,7 +22,7 @@ import Selector from "../../../component/selector/Selector";
 import { useGetAllDeviceQuery } from "../../../../globalState/devices/deviceApis";
 import { setDeviceID } from "../../../../globalState/devices/deviceSlices";
 import { useDispatch } from "react-redux";
-import { useGetGunByIdQuery } from "../../../../globalState/gunType/gunApi";
+import DeviceGunView from "../view/DeviceGunView";
 
 function AddOrUpdateDeviceGunFields() {
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,6 @@ function AddOrUpdateDeviceGunFields() {
   const { id } = useParams();
   let navigate = useNavigate();
 
-
   let dispatch = useDispatch();
 
   const { data, isSuccess } = useGetCpoByIdQuery(id, { skip: !id });
@@ -48,7 +47,7 @@ function AddOrUpdateDeviceGunFields() {
 
   const defaultValues = useMemo(
     () => ({
-    device_id:null,
+      device_id: null,
       email: "",
       phone: "",
     }),
@@ -83,13 +82,11 @@ function AddOrUpdateDeviceGunFields() {
   const { data: DevicesData, isSuccess: successdevice } =
     useGetAllDeviceQuery();
 
-
   const allclusters = successdevice && DevicesData.devices;
 
+  console.log(allclusters, "ddddddddddddddd");
 
-  console.log(allclusters,"ddddddddddddddd")
-
-  const allclusters1 = ""
+  const allclusters1 = "";
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -150,11 +147,10 @@ function AddOrUpdateDeviceGunFields() {
                 options={allclusters.length > 0 ? allclusters : []}
                 placeholder="Select Device"
                 value={watch("device_id")}
-                  onChange={(newValue) => {
-                    setValue("device_id", newValue, { shouldValidate: true });
-                    dispatch(setDeviceID(newValue));
-                
-                  }}
+                onChange={(newValue) => {
+                  setValue("device_id", newValue, { shouldValidate: true });
+                  dispatch(setDeviceID(newValue));
+                }}
               />
               {errors.name && (
                 <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>
@@ -230,29 +226,8 @@ function AddOrUpdateDeviceGunFields() {
           </Stack>
           <Stack
             direction={"row"}
-            sx={{ display: "flex", justifyContent: "space-between" }}
+            sx={{ display: "flex", justifyContent: "end" }}
           >
-            <Link to={"/admin/cpos/view"}>
-              <Button
-                sx={{
-                  color: "white",
-                  borderRadius: "5px",
-                  bgcolor: "#0ab39c",
-                  width: "5rem",
-                  borderColor: "#0ab39c",
-                  padding: "10px 15px",
-                  height: "2.5rem",
-                  BoxShadow: "none",
-                  "&:hover": {
-                    bgcolor: "#0ab39c",
-                  },
-                }}
-              >
-                <FastRewindIcon />
-                Back
-              </Button>
-            </Link>
-
             <LoadingButton
               loading={loading}
               type="submit"
@@ -276,6 +251,7 @@ function AddOrUpdateDeviceGunFields() {
               Save
             </LoadingButton>
           </Stack>
+          <DeviceGunView />
         </Stack>
       </form>
       <Alertbar

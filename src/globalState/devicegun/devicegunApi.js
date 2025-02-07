@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const gunsApi = createApi({
+export const devicegunApi = createApi({
   reducerPath: "devicegunsApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://143.110.178.49/ev-charging-backend/api",
@@ -63,4 +63,4 @@ export const {
   useSoftDeleteGunMutation,
   useRestoreDeletedGunMutation,
   useGetGunByIdQuery,
-} = gunsApi;
+} = devicegunApi;

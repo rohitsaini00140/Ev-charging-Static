@@ -11,7 +11,7 @@ import { useRestoreDeletedGunMutation, useSoftDeleteGunMutation } from '../../..
 
 // ----------------------------------------------------------------------
 
-function GunTableRow({ allRoleData }) {
+function GunTableRow({ allRoleData,}) {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const timer = setTimeout(() => setLoading(false), 1000);

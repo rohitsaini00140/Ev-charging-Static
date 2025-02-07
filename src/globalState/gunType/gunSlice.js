@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const gunsSlice = createSlice({
     name: 'guns',
     initialState: {
-        pageNo: 1,
+        page: 1,
         guns: "",
         gunsStatus: "",
         loading: false,
@@ -11,7 +11,7 @@ const gunsSlice = createSlice({
     },
     reducers: {
         setGunsListPageNo: (state, action) => {
-            state.pageNo = action.payload
+            state.page = action.payload
         },
         setGuns: (state, action) => {
             state.guns = action.payload
