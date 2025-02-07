@@ -8,18 +8,25 @@ export const devicegunApi = createApi({
   tagTypes: ["deviceguns"],
   endpoints: (builder) => ({
     createdeviceguns: builder.mutation({
-      query: (roleData) => ({
+      query: (devicegunData) => ({
         url: "/devicegun/create",
         method: "POST",
-        body: roleData,
+        body: devicegunData,
       }),
       invalidatesTags: ["deviceguns"],
     }),
 
-    getGunsList: builder.query({
-      query: () => "/devicegun/list",
+    getDeviceGunsList: builder.query({
+      query: (device_id) => {
+        console.log("Fetching data for ID:", device_id);  // ✅ Debug API call
+        return {
+          url: `/devicegun/list/${device_id}`,
+          method: "GET",
+        };
+      },
       providesTags: ["deviceguns"],
     }),
+    
 
     getDeviceGunByID: builder.query({
       query: (id) => `/devicegun/show/${id}`,
@@ -33,6 +40,11 @@ export const devicegunApi = createApi({
       providesTags: ["devicegun"],
     }),
 
+
+    getAllDeviceWithmaxgun: builder.query({
+      query: () => `/devicegun/deviceWithMaxGun`,
+      providesTags: ["devicegun"],
+    }),
 
 
     getGunById: builder.query({
@@ -70,11 +82,12 @@ export const devicegunApi = createApi({
 });
 export const {
   useCreatedevicegunsMutation,
-  useGetGunsListQuery,
+  useGetDeviceGunsListQuery,
   useGetDeviceGunByIDQuery,
   useUpdateGunMutation,
   useSoftDeleteGunMutation,
   useRestoreDeletedGunMutation,
   useGetGunByIdQuery,
-  useGetAllDeviceGunQuery
+  useGetAllDeviceGunQuery,
+  useGetAllDeviceWithmaxgunQuery
 } = devicegunApi;

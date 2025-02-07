@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
 import Iconify from "../../../component/Iconify";
 import Scrollbar from "../../../component/scrollbar/Scrollbar";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import TablePagination from "../../../component/TablePagination";
 import { useDispatch, useSelector } from "react-redux";
 import { StyledTableCell, StyledTableRow } from "../../../component/tableStyle";
@@ -18,6 +18,7 @@ import { useGetCpoQuery } from "../../../../globalState/Cpos/cpoApi";
 import { setCpoListPageNo } from "../../../../globalState/Cpos/cpoSlice";
 import DeviceGunTableHead from "./DeviceGunTableHead";
 import DeviceGunTableRow from "./DeviceGunTableRow";
+import { useGetDeviceGunsListQuery } from "../../../../globalState/devicegun/devicegunApi";
 
 function DeviceGunView() {
   const dispatch = useDispatch();
@@ -42,20 +43,18 @@ function DeviceGunView() {
     }
   }, [location.state, navigate]);
 
-  const {
-    data: allUsers,
-    isSuccess: CpoSuccess,
-    isLoading,
-  } = useGetCpoQuery({
-    page: page,
-    name: userName,
-    status,
+  const { device_id } = useParams(); 
+  const { data: alldevicegun, isLoading, isError, error } = useGetDeviceGunsListQuery(device_id, {
+    skip: !device_id,  // ✅ Skip query if device_id is not available
   });
 
-  const allUserData = "";
-  const paginationData = CpoSuccess && allUsers;
+  console.log(alldevicegun,"dddddddddddddd");
+  
 
-  const { last_page } = paginationData;
+  const allUserData = "";
+  // const paginationData = CpoSuccess && allUsers;
+
+  // const { last_page } = paginationData;
 
   const handlePageChange = (event, value) => {
     dispatch(setCpoListPageNo(value));
@@ -111,13 +110,13 @@ function DeviceGunView() {
               </TableContainer>
             </Scrollbar>
           )}
-          {allUserData.length > 0 && (
+          {/* {allUserData.length > 0 && (
             <TablePagination
               count={last_page}
               onPageChange={handlePageChange}
               page={page}
             />
-          )}
+          )} */}
         </Card>
       </Container>
 

@@ -3,7 +3,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button, Typography } from "@mui/material";
+import { Autocomplete, Button, TextField, Typography } from "@mui/material";
 import { useMemo, useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import {
@@ -12,11 +12,16 @@ import {
 } from "../../../../globalState/Cpos/cpoApi";
 import { devicegunSchema } from "./devicegunSchema";
 import SearchableDropdown from "../../../component/searchableDropdown/SearchableDropdown";
-import { useGetAllDeviceQuery, useGetDeviceByIDQuery } from "../../../../globalState/devices/deviceApis";
+import { useGetDeviceByIDQuery } from "../../../../globalState/devices/deviceApis";
 import { useDispatch } from "react-redux";
 import DeviceGunView from "../view/DeviceGunView";
 import { useGetAllGuntypeQuery } from "../../../../globalState/gunType/gunApi";
-import { useCreatedevicegunsMutation, useGetAllDeviceGunQuery } from "../../../../globalState/devicegun/devicegunApi";
+import {
+  useCreatedevicegunsMutation,
+  useGetAllDeviceGunQuery,
+  useGetAllDeviceWithmaxgunQuery,
+} from "../../../../globalState/devicegun/devicegunApi";
+import Selector from "../../../component/selector/Selector";
 
 function AddOrUpdateDeviceGunFields() {
   const [loading, setLoading] = useState(false);
@@ -42,8 +47,8 @@ function AddOrUpdateDeviceGunFields() {
   const defaultValues = useMemo(
     () => ({
       device_id: null,
-      email: "",
-      phone: "",
+      gun_type_id: "",
+      gun_slot: "",
     }),
     []
   );
@@ -74,29 +79,28 @@ function AddOrUpdateDeviceGunFields() {
   }, [id, cpoForUpdate, reset, defaultValues]);
 
   const { data: DevicesData, isSuccess: successdevice } =
-    useGetAllDeviceQuery();
+    useGetAllDeviceWithmaxgunQuery();
 
   const allclusters = successdevice && DevicesData.devices;
 
   const { data: guntypesData, isSuccess: successguntypes } =
-  useGetAllGuntypeQuery();
-  
-  const  gunTypesData = successguntypes && guntypesData.devices
+    useGetAllGuntypeQuery();
 
-  const {data: devicegunData, isSuccess: successdevicegundata}= useGetAllDeviceGunQuery();
+  const gunTypesData = successguntypes && guntypesData.devices;
+
+
+  const { data: devicegunData, isSuccess: successdevicegundata } =
+    useGetAllDeviceGunQuery();
 
   const devicegun = successdevicegundata && devicegunData.devices;
 
-  console.log(devicegun,"dddddddddddd")
-
   const onSubmit = async (data) => {
-    console.log(data);
     setLoading(true);
     try {
       if (id) {
         await updateCpo({ id, updatedCpoData: data }).unwrap();
 
-        navigate("/admin/cpos/view", {
+        navigate("/admin/devicegun/add", {
           state: { message: "User successfully updated!", severity: "success" },
         });
       } else {
@@ -104,7 +108,7 @@ function AddOrUpdateDeviceGunFields() {
 
         reset(defaultValues);
 
-        navigate("/admin/cpos/view", {
+        navigate("/admin/devicegun/add", {
           state: { message: "User successfully added!", severity: "success" },
         });
       }
@@ -134,7 +138,6 @@ function AddOrUpdateDeviceGunFields() {
       open: false,
     }));
   };
-
   return (
     <>
       <form fullWidth onSubmit={handleSubmit(onSubmit)}>
@@ -159,17 +162,18 @@ function AddOrUpdateDeviceGunFields() {
               )}
             </Stack>
             <Stack width={"100%"}>
+
               <SearchableDropdown
                 options={gunTypesData.length > 0 ? gunTypesData : []}
                 placeholder="Select Gun Name"
-                value={watch("name") || null}
-                onChange={(newValue) =>
-                  setValue("project_id", newValue, { shouldValidate: true })
-                }
+                value={watch("gun_type_id")}
+                onChange={(newValue) => {
+                  setValue("gun_type_id", newValue, { shouldValidate: true });
+                }}
               />
-              {errors.email && (
+              {errors.gun_type_id && (
                 <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>
-                  *{errors.email.message}
+                  *{errors.gun_type_id.message}
                 </Typography>
               )}
             </Stack>
@@ -179,23 +183,64 @@ function AddOrUpdateDeviceGunFields() {
             spacing={{ xs: 1, sm: 2, md: 6 }}
           >
             <Stack width={"100%"}>
-              <SearchableDropdown
-                options={devicegun.length > 0 ? devicegun : []}
-                placeholder="Select Gun Number"
-                value={watch("cluster_id")}
-                  onChange={(newValue) => {
-                    setValue("cluster_id", newValue, { shouldValidate: true });
-                  }}
+              <Autocomplete
+                options={
+                  Array.isArray(devicegun)
+                    ? devicegun
+                        .filter(
+                          (device) =>
+                            Number(device.id) === Number(watch("device_id"))
+                        )
+                        .flatMap((device) =>
+                          Array.isArray(device.gun_array)
+                            ? device.gun_array.map((gun) => ({
+                                label: `Gun ${gun}`,
+                                value: Number(gun), // 🔥 Convert to string
+                              }))
+                            : []
+                        )
+                    : []
+                }
+                getOptionLabel={(option) => (option ? option.label : "")}
+                value={
+                  Array.isArray(devicegun)
+                    ? devicegun
+                        .filter(
+                          (device) =>
+                            Number(device.id) === Number(watch("device_id"))
+                        )
+                        .flatMap((device) =>
+                          Array.isArray(device.gun_array)
+                            ? device.gun_array.map((gun) => ({
+                                label: `Gun ${gun}`,
+                                value: Number(gun), // 🔥 Convert to string
+                              }))
+                            : []
+                        )
+                        .find(
+                          (option) => option.value === Number(watch("gun_slot"))
+                        ) || null
+                    : null
+                }
+                onChange={(event, newValue) => {
+                  setValue("gun_slot", newValue ? Number(newValue.value) : "", {
+                    shouldValidate: true,
+                  });
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} placeholder="Select Gun Number" />
+                )}
               />
-              {errors.phone && (
+
+              {errors.gun_slot && (
                 <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>
-                  *{errors.phone.message}
+                  *{errors.gun_slot.message}
                 </Typography>
               )}
             </Stack>
 
             <Stack width={"100%"}>
-            
+              
             </Stack>
           </Stack>
           <Stack
