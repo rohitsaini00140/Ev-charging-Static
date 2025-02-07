@@ -8,7 +8,6 @@ import { headLabel } from "./chargerLogsData";
 import { StyledTableCell } from "../../../component/tableStyle";
 
 function ChargerdashboardTableHead() {
-  console.log(headLabel, "dddddddddddd");
   return (
     <TableHead>
       <TableRow>

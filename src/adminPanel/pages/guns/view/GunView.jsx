@@ -6,27 +6,23 @@ import Container from "@mui/material/Container";
 import TableBody from "@mui/material/TableBody";
 import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
-import Iconify from "../../../component/Iconify";
-import Scrollbar from "../../../component/scrollbar/Scrollbar";
+
 import { Link } from "react-router-dom";
-import TablePagination from "../../../component/TablePagination";
-import { StyledTableCell, StyledTableRow } from "../../../component/tableStyle";
-import DeviceTableHead from "./DeviceTableHead";
-import DeviceTableRow from "./DeviceTableRow";
-import DeviceTableToolbar from "./DeviceTableToolbar";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetDeviceQuery } from "../../../../globalState/devices/deviceApis";
-import {
-  setDeviceListPageNo,
-  setDeviceListPageNo1,
-} from "../../../../globalState/devices/deviceSlices";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import GunTableHead from "./GunTableHead";
+import Scrollbar from "../../../component/scrollbar/Scrollbar";
+import { StyledTableCell, StyledTableRow } from "../../../component/tableStyle";
 import Alertbar from "../../../component/Alertbar";
+import Iconify from "../../../component/Iconify";
+import GunTableRow from "./GunTableRow";
+// import { useGetAllGunQuery } from "../../../../globalState/gunType/gunApi";
+import { useEffect, useState } from "react";
+import { useGetGunsListQuery } from "../../../../globalState/gunType/gunApi";
+import TablePagination from "../../../component/TablePagination";
+import { setGunsListPageNo } from "../../../../globalState/gunType/gunSlice";
 
-function DeviceView() {
-  const { logInRole } = useSelector((state) => state.role);
-
+function GunView() {
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
@@ -34,7 +30,12 @@ function DeviceView() {
   });
 
   const location = useLocation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const {page} = useSelector((state) => state.guns);
+
+  console.log(page,"dddddddddddd")
 
   useEffect(() => {
     if (location.state && location.state.message) {
@@ -47,45 +48,17 @@ function DeviceView() {
     }
   }, [location.state, navigate]);
 
-  const dispatch = useDispatch();
-
-  const { pageNo, deviceName, deviceStatus, deviceID } = useSelector(
-    (state) => state.device
-  );
-  const { projectName } = useSelector((state) => state.project);
-  const { clusterName } = useSelector((state) => state.cluster);
-
   const {
-    data: deviceData,
+    data: gunData,
     isSuccess: deviceSuccess,
     isLoading,
-  } = useGetDeviceQuery({
-    page: pageNo,
-    device_name: deviceName,
-    cluster_name: clusterName,
-    deviceID,
-    project_name: projectName,
-    status: deviceStatus,
-  });
+  } = useGetGunsListQuery();
 
-  // const allDeviceData = deviceSuccess && deviceData?.data
+  // Ensure data exists
+  const allGunData = gunData?.data || [];
+  const paginationData = deviceSuccess && gunData;
 
-  const allDeviceData =
-    logInRole?.user?.role?.name === "Superadmin"
-      ? deviceSuccess && deviceData?.data
-      : deviceSuccess &&
-        deviceData?.data.filter(
-          (ele) => ele?.cluster?.cluster_name === logInRole?.user?.name
-        );
-
-  const paginationData = deviceSuccess && deviceData;
   const { last_page } = paginationData;
-
-
-  console.log(allDeviceData,"fffffffff")
-  const handlePageChange = (event, value) => {
-    dispatch(setDeviceListPageNo1(value));
-  };
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
@@ -97,6 +70,10 @@ function DeviceView() {
     }));
   };
 
+  const handlePageChange = (event, value) => {
+    dispatch(setGunsListPageNo(value));
+  };
+
   return (
     <>
       <Container>
@@ -106,38 +83,39 @@ function DeviceView() {
           justifyContent="space-between"
           m={3}
         >
-          <Typography variant="h4" color="Black">
-            Devices
+          <Typography variant="h4" color="black">
+            Guns 
           </Typography>
-          <Link to={"/admin/device/add"}>
+          <Link to={"/admin/guns/add"}>
             <Button
               variant="contained"
               sx={{
-                boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",
-                padding: "10px 10px",
                 bgcolor: "#20c997",
-                color: "white",
+                boxShadow: "none",
+                padding: "10px 10px",
+                "&:hover": { bgcolor: "#20c997" },
               }}
+              color="inherit"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Device
+              New Gun 
             </Button>
           </Link>
         </Stack>
         <Card
           sx={{
-            bgcolor: "#ffff",
-            // boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",
+            // bgcolor: "#3e403d0f",
+            boxShadow: "0px 4px 12px rgba(87, 179, 62, 0.2)",
           }}
         >
-          <DeviceTableToolbar />
+          {/* <RoleTableToolbar /> */}
           {isLoading ? (
             <Stack
               alignItems="center"
               justifyContent="center"
               sx={{ minHeight: 300, padding: 4 }}
             >
-              <Typography color="white" sx={{ mt: 2 }}>
+              <Typography color="Black" sx={{ mt: 2 }}>
                 Loading...
               </Typography>
             </Stack>
@@ -145,13 +123,10 @@ function DeviceView() {
             <Scrollbar>
               <TableContainer sx={{ overflow: "unset" }}>
                 <Table sx={{ minWidth: 800 }}>
-                  <DeviceTableHead allDeviceData={allDeviceData} />
+                  <GunTableHead allRoleData={allGunData} />
                   <TableBody>
-                    {allDeviceData.length > 0 ? (
-                      <DeviceTableRow
-                        allDeviceData={allDeviceData}
-                        currentPageNo={pageNo}
-                      />
+                    {allGunData.length > 0 ? (
+                      <GunTableRow allRoleData={allGunData}/>
                     ) : (
                       <StyledTableRow>
                         <StyledTableCell
@@ -159,7 +134,7 @@ function DeviceView() {
                           align="center"
                           sx={{ border: "1px solid red", padding: "2rem" }}
                         >
-                          <Typography color="black">No Data Found</Typography>
+                          <Typography color="Black">No Data Found</Typography>
                         </StyledTableCell>
                       </StyledTableRow>
                     )}
@@ -168,11 +143,12 @@ function DeviceView() {
               </TableContainer>
             </Scrollbar>
           )}
-          {allDeviceData.length > 0 && (
+
+          {allGunData.length > 0 && (
             <TablePagination
               count={last_page}
-              page={pageNo}
               onPageChange={handlePageChange}
+              page={page}
             />
           )}
         </Card>
@@ -189,4 +165,4 @@ function DeviceView() {
   );
 }
 
-export default DeviceView;
+export default GunView;

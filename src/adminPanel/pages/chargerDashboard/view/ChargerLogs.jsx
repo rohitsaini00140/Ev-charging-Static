@@ -13,8 +13,14 @@ import { useDispatch} from "react-redux";
 import ChargerdashboardTableHead from "./ChargerdashboardTableHead";
 import ChargerTableRow from "./ChargerTableRow";
 import { Grid } from "@mui/system";
+import { useGetChargersQuery } from "../../../../globalState/charger/chargerApi";
 
 function ChargerLogs() {
+
+
+   const { data, error, isLoading } = useGetChargersQuery();
+  
+    console.log("API Responsetable ma shhow ho ga : ", data);
 
     const postData = null
 
@@ -45,17 +51,7 @@ function ChargerLogs() {
             borderRadius: "2px",
           }}
         >
-          {/* {isLoading ? (
-            <Stack
-              alignItems="center"
-              justifyContent="center"
-              sx={{ minHeight: 300, padding: 4 }}
-            >
-              <Typography color="white" sx={{ mt: 2 }}>
-                Loading...
-              </Typography>
-            </Stack>
-          ) : ( */}
+          
             <Scrollbar>
               <TableContainer sx={{ overflow: "unset" }}>
                 <Table sx={{ minWidth: 800 }}>

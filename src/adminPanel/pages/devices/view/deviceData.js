@@ -5,6 +5,7 @@ export const headLabel = [
     { id: 'name', label: 'Cluster name' },
     { id: 'project', label: 'Project name' },
     { id: 'name', label: 'Device name' },
+    { id: 'max_guns', label: 'Max Guns' },
     { id: 'serialNo', label: 'Device serial no.' },
     { id: 'type', label: 'Device type' },
     { id: 'type', label: 'Device manufacturer' },

@@ -60,6 +60,8 @@ function AddOrUpdateDeviceFields() {
 
   const allclusters = successclusters && clustersData?.clusters;
 
+  console.log(allProjects, "kya aa raha ha");
+
   const [addDevice] = useAddDeviceMutation();
   const [updateDevice] = useUpdateDeviceMutation();
 
@@ -73,7 +75,8 @@ function AddOrUpdateDeviceFields() {
       serial_number: "",
       device_manufacturer: "",
       interval: "60",
-      // status: ""
+      status: "",
+      max_guns: "",
     }),
     []
   );
@@ -104,6 +107,9 @@ function AddOrUpdateDeviceFields() {
         serial_number: deviceForUpdate.serial_number || "",
         device_manufacturer: deviceForUpdate.device_manufacturer || "",
         interval: String(deviceForUpdate.interval) || "", // Convert to string
+        gunnumber: deviceForUpdate.gunnumber || "",
+        status: deviceForUpdate.status || "",
+        max_guns: String(deviceForUpdate.max_guns) || "",
       });
       dispatch(setClutersid(deviceForUpdate.cluster_id));
     } else {
@@ -230,6 +236,25 @@ function AddOrUpdateDeviceFields() {
           >
             <Stack width={"100%"}>
               <Selector
+                value={watch("max_guns")}
+                onChange={(e) =>
+                  setValue("max_guns", String(e.target.value), {
+                    shouldValidate: true,
+                  })
+                }
+                placeholder="Number Of Max Guns"
+                selectType="single"
+                options={["1", "2", "3"]}
+              />
+              {errors.max_guns && (
+                <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
+                  *{errors.max_guns.message}
+                </Typography>
+              )}
+            </Stack>
+
+            <Stack width={"100%"}>
+              <Selector
                 value={watch("type")}
                 onChange={(e) =>
                   setValue("type", e.target.value, { shouldValidate: true })
@@ -258,6 +283,12 @@ function AddOrUpdateDeviceFields() {
                 </Typography>
               )}
             </Stack>
+          </Stack>
+
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 3, sm: 2, md: 6 }}
+          >
             <Stack width={"100%"}>
               <TextField
                 label="Device Serial No."
@@ -275,12 +306,7 @@ function AddOrUpdateDeviceFields() {
                 </Typography>
               )}
             </Stack>
-          </Stack>
 
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 3, sm: 2, md: 6 }}
-          >
             <Stack sx={{ position: "relative" }} width={"100%"}>
               <LocationDropdown
                 label="Device location"
