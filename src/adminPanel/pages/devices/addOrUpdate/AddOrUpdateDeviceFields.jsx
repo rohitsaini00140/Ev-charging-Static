@@ -60,7 +60,7 @@ function AddOrUpdateDeviceFields() {
 
   const allclusters = successclusters && clustersData?.clusters;
 
-  console.log(allProjects , "kya aa raha ha");
+  console.log(allProjects, "kya aa raha ha");
 
   const [addDevice] = useAddDeviceMutation();
   const [updateDevice] = useUpdateDeviceMutation();
@@ -76,7 +76,7 @@ function AddOrUpdateDeviceFields() {
       device_manufacturer: "",
       interval: "60",
       status: "",
-      max_guns:""
+      max_guns: "",
     }),
     []
   );
@@ -238,9 +238,11 @@ function AddOrUpdateDeviceFields() {
               <Selector
                 value={watch("max_guns")}
                 onChange={(e) =>
-                  setValue("max_guns", String(e.target.value), { shouldValidate: true })
+                  setValue("max_guns", String(e.target.value), {
+                    shouldValidate: true,
+                  })
                 }
-                placeholder="Max Gun"
+                placeholder="Number Of Max Guns"
                 selectType="single"
                 options={["1", "2", "3"]}
               />

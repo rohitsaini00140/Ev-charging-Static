@@ -32,12 +32,10 @@ function AddOrUpdateGunFields() {
 
   const { data, isSuccess } = useGetGunByIdQuery(id, { skip: !id });
 
-
   const gunForUpdate = isSuccess && data;
 
   const [creategunTypes] = useCreategunsMutation();
   const [updateGun] = useUpdateGunMutation();
-
 
   const defaultValues = useMemo(
     () => ({
@@ -66,11 +64,11 @@ function AddOrUpdateGunFields() {
   useEffect(() => {
     if (id && gunForUpdate) {
       reset({
-        name:gunForUpdate.name || "",
-        max_power:String(gunForUpdate.max_power) || "",
-        voltage:String(gunForUpdate.voltage) || "",
-        current_type:gunForUpdate.current_type || "",
-        description:gunForUpdate.description || "",
+        name: gunForUpdate.name || "",
+        max_power: String(gunForUpdate.max_power) || "",
+        voltage: String(gunForUpdate.voltage) || "",
+        current_type: gunForUpdate.current_type || "",
+        description: gunForUpdate.description || "",
       });
     } else {
       reset(defaultValues);
@@ -83,7 +81,7 @@ function AddOrUpdateGunFields() {
         ...data,
         description: data.description?.trim() || "",
       };
-  
+
       if (id) {
         await updateGun({ id, updatedUserData: requestData }).unwrap();
         navigate("/admin/guns/view", {
@@ -102,7 +100,7 @@ function AddOrUpdateGunFields() {
         message: "Error while submitting.",
         severity: "error",
       });
-  
+
       if (error.data && error.data.errors) {
         Object.entries(error.data.errors).forEach(([key, message]) => {
           setError(key, { type: "server", message: message[0] });
@@ -111,7 +109,6 @@ function AddOrUpdateGunFields() {
       console.error("Error during submission:", error);
     }
   };
-  
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
@@ -230,7 +227,7 @@ function AddOrUpdateGunFields() {
             direction={"row"}
             sx={{ display: "flex", justifyContent: "space-between" }}
           >
-             <Link to={"/admin/guns/view"}>
+            <Link to={"/admin/guns/view"}>
               <Button
                 sx={{
                   color: "white",

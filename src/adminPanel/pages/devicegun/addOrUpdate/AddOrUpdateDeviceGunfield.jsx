@@ -1,28 +1,22 @@
 import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button, Typography } from "@mui/material";
-import { inputStyle } from "../../../component/inputStyle";
 import { useMemo, useState, useEffect } from "react";
-import Alertbar from "../../../component/Alertbar";
 import { useParams, useNavigate, Link } from "react-router-dom";
-
-import FastRewindIcon from "@mui/icons-material/FastRewind";
 import {
-  useCreateCpoMutation,
   useGetCpoByIdQuery,
   useUpdateCpoMutation,
 } from "../../../../globalState/Cpos/cpoApi";
 import { devicegunSchema } from "./devicegunSchema";
 import SearchableDropdown from "../../../component/searchableDropdown/SearchableDropdown";
-import Selector from "../../../component/selector/Selector";
-import { useGetAllDeviceQuery } from "../../../../globalState/devices/deviceApis";
-import { setDeviceID } from "../../../../globalState/devices/deviceSlices";
+import { useGetAllDeviceQuery, useGetDeviceByIDQuery } from "../../../../globalState/devices/deviceApis";
 import { useDispatch } from "react-redux";
 import DeviceGunView from "../view/DeviceGunView";
+import { useGetAllGuntypeQuery } from "../../../../globalState/gunType/gunApi";
+import { useCreatedevicegunsMutation, useGetAllDeviceGunQuery } from "../../../../globalState/devicegun/devicegunApi";
 
 function AddOrUpdateDeviceGunFields() {
   const [loading, setLoading] = useState(false);
@@ -38,11 +32,11 @@ function AddOrUpdateDeviceGunFields() {
 
   let dispatch = useDispatch();
 
-  const { data, isSuccess } = useGetCpoByIdQuery(id, { skip: !id });
+  const { data, isSuccess } = useGetDeviceByIDQuery(id, { skip: !id });
 
   const cpoForUpdate = isSuccess && data;
 
-  const [createCpo] = useCreateCpoMutation();
+  const [createdevicegun] = useCreatedevicegunsMutation();
   const [updateCpo] = useUpdateCpoMutation();
 
   const defaultValues = useMemo(
@@ -84,9 +78,16 @@ function AddOrUpdateDeviceGunFields() {
 
   const allclusters = successdevice && DevicesData.devices;
 
-  console.log(allclusters, "ddddddddddddddd");
+  const { data: guntypesData, isSuccess: successguntypes } =
+  useGetAllGuntypeQuery();
+  
+  const  gunTypesData = successguntypes && guntypesData.devices
 
-  const allclusters1 = "";
+  const {data: devicegunData, isSuccess: successdevicegundata}= useGetAllDeviceGunQuery();
+
+  const devicegun = successdevicegundata && devicegunData.devices;
+
+  console.log(devicegun,"dddddddddddd")
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -99,7 +100,7 @@ function AddOrUpdateDeviceGunFields() {
           state: { message: "User successfully updated!", severity: "success" },
         });
       } else {
-        await createCpo(data).unwrap();
+        await createdevicegun(data).unwrap();
 
         reset(defaultValues);
 
@@ -149,7 +150,6 @@ function AddOrUpdateDeviceGunFields() {
                 value={watch("device_id")}
                 onChange={(newValue) => {
                   setValue("device_id", newValue, { shouldValidate: true });
-                  dispatch(setDeviceID(newValue));
                 }}
               />
               {errors.name && (
@@ -160,8 +160,8 @@ function AddOrUpdateDeviceGunFields() {
             </Stack>
             <Stack width={"100%"}>
               <SearchableDropdown
-                options={allclusters1.length > 0 ? allclusters1 : []}
-                placeholder="Select Gun Type"
+                options={gunTypesData.length > 0 ? gunTypesData : []}
+                placeholder="Select Gun Name"
                 value={watch("name") || null}
                 onChange={(newValue) =>
                   setValue("project_id", newValue, { shouldValidate: true })
@@ -180,16 +180,12 @@ function AddOrUpdateDeviceGunFields() {
           >
             <Stack width={"100%"}>
               <SearchableDropdown
-                options={allclusters1.length > 0 ? allclusters1 : []}
+                options={devicegun.length > 0 ? devicegun : []}
                 placeholder="Select Gun Number"
                 value={watch("cluster_id")}
-                //   onChange={(newValue) => {
-                //     setValue("cluster_id", newValue, { shouldValidate: true });
-                //     dispatch(setClutersid(newValue));
-                //     if (newValue === null || newValue === undefined) {
-                //       setValue("project_id", null, { shouldValidate: true });
-                //     }
-                //   }}
+                  onChange={(newValue) => {
+                    setValue("cluster_id", newValue, { shouldValidate: true });
+                  }}
               />
               {errors.phone && (
                 <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>
@@ -198,31 +194,9 @@ function AddOrUpdateDeviceGunFields() {
               )}
             </Stack>
 
-            {/* <Stack width={"100%"}>
-              <Selector
-                value={watch("type")}
-                onChange={(e) =>
-                  setValue("type", e.target.value, { shouldValidate: true })
-                }
-                placeholder="Gun Status"
-                selectType="single"
-                options={[
-                  "Available",
-                  "Charging",
-                  "Faulty",
-                  "Reserved",
-                  "Disconnected",
-                  "OutOfService",
-                  "Preparing",
-                  "Finishing",
-                ]}
-              />
-              {errors.type && (
-                <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
-                  *{errors.type.message}
-                </Typography>
-              )}
-            </Stack> */}
+            <Stack width={"100%"}>
+            
+            </Stack>
           </Stack>
           <Stack
             direction={"row"}
@@ -254,13 +228,6 @@ function AddOrUpdateDeviceGunFields() {
           <DeviceGunView />
         </Stack>
       </form>
-      <Alertbar
-        open={snackbar.open}
-        onClose={handleCloseSnackbar}
-        severity={snackbar.severity}
-        message={snackbar.message}
-        position={{ vertical: "top", horizontal: "right" }}
-      />
     </>
   );
 }

@@ -193,118 +193,109 @@ function Charger_Dashboard() {
               </Grid>
             </CardContent>
 
-            {selectedChargerId && (
-              <>
-                <Card
-                  sx={{
-                    mt: 4,
-                    boxShadow: 1,
-                    borderRadius: 1,
-                    bgcolor: "grey.100",
-                  }}
-                >
-                  <CardContent>
-                    <Typography
-                      variant="body1"
-                      sx={{ fontFamily: "monospace", display: "flex" }}
-                    >
-                      <Typography
-                        sx={{ fontWeight: "bold", marginRight: "5px" }}
-                      >
-                        Connector Status:
-                      </Typography>
-                      {selectedStatus}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </>
-            )}
-
-            {selectedChargerId && (
+            <>
               <Card
                 sx={{
                   mt: 4,
-                  boxShadow: 5,
+                  boxShadow: 1,
                   borderRadius: 1,
-                  p: 4,
-                  overflow: "scroll",
-                  maxHeight: "400px",
-                  scrollBehavior: "smooth",
+                  bgcolor: "grey.100",
                 }}
               >
                 <CardContent>
-                  {actions.map((action) => (
-                    <Grid
-                      container
-                      alignItems="center"
-                      key={action}
-                      sx={{ mt: 1 }}
-                    >
-                      <Grid item size={{ xs: 12, md: 6 }}>
-                        {action === "Change Availability" &&
-                        actionVisibility[action] ? (
-                          <FormControl fullWidth>
-                            <InputLabel>Choose Configuration</InputLabel>
-                            <Select
-                              label="Change Availability"
-                              value={selectedConfiguration}
-                              onChange={(e) =>
-                                setSelectedConfiguration(e.target.value)
-                              }
-                            >
-                              {/* Example dropdown options */}
-                              <MenuItem value="Config1">Operative</MenuItem>
-                              <MenuItem value="Config2">Inoperative</MenuItem>
-                            </Select>
-                          </FormControl>
-                        ) : (
-                          actionVisibility[action] && (
-                            <TextField
-                              label={`${action}`}
-                              variant="outlined"
-                              fullWidth
-                            />
-                          )
-                        )}
-                      </Grid>
-
-                      <Grid item size={{ xs: 12, md: 6 }}>
-                        <Typography
-                          variant="body1"
-                          sx={{
-                            fontFamily: "monospace",
-                            cursor: "pointer",
-                            fontWeight: "bold",
-                            display: "flex",
-                            justifyContent: "end",
-                          }}
-                          onClick={() => handleActionClick(action)}
-                        >
-                          {action}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  ))}
+                  <Typography
+                    variant="body1"
+                    sx={{ fontFamily: "monospace", display: "flex" }}
+                  >
+                    <Typography sx={{ fontWeight: "bold", marginRight: "5px" }}>
+                      Connector Status:
+                    </Typography>
+                    {selectedStatus}
+                  </Typography>
                 </CardContent>
               </Card>
-            )}
+            </>
 
-            {selectedChargerId && (
-              <Card
-                sx={{
-                  mt: 4,
-                  boxShadow: 5,
-                  borderRadius: 1,
-                  p: 4,
-                  overflow: "scroll",
-                  maxHeight: "400px",
-                  scrollBehavior: "smooth",
-                }}
-              >
+            <Card
+              sx={{
+                mt: 4,
+                boxShadow: 5,
+                borderRadius: 1,
+                p: 4,
+                overflow: "scroll",
+                maxHeight: "400px",
+                scrollBehavior: "smooth",
+              }}
+            >
+              <CardContent>
+                {actions.map((action) => (
+                  <Grid
+                    container
+                    alignItems="center"
+                    key={action}
+                    sx={{ mt: 1 }}
+                  >
+                    <Grid item size={{ xs: 12, md: 6 }}>
+                      {action === "Change Availability" &&
+                      actionVisibility[action] ? (
+                        <FormControl fullWidth>
+                          <InputLabel>Choose Configuration</InputLabel>
+                          <Select
+                            label="Change Availability"
+                            value={selectedConfiguration}
+                            onChange={(e) =>
+                              setSelectedConfiguration(e.target.value)
+                            }
+                          >
+                            {/* Example dropdown options */}
+                            <MenuItem value="Config1">Operative</MenuItem>
+                            <MenuItem value="Config2">Inoperative</MenuItem>
+                          </Select>
+                        </FormControl>
+                      ) : (
+                        actionVisibility[action] && (
+                          <TextField
+                            label={`${action}`}
+                            variant="outlined"
+                            fullWidth
+                          />
+                        )
+                      )}
+                    </Grid>
 
-                {selectedChargerId && <ChargerLogs />}
-              </Card>
-            )}
+                    <Grid item size={{ xs: 12, md: 6 }}>
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          fontFamily: "monospace",
+                          cursor: "pointer",
+                          fontWeight: "bold",
+                          display: "flex",
+                          justifyContent: "end",
+                        }}
+                        onClick={() => handleActionClick(action)}
+                      >
+                        {action}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card
+              sx={{
+                mt: 4,
+                boxShadow: 5,
+                borderRadius: 1,
+                p: 4,
+                overflow: "scroll",
+                maxHeight: "400px",
+                scrollBehavior: "smooth",
+              }}
+            >
+              <ChargerLogs />
+            </Card>
           </Card>
         </Grid>
       </Grid>

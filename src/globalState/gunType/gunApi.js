@@ -21,7 +21,10 @@ export const gunsApi = createApi({
       providesTags: ["guns"],
     }),
 
-
+    getAllGuntype: builder.query({
+      query: () => `/guntypes`,
+      providesTags: ["guns"],
+    }),
 
     getGunById: builder.query({
       query: (id) => `/guntypes/show/${id}`,
@@ -63,4 +66,5 @@ export const {
   useSoftDeleteGunMutation,
   useRestoreDeletedGunMutation,
   useGetGunByIdQuery,
+  useGetAllGuntypeQuery,
 } = gunsApi;

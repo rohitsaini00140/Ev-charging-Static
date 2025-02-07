@@ -28,7 +28,7 @@ function AddOrUpdateGuns() {
                         borderRadius: "16px"
                     }}
                 >
-                    <Typography variant="h4" sx={{ mb: 3 }} color="Black">{id ? "Update Gun Type":"Add Gun Type"}</Typography>
+                    <Typography variant="h4" sx={{ mb: 3 }} color="Black">{id ? "Update Gun ":"Add Gun "}</Typography>
                     <AddOrUpdateGunFields />
                 </Stack>
             </Stack>
