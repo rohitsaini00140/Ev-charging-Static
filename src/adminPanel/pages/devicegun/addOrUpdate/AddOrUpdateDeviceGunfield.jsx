@@ -6,10 +6,6 @@ import { useForm } from "react-hook-form";
 import { Autocomplete, Button, TextField, Typography } from "@mui/material";
 import { useMemo, useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import {
-  useGetCpoByIdQuery,
-  useUpdateCpoMutation,
-} from "../../../../globalState/Cpos/cpoApi";
 import { devicegunSchema } from "./devicegunSchema";
 import SearchableDropdown from "../../../component/searchableDropdown/SearchableDropdown";
 import { useGetDeviceByIDQuery } from "../../../../globalState/devices/deviceApis";
@@ -20,6 +16,8 @@ import {
   useCreatedevicegunsMutation,
   useGetAllDeviceGunQuery,
   useGetAllDeviceWithmaxgunQuery,
+  useGetDeviceGunByIDQuery,
+  useUpdateDeviceGunMutation,
 } from "../../../../globalState/devicegun/devicegunApi";
 import Selector from "../../../component/selector/Selector";
 
@@ -37,12 +35,12 @@ function AddOrUpdateDeviceGunFields() {
 
   let dispatch = useDispatch();
 
-  const { data, isSuccess } = useGetDeviceByIDQuery(id, { skip: !id });
+  const { data, isSuccess } = useGetDeviceGunByIDQuery(id, { skip: !id });
 
   const cpoForUpdate = isSuccess && data;
 
   const [createdevicegun] = useCreatedevicegunsMutation();
-  const [updateCpo] = useUpdateCpoMutation();
+  const [updateCpo] = useUpdateDeviceGunMutation();
 
   const defaultValues = useMemo(
     () => ({
@@ -70,8 +68,8 @@ function AddOrUpdateDeviceGunFields() {
     if (id && cpoForUpdate) {
       reset({
         device_id: cpoForUpdate.device_id || "",
-        email: cpoForUpdate.email || "",
-        phone: cpoForUpdate.phone || "",
+        gun_type_id: cpoForUpdate.gun_type_id || "",
+        gun_slot: cpoForUpdate.gun_slot|| "",
       });
     } else {
       reset(defaultValues);
@@ -88,7 +86,6 @@ function AddOrUpdateDeviceGunFields() {
 
   const gunTypesData = successguntypes && guntypesData.devices;
 
-
   const { data: devicegunData, isSuccess: successdevicegundata } =
     useGetAllDeviceGunQuery();
 
@@ -100,7 +97,7 @@ function AddOrUpdateDeviceGunFields() {
       if (id) {
         await updateCpo({ id, updatedCpoData: data }).unwrap();
 
-        navigate("/admin/devicegun/add", {
+        navigate("/admin/devicegun/view", {
           state: { message: "User successfully updated!", severity: "success" },
         });
       } else {
@@ -108,7 +105,7 @@ function AddOrUpdateDeviceGunFields() {
 
         reset(defaultValues);
 
-        navigate("/admin/devicegun/add", {
+        navigate("/admin/devicegun/view", {
           state: { message: "User successfully added!", severity: "success" },
         });
       }
@@ -162,7 +159,6 @@ function AddOrUpdateDeviceGunFields() {
               )}
             </Stack>
             <Stack width={"100%"}>
-
               <SearchableDropdown
                 options={gunTypesData.length > 0 ? gunTypesData : []}
                 placeholder="Select Gun Name"
@@ -184,6 +180,19 @@ function AddOrUpdateDeviceGunFields() {
           >
             <Stack width={"100%"}>
               <Autocomplete
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "black",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "black",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "black",
+                    },
+                  },
+                }}
                 options={
                   Array.isArray(devicegun)
                     ? devicegun
@@ -239,9 +248,7 @@ function AddOrUpdateDeviceGunFields() {
               )}
             </Stack>
 
-            <Stack width={"100%"}>
-              
-            </Stack>
+            <Stack width={"100%"}></Stack>
           </Stack>
           <Stack
             direction={"row"}

@@ -8,11 +8,11 @@ import { Skeleton } from "@mui/material";
 import {
   useRestoreDeletedCpoMutation,
   useSoftDeleteCpoMutation,
-
 } from "../../../../globalState/Cpos/cpoApi";
 import { StyledTableCell, StyledTableRow } from "../../../component/tableStyle";
 import Label from "../../../component/lable/Lable";
 import Action from "../../../component/Action";
+import { useSoftDeleteDeviceGunMutation } from "../../../../globalState/devicegun/devicegunApi";
 
 function DeviceGunTableRow({ allUserData, currentpage }) {
   const [loading, setLoading] = useState(true);
@@ -22,7 +22,7 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
     return () => clearTimeout(timer);
   }, []);
 
-  const [softDeleteCpo] = useSoftDeleteCpoMutation();
+  const [softDeleteCpo] = useSoftDeleteDeviceGunMutation();
   const [restoreDeletedUser] = useRestoreDeletedCpoMutation();
 
   function onSoftDelete(data) {
@@ -39,9 +39,6 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
       {allUserData.length > 0 &&
         allUserData.map((data, i) => (
           <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.id}>
-            <StyledTableCell padding="checkbox">
-              <Checkbox disableFocusRipple />
-            </StyledTableCell>
             <StyledTableCell color={"#222245"}>
               {" "}
               {loading ? (
@@ -55,7 +52,7 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
               {loading ? (
                 <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
               ) : (
-                data.name
+                data.device_name
               )}
             </StyledTableCell>
             <StyledTableCell color={"#222245"}>
@@ -63,7 +60,7 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
               {loading ? (
                 <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
               ) : (
-                data.email
+                data.gun_name
               )}
             </StyledTableCell>
             <StyledTableCell color={"#222245"}>
@@ -71,11 +68,21 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
               {loading ? (
                 <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
               ) : (
-                data.phone
+                data.gun_slot
               )}
             </StyledTableCell>
 
-            <StyledTableCell>
+            <StyledTableCell color={"#222245"}>
+              {loading ? (
+                <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
+              ) : data.status ? (
+                data.status
+              ) : (
+                "No status found"
+              )}
+            </StyledTableCell>
+
+            {/* <StyledTableCell>
               <Label color={data.deleted_at === null ? "success" : "error"}>
                 {loading ? (
                   <Skeleton
@@ -90,7 +97,7 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
                   "Inactive"
                 )}
               </Label>
-            </StyledTableCell>
+            </StyledTableCell> */}
             <StyledTableCell>
               {loading ? (
                 <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />

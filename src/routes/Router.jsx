@@ -40,6 +40,7 @@ import CpoView from "../adminPanel/pages/Cpo/view/CpoView.jsx";
 import AddOrUpdateGuns from "../adminPanel/pages/guns/addOrUpdate/AddOrUpdateGun.jsx";
 import GunView from "../adminPanel/pages/guns/view/GunView.jsx";
 import AddOrUpdateDeviceGun from "../adminPanel/pages/devicegun/addOrUpdate/AddOrUpdateDeviceGun.jsx";
+import DeviceGunView from "../adminPanel/pages/devicegun/view/DeviceGunView.jsx";
 
 const role = JSON.parse(sessionStorage.getItem("role"));
 
@@ -105,7 +106,7 @@ function Router() {
                   />
 
                   <Route path="/devicegun/add" element={<AddOrUpdateDeviceGun/>} />
-                  {/* <Route path="/device/view" element={<DeviceView />} /> */}
+                  <Route path="/devicegun/view" element={<DeviceGunView />} />
                   <Route
                     path="/devicegun/update/:id"
                     element={<AddOrUpdateDeviceGun />}

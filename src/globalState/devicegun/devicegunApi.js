@@ -17,10 +17,9 @@ export const devicegunApi = createApi({
     }),
 
     getDeviceGunsList: builder.query({
-      query: (device_id) => {
-        console.log("Fetching data for ID:", device_id);  // ✅ Debug API call
+      query: () => {
         return {
-          url: `/devicegun/list/${device_id}`,
+          url: `/devicegun/list`,
           method: "GET",
         };
       },
@@ -30,7 +29,7 @@ export const devicegunApi = createApi({
 
     getDeviceGunByID: builder.query({
       query: (id) => `/devicegun/show/${id}`,
-      providesTags: ["devicegun"],
+      providesTags: ["deviceguns"],
     }),
 
 
@@ -47,12 +46,9 @@ export const devicegunApi = createApi({
     }),
 
 
-    getGunById: builder.query({
-      query: (id) => `/devicegun/show/${id}`,
-      providesTags: ["deviceguns"],
-    }),
 
-    updateGun: builder.mutation({
+
+    updateDeviceGun: builder.mutation({
       query: ({ id, updatedUserData }) => ({
         url: `/devicegun/update/${id}`,
         method: "PUT",
@@ -61,9 +57,9 @@ export const devicegunApi = createApi({
       invalidatesTags: ["deviceguns"],
     }),
 
-    softDeleteGun: builder.mutation({
+    softDeleteDeviceGun: builder.mutation({
       query: ({ id, softDeletedGunData }) => ({
-        url: `/devicegun/soft-delete/${id}`,
+        url: `/devicegun/destroy/${id}`,
         method: "POST",
         body:softDeletedGunData,
       }),
@@ -84,10 +80,9 @@ export const {
   useCreatedevicegunsMutation,
   useGetDeviceGunsListQuery,
   useGetDeviceGunByIDQuery,
-  useUpdateGunMutation,
-  useSoftDeleteGunMutation,
+  useUpdateDeviceGunMutation,
+  useSoftDeleteDeviceGunMutation,
   useRestoreDeletedGunMutation,
-  useGetGunByIdQuery,
   useGetAllDeviceGunQuery,
   useGetAllDeviceWithmaxgunQuery
 } = devicegunApi;

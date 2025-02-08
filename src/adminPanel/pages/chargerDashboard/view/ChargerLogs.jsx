@@ -8,22 +8,34 @@ import TableContainer from "@mui/material/TableContainer";
 import Scrollbar from "../../../component/scrollbar/Scrollbar";
 import TablePagination from "../../../component/TablePagination";
 import { StyledTableCell, StyledTableRow } from "../../../component/tableStyle";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ChargerdashboardTableHead from "./ChargerdashboardTableHead";
 import ChargerTableRow from "./ChargerTableRow";
 import { Grid } from "@mui/system";
 import { useGetChargersQuery } from "../../../../globalState/charger/chargerApi";
+import { setChargerListPageNo } from "../../../../globalState/charger/ChargerSlice";
 
 function ChargerLogs() {
+  const dispatch = useDispatch();
+  const { page } = useSelector((state) => state.charger);
 
+  const {
+    data: chargerData,
+    isSuccess: deviceLogSuccess,
+    isLoading,
+  } = useGetChargersQuery();
 
-   const { data, error, isLoading } = useGetChargersQuery();
-  
-    console.log("API Responsetable ma shhow ho ga : ", data);
+  const allDeviceLogData1 = deviceLogSuccess && chargerData;
 
-    const postData = null
+  // console.log(allDeviceLogData1,"dddddddddddd")
 
+  const paginationData = deviceLogSuccess && chargerData;
+  const { last_page } = paginationData;
+
+  const handlePageChange = (event, value) => {
+    dispatch(setChargerListPageNo(value));
+  };
 
   return (
     <>
@@ -51,36 +63,34 @@ function ChargerLogs() {
             borderRadius: "2px",
           }}
         >
-          
-            <Scrollbar>
-              <TableContainer sx={{ overflow: "unset" }}>
-                <Table sx={{ minWidth: 800 }}>
-                  <ChargerdashboardTableHead  />
-                  <TableBody>
-                    {postData?.length > 0 ? (
-                      <ChargerTableRow postData={postData} />
-                    ) : (
-                      <StyledTableRow>
-                        <StyledTableCell
-                          colSpan={10}
-                          align="center"
-                          sx={{ border: "1px solid red", padding: "2rem" }}
-                        >
-                          <Typography color="Black">No Data Found</Typography>
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Scrollbar>
-        {/* ) } */}
-          {postData?.data?.length > 0 && (
+          <Scrollbar>
+            <TableContainer sx={{ overflow: "unset" }}>
+              <Table sx={{ minWidth: 800 }}>
+                <ChargerdashboardTableHead />
+                <TableBody>
+                  {allDeviceLogData1?.length > 0 ? (
+                    <ChargerTableRow postData={allDeviceLogData1} />
+                  ) : (
+                    <StyledTableRow>
+                      <StyledTableCell
+                        colSpan={10}
+                        align="center"
+                        sx={{ border: "1px solid red", padding: "2rem" }}
+                      >
+                        <Typography color="Black">No Data Found</Typography>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Scrollbar>
+          {/* ) } */}
+          {allDeviceLogData1.length > 0 && (
             <TablePagination
-              count={Math.floor(postData?.total / 10)}
-              // page={page}
-              // onPageChange={handlePageChange}
-              rowsPerPage={10}
+              count={last_page}
+              onPageChange={handlePageChange}
+              page={page}
             />
           )}
         </Card>

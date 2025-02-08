@@ -18,7 +18,20 @@ import ChargerdashboardTableHead from "./view/ChargerdashboardTableHead";
 import ChargerLogs from "./view/ChargerLogs";
 
 function Charger_Dashboard() {
-  const [selectedChargerId, setSelectedChargerId] = useState(null);
+  const {
+    data: chargerData1,
+    isSuccess: deviceLogSuccess,
+    isLoading,
+  } = useGetChargersQuery();
+
+  const allDeviceLogData1 = Array.isArray(chargerData1) ? chargerData1 : [];
+
+
+  const alldata = deviceLogSuccess && chargerData1.map((itr) => itr.deviceID);
+
+
+
+  const [selectedChargerId, setSelectedChargerId] = useState(alldata);
   const [selectedStatus, setSelectedStatus] = useState(null);
   const [actionVisibility, setActionVisibility] = useState({}); // Track visibility of each action's TextField
 
@@ -28,16 +41,12 @@ function Charger_Dashboard() {
   const [showHeartbeatInput, setShowHeartbeatInput] = useState(false);
 
   const handleResetClick = () => {
-    setShowRadio(true); // Show the radio button on Reset click
+    setShowRadio(true)
   };
 
   const handleHeartbeatClick = () => {
     setShowHeartbeatInput((prev) => !prev); // Toggle input field visibility
   };
-
-  const { data, error, isLoading } = useGetChargersQuery();
-
-  console.log("API Response: ", data);
 
   const handleRadioChange = (event) => {
     // setResetType(event.target.value); // Update the reset type
@@ -91,38 +100,48 @@ function Charger_Dashboard() {
             <CardContent>
               <Grid container alignItems="center">
                 {/* Left side: Data */}
-                <Grid item size={{ xs: 12, md: 6 }}>
-                  <Typography
-                    variant="body1"
-                    color="textSecondary"
-                    sx={{ display: "flex" }}
-                  >
-                    <Typography sx={{ fontWeight: "bold", marginRight: "5px" }}>
-                      Charger Display ID:
+
+                {allDeviceLogData1?.map((chargerData1, index) => (
+                  <Grid key={index} item xs={12} md={12} >
+                    <Typography
+                      variant="body1"
+                      color="textSecondary"
+                      sx={{ display: "flex" }}
+                    >
+                      <Typography
+                        sx={{ fontWeight: "bold", marginRight: "5px" }}
+                      >
+                        Charger Display ID:
+                      </Typography>
+                      {chargerData1.deviceID}
                     </Typography>
-                    {chargerData.id}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    color="textSecondary"
-                    sx={{ display: "flex" }}
-                  >
-                    <Typography sx={{ fontWeight: "bold", marginRight: "5px" }}>
-                      Project Name:
+                    <Typography
+                      variant="body1"
+                      color="textSecondary"
+                      sx={{ display: "flex" }}
+                    >
+                      <Typography
+                        sx={{ fontWeight: "bold", marginRight: "5px" }}
+                      >
+                        Project Name:
+                      </Typography>
+                      {chargerData1.project}
                     </Typography>
-                    {chargerData.project}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    color="textSecondary"
-                    sx={{ display: "flex" }}
-                  >
-                    <Typography sx={{ fontWeight: "bold", marginRight: "5px" }}>
-                      Status:
+                    <Typography
+                      variant="body1"
+                      color="textSecondary"
+                      sx={{ display: "flex" }}
+                    >
+                      <Typography
+                        sx={{ fontWeight: "bold", marginRight: "5px" }}
+                      >
+                        Status:
+                      </Typography>
+                      {chargerData1.status}
                     </Typography>
-                    {chargerData.status}
-                  </Typography>
-                </Grid>
+                  </Grid>
+                ))}
+
                 {/* Right side: Button */}
                 <Grid
                   item

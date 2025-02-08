@@ -43,15 +43,11 @@ function DeviceGunView() {
     }
   }, [location.state, navigate]);
 
-  const { device_id } = useParams(); 
-  const { data: alldevicegun, isLoading, isError, error } = useGetDeviceGunsListQuery(device_id, {
-    skip: !device_id,  // ✅ Skip query if device_id is not available
-  });
+  const { data: alldevicegun, isLoading, isError, error } = useGetDeviceGunsListQuery();
 
-  console.log(alldevicegun,"dddddddddddddd");
   
 
-  const allUserData = "";
+  
   // const paginationData = CpoSuccess && allUsers;
 
   // const { last_page } = paginationData;
@@ -89,10 +85,10 @@ function DeviceGunView() {
                 <Table sx={{ minWidth: 800 }}>
                   <DeviceGunTableHead/>
                   <TableBody>
-                    {allUserData.length > 0 ? (
+                    {alldevicegun.length > 0 ? (
                       <DeviceGunTableRow
                         currentpage={page}
-                        allUserData={allUserData}
+                        allUserData={alldevicegun}
                       />
                     ) : (
                       <StyledTableRow>
