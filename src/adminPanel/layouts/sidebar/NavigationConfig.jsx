@@ -112,7 +112,7 @@ export const navConfig = [
   },
 
   {
-    title: "Gun Types",
+    title: "Guns",
     icon: icon("chargerGun"),
     path: "/admin/guns/view",
   },

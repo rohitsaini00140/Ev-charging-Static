@@ -159,7 +159,7 @@ function AddOrUpdateGunFields() {
 
             <Stack sx={{ position: "relative" }} width={"100%"}>
               <TextField
-                label="Voltage"
+                label="Voltage (In-Volts)"
                 {...register("voltage", { required: true })}
                 value={watch("voltage") || ""}
                 sx={inputStyle}

@@ -16,7 +16,9 @@ import { Grid } from "@mui/system";
 import { useGetChargersQuery } from "../../../../globalState/charger/chargerApi";
 import { setChargerListPageNo } from "../../../../globalState/charger/ChargerSlice";
 
-function ChargerLogs() {
+function ChargerLogs({dataLogs}) {
+
+
   const dispatch = useDispatch();
   const { page } = useSelector((state) => state.charger);
 
@@ -26,7 +28,7 @@ function ChargerLogs() {
     isLoading,
   } = useGetChargersQuery();
 
-  const allDeviceLogData1 = deviceLogSuccess && chargerData;
+  const allDeviceLogData1 = dataLogs
 
   // console.log(allDeviceLogData1,"dddddddddddd")
 
@@ -86,13 +88,13 @@ function ChargerLogs() {
             </TableContainer>
           </Scrollbar>
           {/* ) } */}
-          {allDeviceLogData1.length > 0 && (
+          {/* {allDeviceLogData1.length > 0 && (
             <TablePagination
               count={last_page}
               onPageChange={handlePageChange}
               page={page}
             />
-          )}
+          )} */}
         </Card>
       </Container>
     </>
