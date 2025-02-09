@@ -113,7 +113,7 @@ export const navConfig = [
 
   {
     title: "Guns",
-    icon: icon("chargerGun"),
+    icon: icon("ev-plug-tesla-s-svgrepo-com"),
     path: "/admin/guns/view",
   },
 
@@ -137,7 +137,7 @@ export const navConfig = [
 
   {
     title: "Device Guns",
-    icon: icon("charger-power"),
+    icon: icon("charger-power-battery-svgrepo-com"),
     path: "/admin/devicegun/add",
   },
 

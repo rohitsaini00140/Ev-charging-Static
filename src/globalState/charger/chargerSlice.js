@@ -3,19 +3,24 @@ import { createSlice } from "@reduxjs/toolkit";
 const chargerSlice = createSlice({
   name: 'charger',
   initialState: {
-      pageNo: 1,
+      page: 1,
+      deviceID: "",
       
   },
   reducers: {
-      setChargerPageNo: (state, action) => {
-          state.pageNo = action.payload
+      setChargerDashboardPageNo: (state, action) => {
+          state.page = action.payload
+      },
+      setDeviceID: (state, action) => {
+        state.deviceID = action.payload;
       },
     
   },
 });
 
 export const {
-  setChargerListPageNo,
+  setChargerDashboardPageNo,
+  setDeviceID,
 } = chargerSlice.actions;
 
 export default chargerSlice.reducer;

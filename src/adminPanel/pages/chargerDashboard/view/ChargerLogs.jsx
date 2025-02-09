@@ -14,7 +14,7 @@ import ChargerdashboardTableHead from "./ChargerdashboardTableHead";
 import ChargerTableRow from "./ChargerTableRow";
 import { Grid } from "@mui/system";
 import { useGetChargersQuery } from "../../../../globalState/charger/chargerApi";
-import { setChargerListPageNo } from "../../../../globalState/charger/ChargerSlice";
+import { setChargerDashboardPageNo } from "../../../../globalState/charger/ChargerSlice";
 
 function ChargerLogs({dataLogs}) {
 
@@ -36,7 +36,7 @@ function ChargerLogs({dataLogs}) {
   const { last_page } = paginationData;
 
   const handlePageChange = (event, value) => {
-    dispatch(setChargerListPageNo(value));
+    dispatch(setChargerDashboardPageNo(value));
   };
 
   return (
@@ -87,14 +87,14 @@ function ChargerLogs({dataLogs}) {
               </Table>
             </TableContainer>
           </Scrollbar>
-          {/* ) } */}
-          {/* {allDeviceLogData1.length > 0 && (
+
+          {allDeviceLogData1.length > 0 && (
             <TablePagination
               count={last_page}
               onPageChange={handlePageChange}
               page={page}
             />
-          )} */}
+          )}
         </Card>
       </Container>
     </>

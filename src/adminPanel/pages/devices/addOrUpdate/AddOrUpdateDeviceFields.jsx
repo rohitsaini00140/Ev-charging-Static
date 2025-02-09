@@ -261,7 +261,7 @@ function AddOrUpdateDeviceFields() {
                 }
                 placeholder="Select Device Type"
                 selectType="single"
-                options={["EV charger", "PQ meter", "Sensor"]}
+                options={["CCS", "GBT", "Ac type 2"]}
               />
               {errors.type && (
                 <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>

@@ -11,9 +11,22 @@ export const chargerApi = createApi({
       query: () => "ocpp/devices", // GET request to /devices
       providesTags: ["Charger"],
     }),
+
+    getChargersWithPagination: builder.query({
+      query: ({ page }) => `ocpp/data?page=${page}`,  // ✅ Ensure that `page` is added
+      providesTags: ["Charger"],
+    }),
+
+    getChargersWithFilter: builder.query({
+      query: ({ deviceID }) => `ocpp/data?deviceID=${deviceID}`,
+      providesTags: ["Charger"],
+    }),
+
+
+
   }),
 });
 
 // Export the hook
-export const { useGetChargersQuery } = chargerApi;
+export const { useGetChargersQuery,useGetChargersWithPaginationQuery,useGetChargersWithFilterQuery, } = chargerApi;
 
