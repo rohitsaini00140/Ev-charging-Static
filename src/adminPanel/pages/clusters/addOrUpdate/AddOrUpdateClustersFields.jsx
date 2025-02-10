@@ -122,15 +122,14 @@ function AddOrUpdateClustersFields() {
 
   const onSubmit = async (data) => {
     setLoading(true);
-
+  
     try {
-      const { lat, lng } = address;
-      data.latitude = lat;
-      data.longitude = lng;
-
+         // const { lat, lng } = address;
+      // data.latitude = lat;
+      // data.longitude = lng;
       if (id) {
         await updateCluster({ id, updatedClusterData: data }).unwrap();
-
+  
         navigate("/admin/cluster/view", {
           state: {
             message: "Cluster successfully updated!",
@@ -140,7 +139,6 @@ function AddOrUpdateClustersFields() {
       } else {
         await addCluster(data).unwrap();
         reset(defaultValues);
-        dispatch(setAddress(""));
         navigate("/admin/cluster/view", {
           state: {
             message: "Cluster successfully added!",
@@ -164,6 +162,7 @@ function AddOrUpdateClustersFields() {
       setLoading(false);
     }
   };
+  
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
@@ -289,12 +288,10 @@ function AddOrUpdateClustersFields() {
           </Stack>
 
           <Stack width={"100%"} sx={{ position: "relative" }}>
-            <LocationDropdown
+            <TextField
               label="Cluster location"
               value={watch("location")}
-              onChange={(newValue) =>
-                setValue("location", newValue, { shouldValidate: true })
-              }
+              onChange={(event) => setValue("location", event.target.value, { shouldValidate: true })}
             />
             {errors.location && (
               <Typography color={"#ff6384"} fontSize={"13px"} mt={".5rem"}>

@@ -77,6 +77,7 @@ function AddOrUpdateDeviceFields() {
       interval: "60",
       status: "",
       max_guns: "",
+      max_power: "",
     }),
     []
   );
@@ -110,6 +111,7 @@ function AddOrUpdateDeviceFields() {
         gunnumber: deviceForUpdate.gunnumber || "",
         status: deviceForUpdate.status || "",
         max_guns: String(deviceForUpdate.max_guns) || "",
+        max_power: deviceForUpdate.max_power || "",
       });
       dispatch(setClutersid(deviceForUpdate.cluster_id));
     } else {
@@ -261,7 +263,7 @@ function AddOrUpdateDeviceFields() {
                 }
                 placeholder="Select Device Type"
                 selectType="single"
-                options={["CCS", "GBT", "Ac type 2"]}
+                options={["CCS", "GBT", "AC Type 2"]}
               />
               {errors.type && (
                 <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
@@ -269,6 +271,27 @@ function AddOrUpdateDeviceFields() {
                 </Typography>
               )}
             </Stack>
+
+            <Stack sx={{ position: "relative" }} width={"100%"}>
+              <TextField
+                label="Max Power (In-Killowatts)"
+                {...register("max_power", { required: true })}
+                value={watch("max_power") || ""}
+                sx={inputStyle}
+                fullWidth
+              />
+              {errors.max_power && (
+                <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
+                  *{errors.max_power.message}
+                </Typography>
+              )}
+            </Stack>
+          </Stack>
+
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 3, sm: 2, md: 6 }}
+          >
             <Stack sx={{ position: "relative" }} width={"100%"}>
               <TextField
                 label="Device Manufacturer"
@@ -283,12 +306,7 @@ function AddOrUpdateDeviceFields() {
                 </Typography>
               )}
             </Stack>
-          </Stack>
 
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 3, sm: 2, md: 6 }}
-          >
             <Stack width={"100%"}>
               <TextField
                 label="Device Serial No."
@@ -303,21 +321,6 @@ function AddOrUpdateDeviceFields() {
               {errors.serial_number && (
                 <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
                   *{errors.serial_number.message}
-                </Typography>
-              )}
-            </Stack>
-
-            <Stack sx={{ position: "relative" }} width={"100%"}>
-              <LocationDropdown
-                label="Device location"
-                value={watch("location")}
-                onChange={(newValue) =>
-                  setValue("location", newValue, { shouldValidate: true })
-                }
-              />
-              {errors.location && (
-                <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
-                  *{errors.location.message}
                 </Typography>
               )}
             </Stack>
@@ -339,6 +342,26 @@ function AddOrUpdateDeviceFields() {
               {errors.interval && (
                 <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
                   *{errors.interval.message}
+                </Typography>
+              )}
+            </Stack>
+          </Stack>
+
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 3, sm: 2, md: 6 }}
+          >
+            <Stack sx={{ position: "relative" }} width={"100%"}>
+              <LocationDropdown
+                label="Device location"
+                value={watch("location")}
+                onChange={(newValue) =>
+                  setValue("location", newValue, { shouldValidate: true })
+                }
+              />
+              {errors.location && (
+                <Typography fontSize={"13px"} color={"#ff6384"} mt={".5rem"}>
+                  *{errors.location.message}
                 </Typography>
               )}
             </Stack>
