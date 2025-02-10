@@ -1,18 +1,10 @@
 import Checkbox from "@mui/material/Checkbox";
-// import Label from "../../../component/lable/Lable";
-
-// import Action from "../../../component/Action";
-// import { StyledTableCell, StyledTableRow } from "../../../component/tableStyle";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@mui/material";
-import {
-  useRestoreDeletedCpoMutation,
-  useSoftDeleteCpoMutation,
-} from "../../../../globalState/Cpos/cpoApi";
 import { StyledTableCell, StyledTableRow } from "../../../component/tableStyle";
 import Label from "../../../component/lable/Lable";
 import Action from "../../../component/Action";
-import { useSoftDeleteDeviceGunMutation } from "../../../../globalState/devicegun/devicegunApi";
+import { useRestoreDeletedDeviceGunMutation, useSoftDeleteDeviceGunMutation } from "../../../../globalState/devicegun/devicegunApi";
 
 function DeviceGunTableRow({ allUserData, currentpage }) {
   const [loading, setLoading] = useState(true);
@@ -23,11 +15,11 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
   }, []);
 
   const [softDeleteCpo] = useSoftDeleteDeviceGunMutation();
-  const [restoreDeletedUser] = useRestoreDeletedCpoMutation();
+  const [restoreDeletedUser] = useRestoreDeletedDeviceGunMutation();
 
   function onSoftDelete(data) {
     let dataId = data.id;
-    softDeleteCpo({ id: dataId, softDeletedCpoData: data });
+    softDeleteCpo({ id: dataId, softDeletedDeviceGunData: data });
   }
 
   function onRestoreData(id) {
@@ -78,7 +70,7 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
               ) : data.status ? (
                 data.status
               ) : (
-                "No status found"
+                "Unknown"
               )}
             </StyledTableCell>
 
@@ -105,6 +97,7 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
                 <Action
                   data={data}
                   activeOrInactive={data.deleted_at}
+                  pathToNavigate={"/admin/devicegun/add"}
                   onSoftDelete={onSoftDelete}
                   onRestoreData={onRestoreData}
                 />

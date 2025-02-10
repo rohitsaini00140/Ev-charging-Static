@@ -105,10 +105,14 @@ function Router() {
                     element={<AddOrUpdateUser />}
                   />
 
-                  <Route path="/devicegun/add" element={<AddOrUpdateDeviceGun/>} />
-                  <Route path="/devicegun/view" element={<DeviceGunView />} />
                   <Route
-                    path="/devicegun/update/:id"
+                    path="/devicegun/add"
+                    element={<AddOrUpdateDeviceGun />}
+                  />
+
+                  
+                  <Route
+                    path="/devicegun/add/:id"
                     element={<AddOrUpdateDeviceGun />}
                   />
 

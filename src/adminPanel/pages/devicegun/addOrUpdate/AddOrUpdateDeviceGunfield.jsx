@@ -8,9 +8,7 @@ import { useMemo, useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { devicegunSchema } from "./devicegunSchema";
 import SearchableDropdown from "../../../component/searchableDropdown/SearchableDropdown";
-import { useGetDeviceByIDQuery } from "../../../../globalState/devices/deviceApis";
 import { useDispatch } from "react-redux";
-import DeviceGunView from "../view/DeviceGunView";
 import { useGetAllGuntypeQuery } from "../../../../globalState/gunType/gunApi";
 import {
   useCreatedevicegunsMutation,
@@ -19,7 +17,8 @@ import {
   useGetDeviceGunByIDQuery,
   useUpdateDeviceGunMutation,
 } from "../../../../globalState/devicegun/devicegunApi";
-import Selector from "../../../component/selector/Selector";
+import DeviceGunView from "../view/DeviceGunView";
+import Alertbar from "../../../component/Alertbar";
 
 function AddOrUpdateDeviceGunFields() {
   const [loading, setLoading] = useState(false);
@@ -33,14 +32,12 @@ function AddOrUpdateDeviceGunFields() {
   const { id } = useParams();
   let navigate = useNavigate();
 
-  let dispatch = useDispatch();
-
   const { data, isSuccess } = useGetDeviceGunByIDQuery(id, { skip: !id });
 
-  const cpoForUpdate = isSuccess && data;
+  const deviceGunforUpdate = isSuccess && data;
 
   const [createdevicegun] = useCreatedevicegunsMutation();
-  const [updateCpo] = useUpdateDeviceGunMutation();
+  const [updateDeviceGun] = useUpdateDeviceGunMutation();
 
   const defaultValues = useMemo(
     () => ({
@@ -65,16 +62,16 @@ function AddOrUpdateDeviceGunFields() {
   });
 
   useEffect(() => {
-    if (id && cpoForUpdate) {
+    if (id && deviceGunforUpdate) {
       reset({
-        device_id: cpoForUpdate.device_id || "",
-        gun_type_id: cpoForUpdate.gun_type_id || "",
-        gun_slot: cpoForUpdate.gun_slot|| "",
+        device_id: deviceGunforUpdate.device_id || "",
+        gun_type_id: deviceGunforUpdate.gun_type_id || "",
+        gun_slot: deviceGunforUpdate.gun_slot || "",
       });
     } else {
       reset(defaultValues);
     }
-  }, [id, cpoForUpdate, reset, defaultValues]);
+  }, [id, deviceGunforUpdate, reset, defaultValues]);
 
   const { data: DevicesData, isSuccess: successdevice } =
     useGetAllDeviceWithmaxgunQuery();
@@ -92,21 +89,28 @@ function AddOrUpdateDeviceGunFields() {
   const devicegun = successdevicegundata && devicegunData.devices;
 
   const onSubmit = async (data) => {
+    console.log(data);
     setLoading(true);
     try {
       if (id) {
-        await updateCpo({ id, updatedCpoData: data }).unwrap();
+        await updateDeviceGun({ id, updatedDeviceGunData: data }).unwrap();
 
-        navigate("/admin/devicegun/view", {
-          state: { message: "User successfully updated!", severity: "success" },
+        navigate("/admin/devicegun/add", {
+          state: {
+            message: "devicegun successfully updated!",
+            severity: "success",
+          },
         });
       } else {
         await createdevicegun(data).unwrap();
 
         reset(defaultValues);
 
-        navigate("/admin/devicegun/view", {
-          state: { message: "User successfully added!", severity: "success" },
+        navigate("/admin/devicegun/add", {
+          state: {
+            message: "devicegun successfully added!",
+            severity: "success",
+          },
         });
       }
     } catch (error) {
@@ -280,6 +284,13 @@ function AddOrUpdateDeviceGunFields() {
           <DeviceGunView />
         </Stack>
       </form>
+      <Alertbar
+        open={snackbar.open}
+        onClose={handleCloseSnackbar}
+        severity={snackbar.severity}
+        message={snackbar.message}
+        position={{ vertical: "top", horizontal: "right" }}
+      />
     </>
   );
 }

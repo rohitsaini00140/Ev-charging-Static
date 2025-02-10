@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Container, Card, CardContent, Button } from "@mui/material";
 import { Box, Grid, Stack } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import {
   useGetChargersQuery,
@@ -27,6 +27,12 @@ import {
   setChargerDashboardPageNo,
   setDeviceID,
 } from "../../../globalState/charger/ChargerSlice";
+import { inputStyle } from "../../component/inputStyle";
+import { useAddDeviceMutation, useGetDeviceByIDQuery, useUpdateDeviceOccpMutation } from "../../../globalState/devices/deviceApis";
+import { useNavigate, useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { deviceSchema } from "../devices/addOrUpdate/deviceSchema";
 
 function Charger_Dashboard() {
   const dispatch = useDispatch();
@@ -111,10 +117,122 @@ function Charger_Dashboard() {
     }));
   };
 
+
+
+
+
+
+
+  const [loading, setLoading] = useState(false);
+
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+
+
+
+  const { id } = useParams();
+   const navigate = useNavigate();
+ 
+ const [addDevice] = useAddDeviceMutation();
+ const [updateDevice] = useUpdateDeviceOccpMutation();
+
+  const defaultValues = useMemo(
+    () => ({
+      name: "",
+      project_id: null,
+      cluster_id: null,
+      type: "",
+      location: "",
+      serial_number: "",
+      device_manufacturer: "",
+      interval: "60",
+      status: "",
+      max_guns: "",
+      max_power: "",
+    }),
+    []
+  );
+
+
+
+  const { data, isSuccess:success } = useGetDeviceByIDQuery(id, { skip: !id });
+    const deviceForUpdate = success && data;
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+    reset,
+    setError,
+  } = useForm({
+    resolver: zodResolver(deviceSchema),
+    defaultValues: defaultValues,
+  });
+  useEffect(() => {
+    if (id && deviceForUpdate) {
+      reset({
+        interval: String(deviceForUpdate.interval) || "", // Convert to string
+  
+      });
+    //   dispatch(setClutersid(deviceForUpdate.cluster_id));
+    // } else {
+      reset(defaultValues);
+    }
+  }, [id, deviceForUpdate, reset, defaultValues]);
+
+
+  const onSubmit = async (data) => {
+    setLoading(true);
+    try {
+      const formattedData = {
+        ...data,
+        interval: String(data.interval), // Ensure it's a string
+      };
+
+      if (id) {
+        await updateDevice({ id, updatedDeviceData: formattedData }).unwrap();
+        navigate("/admin/device/view", {
+          state: {
+            message: "Device successfully updated!",
+            severity: "success",
+          },
+        });
+      } else {
+        await addDevice(formattedData).unwrap();
+        reset(defaultValues);
+        navigate("/admin/device/view", {
+          state: { message: "Device successfully added!", severity: "success" },
+        });
+      }
+    } catch (error) {
+      setSnackbar({
+        open: true,
+        message: "Error while submitting.",
+        severity: "error",
+      });
+      if (error.data && error.data.errors) {
+        Object.entries(error.data.errors).forEach(([key, message]) => {
+          setError(key, { type: "server", message: message[0] });
+        });
+      }
+      console.error("Error during submission:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Container maxWidth="xl">
-      <Stack >
-        <Grid Container sx={{ display: "flex",justifyContent:"space-between"}}>
+      <Stack>
+        <Grid
+          Container
+          sx={{ display: "flex", justifyContent: "space-between" }}
+        >
           <Grid item size={{ xs: 12, md: 6 }}>
             <Typography variant="h4" sx={{ m: 2 }}>
               OCPP Communication
@@ -243,10 +361,31 @@ function Charger_Dashboard() {
                             {showHeartbeatInput && (
                               <Box sx={{ mt: 2 }}>
                                 <TextField
-                                  label="Enter Heartbeat Interval"
-                                  variant="outlined"
+                                  label="Heartbeat Interval (In-Seconds) "
+                                  {...register("interval", { required: true })}
+                                  value={watch("interval") || ""}
+                                  onChange={(e) =>
+                                    setValue(
+                                      "interval",
+                                      String(e.target.value),
+                                      {
+                                        shouldValidate: true,
+                                      }
+                                    )
+                                  }
+                                  sx={inputStyle}
                                   fullWidth
                                 />
+
+                                {errors.interval && (
+                                  <Typography
+                                    fontSize={"13px"}
+                                    color={"#ff6384"}
+                                    mt={".5rem"}
+                                  >
+                                    *{errors.interval.message}
+                                  </Typography>
+                                )}
                               </Box>
                             )}
                             {showRadio && (

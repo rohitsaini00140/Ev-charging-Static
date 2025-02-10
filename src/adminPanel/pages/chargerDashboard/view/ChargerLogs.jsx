@@ -39,57 +39,59 @@ function ChargerLogs({ dataLogs }) {
     dispatch(setChargerDashboardPageNo(value));
   };
 
+  const downloadExcel = () => {
+    if (!allDeviceLogData1 || allDeviceLogData1.length === 0) {
+      alert("No data available to download.");
+      return;
+    }
 
+    // Extract only the required headers
+    const wsData = allDeviceLogData1.map((data) => ({
+      Action: data?.action || "No Data Available",
+      Request: data?.chargerrequest || "No Data Available",
+      Response: data?.chargerresponse || "No Data Available",
+      "Request Time": data?.request_date
+        ? new Date(data.request_date).toLocaleString()
+        : "No Data Available",
+      "Response Time": data?.reponse_date
+        ? new Date(data.reponse_date).toLocaleString()
+        : "No Data Available",
+    }));
 
-  // const downloadExcel = () => {
-  //   if (!allDeviceLogData1 || allDeviceLogData1.length === 0) {
-  //     alert("No data available to download.");
-  //     return;
-  //   }
-  
-  //   // Extract only the required headers
-  //   const wsData = allDeviceLogData1.map((data) => ({
-  //     Action: data?.action || "No Data Available",
-  //     Request: data?.chargerrequest || "No Data Available",
-  //     Response: data?.chargerresponse || "No Data Available",
-  //     "Request Time": data?.request_date
-  //       ? new Date(data.request_date).toLocaleString()
-  //       : "No Data Available",
-  //     "Response Time": data?.reponse_date
-  //       ? new Date(data.reponse_date).toLocaleString()
-  //       : "No Data Available",
-  //   }));
-  
-  //   // Create worksheet
-  //   const worksheet = XLSX.utils.json_to_sheet(wsData, {
-  //     header: ["Action", "Request", "Response", "Request Time", "Response Time"],
-  //   });
-  
-  //   // Function to calculate column width based on the longest content in each column
-  //   const autoFitColumns = (ws, data) => {
-  //     const columnWidths = Object.keys(data[0]).map((key, colIndex) => ({
-  //       wch: Math.max(
-  //         key.length, // Header length
-  //         ...data.map((row) => (row[key] ? row[key].toString().length : 0)) // Max cell length
-  //       ) + 2 // Add some padding
-  //     }));
-      
-  //     ws["!cols"] = columnWidths;
-  //   };
-  
-  //   // Adjust column widths dynamically
-  //   autoFitColumns(worksheet, wsData);
-  
-  //   // Create workbook and append the worksheet
-  //   const workbook = XLSX.utils.book_new();
-  //   XLSX.utils.book_append_sheet(workbook, worksheet, "Charger Logs");
-  
-  //   // Download the file
-  //   XLSX.writeFile(workbook, "Charger_Logs.xlsx");
-  // };
-  
-  
+    // Create worksheet
+    const worksheet = XLSX.utils.json_to_sheet(wsData, {
+      header: [
+        "Action",
+        "Request",
+        "Response",
+        "Request Time",
+        "Response Time",
+      ],
+    });
 
+    // Function to calculate column width based on the longest content in each column
+    const autoFitColumns = (ws, data) => {
+      const columnWidths = Object.keys(data[0]).map((key, colIndex) => ({
+        wch:
+          Math.max(
+            key.length, // Header length
+            ...data.map((row) => (row[key] ? row[key].toString().length : 0)) // Max cell length
+          ) + 2, // Add some padding
+      }));
+
+      ws["!cols"] = columnWidths;
+    };
+
+    // Adjust column widths dynamically
+    autoFitColumns(worksheet, wsData);
+
+    // Create workbook and append the worksheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Charger Logs");
+
+    // Download the file
+    XLSX.writeFile(workbook, "Charger_Logs.xlsx");
+  };
 
   return (
     <>
@@ -109,10 +111,17 @@ function ChargerLogs({ dataLogs }) {
               </Typography>
             </Grid>
 
-            {/* <Grid item xs={12} sm={6} md={6} lg={6}>
+            <Grid item xs={12} sm={6} md={6} lg={6}>
               {" "}
-              <Button onClick={downloadExcel} variant="contained" color="primary">Download Excel</Button>
-            </Grid> */}
+              <Button
+                onClick={downloadExcel}
+                variant="contained"
+                color="primary"
+                sx={{ background: "#20c997", width: "100%", height: "100%" }}
+              >
+                Download Excel
+              </Button>
+            </Grid>
           </Grid>
         </Stack>
 

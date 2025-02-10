@@ -49,24 +49,24 @@ export const devicegunApi = createApi({
 
 
     updateDeviceGun: builder.mutation({
-      query: ({ id, updatedUserData }) => ({
+      query: ({ id,updatedDeviceGunData}) => ({
         url: `/devicegun/update/${id}`,
         method: "PUT",
-        body: updatedUserData,
+        body: updatedDeviceGunData,
       }),
       invalidatesTags: ["deviceguns"],
     }),
 
     softDeleteDeviceGun: builder.mutation({
-      query: ({ id, softDeletedGunData }) => ({
+      query: ({ id, softDeletedDeviceGunData }) => ({
         url: `/devicegun/destroy/${id}`,
         method: "POST",
-        body:softDeletedGunData,
+        body:softDeletedDeviceGunData,
       }),
       invalidatesTags: ["deviceguns"],
     }),
 
-    restoreDeletedGun: builder.mutation({
+    restoreDeletedDeviceGun: builder.mutation({
       query: (id) => ({
         url: `/devicegun/restore/${id}`,
         method: "POST",
@@ -82,7 +82,7 @@ export const {
   useGetDeviceGunByIDQuery,
   useUpdateDeviceGunMutation,
   useSoftDeleteDeviceGunMutation,
-  useRestoreDeletedGunMutation,
+  useRestoreDeletedDeviceGunMutation,
   useGetAllDeviceGunQuery,
   useGetAllDeviceWithmaxgunQuery
 } = devicegunApi;
