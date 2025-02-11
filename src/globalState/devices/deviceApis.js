@@ -63,7 +63,7 @@ export const deviceApi = createApi({
 
     updateDeviceOccp: builder.mutation({
       query: ({ updatedDeviceData}) => ({
-        url: `/update-device-interval`,
+        url: `/devices/update-device-interval`,
         method: "POST",
         body: updatedDeviceData,
       }),

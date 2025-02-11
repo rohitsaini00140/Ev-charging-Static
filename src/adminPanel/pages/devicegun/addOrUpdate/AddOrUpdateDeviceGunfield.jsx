@@ -195,7 +195,7 @@ function AddOrUpdateDeviceGunFields() {
                     "&.Mui-focused fieldset": {
                       borderColor: "black",
                     },
-                  },
+                  },                  
                 }}
                 options={
                   Array.isArray(devicegun)
@@ -241,7 +241,12 @@ function AddOrUpdateDeviceGunFields() {
                   });
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Select Gun Number" />
+                  <TextField {...params} placeholder="Select Gun Number"    sx={{
+                    "& .MuiInputBase-input::placeholder": {
+                      color: "black",
+                      opacity: 1, // Ensure the color is fully applied
+                    },
+                  }}  />
                 )}
               />
 

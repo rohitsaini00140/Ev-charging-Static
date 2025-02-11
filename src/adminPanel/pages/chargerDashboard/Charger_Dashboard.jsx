@@ -18,7 +18,6 @@ import {
   useGetChargersWithFilterQuery,
   useGetChargersWithPaginationQuery,
 } from "../../../globalState/charger/chargerApi";
-import ChargerdashboardTableHead from "./view/ChargerdashboardTableHead";
 import ChargerLogs from "./view/ChargerLogs";
 import ConnectorStatus from "./view/ConnectorStatus";
 import TablePagination from "../../component/TablePagination";
@@ -28,11 +27,7 @@ import {
   setDeviceID,
 } from "../../../globalState/charger/ChargerSlice";
 import { inputStyle } from "../../component/inputStyle";
-import { useAddDeviceMutation, useGetDeviceByIDQuery, useUpdateDeviceOccpMutation } from "../../../globalState/devices/deviceApis";
-import { useNavigate, useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { deviceSchema } from "../devices/addOrUpdate/deviceSchema";
+
 
 function Charger_Dashboard() {
   const dispatch = useDispatch();
@@ -42,16 +37,16 @@ function Charger_Dashboard() {
     page,
   });
 
-  console.log("API Data:", chargerData1);
-
   const { data: filteredChargers, isSuccess: filteredSuccess } =
     useGetChargersWithFilterQuery({ deviceID });
 
   const allDeviceLogData = deviceID ? filteredChargers : chargerData1;
   const successStatus = deviceID ? filteredSuccess : isSuccess;
 
+  const ActionId = allDeviceLogData?.data?.map((itr) => itr.id);
+  const ActionId1 = allDeviceLogData?.data?.map((itr) => itr.interval);
+
   const handlePageChange = (event, value) => {
-    console.log("Changing Page to:", value);
     dispatch(setChargerDashboardPageNo(value));
   };
 
@@ -85,12 +80,6 @@ function Charger_Dashboard() {
     }
   };
 
-  const chargerData = {
-    id: "CHG12345",
-    project: "EV Charging Station",
-    status: "Active",
-  };
-
   const actions = [
     "Change Availability",
     "Get Configurations",
@@ -102,11 +91,9 @@ function Charger_Dashboard() {
   const handleButtonClick = () => {
     if (selectedChargerId) {
       setSelectedChargerId(null);
-      setSelectedStatus(null);
       setActionVisibility({}); // Reset all action visibility
     } else {
-      setSelectedChargerId(chargerData.id);
-      setSelectedStatus(chargerData.status);
+      setSelectedChargerId(ActionId);
     }
   };
 
@@ -118,113 +105,8 @@ function Charger_Dashboard() {
   };
 
 
+  console.log(ActionId1,"kya aaa rahaah ")
 
-
-
-
-
-  const [loading, setLoading] = useState(false);
-
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    message: "",
-    severity: "success",
-  });
-
-
-
-  const { id } = useParams();
-   const navigate = useNavigate();
- 
- const [addDevice] = useAddDeviceMutation();
- const [updateDevice] = useUpdateDeviceOccpMutation();
-
-  const defaultValues = useMemo(
-    () => ({
-      name: "",
-      project_id: null,
-      cluster_id: null,
-      type: "",
-      location: "",
-      serial_number: "",
-      device_manufacturer: "",
-      interval: "60",
-      status: "",
-      max_guns: "",
-      max_power: "",
-    }),
-    []
-  );
-
-
-
-  const { data, isSuccess:success } = useGetDeviceByIDQuery(id, { skip: !id });
-    const deviceForUpdate = success && data;
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors },
-    reset,
-    setError,
-  } = useForm({
-    resolver: zodResolver(deviceSchema),
-    defaultValues: defaultValues,
-  });
-  useEffect(() => {
-    if (id && deviceForUpdate) {
-      reset({
-        interval: String(deviceForUpdate.interval) || "", // Convert to string
-  
-      });
-    //   dispatch(setClutersid(deviceForUpdate.cluster_id));
-    // } else {
-      reset(defaultValues);
-    }
-  }, [id, deviceForUpdate, reset, defaultValues]);
-
-
-  const onSubmit = async (data) => {
-    setLoading(true);
-    try {
-      const formattedData = {
-        ...data,
-        interval: String(data.interval), // Ensure it's a string
-      };
-
-      if (id) {
-        await updateDevice({ id, updatedDeviceData: formattedData }).unwrap();
-        navigate("/admin/device/view", {
-          state: {
-            message: "Device successfully updated!",
-            severity: "success",
-          },
-        });
-      } else {
-        await addDevice(formattedData).unwrap();
-        reset(defaultValues);
-        navigate("/admin/device/view", {
-          state: { message: "Device successfully added!", severity: "success" },
-        });
-      }
-    } catch (error) {
-      setSnackbar({
-        open: true,
-        message: "Error while submitting.",
-        severity: "error",
-      });
-      if (error.data && error.data.errors) {
-        Object.entries(error.data.errors).forEach(([key, message]) => {
-          setError(key, { type: "server", message: message[0] });
-        });
-      }
-      console.error("Error during submission:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <Container maxWidth="xl">
@@ -294,18 +176,6 @@ function Charger_Dashboard() {
                           </Typography>
                           {val.project_name}
                         </Typography>
-                        {/* <Typography
-                          variant="body1"
-                          color="textSecondary"
-                          sx={{ display: "flex" }}
-                        >
-                          <Typography
-                            sx={{ fontWeight: "bold", marginRight: "5px" }}
-                          >
-                            Interval :
-                          </Typography>
-                          {val.interval}
-                        </Typography> */}
 
                         <Typography
                           variant="body1"
@@ -317,7 +187,7 @@ function Charger_Dashboard() {
                           >
                             Status :
                           </Typography>
-                          Online
+                          NA
                         </Typography>
                       </Grid>
                       {/* Right side: Button */}
@@ -361,33 +231,25 @@ function Charger_Dashboard() {
                             {showHeartbeatInput && (
                               <Box sx={{ mt: 2 }}>
                                 <TextField
-                                  label="Heartbeat Interval (In-Seconds) "
-                                  {...register("interval", { required: true })}
-                                  value={watch("interval") || ""}
-                                  onChange={(e) =>
-                                    setValue(
-                                      "interval",
-                                      String(e.target.value),
-                                      {
-                                        shouldValidate: true,
-                                      }
-                                    )
-                                  }
+                                  label="Heartbeat Interval (In-Seconds)"
                                   sx={inputStyle}
                                   fullWidth
                                 />
 
-                                {errors.interval && (
-                                  <Typography
-                                    fontSize={"13px"}
-                                    color={"#ff6384"}
-                                    mt={".5rem"}
+                                <Grid item size={{ xs: 12, md: 4 }}>
+                                  <Button
+                                    sx={{
+                                      bgcolor: "#20c997",
+                                      marginTop: "10px",
+                                    }}
+                                    variant="contained"
                                   >
-                                    *{errors.interval.message}
-                                  </Typography>
-                                )}
+                                    Enter
+                                  </Button>
+                                </Grid>
                               </Box>
                             )}
+
                             {showRadio && (
                               <Box sx={{ mt: 2 }}>
                                 <RadioGroup
@@ -525,7 +387,7 @@ function Charger_Dashboard() {
                       scrollBehavior: "smooth",
                     }}
                   >
-                    <ChargerLogs dataLogs={val?.charger_logs?.data?.flat()} />
+                    <ChargerLogs dataLogs={val?.charger_logs} />
                   </Card>
                 </Card>
               </Grid>

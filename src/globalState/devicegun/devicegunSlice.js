@@ -10,7 +10,7 @@ const devicegunSlice = createSlice({
     error: null,
   },
   reducers: {
-    setCpoListPageNo: (state, action) => {
+    setDeviceGunListPageNo: (state, action) => {
       state.page = action.payload;
     },
     setCpoName: (state, action) => {
@@ -22,5 +22,5 @@ const devicegunSlice = createSlice({
   },
 });
 
-export const { setCpoName, setCpoListPageNo, setCpoStatus } = devicegunSlice.actions;
+export const { setCpoName,setDeviceGunListPageNo, setCpoStatus } = devicegunSlice.actions;
 export default devicegunSlice.reducer;

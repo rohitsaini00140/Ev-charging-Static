@@ -5,6 +5,7 @@ const chargerSlice = createSlice({
   initialState: {
       page: 1,
       deviceID: "",
+      pageNO:1,
       
   },
   reducers: {
@@ -14,12 +15,16 @@ const chargerSlice = createSlice({
       setDeviceID: (state, action) => {
         state.deviceID = action.payload;
       },
+      setChargerDashboardlistPageNo: (state, action) => {
+        state.pageNO = action.payload
+    },
     
   },
 });
 
 export const {
   setChargerDashboardPageNo,
+  setChargerDashboardlistPageNo,
   setDeviceID,
 } = chargerSlice.actions;
 

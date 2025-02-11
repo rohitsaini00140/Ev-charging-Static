@@ -17,12 +17,10 @@ export const devicegunApi = createApi({
     }),
 
     getDeviceGunsList: builder.query({
-      query: () => {
-        return {
-          url: `/devicegun/list`,
-          method: "GET",
-        };
-      },
+      query: ({ page = 1 }) => ({
+        url: `/devicegun/list?page=${page}`,
+        method: "GET",
+      }),
       providesTags: ["deviceguns"],
     }),
     

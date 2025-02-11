@@ -15,12 +15,13 @@ import ChargerdashboardTableHead from "./ChargerdashboardTableHead";
 import ChargerTableRow from "./ChargerTableRow";
 import { Grid } from "@mui/system";
 import { useGetChargersQuery } from "../../../../globalState/charger/chargerApi";
-import { setChargerDashboardPageNo } from "../../../../globalState/charger/ChargerSlice";
+import { setChargerDashboardlistPageNo, setChargerDashboardPageNo } from "../../../../globalState/charger/ChargerSlice";
 import { Button } from "@mui/material";
 
 function ChargerLogs({ dataLogs }) {
   const dispatch = useDispatch();
-  const { page } = useSelector((state) => state.charger);
+  const {pageNO } = useSelector((state) => state.charger);
+
 
   const {
     data: chargerData,
@@ -28,15 +29,15 @@ function ChargerLogs({ dataLogs }) {
     isLoading,
   } = useGetChargersQuery();
 
-  const allDeviceLogData1 = dataLogs;
+  const allDeviceLogData1 = dataLogs?.data?.flat();
 
   // console.log(allDeviceLogData1,"dddddddddddd")
 
-  const paginationData = deviceLogSuccess && chargerData;
-  const { last_page } = paginationData;
+  const paginationData =  dataLogs ;
+  const {last_page} = paginationData;
 
   const handlePageChange = (event, value) => {
-    dispatch(setChargerDashboardPageNo(value));
+    dispatch(setChargerDashboardlistPageNo(value));
   };
 
   const downloadExcel = () => {
@@ -156,9 +157,9 @@ function ChargerLogs({ dataLogs }) {
 
           {allDeviceLogData1.length > 0 && (
             <TablePagination
-              count={last_page}
+              count={1}
               onPageChange={handlePageChange}
-              page={page}
+              page={pageNO}
             />
           )}
         </Card>

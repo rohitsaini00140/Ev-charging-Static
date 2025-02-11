@@ -7,6 +7,9 @@ import Action from "../../../component/Action";
 import { useRestoreDeletedDeviceGunMutation, useSoftDeleteDeviceGunMutation } from "../../../../globalState/devicegun/devicegunApi";
 
 function DeviceGunTableRow({ allUserData, currentpage }) {
+
+
+  console.log(allUserData.data,"yaha aaaa rahaha aaa")
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,15 +31,15 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
 
   return (
     <>
-      {allUserData.length > 0 &&
-        allUserData.map((data, i) => (
+      {allUserData.data.length > 0 &&
+        allUserData.data.map((data, i) => (
           <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.id}>
             <StyledTableCell color={"#222245"}>
               {" "}
               {loading ? (
                 <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
               ) : (
-                currentpage - 1 + (i + 1)
+                ((currentpage - 1) * 10 + (i + 1))
               )}
             </StyledTableCell>
             <StyledTableCell color={"#222245"}>
