@@ -79,6 +79,10 @@ function DeviceTableRow({ allDeviceData, currentPageNo }) {
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.type}
                         </StyledTableCell>
+
+                        <StyledTableCell color={"#222245"}>
+                            {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.max_power}
+                        </StyledTableCell>
                         <StyledTableCell color={"#222245"}>
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : data.device_manufacturer}
                         </StyledTableCell>  

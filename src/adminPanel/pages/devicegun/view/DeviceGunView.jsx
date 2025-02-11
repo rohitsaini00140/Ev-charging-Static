@@ -19,12 +19,13 @@ import { setCpoListPageNo } from "../../../../globalState/Cpos/cpoSlice";
 import DeviceGunTableHead from "./DeviceGunTableHead";
 import DeviceGunTableRow from "./DeviceGunTableRow";
 import { useGetDeviceGunsListQuery } from "../../../../globalState/devicegun/devicegunApi";
+import { setDeviceGunListPageNo } from "../../../../globalState/devicegun/devicegunSlice";
 
 function DeviceGunView() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const { page, userName, status } = useSelector((state) => state.cpo);
+  const { page } = useSelector((state) => state.deviceguns);
 
   const [snackbar, setSnackbar] = useState({
     open: false,
@@ -43,21 +44,21 @@ function DeviceGunView() {
     }
   }, [location.state, navigate]);
 
-  const { device_id } = useParams(); 
-  const { data: alldevicegun, isLoading, isError, error } = useGetDeviceGunsListQuery(device_id, {
-    skip: !device_id,  // ✅ Skip query if device_id is not available
-  });
+  const { data: alldevicegun,  isSuccess: devicegunSuccess, isLoading, isError, error } = useGetDeviceGunsListQuery({ page});
 
-  console.log(alldevicegun,"dddddddddddddd");
   
+console.log(alldevicegun,"kya  aaaa raha ha")
 
-  const allUserData = "";
-  // const paginationData = CpoSuccess && allUsers;
 
-  // const { last_page } = paginationData;
+const paginationData = devicegunSuccess && alldevicegun;
+
+
+  console.log(paginationData,"fffffffffffff")
+
+  const { last_page } = paginationData;
 
   const handlePageChange = (event, value) => {
-    dispatch(setCpoListPageNo(value));
+    dispatch(setDeviceGunListPageNo(value));
   };
 
   const handleCloseSnackbar = (event, reason) => {
@@ -89,10 +90,10 @@ function DeviceGunView() {
                 <Table sx={{ minWidth: 800 }}>
                   <DeviceGunTableHead/>
                   <TableBody>
-                    {allUserData.length > 0 ? (
+                    {alldevicegun?.data.length > 0 ? (
                       <DeviceGunTableRow
                         currentpage={page}
-                        allUserData={allUserData}
+                        allUserData={alldevicegun}
                       />
                     ) : (
                       <StyledTableRow>
@@ -110,13 +111,13 @@ function DeviceGunView() {
               </TableContainer>
             </Scrollbar>
           )}
-          {/* {allUserData.length > 0 && (
+          {alldevicegun?.data.length > 0 && (
             <TablePagination
               count={last_page}
               onPageChange={handlePageChange}
               page={page}
             />
-          )} */}
+          )}
         </Card>
       </Container>
 

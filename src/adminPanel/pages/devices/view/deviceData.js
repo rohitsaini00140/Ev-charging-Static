@@ -8,6 +8,7 @@ export const headLabel = [
     { id: 'max_guns', label: 'Max Guns' },
     { id: 'serialNo', label: 'Device serial no.' },
     { id: 'type', label: 'Device type' },
+    { id: 'type', label: 'Max Power (In-Killowatts)' },
     { id: 'type', label: 'Device manufacturer' },
     { id: 'deviceID', label: 'Device ID' },
     { id: 'interval', label: 'Heartbeat Interval (In-Seconds)' },

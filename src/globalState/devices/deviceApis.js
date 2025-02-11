@@ -58,6 +58,18 @@ export const deviceApi = createApi({
       invalidatesTags: ["device"],
     }),
 
+
+
+
+    updateDeviceOccp: builder.mutation({
+      query: ({ updatedDeviceData}) => ({
+        url: `/devices/update-device-interval`,
+        method: "POST",
+        body: updatedDeviceData,
+      }),
+      invalidatesTags: ["device"],
+    }),
+
     softDeleteDevice: builder.mutation({
       query: ({ id, deletedDeviceData }) => ({
         url: `/devices/soft-delete/${id}`,
@@ -120,6 +132,7 @@ export const {
   useGetAllDeviceQuery,
   useGetDeviceByIDQuery,
   useUpdateDeviceMutation,
+  useUpdateDeviceOccpMutation,
   useSoftDeleteDeviceMutation,
   useRestoreDeviceMutation,
   useGetDeviceLogsQuery,

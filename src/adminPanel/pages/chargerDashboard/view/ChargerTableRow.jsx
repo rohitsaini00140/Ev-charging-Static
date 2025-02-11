@@ -5,6 +5,24 @@ import { List, ListItem, Skeleton } from "@mui/material";
 function ChargerTableRow({ postData }) {
   const [loading, setLoading] = useState(true);
 
+
+// console.log(postData,"dddddddddddddd")
+  
+//   const actions = postData
+//   ?.map(itr => itr?.charger_logs?.data) 
+//   .flat() 
+//   .map(log => log?.action) 
+//   .filter(Boolean); 
+
+// console.log(actions, "Extracted action values");
+
+
+
+  
+
+
+
+
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
@@ -110,7 +128,7 @@ function ChargerTableRow({ postData }) {
     // Parse if the data is a JSON string
     if (typeof data === "string") {
       try {
-        // data = JSON.parse(data);
+        data = JSON.parse(data);
       } catch (e) {
         // If parsing fails, return the raw string
         return (
@@ -181,9 +199,9 @@ function ChargerTableRow({ postData }) {
 
   return (
     <>
-      {postData?.data?.length > 0 &&
-        postData?.data?.map((data) => (
-          <StyledTableRow key={data.id}>
+      {postData.length > 0 &&
+        postData?.flat()?.map((data) => (
+          <StyledTableRow key={data?.id || Math.random()}>
             <StyledTableCell color={"#222245"} sx={{ border: "1px solid" }}>
               {loading ? (
                 <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
@@ -192,13 +210,6 @@ function ChargerTableRow({ postData }) {
               )}
             </StyledTableCell>
 
-            <StyledTableCell color={"#222245"} sx={{ border: "1px solid" }}>
-              {loading ? (
-                <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
-              ) : (
-                data?.charger_id
-              )}
-            </StyledTableCell>
 
             <StyledTableCell
               color={"#222245"}
@@ -254,3 +265,5 @@ function ChargerTableRow({ postData }) {
 }
 
 export default ChargerTableRow;
+
+

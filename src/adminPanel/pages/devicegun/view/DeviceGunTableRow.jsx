@@ -1,20 +1,15 @@
 import Checkbox from "@mui/material/Checkbox";
-// import Label from "../../../component/lable/Lable";
-
-// import Action from "../../../component/Action";
-// import { StyledTableCell, StyledTableRow } from "../../../component/tableStyle";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@mui/material";
-import {
-  useRestoreDeletedCpoMutation,
-  useSoftDeleteCpoMutation,
-
-} from "../../../../globalState/Cpos/cpoApi";
 import { StyledTableCell, StyledTableRow } from "../../../component/tableStyle";
 import Label from "../../../component/lable/Lable";
 import Action from "../../../component/Action";
+import { useRestoreDeletedDeviceGunMutation, useSoftDeleteDeviceGunMutation } from "../../../../globalState/devicegun/devicegunApi";
 
 function DeviceGunTableRow({ allUserData, currentpage }) {
+
+
+  console.log(allUserData.data,"yaha aaaa rahaha aaa")
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -22,12 +17,12 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
     return () => clearTimeout(timer);
   }, []);
 
-  const [softDeleteCpo] = useSoftDeleteCpoMutation();
-  const [restoreDeletedUser] = useRestoreDeletedCpoMutation();
+  const [softDeleteCpo] = useSoftDeleteDeviceGunMutation();
+  const [restoreDeletedUser] = useRestoreDeletedDeviceGunMutation();
 
   function onSoftDelete(data) {
     let dataId = data.id;
-    softDeleteCpo({ id: dataId, softDeletedCpoData: data });
+    softDeleteCpo({ id: dataId, softDeletedDeviceGunData: data });
   }
 
   function onRestoreData(id) {
@@ -36,18 +31,15 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
 
   return (
     <>
-      {allUserData.length > 0 &&
-        allUserData.map((data, i) => (
+      {allUserData.data.length > 0 &&
+        allUserData.data.map((data, i) => (
           <StyledTableRow hover tabIndex={-1} role="checkbox" key={data.id}>
-            <StyledTableCell padding="checkbox">
-              <Checkbox disableFocusRipple />
-            </StyledTableCell>
             <StyledTableCell color={"#222245"}>
               {" "}
               {loading ? (
                 <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
               ) : (
-                currentpage - 1 + (i + 1)
+                ((currentpage - 1) * 10 + (i + 1))
               )}
             </StyledTableCell>
             <StyledTableCell color={"#222245"}>
@@ -55,7 +47,7 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
               {loading ? (
                 <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
               ) : (
-                data.name
+                data.device_name
               )}
             </StyledTableCell>
             <StyledTableCell color={"#222245"}>
@@ -63,7 +55,7 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
               {loading ? (
                 <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
               ) : (
-                data.email
+                data.gun_name
               )}
             </StyledTableCell>
             <StyledTableCell color={"#222245"}>
@@ -71,11 +63,21 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
               {loading ? (
                 <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
               ) : (
-                data.phone
+                data.gun_slot
               )}
             </StyledTableCell>
 
-            <StyledTableCell>
+            <StyledTableCell color={"#222245"}>
+              {loading ? (
+                <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
+              ) : data.status ? (
+                data.status
+              ) : (
+                "Unknown"
+              )}
+            </StyledTableCell>
+
+            {/* <StyledTableCell>
               <Label color={data.deleted_at === null ? "success" : "error"}>
                 {loading ? (
                   <Skeleton
@@ -90,7 +92,7 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
                   "Inactive"
                 )}
               </Label>
-            </StyledTableCell>
+            </StyledTableCell> */}
             <StyledTableCell>
               {loading ? (
                 <Skeleton sx={{ bgcolor: "#57b33e3d" }} animation="pulse" />
@@ -98,6 +100,7 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
                 <Action
                   data={data}
                   activeOrInactive={data.deleted_at}
+                  pathToNavigate={"/admin/devicegun/add"}
                   onSoftDelete={onSoftDelete}
                   onRestoreData={onRestoreData}
                 />

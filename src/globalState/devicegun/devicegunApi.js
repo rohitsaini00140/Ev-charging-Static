@@ -17,20 +17,17 @@ export const devicegunApi = createApi({
     }),
 
     getDeviceGunsList: builder.query({
-      query: (device_id) => {
-        console.log("Fetching data for ID:", device_id);  // ✅ Debug API call
-        return {
-          url: `/devicegun/list/${device_id}`,
-          method: "GET",
-        };
-      },
+      query: ({ page = 1 }) => ({
+        url: `/devicegun/list?page=${page}`,
+        method: "GET",
+      }),
       providesTags: ["deviceguns"],
     }),
     
 
     getDeviceGunByID: builder.query({
       query: (id) => `/devicegun/show/${id}`,
-      providesTags: ["devicegun"],
+      providesTags: ["deviceguns"],
     }),
 
 
@@ -47,30 +44,27 @@ export const devicegunApi = createApi({
     }),
 
 
-    getGunById: builder.query({
-      query: (id) => `/devicegun/show/${id}`,
-      providesTags: ["deviceguns"],
-    }),
 
-    updateGun: builder.mutation({
-      query: ({ id, updatedUserData }) => ({
+
+    updateDeviceGun: builder.mutation({
+      query: ({ id,updatedDeviceGunData}) => ({
         url: `/devicegun/update/${id}`,
         method: "PUT",
-        body: updatedUserData,
+        body: updatedDeviceGunData,
       }),
       invalidatesTags: ["deviceguns"],
     }),
 
-    softDeleteGun: builder.mutation({
-      query: ({ id, softDeletedGunData }) => ({
-        url: `/devicegun/soft-delete/${id}`,
+    softDeleteDeviceGun: builder.mutation({
+      query: ({ id, softDeletedDeviceGunData }) => ({
+        url: `/devicegun/destroy/${id}`,
         method: "POST",
-        body:softDeletedGunData,
+        body:softDeletedDeviceGunData,
       }),
       invalidatesTags: ["deviceguns"],
     }),
 
-    restoreDeletedGun: builder.mutation({
+    restoreDeletedDeviceGun: builder.mutation({
       query: (id) => ({
         url: `/devicegun/restore/${id}`,
         method: "POST",
@@ -84,10 +78,9 @@ export const {
   useCreatedevicegunsMutation,
   useGetDeviceGunsListQuery,
   useGetDeviceGunByIDQuery,
-  useUpdateGunMutation,
-  useSoftDeleteGunMutation,
-  useRestoreDeletedGunMutation,
-  useGetGunByIdQuery,
+  useUpdateDeviceGunMutation,
+  useSoftDeleteDeviceGunMutation,
+  useRestoreDeletedDeviceGunMutation,
   useGetAllDeviceGunQuery,
   useGetAllDeviceWithmaxgunQuery
 } = devicegunApi;
