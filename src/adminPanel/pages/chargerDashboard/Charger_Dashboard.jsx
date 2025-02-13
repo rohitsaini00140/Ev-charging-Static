@@ -27,7 +27,7 @@ import {
   setDeviceID,
 } from "../../../globalState/charger/ChargerSlice";
 import { inputStyle } from "../../component/inputStyle";
-
+import { useUpdateDeviceOccpMutation } from "../../../globalState/devices/deviceApis";
 
 function Charger_Dashboard() {
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ function Charger_Dashboard() {
     page,
   });
 
+
   const { data: filteredChargers, isSuccess: filteredSuccess } =
     useGetChargersWithFilterQuery({ deviceID });
 
@@ -44,10 +45,13 @@ function Charger_Dashboard() {
   const successStatus = deviceID ? filteredSuccess : isSuccess;
 
   const ActionId = allDeviceLogData?.data?.map((itr) => itr.id);
-  const ActionId1 = allDeviceLogData?.data?.map((itr) => itr.interval);
+  const Interval = allDeviceLogData?.data?.map((itr) => itr.interval);
+
+ 
 
   const handlePageChange = (event, value) => {
     dispatch(setChargerDashboardPageNo(value));
+    
   };
 
   const handleSearchChange = (event) => {
@@ -62,6 +66,23 @@ function Charger_Dashboard() {
   const [resetType, setResetType] = useState("");
   const [selectedConfiguration, setSelectedConfiguration] = useState("");
   const [showHeartbeatInput, setShowHeartbeatInput] = useState(false);
+
+  const [updateinterval, setUpdateinterval] = useState('');
+
+
+  useEffect(() => {
+    if (allDeviceLogData?.data?.length > 0) {
+      setUpdateinterval(allDeviceLogData?.data[0]?.interval || '');
+    }
+  }, [allDeviceLogData, page]);
+
+  useEffect(() => {
+  // Reset selectedChargerId and actionVisibility when page changes
+  setSelectedChargerId(null);
+  setActionVisibility({});
+}, [page]);
+
+  
 
   const handleResetClick = () => {
     setShowRadio(true);
@@ -104,10 +125,24 @@ function Charger_Dashboard() {
     }));
   };
 
+  const [updateDeviceOccp] = useUpdateDeviceOccpMutation();
 
-  console.log(ActionId1,"kya aaa rahaah ")
-
-
+  function Updatetoclick() {
+    const deviceIdString = ActionId[0]?.toString();
+    console.log(updateinterval, "Updating interval...");
+  
+    updateDeviceOccp({ updatedDeviceData: { interval: updateinterval, device_id: deviceIdString } })
+      .unwrap()
+      .then((res) => {
+        alert(`Success: ${res.message || "Interval updated successfully!"}`);
+        
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert(`Error: ${err.data?.message || "Failed to update interval!"}`);
+      });
+  }
+  
   return (
     <Container maxWidth="xl">
       <Stack>
@@ -185,6 +220,19 @@ function Charger_Dashboard() {
                           <Typography
                             sx={{ fontWeight: "bold", marginRight: "5px" }}
                           >
+                            Interval :
+                          </Typography>
+                          {val.interval}
+                        </Typography>
+
+                        <Typography
+                          variant="body1"
+                          color="textSecondary"
+                          sx={{ display: "flex" }}
+                        >
+                          <Typography
+                            sx={{ fontWeight: "bold", marginRight: "5px" }}
+                          >
                             Status :
                           </Typography>
                           NA
@@ -234,6 +282,11 @@ function Charger_Dashboard() {
                                   label="Heartbeat Interval (In-Seconds)"
                                   sx={inputStyle}
                                   fullWidth
+                                  // value={updateinterval}
+                                  onChange={(e) =>
+                                    setUpdateinterval(e.target.value)
+                                  }
+                                  defaultValue={Interval}
                                 />
 
                                 <Grid item size={{ xs: 12, md: 4 }}>
@@ -242,6 +295,7 @@ function Charger_Dashboard() {
                                       bgcolor: "#20c997",
                                       marginTop: "10px",
                                     }}
+                                    onClick={Updatetoclick}
                                     variant="contained"
                                   >
                                     Enter
