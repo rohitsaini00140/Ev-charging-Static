@@ -69,6 +69,7 @@ function DeviceLogs() {
     data: postData,
     error,
     isLoading,
+    isSuccess: postDataSucess,
   } = useFilterChargerLogsQuery({
     page: page,
     from_date: from_date ? dayjs(from_date).format("YYYY-MM-DD") : undefined,
@@ -76,6 +77,12 @@ function DeviceLogs() {
     charger_display_id,
     action,
   });
+  
+
+  const paginationData = postDataSucess && postData;
+
+  const { last_page } = paginationData;
+
 
   const handlePageChange = (event, value) => {
     dispatch(setDeviceListPageNo(value));
@@ -443,7 +450,7 @@ function DeviceLogs() {
           )}
           {postData?.data?.length > 0 && (
             <TablePagination
-              count={Math.floor(postData?.total / 10)}
+              count={last_page}
               page={page}
               onPageChange={handlePageChange}
               rowsPerPage={10}
