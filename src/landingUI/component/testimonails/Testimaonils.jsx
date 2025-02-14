@@ -8,13 +8,13 @@ import { Grid } from "@mui/system";
 
 const blogPosts = [
     {
-      title: 'Rohit Saini',
+      title: 'Deepak Gupta',
       des: 'Software Enginner',
       image: 'https://png.pngtree.com/png-clipart/20200225/original/pngtree-young-service-boy-vector-download-user-icon-vector-avatar-png-image_5257569.jpg',
       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodiLorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi',
     },
     {
-      title: 'Shivani Shah',
+      title: 'Aditya Shah',
       des: 'Software Developer',
       image: 'https://cdn1.iconfinder.com/data/icons/website-internet/48/website_-_female_user-512.png',
       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi',
@@ -26,7 +26,7 @@ const blogPosts = [
       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi',
     },
     {
-      title: 'Notra Bolly',
+      title: 'Rohit Saini',
       des: 'Student',
       image: 'https://cdn1.iconfinder.com/data/icons/website-internet/48/website_-_female_user-512.png',
       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatem soluta laudantium, error expedita commodi',
