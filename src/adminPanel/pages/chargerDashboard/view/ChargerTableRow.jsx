@@ -128,7 +128,7 @@ function ChargerTableRow({ postData }) {
     // Parse if the data is a JSON string
     if (typeof data === "string") {
       try {
-        data = JSON.parse(data);
+        // data = JSON.parse(data);
       } catch (e) {
         // If parsing fails, return the raw string
         return (
