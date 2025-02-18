@@ -31,15 +31,16 @@ import { useUpdateDeviceOccpMutation } from "../../../globalState/devices/device
 
 function Charger_Dashboard() {
   const dispatch = useDispatch();
-  const { page, deviceID } = useSelector((state) => state.charger);
+  const { page, deviceID,log_page} = useSelector((state) => state.charger);
 
   const { data: chargerData1, isSuccess } = useGetChargersWithPaginationQuery({
     page,
+    log_page,
   });
 
 
   const { data: filteredChargers, isSuccess: filteredSuccess } =
-    useGetChargersWithFilterQuery({ deviceID });
+    useGetChargersWithFilterQuery({ deviceID,log_page });
 
   const allDeviceLogData = deviceID ? filteredChargers : chargerData1;
   const successStatus = deviceID ? filteredSuccess : isSuccess;
@@ -50,6 +51,7 @@ function Charger_Dashboard() {
  
 
   const handlePageChange = (event, value) => {
+  
     dispatch(setChargerDashboardPageNo(value));
     
   };
@@ -435,7 +437,7 @@ function Charger_Dashboard() {
                       mt: 4,
                       boxShadow: 5,
                       borderRadius: 1,
-                      p: 4,
+                      p: 1,
                       overflow: "scroll",
                       maxHeight: "400px",
                       scrollBehavior: "smooth",

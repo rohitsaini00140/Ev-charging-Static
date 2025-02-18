@@ -199,7 +199,7 @@ function ChargerTableRow({ postData }) {
 
   return (
     <>
-      {postData.length > 0 &&
+      {postData?.length > 0 &&
         postData?.flat()?.map((data) => (
           <StyledTableRow key={data?.id || Math.random()}>
             <StyledTableCell color={"#222245"} sx={{ border: "1px solid" }}>

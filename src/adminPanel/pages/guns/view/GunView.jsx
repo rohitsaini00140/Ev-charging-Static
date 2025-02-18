@@ -84,9 +84,9 @@ function GunView() {
           m={3}
         >
           <Typography variant="h4" color="black">
-            Guns 
+          Connectors
           </Typography>
-          <Link to={"/admin/guns/add"}>
+          <Link to={"/admin/Connector/add"}>
             <Button
               variant="contained"
               sx={{
@@ -98,7 +98,7 @@ function GunView() {
               color="inherit"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Gun 
+              New Connector
             </Button>
           </Link>
         </Stack>

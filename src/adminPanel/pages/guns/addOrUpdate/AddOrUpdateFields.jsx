@@ -84,14 +84,14 @@ function AddOrUpdateGunFields() {
 
       if (id) {
         await updateGun({ id, updatedUserData: requestData }).unwrap();
-        navigate("/admin/guns/view", {
-          state: { message: "Gun successfully updated!", severity: "success" },
+        navigate("/admin/Connector/view", {
+          state: { message: "Connectorsuccessfully updated!", severity: "success" },
         });
       } else {
         await creategunTypes(requestData).unwrap();
         reset(defaultValues);
-        navigate("/admin/guns/view", {
-          state: { message: "Gun successfully added!", severity: "success" },
+        navigate("/admin/Connector/view", {
+          state: { message: "Connector successfully added!", severity: "success" },
         });
       }
     } catch (error) {
@@ -130,7 +130,7 @@ function AddOrUpdateGunFields() {
           >
             <Stack sx={{ position: "relative" }} width={"100%"}>
               <TextField
-                label=" Gun Name"
+                label="Connector Name"
                 {...register("name", { required: true })}
                 value={watch("name") || ""}
                 sx={inputStyle}
@@ -227,7 +227,7 @@ function AddOrUpdateGunFields() {
             direction={"row"}
             sx={{ display: "flex", justifyContent: "space-between" }}
           >
-            <Link to={"/admin/guns/view"}>
+            <Link to={"/admin/Connector/view"}>
               <Button
                 sx={{
                   color: "white",

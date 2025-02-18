@@ -1,6 +1,6 @@
 export const GunheadLabel = [
     { id: "slno", label: "SN" },
-    { id: "slno", label: "Gun Name" },
+    { id: "slno", label: "Connector Name" },
     { id: 'name', label: 'Max. Power (In-Kilowatts)' },
     { id: 'status', label: 'Voltage (In-Volts)' },
     { id: 'status', label: 'Current Type' },

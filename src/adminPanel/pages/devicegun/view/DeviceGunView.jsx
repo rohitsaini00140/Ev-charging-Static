@@ -53,8 +53,6 @@ console.log(alldevicegun,"kya  aaaa raha ha")
 const paginationData = devicegunSuccess && alldevicegun;
 
 
-  console.log(paginationData,"fffffffffffff")
-
   const { last_page } = paginationData;
 
   const handlePageChange = (event, value) => {

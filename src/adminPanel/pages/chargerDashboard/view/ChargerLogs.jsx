@@ -14,30 +14,23 @@ import * as XLSX from "xlsx";
 import ChargerdashboardTableHead from "./ChargerdashboardTableHead";
 import ChargerTableRow from "./ChargerTableRow";
 import { Grid } from "@mui/system";
-import { useGetChargersQuery } from "../../../../globalState/charger/chargerApi";
-import { setChargerDashboardlistPageNo, setChargerDashboardPageNo } from "../../../../globalState/charger/ChargerSlice";
+import {setChargerLogPage } from "../../../../globalState/charger/ChargerSlice";
 import { Button } from "@mui/material";
 
 function ChargerLogs({ dataLogs }) {
+
+
+  console.log(dataLogs,"kya mil raha ha ")
+
   const dispatch = useDispatch();
-  const {pageNO } = useSelector((state) => state.charger);
-
-
-  const {
-    data: chargerData,
-    isSuccess: deviceLogSuccess,
-    isLoading,
-  } = useGetChargersQuery();
-
+  const { log_page } = useSelector((state) => state.charger);
   const allDeviceLogData1 = dataLogs?.data?.flat();
-
-  // console.log(allDeviceLogData1,"dddddddddddd")
 
   const paginationData =  dataLogs ;
   const {last_page} = paginationData;
 
   const handlePageChange = (event, value) => {
-    dispatch(setChargerDashboardlistPageNo(value));
+    dispatch(setChargerLogPage(value));
   };
 
   const downloadExcel = () => {
@@ -157,9 +150,9 @@ function ChargerLogs({ dataLogs }) {
 
           {allDeviceLogData1.length > 0 && (
             <TablePagination
-              count={1}
+            count={last_page}
               onPageChange={handlePageChange}
-              page={pageNO}
+              page={log_page}
             />
           )}
         </Card>
