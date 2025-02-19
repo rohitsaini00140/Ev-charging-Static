@@ -274,7 +274,7 @@ function AddOrUpdateDeviceFields() {
 
             <Stack sx={{ position: "relative" }} width={"100%"}>
               <TextField
-                label="Max Power (In-Killowatts)"
+                label="Max. Power"
                 {...register("max_power", { required: true })}
                 value={watch("max_power") || ""}
                 sx={inputStyle}

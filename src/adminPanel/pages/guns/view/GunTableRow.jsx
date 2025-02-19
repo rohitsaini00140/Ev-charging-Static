@@ -53,7 +53,7 @@ function GunTableRow({ allRoleData,}) {
                             {loading ? <Skeleton sx={{ bgcolor: '#57b33e3d' }} animation="pulse" /> : <Action
                                 data={data}
                                 activeOrInactive={data.deleted_at}
-                                pathToNavigate={"/admin/guns/update"}
+                                pathToNavigate={"/admin/Connector/update"}
                                 onSoftDelete={onSoftDelete}
                                 onRestoreData={onRestoreData}
                             />}

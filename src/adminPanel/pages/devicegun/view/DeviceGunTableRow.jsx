@@ -100,7 +100,7 @@ function DeviceGunTableRow({ allUserData, currentpage }) {
                 <Action
                   data={data}
                   activeOrInactive={data.deleted_at}
-                  pathToNavigate={"/admin/devicegun/add"}
+                  pathToNavigate={"/admin/deviceconnector/add"}
                   onSoftDelete={onSoftDelete}
                   onRestoreData={onRestoreData}
                 />

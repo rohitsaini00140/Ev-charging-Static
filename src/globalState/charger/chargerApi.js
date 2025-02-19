@@ -13,12 +13,21 @@ export const chargerApi = createApi({
     }),
 
     getChargersWithPagination: builder.query({
-      query: ({ page }) => `ocpp/data?page=${page}`,  // ✅ Ensure that `page` is added
+      query: ({ page,log_page }) =>
+        `ocpp/data?page=${page}&log_page=${log_page}`, 
       providesTags: ["Charger"],
     }),
 
+
+    getChargersWithLogPagination: builder.query({
+      query: ({ log_page = 1 }) => `ocpp/data?log_page=${log_page}`,
+      providesTags: ["Charger"],
+    }),
+    
+
+
     getChargersWithFilter: builder.query({
-      query: ({ deviceID }) => `ocpp/data?deviceID=${deviceID}`,
+      query: ({ deviceID,log_page }) => `ocpp/data?deviceID=${deviceID}&log_page=${log_page}`,
       providesTags: ["Charger"],
     }),
 
@@ -28,5 +37,5 @@ export const chargerApi = createApi({
 });
 
 // Export the hook
-export const { useGetChargersQuery,useGetChargersWithPaginationQuery,useGetChargersWithFilterQuery, } = chargerApi;
+export const { useGetChargersQuery,useGetChargersWithPaginationQuery,useGetChargersWithFilterQuery, useGetChargersWithLogPaginationQuery} = chargerApi;
 

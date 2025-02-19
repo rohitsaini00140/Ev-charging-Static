@@ -94,9 +94,9 @@ function Router() {
                   <Route path="/cpos/view" element={<CpoView />} />
                   <Route path="/cpos/update/:id" element={<AddOrUpdateCpo />} />
 
-                  <Route path="guns/add" element={<AddOrUpdateGuns />} />
-                  <Route path="guns/view" element={<GunView />} />
-                  <Route path="guns/update/:id" element={<AddOrUpdateGuns />} />
+                  <Route path="Connector/add" element={<AddOrUpdateGuns />} />
+                  <Route path="Connector/view" element={<GunView />} />
+                  <Route path="Connector/update/:id" element={<AddOrUpdateGuns />} />
 
                   <Route path="/user/add" element={<AddOrUpdateUser />} />
                   <Route path="/user/view" element={<UserView />} />
@@ -106,13 +106,13 @@ function Router() {
                   />
 
                   <Route
-                    path="/devicegun/add"
+                    path="/deviceconnector/add"
                     element={<AddOrUpdateDeviceGun />}
                   />
 
                   
                   <Route
-                    path="/devicegun/add/:id"
+                    path="/deviceconnector/add/:id"
                     element={<AddOrUpdateDeviceGun />}
                   />
 

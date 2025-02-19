@@ -15,10 +15,8 @@ export const deviceSchema = z.object({
         message: "Please enter a valid number",
       }).transform(val => Number(val)),
       max_guns:z.string().trim().min(1, "Please Select Max Guns"),
-      max_power: z
-      .union([z.number(), z.string().regex(/^\d+$/, "Please enter a valid number")])
-      .transform((val) => Number(val))
-      .refine((val) => val >= 1, { message: "Please Select Max Power" })
+      max_power: z.string().trim().min(1, "Please Enter Max Power")
+    
     
 
 });

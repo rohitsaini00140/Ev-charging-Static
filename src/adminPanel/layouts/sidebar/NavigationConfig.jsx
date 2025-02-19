@@ -112,9 +112,9 @@ export const navConfig = [
   },
 
   {
-    title: "Guns",
+    title: "Connectors",
     icon: icon("ev-plug-tesla-s-svgrepo-com"),
-    path: "/admin/guns/view",
+    path: "/admin/Connector/view",
   },
 
   {
@@ -136,16 +136,16 @@ export const navConfig = [
   },
 
   {
-    title: "Device Guns",
+    title: "Device Connector",
     icon: icon("charger-power-battery-svgrepo-com"),
-    path: "/admin/devicegun/add",
+    path: "/admin/deviceconnector/add",
   },
 
-  {
-    title: "Charger Activity Logs",
-    path: "/admin/deviceLog",
-    icon: icon("ActivityLogs"),
-  },
+  // {
+  //   title: "Charger Activity Logs",
+  //   path: "/admin/deviceLog",
+  //   icon: icon("ActivityLogs"),
+  // },
 
   {
     title: "OCPP Communication",

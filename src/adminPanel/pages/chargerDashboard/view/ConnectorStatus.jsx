@@ -15,7 +15,7 @@ function ConnectorStatus({ connector }) {
             <li key={item.connectorId} style={{ marginBottom: '15px' }}>
               <div><strong> Connector ID:</strong> {item.connectorId}</div>
               <div><strong>Status:</strong> {item.status}</div>
-              <div><strong>Timespan:</strong> {formatTimestamp(item.timestamp)}</div>
+              <div><strong>timestamp:</strong> {formatTimestamp(item.timestamp)}</div>
             </li>
           ))}
         </ul>
