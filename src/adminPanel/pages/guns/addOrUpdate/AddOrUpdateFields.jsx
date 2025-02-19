@@ -65,7 +65,7 @@ function AddOrUpdateGunFields() {
     if (id && gunForUpdate) {
       reset({
         name: gunForUpdate.name || "",
-        max_power: String(gunForUpdate.max_power) || "",
+        max_power:gunForUpdate.max_power|| "",
         voltage: String(gunForUpdate.voltage) || "",
         current_type: gunForUpdate.current_type || "",
         description: gunForUpdate.description || "",
@@ -144,7 +144,7 @@ function AddOrUpdateGunFields() {
             </Stack>
             <Stack sx={{ position: "relative" }} width={"100%"}>
               <TextField
-                label="Max. Power (In-Kilowatts)"
+                label="Max. Power"
                 {...register("max_power", { required: true })}
                 value={watch("max_power") || ""}
                 sx={inputStyle}
