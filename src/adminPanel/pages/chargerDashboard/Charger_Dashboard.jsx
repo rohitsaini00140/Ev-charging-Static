@@ -224,7 +224,7 @@ function Charger_Dashboard() {
                           >
                             Interval :
                           </Typography>
-                          {val.interval}
+                          {val.interval} Second
                         </Typography>
 
                         <Typography

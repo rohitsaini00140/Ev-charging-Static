@@ -95,9 +95,9 @@ function AddOrUpdateDeviceGunFields() {
       if (id) {
         await updateDeviceGun({ id, updatedDeviceGunData: data }).unwrap();
 
-        navigate("/admin/devicegun/add", {
+        navigate("/admin/deviceconnector/add", {
           state: {
-            message: "devicegun successfully updated!",
+            message: "device Connector successfully updated!",
             severity: "success",
           },
         });
@@ -106,9 +106,9 @@ function AddOrUpdateDeviceGunFields() {
 
         reset(defaultValues);
 
-        navigate("/admin/devicegun/add", {
+        navigate("/admin/deviceconnector/add", {
           state: {
-            message: "devicegun successfully added!",
+            message: "device Connector successfully added!",
             severity: "success",
           },
         });
@@ -165,7 +165,7 @@ function AddOrUpdateDeviceGunFields() {
             <Stack width={"100%"}>
               <SearchableDropdown
                 options={gunTypesData.length > 0 ? gunTypesData : []}
-                placeholder="Select Gun Name"
+                placeholder="Select Connector Name"
                 value={watch("gun_type_id")}
                 onChange={(newValue) => {
                   setValue("gun_type_id", newValue, { shouldValidate: true });
@@ -241,7 +241,7 @@ function AddOrUpdateDeviceGunFields() {
                   });
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Select Gun Number"    sx={{
+                  <TextField {...params} placeholder="Select Connector Number"    sx={{
                     "& .MuiInputBase-input::placeholder": {
                       color: "black",
                       opacity: 1, // Ensure the color is fully applied

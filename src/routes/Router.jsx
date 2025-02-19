@@ -106,13 +106,13 @@ function Router() {
                   />
 
                   <Route
-                    path="/devicegun/add"
+                    path="/deviceconnector/add"
                     element={<AddOrUpdateDeviceGun />}
                   />
 
                   
                   <Route
-                    path="/devicegun/add/:id"
+                    path="/deviceconnector/add/:id"
                     element={<AddOrUpdateDeviceGun />}
                   />
 

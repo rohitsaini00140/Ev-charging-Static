@@ -26,7 +26,7 @@ function AddOrUpdateDeviceGun() {
                         backgroundColor: "#ffff",
                     }}
                 >
-                    <Typography variant="h4" color="black" sx={{ mb: 3 }}>{id ? "Update Device Gun" : "Add Device Gun"}</Typography>
+                    <Typography variant="h4" color="black" sx={{ mb: 3 }}>{id ? "Update Device Connector" : "Add Device Connector"}</Typography>
                     <AddOrUpdateDeviceGunFields/>
                 </Card>
             </Stack>

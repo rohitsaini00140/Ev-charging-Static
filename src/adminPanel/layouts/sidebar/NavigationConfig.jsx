@@ -136,9 +136,9 @@ export const navConfig = [
   },
 
   {
-    title: "Device Guns",
+    title: "Device Connector",
     icon: icon("charger-power-battery-svgrepo-com"),
-    path: "/admin/devicegun/add",
+    path: "/admin/deviceconnector/add",
   },
 
   // {

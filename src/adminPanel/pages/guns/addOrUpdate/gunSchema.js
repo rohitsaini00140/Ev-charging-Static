@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 export const gunsSchema = z.object({
-  name: z.string().trim().min(1, "Please Enter Gun Name"),
+  name: z.string().trim().min(1, "Please Enter Connector Name"),
   max_power: z
     .string()
     .trim()
