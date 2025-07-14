@@ -14,7 +14,7 @@ import * as XLSX from "xlsx";
 import ChargerdashboardTableHead from "./ChargerdashboardTableHead";
 import ChargerTableRow from "./ChargerTableRow";
 import { Grid } from "@mui/system";
-import {setChargerLogPage } from "../../../../globalState/charger/ChargerSlice";
+import {setChargerLogPage } from "../../../../globalState/charger/chargerSlice";
 import { Button } from "@mui/material";
 
 function ChargerLogs({ dataLogs }) {

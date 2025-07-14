@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Container, Card, CardContent, Button } from "@mui/material";
 import { Box, Grid, Stack } from "@mui/system";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   useGetChargersQuery,
@@ -25,7 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setChargerDashboardPageNo,
   setDeviceID,
-} from "../../../globalState/charger/ChargerSlice";
+} from "../../../globalState/charger/chargerSlice";
 import { inputStyle } from "../../component/inputStyle";
 import { useUpdateDeviceOccpMutation } from "../../../globalState/devices/deviceApis";
 

@@ -16,7 +16,7 @@ import deviceSlice from "../devices/deviceSlices";
 import rolesSlice from "../roles/rolesSlices";
 import permissionSlice from "../permission/permissionSlices";
 import { chargerApi } from "../charger/chargerApi";
-import chargerSlice from '../charger/ChargerSlice'
+import chargerSlice from '../charger/chargerSlice'
 import { cpoApi } from "../Cpos/cpoApi";
 import cpoSlice from "../Cpos/cpoSlice"
 import { gunsApi } from "../gunType/gunApi";

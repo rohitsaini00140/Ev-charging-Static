@@ -64,42 +64,69 @@ function Login() {
 
 
 
+    // const onSubmit = async (data) => {
+    //     try {
+    //         dispatch(setLogIn(""))
+    //         const result = await loginUser(data).unwrap();
+    //         sessionStorage.setItem("role", JSON.stringify(result))
+    //         const getLoginRole = JSON.parse(sessionStorage.getItem("role"))
+    //         dispatch(setLogIn(getLoginRole))
+
+    //         console.log("roleName", logInRole?.user?.role?.name)
+
+    //         setSnackbar({
+    //             open: true,
+    //             message: 'Login successfully!',
+    //             severity: 'success'
+    //         });
+
+    //         // setTimeout(() => {
+    //         //     const roleName = result?.user?.role?.name;
+    //         //     navigate(`/${roleName === "Superadmin" ? "admin" : "clusterAdmin"}`);
+    //         // }, 2000);
+
+    //     } catch (error) {
+    //         setSnackbar({
+    //             open: true,
+    //             message: (error?.data) ? (error?.data?.error) : "error while submitting",
+    //             severity: 'error'
+    //         });
+    //         if (error.data && error.data.errors) {
+    //             Object.entries(error.data.errors).forEach(([key, message]) => {
+    //                 setError(key, { type: "server", message: message[0] });
+    //             });
+    //         }
+    //         console.error("Error during submission:", error);
+    //     }
+    // };
+
+
+
+
     const onSubmit = async (data) => {
-        try {
-            dispatch(setLogIn(""))
-            const result = await loginUser(data).unwrap();
-            sessionStorage.setItem("role", JSON.stringify(result))
-            const getLoginRole = JSON.parse(sessionStorage.getItem("role"))
-            dispatch(setLogIn(getLoginRole))
+    const { email, password } = data;
 
-            console.log("roleName", logInRole?.user?.role?.name)
+    // Simulate login by checking hardcoded credentials
+    if (email === 'admin@example.com' && password === 'admin123') {
+        localStorage.setItem('user', JSON.stringify({ email }));
 
-            setSnackbar({
-                open: true,
-                message: 'Login successfully!',
-                severity: 'success'
-            });
+        setSnackbar({
+            open: true,
+            message: 'Login successfully!',
+            severity: 'success'
+        });
 
-            // setTimeout(() => {
-            //     const roleName = result?.user?.role?.name;
-            //     navigate(`/${roleName === "Superadmin" ? "admin" : "clusterAdmin"}`);
-            // }, 2000);
-
-        } catch (error) {
-            setSnackbar({
-                open: true,
-                message: (error?.data) ? (error?.data?.error) : "error while submitting",
-                severity: 'error'
-            });
-            if (error.data && error.data.errors) {
-                Object.entries(error.data.errors).forEach(([key, message]) => {
-                    setError(key, { type: "server", message: message[0] });
-                });
-            }
-            console.error("Error during submission:", error);
-        }
-    };
-
+        setTimeout(() => {
+            navigate("/admin");
+        }, 2000);
+    } else {
+        setSnackbar({
+            open: true,
+            message: 'Invalid email or password',
+            severity: 'error'
+        });
+    }
+};
 
 
     useEffect(() => {
